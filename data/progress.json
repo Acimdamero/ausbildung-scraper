@@ -1,15 +1,31 @@
 {
-  "last_run_at": "2026-06-11T07:53:12.608220+00:00",
+  "last_run_at": "2026-06-11T08:07:55.157541+00:00",
   "categories": [
     {
       "category_id": "fachinformatiker_ae",
       "category_name": "Fachinformatiker/in Anwendungsentwicklung",
       "total_available": 947,
-      "scraped_count": 24,
-      "failed_count": 1,
-      "last_run_at": "2026-06-11T07:53:12.608220+00:00"
+      "scraped_count": 75,
+      "failed_count": 0,
+      "last_run_at": "2026-06-11T08:07:07.819021+00:00"
+    },
+    {
+      "category_id": "fachinformatiker_ae_2026",
+      "category_name": "Fachinformatiker/in Anwendungsentwicklung Jahr 2026",
+      "total_available": 679,
+      "scraped_count": 75,
+      "failed_count": 0,
+      "last_run_at": "2026-06-11T08:07:31.465173+00:00"
+    },
+    {
+      "category_id": "fachinformatiker_dpa",
+      "category_name": "Fachinformatiker/in Daten- und Prozessanalyse",
+      "total_available": 137,
+      "scraped_count": 75,
+      "failed_count": 0,
+      "last_run_at": "2026-06-11T08:07:55.157541+00:00"
     }
   ],
-  "total_scraped": 24,
-  "total_failed": 1
+  "total_scraped": 225,
+  "total_failed": 0
 }

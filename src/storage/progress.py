@@ -93,7 +93,15 @@ class ProgressTracker:
         )
         return self.path
 
-    def export_markdown(self, path: str | Path = "data/PROGRESS.md") -> Path:
+    def export_markdown(
+        self,
+        path: str | Path = "data/PROGRESS.md",
+        *,
+        viewer_path: str | None = None,
+        export_paths: list[str] | None = None,
+        workers: int | None = None,
+        request_delay: float | None = None,
+    ) -> Path:
         """Human-readable progress for GitHub README embedding."""
         out = Path(path)
         lines = [
@@ -102,14 +110,40 @@ class ProgressTracker:
             f"**Last run:** {self._data.last_run_at}",
             f"**Total scraped:** {self._data.total_scraped}",
             f"**Total failed:** {self._data.total_failed}",
-            "",
-            "| Category | Available | Scraped | Failed | Last Run |",
-            "|----------|-----------|---------|--------|----------|",
         ]
+        if workers is not None and request_delay is not None:
+            lines.append(
+                f"**Settings:** workers={workers}, delay={request_delay}s per request"
+            )
+        lines.extend(
+            [
+                "",
+                "## Lihat Data",
+                "",
+            ]
+        )
+        if viewer_path:
+            lines.append(
+                f"- **HTML Viewer (buka di browser):** `{viewer_path}`"
+            )
+        lines.extend(
+            [
+                "- **CSV (Excel/Numbers):** `data/exports/*.csv`",
+                "- **JSON:** `data/exports/*.json`",
+                "- **Progress JSON:** `data/progress.json`",
+                "",
+                "| Category | Available | Scraped | Failed | Last Run |",
+                "|----------|-----------|---------|--------|----------|",
+            ]
+        )
         for c in self._data.categories:
             lines.append(
                 f"| {c.category_name} | {c.total_available} | "
                 f"{c.scraped_count} | {c.failed_count} | {c.last_run_at[:19]} |"
             )
+        if export_paths:
+            lines.extend(["", "## File Export Terbaru", ""])
+            for p in export_paths:
+                lines.append(f"- `{p}`")
         out.write_text("\n".join(lines) + "\n", encoding="utf-8")
         return out

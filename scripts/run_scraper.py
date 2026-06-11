@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import logging
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -52,6 +53,7 @@ def scrape_category(
     *,
     max_pages: int | None,
     page_size: int,
+    workers: int,
 ) -> tuple[list, int, int]:
     from src.models.listing import AusbildungListing
 
@@ -67,26 +69,68 @@ def scrape_category(
     ):
         total_available = page_result.get("maxErgebnisse", 0)
         jobs = page_result.get("ergebnisliste", [])
+        page_no = page_result.get("page", "?")
         logger.info(
-            "Category %s: page %s — %d jobs on page",
+            "Category %s: page %s — %d jobs on page (workers=%d)",
             category["id"],
-            page_result.get("page"),
+            page_no,
             len(jobs),
+            workers,
         )
 
-        for job in jobs:
-            refnr = job.get("referenznummer")
-            if not refnr:
+        refnrs = [job.get("referenznummer") for job in jobs if job.get("referenznummer")]
+        failed += len(jobs) - len(refnrs)
+
+        completed = 0
+
+        def on_progress(
+            refnr: str,
+            detail: dict | None,
+            exc: Exception | None,
+        ) -> None:
+            nonlocal completed, failed
+            completed += 1
+            if exc or detail is None:
                 failed += 1
-                continue
-            try:
-                detail = client.get_job_details(refnr)
-                listings.append(parser.parse(detail, category["id"]))
-            except Exception as exc:
-                logger.warning("Failed detail fetch %s: %s", refnr, exc)
-                failed += 1
+                if exc:
+                    logger.warning("Failed detail fetch %s: %s", refnr, exc)
+                return
+            listings.append(parser.parse(detail, category["id"]))
+            if completed % 25 == 0 or completed == len(refnrs):
+                logger.info(
+                    "Category %s page %s: %d/%d details fetched",
+                    category["id"],
+                    page_no,
+                    completed,
+                    len(refnrs),
+                )
+
+        client.fetch_details_parallel(
+            refnrs,
+            max_workers=workers,
+            on_progress=on_progress,
+        )
 
     return listings, total_available, failed
+
+
+def generate_viewer(output: Path | None = None) -> Path | None:
+    viewer_script = ROOT / "scripts" / "generate_viewer.py"
+    if not viewer_script.exists():
+        return None
+    target = output or ROOT / "data" / "viewer" / "index.html"
+    result = subprocess.run(
+        [sys.executable, str(viewer_script), "--output", str(target)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        logger.warning("Viewer generation failed: %s", result.stderr.strip())
+        return None
+    logger.info(result.stdout.strip())
+    return target
 
 
 def main() -> int:
@@ -109,13 +153,25 @@ def main() -> int:
         default=int(os.getenv("DEFAULT_PAGE_SIZE", "25")),
     )
     parser_args.add_argument(
+        "--workers",
+        type=int,
+        default=int(os.getenv("SCRAPE_WORKERS", "1")),
+        help="Parallel detail fetch workers (default 1 = sequential).",
+    )
+    parser_args.add_argument(
         "--samples",
         action="store_true",
         help="Save output to data/samples/ instead of data/exports/",
     )
+    parser_args.add_argument(
+        "--no-viewer",
+        action="store_true",
+        help="Skip HTML viewer generation after scrape.",
+    )
     args = parser_args.parse_args()
 
     max_pages = None if args.max_pages == 0 else args.max_pages
+    workers = max(1, args.workers)
 
     client = JobsucheClient(
         base_url=os.getenv(
@@ -124,6 +180,8 @@ def main() -> int:
         ),
         api_key=os.getenv("JOBSUCHE_API_KEY", "jobboerse-jobsuche"),
         request_delay=float(os.getenv("REQUEST_DELAY_SECONDS", "0.3")),
+        max_retries=int(os.getenv("MAX_RETRIES", "3")),
+        retry_backoff=float(os.getenv("RETRY_BACKOFF_SECONDS", "2.0")),
     )
     listing_parser = ListingParser()
     storage = LocalStorage(ROOT / "data")
@@ -146,6 +204,7 @@ def main() -> int:
         if sheet_id:
             sheets_exporter = GoogleSheetsExporter(sheet_id, ROOT / creds)
 
+    export_paths: list[str] = []
     total_listings = 0
     for category in categories:
         logger.info("=== Scraping: %s ===", category["name"])
@@ -155,14 +214,22 @@ def main() -> int:
             category,
             max_pages=max_pages,
             page_size=args.page_size,
+            workers=workers,
         )
 
-        suffix = "sample" if args.samples else category["id"]
         if args.samples:
-            storage.save_json(listings, f"{suffix}_{category['id']}.json", samples=True)
-            storage.save_csv(listings, f"{suffix}_{category['id']}.csv", samples=True)
+            json_path = storage.save_json(
+                listings, f"sample_{category['id']}.json", samples=True
+            )
+            csv_path = storage.save_csv(
+                listings, f"sample_{category['id']}.csv", samples=True
+            )
         else:
-            storage.save_category_bundle(category["id"], listings)
+            bundle = storage.save_category_bundle(category["id"], listings)
+            json_path = bundle["json"]
+            csv_path = bundle["csv"]
+
+        export_paths.extend([str(json_path.relative_to(ROOT)), str(csv_path.relative_to(ROOT))])
 
         if sheets_exporter:
             try:
@@ -186,8 +253,20 @@ def main() -> int:
             total_available,
         )
 
-    progress.export_markdown(ROOT / "data" / "PROGRESS.md")
+    viewer_path = None
+    if not args.no_viewer:
+        viewer_path = generate_viewer()
+
+    progress.export_markdown(
+        ROOT / "data" / "PROGRESS.md",
+        viewer_path=str(viewer_path.relative_to(ROOT)) if viewer_path else None,
+        export_paths=export_paths,
+        workers=workers,
+        request_delay=float(os.getenv("REQUEST_DELAY_SECONDS", "0.3")),
+    )
     logger.info("Total listings collected: %d", total_listings)
+    if viewer_path:
+        logger.info("Open viewer: %s", viewer_path)
     return 0
 
 

@@ -11,7 +11,103 @@
 - Google Sheets via `gspread` (optional)
 - Local JSON/CSV backup
 
-## Quick Start
+## Quick Start Siap Pakai (Bahasa Indonesia)
+
+### Checklist — apa yang dibutuhkan?
+
+| Item | Wajib? | Keterangan |
+|------|--------|------------|
+| Python 3.10+ | ✅ Ya | Sudah terinstall di Mac |
+| API Key Arbeitsagentur | ❌ Tidak perlu daftar | Pakai key publik bawaan |
+| Akun Google / Sheets | ❌ Opsional | Hanya jika mau export ke Google Sheets |
+| Browser | ✅ Ya | Untuk buka HTML viewer |
+
+### API — tanpa login
+
+| | |
+|---|---|
+| **Dokumentasi** | https://jobsuche.api.bund.dev/ |
+| **Base URL** | `https://rest.arbeitsagentur.de/jobboerse/jobsuche-service` |
+| **API Key** | `jobboerse-jobsuche` (header `X-API-Key`) |
+| **Registrasi** | Tidak diperlukan — key publik |
+
+### Setup sekali (copy-paste)
+
+```bash
+cd ~/Projects/ausbildung-scraper
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+```
+
+### Jalankan scraper
+
+```bash
+# Cepat — 1 halaman per kategori (~75 listing total)
+python scripts/run_scraper.py --max-pages 1
+
+# Rekomendasi — 3 halaman per kategori (~225 listing)
+python scripts/run_scraper.py --max-pages 3 --workers 3
+
+# Full scrape semua halaman (~947 x 3 kategori ≈ 2840 listing)
+python scripts/run_scraper.py --max-pages 0 --workers 3
+```
+
+### Lihat data langsung
+
+Setelah scrape selesai, buka di browser:
+
+```bash
+open data/viewer/index.html
+```
+
+Atau regenerate viewer manual:
+
+```bash
+python scripts/generate_viewer.py
+open data/viewer/index.html
+```
+
+**Cara lain:**
+
+| Format | Lokasi | Cara buka |
+|--------|--------|-----------|
+| HTML Viewer | `data/viewer/index.html` | Double-click / `open` di browser |
+| CSV | `data/exports/*.csv` | Excel, Numbers, Google Sheets upload |
+| JSON | `data/exports/*.json` | VS Code, editor teks |
+| Progress | `data/PROGRESS.md` | Ringkasan + link file |
+| Google Sheets | Tab `FI_AE`, dll. | Perlu setup service account |
+
+### Rate limit — aman vs agresif
+
+| Mode | Workers | Delay | Estimasi full scrape (~2840 detail) |
+|------|---------|-------|-------------------------------------|
+| **Aman (default)** | 1 | 0.3s | ~15–20 menit |
+| **Seimbang** | 3 | 0.3s | ~6–8 menit |
+| **Cepat** | 5 | 0.15s | ~3–5 menit |
+| **Agresif ⚠️** | 8+ | 0.05s | Risiko HTTP 429 / IP throttle |
+
+Atur di `.env` atau flag CLI:
+
+```bash
+# .env
+REQUEST_DELAY_SECONDS=0.3
+SCRAPE_WORKERS=3
+
+# atau via CLI
+python scripts/run_scraper.py --max-pages 0 --workers 3
+```
+
+Retry otomatis untuk connection reset dan HTTP 429/5xx (`MAX_RETRIES=3`).
+
+### Google Sheets (opsional — butuh kredensial)
+
+Tidak wajib. Tanpa Google, data tetap tersimpan lokal (JSON/CSV/HTML).
+
+---
+
+## Quick Start (English)
 
 ```bash
 cd ~/Projects/ausbildung-scraper
@@ -58,7 +154,9 @@ python scripts/run_scraper.py --max-pages 0
 | `--category ID` | Single category from config |
 | `--max-pages N` | Pages per category (`0` = all) |
 | `--page-size N` | Results per page (default 25) |
+| `--workers N` | Parallel detail fetch workers (default 1) |
 | `--samples` | Save to `data/samples/` |
+| `--no-viewer` | Skip HTML viewer generation |
 
 ## Google Sheets Setup
 
@@ -83,7 +181,7 @@ Each category exports to its own tab (`FI_AE`, `FI_AE_2026`, `FI_DPA`).
 ausbildung-scraper/
 ├── config/           # categories + field mapping
 ├── docs/             # PRD, architecture, pipeline
-├── scripts/          # run_scraper.py
+├── scripts/          # run_scraper.py, generate_viewer.py
 ├── src/
 │   ├── api_client/   # Jobsuche REST client
 │   ├── parser/       # API → normalized listing
@@ -91,7 +189,8 @@ ausbildung-scraper/
 │   └── models/       # AusbildungListing dataclass
 └── data/
     ├── samples/      # test output
-    ├── exports/      # production output
+    ├── exports/      # production output (JSON + CSV)
+    ├── viewer/       # index.html — buka di browser
     └── progress.json # scrape stats
 ```
 
