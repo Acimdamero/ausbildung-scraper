@@ -22,11 +22,17 @@ class AusbildungListing:
     deskripsi_perusahaan: str = ""
     apa_yang_ditawarkan: str = ""
     link_website_perusahaan: str = ""
+    link_website_perusahaan_resmi: str = ""
+    website_type: str = ""
     alamat_email_bewerbung: str = ""
     link_bewerbung: str = ""
+    link_bewerbung_externe: str = ""
+    link_bewerbung_efektif: str = ""
+    bewerbung_sumber: str = ""
     kontak_penanggung_jawab: str = ""
     dokumen_yang_harus_dipenuhi: str = ""
     ba_job_url: str = ""
+    kelengkapan_score: int = 0
     scraped_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )

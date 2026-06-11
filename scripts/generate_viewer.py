@@ -39,6 +39,12 @@ def load_listings(data_dir: Path, source: str = "exports") -> tuple[list[dict], 
     sources: dict[str, str] = {}
 
     if source == "processed":
+        master = data_dir / "processed" / "master_bewerbung.json"
+        if master.exists():
+            payload = json.loads(master.read_text(encoding="utf-8"))
+            if isinstance(payload, list) and payload:
+                sources["master_bewerbung"] = str(master.relative_to(ROOT))
+                return payload, sources
         combined = data_dir / "processed" / "all_listings_deduped.json"
         if combined.exists():
             payload = json.loads(combined.read_text(encoding="utf-8"))
@@ -159,6 +165,29 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     }}
     .card a:hover {{ background: rgba(61, 139, 253, 0.12); }}
     .salary {{ color: #7ddea2; font-size: 0.9rem; margin-top: 0.35rem; }}
+    .badges {{ display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }}
+    .badge {{
+      font-size: 0.75rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }}
+    .badge.score {{ color: #7ddea2; border-color: #3a6b4f; }}
+    .badge.partner {{ color: #f0c674; border-color: #6b5a2a; }}
+    .badge.company {{ color: #8ec8ff; border-color: #2a4a6b; }}
+    .badge {{
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      margin-right: 0.35rem;
+    }}
+    .badge.score-high {{ color: #7ddea2; border-color: #2d6b47; }}
+    .badge.score-mid {{ color: #e8c547; border-color: #6b5a1f; }}
+    .badge.score-low {{ color: #e88a7d; border-color: #6b2d2d; }}
     footer {{
       padding: 1rem 1.5rem 2rem;
       color: var(--muted);
@@ -176,6 +205,22 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       <input id="search" type="search" placeholder="Cari perusahaan, kota, deskripsi...">
       <select id="category">
         <option value="">Semua kategori</option>
+      </select>
+      <select id="sort">
+        <option value="score-desc">Kelengkapan tertinggi</option>
+        <option value="score-asc">Kelengkapan terendah</option>
+        <option value="city">Kota A–Z</option>
+        <option value="company">Perusahaan A–Z</option>
+      </select>
+      <select id="emailFilter">
+        <option value="">Email: semua</option>
+        <option value="yes">Punya email</option>
+        <option value="no">Tanpa email</option>
+      </select>
+      <select id="manualFilter">
+        <option value="">Manual: semua</option>
+        <option value="ya">Butuh cek manual</option>
+        <option value="tidak">Siap otomatisasi</option>
       </select>
     </div>
   </header>
@@ -204,11 +249,36 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       return text.length > max ? text.slice(0, max) + "…" : text;
     }}
 
+    function scoreClass(score) {{
+      if (score >= 75) return "score-high";
+      if (score >= 50) return "score-mid";
+      return "score-low";
+    }}
+
+    function hasEmail(item) {{
+      return Boolean((item.alamat_email_bewerbung || "").trim());
+    }}
+
+    function butuhManual(item) {{
+      if (item.butuh_manual) return item.butuh_manual === "ya";
+      const cara = item.cara_apply || "";
+      const score = item.kelengkapan_score ?? 0;
+      if (cara === "tidak_jelas" || score < 50) return true;
+      return cara === "ba_portal" && !hasEmail(item);
+    }}
+
     function render() {{
       const q = document.getElementById("search").value.toLowerCase().trim();
       const cat = categorySelect.value;
-      const filtered = LISTINGS.filter(item => {{
+      const sort = document.getElementById("sort").value;
+      const emailFilter = document.getElementById("emailFilter").value;
+      const manualFilter = document.getElementById("manualFilter").value;
+      let filtered = LISTINGS.filter(item => {{
         if (cat && item.category_id !== cat) return false;
+        if (emailFilter === "yes" && !hasEmail(item)) return false;
+        if (emailFilter === "no" && hasEmail(item)) return false;
+        const manual = butuhManual(item) ? "ya" : "tidak";
+        if (manualFilter && manual !== manualFilter) return false;
         if (!q) return true;
         const hay = [
           item.nama_perusahaan,
@@ -221,29 +291,53 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         return hay.includes(q);
       }});
 
+      filtered = [...filtered].sort((a, b) => {{
+        if (sort === "score-desc") return (b.kelengkapan_score || 0) - (a.kelengkapan_score || 0);
+        if (sort === "score-asc") return (a.kelengkapan_score || 0) - (b.kelengkapan_score || 0);
+        if (sort === "city") return (a.posisi_kota || "").localeCompare(b.posisi_kota || "", "de");
+        if (sort === "company") return (a.nama_perusahaan || "").localeCompare(b.nama_perusahaan || "", "de");
+        return 0;
+      }});
+
       document.getElementById("stats").textContent =
         `Menampilkan ${{filtered.length}} dari ${{LISTINGS.length}} listing`;
 
       const grid = document.getElementById("grid");
-      grid.innerHTML = filtered.map(item => `
+      grid.innerHTML = filtered.map(item => {{
+        const bewerbungUrl = item.link_bewerbung_efektif || item.link_bewerbung || item.ba_job_url;
+        const bewerbungLabel = item.bewerbung_sumber === "externe" ? "Bewerbung (eksternal)" : "Bewerbung (BA)";
+        const score = item.kelengkapan_score ?? 0;
+        const cara = item.cara_apply || "";
+        const manual = butuhManual(item);
+        return `
         <article class="card">
           <div class="company">${{item.nama_perusahaan || "—"}}</div>
           <h2>${{item.jenis_ausbildung || item.category_id}}</h2>
           <div class="location">${{item.posisi_kota || "—"}} · ${{item.alamat_detail || ""}}</div>
+          <div>
+            <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
+            ${{cara ? `<span class="badge">Apply: ${{cara}}</span>` : ""}}
+            ${{item.website_type ? `<span class="badge">Web: ${{item.website_type}}</span>` : ""}}
+            ${{hasEmail(item) ? `<span class="badge score-high">Email</span>` : ""}}
+            ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
+          </div>
           ${{item.gaji ? `<div class="salary">Gaji: ${{item.gaji}}</div>` : ""}}
           <div class="type">${{item.category_id}}</div>
           <div class="desc">${{excerpt(item.detail_deskripsi)}}</div>
           <div class="links">
             ${{item.ba_job_url ? `<a href="${{item.ba_job_url}}" target="_blank" rel="noopener">Arbeitsagentur</a>` : ""}}
-            ${{item.link_bewerbung ? `<a href="${{item.link_bewerbung}}" target="_blank" rel="noopener">Bewerbung</a>` : ""}}
-            ${{item.link_website_perusahaan ? `<a href="${{item.link_website_perusahaan}}" target="_blank" rel="noopener">Website</a>` : ""}}
+            ${{bewerbungUrl ? `<a href="${{bewerbungUrl}}" target="_blank" rel="noopener">${{bewerbungLabel}}</a>` : ""}}
+            ${{(item.link_website_perusahaan_resmi || item.link_website_perusahaan) ? `<a href="${{item.link_website_perusahaan_resmi || item.link_website_perusahaan}}" target="_blank" rel="noopener">${{item.link_website_perusahaan_resmi ? "Website resmi" : "Website"}}</a>` : ""}}
           </div>
         </article>
-      `).join("");
+      `}}).join("");
     }}
 
     document.getElementById("search").addEventListener("input", render);
     categorySelect.addEventListener("change", render);
+    document.getElementById("sort").addEventListener("change", render);
+    document.getElementById("emailFilter").addEventListener("change", render);
+    document.getElementById("manualFilter").addEventListener("change", render);
     render();
   </script>
 </body>

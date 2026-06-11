@@ -54,6 +54,15 @@ python scripts/run_scraper.py --max-pages 3 --workers 3
 python scripts/run_scraper.py --max-pages 0 --workers 3
 ```
 
+### Reprocess parser (tanpa scrape ulang)
+
+Setelah perbaikan parser, perbarui export yang ada:
+
+```bash
+python scripts/reprocess_data.py
+python scripts/dedup_data.py
+```
+
 ### Deduplikasi data
 
 Scrape mentah sering berisi duplikat (lowongan sama muncul di beberapa kategori pencarian). Jalankan deduplikasi setelah scrape:
@@ -70,6 +79,23 @@ Script ini:
 - Memperbarui statistik di `data/progress.json` dan `data/PROGRESS.md`
 
 Prioritas kategori saat duplikat lintas-kategori: `ae_2026` > `dpa` > `ae`.
+
+### Export untuk Bewerbung (Excel/Sheets)
+
+Setelah deduplikasi, file siap pakai di `data/processed/`:
+
+| File | Kegunaan |
+|------|----------|
+| `master_bewerbung.csv` | File utama — tracking lamaran |
+| `high_priority.csv` | Punya email + data lengkap |
+| `needs_manual_review.csv` | Perlu cek manual |
+| `by_city/*.csv` | Per kota |
+
+```bash
+python scripts/generate_bewerbung_exports.py   # regenerate tanpa dedup
+```
+
+Panduan lengkap: [docs/DATA_WORKFLOW.md](docs/DATA_WORKFLOW.md)
 
 ### Lihat data langsung
 
@@ -229,11 +255,12 @@ ausbildung-scraper/
 | Yang ditawarkan | ⚠️ (in description) |
 | Website perusahaan | ⚠️ (often partner URL) |
 | Email bewerbung | ❌ |
-| Link bewerbung | ⚠️ (external jobs only) |
+| Link bewerbung | ✅ (externe atau fallback BA) |
+| Website type / kelengkapan | ✅ (derived) |
 | Kontak HR | ❌ |
 | Dokumen | ❌ |
 
-See `config/fields_mapping.yaml` and `docs/API_INVESTIGATION.md`.
+See `config/fields_mapping.yaml`, `docs/DATA_COMPLETENESS.md`, and `docs/API_INVESTIGATION.md`.
 
 ## Progress Tracking
 

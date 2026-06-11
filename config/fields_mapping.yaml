@@ -77,11 +77,25 @@ fields:
     notes: "Nicht strukturiert — Teil der Stellenbeschreibung"
 
   link_website_perusahaan:
-    label_id: "Link Website Perusahaan Resmi"
-    label_de: "Firmenwebsite"
+    label_id: "Link Website Perusahaan"
+    label_de: "Firmenwebsite (API)"
     api_paths: ["allianzpartnerUrl"]
     availability: partial
     notes: "Oft Partner-Portal, nicht direkte Firmen-URL"
+
+  link_website_perusahaan_resmi:
+    label_id: "Link Website Perusahaan Resmi"
+    label_de: "Offizielle Firmenwebsite"
+    api_paths: []
+    availability: partial
+    notes: "Nur wenn website_type=company"
+
+  website_type:
+    label_id: "Tipe Website"
+    label_de: "Website-Typ"
+    api_paths: ["allianzpartnerUrl"]
+    availability: partial
+    notes: "company | ba_portal | partner_portal | empty"
 
   alamat_email_bewerbung:
     label_id: "Alamat Email Bewerbung"
@@ -92,10 +106,30 @@ fields:
 
   link_bewerbung:
     label_id: "Link Bewerbung"
-    label_de: "Bewerbungslink"
+    label_de: "Bewerbungslink (efektif)"
+    api_paths: ["externeURL", "referenznummer"]
+    availability: full
+    notes: "externeURL wenn vorhanden, sonst ba_job_url"
+
+  link_bewerbung_externe:
+    label_id: "Link Bewerbung Eksternal"
+    label_de: "Externe Bewerbungs-URL"
     api_paths: ["externeURL"]
     availability: partial
-    notes: "Nur bei externen Stellenbörsen; sonst über BA-Portal"
+
+  bewerbung_sumber:
+    label_id: "Sumber Link Bewerbung"
+    label_de: "Bewerbungsquelle"
+    api_paths: []
+    availability: full
+    notes: "externe | ba_portal | none"
+
+  kelengkapan_score:
+    label_id: "Skor Kelengkapan"
+    label_de: "Vollständigkeits-Score"
+    api_paths: []
+    availability: full
+    notes: "0–100% gefüllte Nutzerfelder"
 
   kontak_penanggung_jawab:
     label_id: "Kontak Penanggung Jawab/HR"

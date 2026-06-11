@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.models.listing import AusbildungListing
+from src.parser.enrichment import enrich_listing
 from src.storage.dedup import DedupStats, deduplicate_listings, split_by_category
 from src.storage.local import LocalStorage
 from src.storage.progress import ProgressTracker
@@ -183,6 +184,7 @@ def main() -> int:
         logger.info("  %s: %d from %s", category_id, count, src)
 
     deduped, stats = deduplicate_listings(listings)
+    deduped = [enrich_listing(item) for item in deduped]
     logger.info(
         "Deduplicated: %d -> %d (removed %d)",
         stats.input_total,
@@ -215,6 +217,21 @@ def main() -> int:
         processed_paths=processed_paths,
         export_sources=sources,
     )
+
+    bewerbung_script = ROOT / "scripts" / "generate_bewerbung_exports.py"
+    bewerbung_result = subprocess.run(
+        [sys.executable, str(bewerbung_script), "--data-dir", str(args.data_dir)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if bewerbung_result.returncode != 0:
+        logger.warning("Bewerbung exports failed: %s", bewerbung_result.stderr.strip())
+    else:
+        for line in (bewerbung_result.stdout + bewerbung_result.stderr).strip().splitlines():
+            if line.strip():
+                logger.info(line.strip())
 
     logger.info("Processed files written under data/processed/")
     if viewer_path:
