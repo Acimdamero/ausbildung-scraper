@@ -139,6 +139,18 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1rem;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }}
+    .card:hover {{
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(61, 139, 253, 0.25);
+    }}
+    .card-hint {{
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      opacity: 0.85;
     }}
     .card h2 {{
       margin: 0 0 0.35rem;
@@ -195,6 +207,107 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       border-top: 1px solid var(--border);
     }}
     footer ul {{ margin: 0.5rem 0 0; padding-left: 1.25rem; }}
+    .modal-overlay {{
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.65);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }}
+    .modal-overlay.open {{ display: flex; }}
+    .modal {{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      width: min(720px, 100%);
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    }}
+    .modal-header {{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 1.25rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }}
+    .modal-header h2 {{
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }}
+    .modal-header .company {{
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }}
+    .modal-close {{
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      width: 2.25rem;
+      height: 2.25rem;
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+      flex-shrink: 0;
+    }}
+    .modal-close:hover {{ background: rgba(61, 139, 253, 0.12); border-color: var(--accent); }}
+    .modal-body {{
+      overflow-y: auto;
+      padding: 1rem 1.25rem 1.25rem;
+    }}
+    .detail-section {{
+      margin-bottom: 1.1rem;
+    }}
+    .detail-section:last-child {{ margin-bottom: 0; }}
+    .detail-label {{
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }}
+    .detail-value {{
+      font-size: 0.92rem;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }}
+    .detail-value.muted {{ color: var(--muted); }}
+    .detail-value.scrollable {{
+      max-height: 24rem;
+      overflow-y: auto;
+      padding: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      line-height: 1.55;
+    }}
+    .modal-links {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.35rem;
+    }}
+    .modal-links a {{
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+    }}
+    .modal-links a:hover {{ background: rgba(61, 139, 253, 0.12); }}
+    body.modal-open {{ overflow: hidden; }}
   </style>
 </head>
 <body>
@@ -232,6 +345,18 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     <strong>Sumber data:</strong>
     <ul>{source_lines or "<li>Belum ada file JSON</li>"}</ul>
   </footer>
+  <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <div>
+          <div class="company" id="modal-company"></div>
+          <h2 id="modal-title"></h2>
+        </div>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
   <script>
     const LISTINGS = {data_json};
 
@@ -244,9 +369,78 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       categorySelect.appendChild(opt);
     }});
 
-    function excerpt(text, max = 280) {{
+    function excerpt(text, max = 320) {{
       if (!text) return "";
       return text.length > max ? text.slice(0, max) + "…" : text;
+    }}
+
+    function escapeHtml(text) {{
+      if (!text) return "";
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }}
+
+    function detailSection(label, value, opts = {{}}) {{
+      const {{ scrollable = false, muted = false }} = opts;
+      if (!value) return "";
+      const cls = ["detail-value", scrollable ? "scrollable" : "", muted ? "muted" : ""].filter(Boolean).join(" ");
+      return `
+        <div class="detail-section">
+          <div class="detail-label">${{label}}</div>
+          <div class="${{cls}}">${{escapeHtml(value)}}</div>
+        </div>`;
+    }}
+
+    function openModal(item) {{
+      const overlay = document.getElementById("modal-overlay");
+      const bewerbungUrl = item.link_bewerbung_efektif || item.link_bewerbung || item.ba_job_url;
+      const bewerbungLabel = item.bewerbung_sumber === "externe" ? "Bewerbung (eksternal)" : "Bewerbung (BA)";
+      const websiteUrl = item.link_website_perusahaan_resmi || item.link_website_perusahaan;
+      const websiteLabel = item.link_website_perusahaan_resmi ? "Website resmi" : "Website";
+      const score = item.kelengkapan_score ?? 0;
+
+      document.getElementById("modal-company").textContent = item.nama_perusahaan || "—";
+      document.getElementById("modal-title").textContent = item.jenis_ausbildung || item.category_id || "—";
+
+      const links = [
+        item.ba_job_url ? `<a href="${{item.ba_job_url}}" target="_blank" rel="noopener">Arbeitsagentur</a>` : "",
+        bewerbungUrl ? `<a href="${{bewerbungUrl}}" target="_blank" rel="noopener">${{bewerbungLabel}}</a>` : "",
+        websiteUrl ? `<a href="${{websiteUrl}}" target="_blank" rel="noopener">${{websiteLabel}}</a>` : "",
+      ].filter(Boolean).join("");
+
+      document.getElementById("modal-body").innerHTML = `
+        <div class="badges" style="margin-bottom:1rem">
+          <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
+          ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
+          ${{item.bewerbung_sumber ? `<span class="badge">Sumber: ${{escapeHtml(item.bewerbung_sumber)}}</span>` : ""}}
+          ${{item.category_id ? `<span class="badge">${{escapeHtml(item.category_id)}}</span>` : ""}}
+        </div>
+        ${{detailSection("Kota", item.posisi_kota)}}
+        ${{detailSection("Alamat", item.alamat_detail)}}
+        ${{detailSection("Jenis Ausbildung", item.jenis_ausbildung)}}
+        ${{detailSection("Gaji", item.gaji)}}
+        ${{detailSection("Persyaratan", item.persyaratan)}}
+        ${{detailSection("Deskripsi Perusahaan", item.deskripsi_perusahaan)}}
+        ${{detailSection("Apa yang Ditawarkan", item.apa_yang_ditawarkan)}}
+        ${{detailSection("Deskripsi Lengkap", item.detail_deskripsi, {{ scrollable: true }})}}
+        ${{detailSection("Email Bewerbung", item.alamat_email_bewerbung)}}
+        ${{detailSection("Kontak HR", item.kontak_penanggung_jawab)}}
+        ${{detailSection("Dokumen yang Diperlukan", item.dokumen_yang_harus_dipenuhi, {{ scrollable: true }})}}
+        ${{detailSection("Referenznummer", item.referenznummer, {{ muted: true }})}}
+        ${{links ? `<div class="detail-section"><div class="detail-label">Tautan</div><div class="modal-links">${{links}}</div></div>` : ""}}
+      `;
+
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }}
+
+    function closeModal() {{
+      const overlay = document.getElementById("modal-overlay");
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
     }}
 
     function scoreClass(score) {{
@@ -309,21 +503,23 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         const score = item.kelengkapan_score ?? 0;
         const cara = item.cara_apply || "";
         const manual = butuhManual(item);
+        const ref = item.referenznummer || "";
         return `
-        <article class="card">
-          <div class="company">${{item.nama_perusahaan || "—"}}</div>
-          <h2>${{item.jenis_ausbildung || item.category_id}}</h2>
-          <div class="location">${{item.posisi_kota || "—"}} · ${{item.alamat_detail || ""}}</div>
+        <article class="card" data-ref="${{escapeHtml(ref)}}" tabindex="0" role="button" aria-label="Lihat detail ${{escapeHtml(item.nama_perusahaan || "")}}">
+          <div class="company">${{escapeHtml(item.nama_perusahaan || "—")}}</div>
+          <h2>${{escapeHtml(item.jenis_ausbildung || item.category_id)}}</h2>
+          <div class="location">${{escapeHtml(item.posisi_kota || "—")}} · ${{escapeHtml(item.alamat_detail || "")}}</div>
           <div>
             <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
-            ${{cara ? `<span class="badge">Apply: ${{cara}}</span>` : ""}}
-            ${{item.website_type ? `<span class="badge">Web: ${{item.website_type}}</span>` : ""}}
+            ${{cara ? `<span class="badge">Apply: ${{escapeHtml(cara)}}</span>` : ""}}
+            ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
             ${{hasEmail(item) ? `<span class="badge score-high">Email</span>` : ""}}
             ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
           </div>
-          ${{item.gaji ? `<div class="salary">Gaji: ${{item.gaji}}</div>` : ""}}
-          <div class="type">${{item.category_id}}</div>
-          <div class="desc">${{excerpt(item.detail_deskripsi)}}</div>
+          ${{item.gaji ? `<div class="salary">Gaji: ${{escapeHtml(item.gaji)}}</div>` : ""}}
+          <div class="type">${{escapeHtml(item.category_id)}}</div>
+          <div class="desc">${{escapeHtml(excerpt(item.detail_deskripsi))}}</div>
+          <div class="card-hint">Klik untuk detail lengkap →</div>
           <div class="links">
             ${{item.ba_job_url ? `<a href="${{item.ba_job_url}}" target="_blank" rel="noopener">Arbeitsagentur</a>` : ""}}
             ${{bewerbungUrl ? `<a href="${{bewerbungUrl}}" target="_blank" rel="noopener">${{bewerbungLabel}}</a>` : ""}}
@@ -332,6 +528,36 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         </article>
       `}}).join("");
     }}
+
+    const listingsByRef = Object.fromEntries(
+      LISTINGS.map(l => [l.referenznummer || "", l]).filter(([k]) => k)
+    );
+
+    document.getElementById("grid").addEventListener("click", (e) => {{
+      if (e.target.closest("a")) return;
+      const card = e.target.closest(".card");
+      if (!card) return;
+      const ref = card.dataset.ref;
+      const item = listingsByRef[ref];
+      if (item) openModal(item);
+    }});
+
+    document.getElementById("grid").addEventListener("keydown", (e) => {{
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const card = e.target.closest(".card");
+      if (!card) return;
+      e.preventDefault();
+      const item = listingsByRef[card.dataset.ref];
+      if (item) openModal(item);
+    }});
+
+    document.getElementById("modal-close").addEventListener("click", closeModal);
+    document.getElementById("modal-overlay").addEventListener("click", (e) => {{
+      if (e.target.id === "modal-overlay") closeModal();
+    }});
+    document.addEventListener("keydown", (e) => {{
+      if (e.key === "Escape") closeModal();
+    }});
 
     document.getElementById("search").addEventListener("input", render);
     categorySelect.addEventListener("change", render);
