@@ -1,0 +1,125 @@
+# Mapping: user field (ID) -> API source path(s)
+# availability: full | partial | missing
+
+fields:
+  nama_perusahaan:
+    label_id: "Nama Perusahaan"
+    label_de: "Firmenname"
+    api_paths: ["firma"]
+    availability: full
+
+  titik_data_di_peta:
+    label_id: "Titik Data di Peta"
+    label_de: "Kartenkoordinaten"
+    api_paths: ["stellenlokationen[].breite", "stellenlokationen[].laenge"]
+    availability: full
+    notes: "Format: lat,lon"
+
+  posisi_kota:
+    label_id: "Posisi Kota"
+    label_de: "Stadt"
+    api_paths: ["stellenlokationen[].adresse.ort"]
+    availability: full
+
+  alamat_detail:
+    label_id: "Alamat Detail"
+    label_de: "Detaillierte Adresse"
+    api_paths:
+      - "stellenlokationen[].adresse.strasse"
+      - "stellenlokationen[].adresse.hausnummer"
+      - "stellenlokationen[].adresse.plz"
+      - "stellenlokationen[].adresse.ort"
+    availability: partial
+    notes: "Straße/Hausnummer nicht bei allen Anzeigen vorhanden"
+
+  detail_deskripsi:
+    label_id: "Detail Deskripsi"
+    label_de: "Stellenbeschreibung"
+    api_paths: ["stellenangebotsBeschreibung"]
+    availability: full
+
+  gaji:
+    label_id: "Gaji"
+    label_de: "Ausbildungsvergütung"
+    api_paths:
+      - "ausbildungsverguetungJahr1"
+      - "ausbildungsverguetungJahr2"
+      - "ausbildungsverguetungJahr3"
+      - "verguetungsangabe"
+    availability: partial
+    notes: "Nur ~3% der Stellen geben Vergütung an"
+
+  persyaratan:
+    label_id: "Persyaratan"
+    label_de: "Anforderungen"
+    api_paths: ["geforderterBildungsabschluss", "stellenangebotsBeschreibung"]
+    availability: partial
+    notes: "Strukturiert nur Bildungsabschluss; Rest in Beschreibung"
+
+  jenis_ausbildung:
+    label_id: "Jenis Ausbildung"
+    label_de: "Ausbildungsart"
+    api_paths: ["ausbildungsart", "hauptberuf", "alleBerufe"]
+    availability: full
+
+  deskripsi_perusahaan:
+    label_id: "Deskripsi Perusahaan"
+    label_de: "Arbeitgeberbeschreibung"
+    api_paths: []
+    availability: missing
+    notes: "Kein separates API-Feld; ggf. aus Beschreibung extrahieren"
+
+  apa_yang_ditawarkan:
+    label_id: "Apa yang Ditawarkan"
+    label_de: "Angebotene Leistungen"
+    api_paths: ["stellenangebotsBeschreibung"]
+    availability: partial
+    notes: "Nicht strukturiert — Teil der Stellenbeschreibung"
+
+  link_website_perusahaan:
+    label_id: "Link Website Perusahaan Resmi"
+    label_de: "Firmenwebsite"
+    api_paths: ["allianzpartnerUrl"]
+    availability: partial
+    notes: "Oft Partner-Portal, nicht direkte Firmen-URL"
+
+  alamat_email_bewerbung:
+    label_id: "Alamat Email Bewerbung"
+    label_de: "Bewerbungs-E-Mail"
+    api_paths: []
+    availability: missing
+    notes: "Bewerbung-Endpoint (/bewerbung) nicht öffentlich zugänglich"
+
+  link_bewerbung:
+    label_id: "Link Bewerbung"
+    label_de: "Bewerbungslink"
+    api_paths: ["externeURL"]
+    availability: partial
+    notes: "Nur bei externen Stellenbörsen; sonst über BA-Portal"
+
+  kontak_penanggung_jawab:
+    label_id: "Kontak Penanggung Jawab/HR"
+    label_de: "Ansprechpartner"
+    api_paths: []
+    availability: missing
+
+  dokumen_yang_harus_dipenuhi:
+    label_id: "Dokumen yang Harus Dipenuhi"
+    label_de: "Erforderliche Unterlagen"
+    api_paths: []
+    availability: missing
+    notes: "Nicht in API; ggf. in Beschreibung erwähnt"
+
+  # Metadata (bonus)
+  referenznummer:
+    label_id: "Referenznummer"
+    label_de: "Referenznummer"
+    api_paths: ["referenznummer"]
+    availability: full
+
+  ba_job_url:
+    label_id: "Link Arbeitsagentur"
+    label_de: "Arbeitsagentur-Link"
+    api_paths: ["referenznummer"]
+    availability: full
+    notes: "Konstruiert aus referenznummer"

@@ -1,0 +1,15 @@
+{
+  "last_run_at": "2026-06-11T07:53:12.608220+00:00",
+  "categories": [
+    {
+      "category_id": "fachinformatiker_ae",
+      "category_name": "Fachinformatiker/in Anwendungsentwicklung",
+      "total_available": 947,
+      "scraped_count": 24,
+      "failed_count": 1,
+      "last_run_at": "2026-06-11T07:53:12.608220+00:00"
+    }
+  ],
+  "total_scraped": 24,
+  "total_failed": 1
+}

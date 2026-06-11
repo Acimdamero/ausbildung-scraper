@@ -1,0 +1,31 @@
+# Secrets & credentials
+.env
+credentials/
+*.json
+!config/*.yaml
+!data/samples/*.json
+!data/progress.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# Data outputs (keep samples)
+data/raw/
+data/processed/
+data/exports/
+!data/samples/
+
+# IDE & OS
+.idea/
+.vscode/
+.DS_Store
+
+# Progress / logs
+logs/
+*.log

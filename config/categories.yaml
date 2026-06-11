@@ -1,0 +1,32 @@
+# Search categories for Ausbildung listings (angebotsart=4)
+# Duplicate entries are deduplicated by id at runtime.
+
+categories:
+  - id: fachinformatiker_ae
+    name: "Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung"
+    was: "Fachinformatiker/in Anwendungsentwicklung "
+    angebotsart: 4
+    sheet_tab: "FI_AE"
+
+  - id: fachinformatiker_ae_2026
+    name: "Fachinformatiker/in Anwendungsentwicklung Jahr 2026"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung Jahr 2026"
+    was: "Fachinformatiker/in Anwendungsentwicklung Jahr 2026"
+    angebotsart: 4
+    sheet_tab: "FI_AE_2026"
+
+  - id: fachinformatiker_dpa
+    name: "Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse"
+    was: "Fachinformatiker/in Daten- und Prozessanalyse"
+    angebotsart: 4
+    sheet_tab: "FI_DPA"
+
+  - id: fachinformatiker_dpa_dup
+    name: "Fachinformatiker/in Daten- und Prozessanalyse (duplicate)"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse"
+    was: "Fachinformatiker/in Daten- und Prozessanalyse"
+    angebotsart: 4
+    sheet_tab: "FI_DPA_2"
+    duplicate_of: fachinformatiker_dpa
