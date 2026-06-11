@@ -1,0 +1,223 @@
+{
+  "detail_url": "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C",
+  "api_calls": [
+    {
+      "url": "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C",
+      "status": 200,
+      "content_type": "text/x-component"
+    },
+    {
+      "url": "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C",
+      "status": 200,
+      "content_type": "text/x-component"
+    },
+    {
+      "url": "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C",
+      "status": 200,
+      "content_type": "text/x-component"
+    },
+    {
+      "url": "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C",
+      "status": 200,
+      "content_type": "text/x-component"
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?action_name=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&idsite=8&rec=1&r=863648&h=12&m=29&s=13&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&dimension1=&dimension2=&dimension3=&dimension4=&dimension5=&dimension6=&dimension7=&dimension22=&dimension23=&dimension24=&pv_id=JgQsF1&pf_net=151&pf_srv=5269&pf_tfr=85&pf_dm1=475&pf_dm2=116&pf_onl=0&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?action_name=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&idsite=2&rec=1&r=688560&h=12&m=29&s=13&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&pv_id=9YgISu&pf_net=151&pf_srv=5269&pf_tfr=85&pf_dm1=475&pf_dm2=116&pf_onl=0&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C",
+      "status": 200,
+      "content_type": "text/x-component"
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?e_c=a54a3069-6d6d-464f-a491-c1061d84f829&e_a=search_impression&e_n=Suche%20Impressionen&ca=1&idsite=2&rec=1&r=484393&h=12&m=29&s=17&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&pf_net=151&pf_srv=5269&pf_tfr=85&pf_dm1=475&pf_dm2=116&pf_onl=0&pv_id=9YgISu&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?e_c=view_item_list&e_a=a7b669f3-4526-4c10-867d-c6021d3b34ec&e_n=341c9c01-7077-49b0-be56-f3f0820a565c&ca=1&idsite=8&rec=1&r=171627&h=12&m=29&s=17&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&dimension1=&dimension2=&dimension3=&dimension4=&dimension5=&dimension6=&dimension7=&dimension8=a7b669f3-4526-4c10-867d-c6021d3b34ec&dimension10=Berlin&dimension11=Ausbildung%20Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%20(m%2Fw%2Fd)&dimension12=Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung&dimension13=Job-Posting&dimension14=Frachtwerk%20GmbH&dimension15=&dimension16=341c9c01-7077-49b0-be56-f3f0820a565c&dimension17=a7b669f3-4526-4c10-867d-c6021d3b34ec&dimension18=1&dimension19=1&dimension20=EUR&dimension22=&dimension23=&dimension24=&pv_id=JgQsF1&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?e_c=view_item_list&e_a=a54a3069-6d6d-464f-a491-c1061d84f829&e_n=25199b97-b5bc-4fbc-823d-b69644279d75&ca=1&idsite=8&rec=1&r=051287&h=12&m=29&s=17&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&dimension1=&dimension2=&dimension3=&dimension4=&dimension5=&dimension6=&dimension7=&dimension8=a54a3069-6d6d-464f-a491-c1061d84f829&dimension10=B%C3%B6nen&dimension11=Ausbildung%20Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%20(m%2Fw%2Fd)&dimension12=Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung&dimension13=Job-Posting&dimension14=PharmLog%20Pharma%20Logistik%20GmbH&dimension15=&dimension16=25199b97-b5bc-4fbc-823d-b69644279d75&dimension17=a54a3069-6d6d-464f-a491-c1061d84f829&dimension18=1&dimension19=1&dimension20=EUR&dimension22=&dimension23=&dimension24=&pf_net=151&pf_srv=5269&pf_tfr=85&pf_dm1=475&pf_dm2=116&pf_onl=0&pv_id=JgQsF1&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?e_c=a7b669f3-4526-4c10-867d-c6021d3b34ec&e_a=search_impression&e_n=Suche%20Impressionen&ca=1&idsite=2&rec=1&r=905253&h=12&m=29&s=17&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&pv_id=9YgISu&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://www.google.com/ccm/collect?rcb=0&frm=0&ae=g&auid=9212342.1781173765&dt=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&en=page_view&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F&scrsrc=www.googletagmanager.com&rnd=306493478.1781173765&navt=n&npa=0&us_privacy=1---&ep.ads_data_redaction=0&gdid=dMWZhNz&_tu=CA&gtm=45He6691v71703898za200zd71703898xea&gcs=G111&gcd=13r3r3r2r5l1&dma_cps=a&dma=1&tag_exp=115938465~115938468~117227716~118012007~119456240~119456248&apve=1&apvf=f&apvc=1&tft=1781173764821&tfd=18425",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "url": "https://cdn-4.convertexperiments.com/api/v1/project-optional-settings/100411983/100412268",
+      "status": 200,
+      "content_type": "application/json",
+      "json_keys": [
+        "account_id",
+        "project_id",
+        "visitor_insights"
+      ],
+      "sample": "{\"account_id\": 100411983, \"project_id\": 100412268, \"visitor_insights\": {\"enabled\": false, \"sampling_rate\": 5, \"tracking_id\": null}}"
+    },
+    {
+      "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-GNWX91X2WH&gtm=45je6691v9105574709za20gzb71703898zd71703898&_p=1781173752501&_gaz=1&gcs=G111&gcd=13r3rPr2r5l1&npa=0&dma_cps=a&dma=1&gdid=dMWZhNz&ecid=677758299&_eu=AEAEAGAC&_prs=ok&ae=a&are=1&cid=1424954106.1781173765&frm=0&pscdl=noapi&rcb=10&sr=1280x720&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uam=&uamb=0&uap=macOS&uapv=10_15_7&uaw=0&ul=de-de&gaf=2&_s=1&tag_exp=0~115938465~115938469&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&sid=1781173765&sct=1&seg=0&dt=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&_tu=CA&en=view_search_results&_fv=2&_ss=1&ep.=false&ep.gtm_container_id_version=GTM-KJGR87%20-%20524&ep.page_type=SucheABS&ep.page_target_group=Sch%C3%BCler&ep.page_category_full=SucheABS&ep.user_role=not-logged-in&ep.partner_status=&ep.login_status=not%20logged%20in&ep.product_t1=keine%20Zuordnung&ep.content_cat=Transactional&ep.page_cat=HauptsucheABS&ep.page_folder1=suche&ep.page_folder2=keine%20Zuordnung&ep.page_folder3=keine%20Zuordnung&ep.page_folder4=keine%20Zuordnung&epn.user_nef=0&ep.dl_evn=cookie_consent_update&ep.page_enh_customer=gtm-not-set&ep.page_enh_data=gtm-not-set&ep.page_enh_feature=gtm-not-set&ep.page_enh_rating=gtm-not-set&ep.page_enh_sum=gtm-not-set&ep.page_enh_user=gtm-not-set&ep.ab_platform=abs&ep.search_term=Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&tfd=19042",
+      "status": 204,
+      "content_type": "text/plain"
+    },
+    {
+      "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-GNWX91X2WH&gtm=45je6691v9105574709z871703898za20gzb71703898zd71703898&_p=1781173752501&gcs=G111&gcd=13r3rPr2r5l1&npa=0&dma_cps=a&dma=1&gdid=dMWZhNz&ecid=677758299&_eu=AAAAAGQC&are=1&cid=1424954106.1781173765&ec_mode=a&frm=0&pscdl=noapi&rcb=10&sr=1280x720&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uam=&uamb=0&uap=macOS&uapv=10_15_7&uaw=0&ul=de-de&gaf=2&_s=2&tag_exp=0~115938465~115938469&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&sid=1781173765&sct=1&seg=1&dt=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&_tu=CA&en=page_view&ep.=false&ep.gtm_container_id_version=GTM-KJGR87%20-%20524&ep.page_type=SucheABS&ep.page_target_group=Sch%C3%BCler&ep.page_category_full=SucheABS&ep.user_role=not-logged-in&ep.partner_status=&ep.login_status=not%20logged%20in&ep.product_t1=keine%20Zuordnung&ep.content_cat=Transactional&ep.page_cat=HauptsucheABS&ep.page_folder1=suche&ep.page_folder2=keine%20Zuordnung&ep.page_folder3=keine%20Zuordnung&ep.page_folder4=keine%20Zuordnung&epn.user_nef=0&ep.dl_evn=cookie_consent_update&ep.page_enh_customer=gtm-not-set&ep.page_enh_data=gtm-not-set&ep.page_enh_feature=gtm-not-set&ep.page_enh_rating=gtm-not-set&ep.page_enh_sum=gtm-not-set&ep.page_enh_user=gtm-not-set&ep.ab_platform=abs&_et=2&tfd=19050",
+      "status": 204,
+      "content_type": "text/plain"
+    },
+    {
+      "url": "https://api.hubapi.com/hs-script-loader-public/v2/config/pixels-and-events/json?portalId=8347045",
+      "status": 200,
+      "content_type": "application/json;charset=utf-8",
+      "json_keys": [
+        "pixels",
+        "enhancedConversionEventSettings"
+      ],
+      "sample": "{\"pixels\": {\"ADWORDS\": [{\"pixelId\": \"850561483\", \"limitedDataUseEnabled\": false, \"pixelInitializer\": \"850561483\"}], \"FACEBOOK\": [{\"pixelId\": \"294025404710576\", \"limitedDataUseEnabled\": true, \"pixelInitializer\": \"294025404710576\"}], \"LINKEDIN\": [{\"pixelId\": \"418545\", \"limitedDataUseEnabled\": false, \"pixelInitializer\": \"418545\"}, {\"pixelId\": \"4957417\", \"limitedDataUseEnabled\": false, \"pixelInitializer\": \"4957417\"}]}, \"enhancedConversionEventSettings\": {}}"
+    },
+    {
+      "url": "https://track.hubspot.com/__ptq.gif?k=1&sd=1280x720&cd=24-bit&cs=UTF-8&ln=de-de&v=1.1&a=8347045&rcu=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F&pu=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&t=Ausbildung+finden+-+Tausende+freie+Lehrstellen+auf+Ausbildung.de&cts=1781173765370&vi=449611d9b7493b657e2872e9f431fefa&nc=true&u=265785296.449611d9b7493b657e2872e9f431fefa.1781173765368.1781173765368.1781173765368.1&b=265785296.1.1781173765368&cc=15",
+      "status": 200,
+      "content_type": "image/gif"
+    },
+    {
+      "url": "https://www.facebook.com/tr/?id=252097418558493&ev=PageView&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&rl=&if=false&ts=1781173765467&iw=false&sw=1280&sh=720&v=2.9.337&r=stable&ec=0&o=4126&aems=0%3B0&fbp=fb.1.1781173765462.427299074961827241&cs_est=true&ler=empty&pmd[title]=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&pmd[locale]=de&pmd[description]=Ausbildung%20finden%20anhand%20von%20tausenden%20freien%20Ausbildungspl%C3%A4tzen.%20Mache%20jetzt%20den%20Berufscheck%20und%20finde%20heraus%2C%20welcher%20Beruf%20zu%20dir%20passt.&plt=5908.600000143051&iss=1&imft=1&tz=120&it=1781173765192&coo=false&expv2[0]=pl0&expv2[1]=el2&expv2[2]=bc1&expv2[3]=ra2&expv2[4]=rp2&expv2[5]=im1&expv2[6]=hf0&rqm=GET",
+      "status": 200,
+      "content_type": "text/plain"
+    },
+    {
+      "url": "https://region1.analytics.google.com/measurement/conversion?random=1781173765420&cv=11&tid=G-GNWX91X2WH&fst=1781173765420&fmt=8&en=first_visit&gtm=45je6691v9105574709za20gzb71703898zd71703898xec&gcs=G111&gcd=13r3rPr2r5l1&dma_cps=a&dma=1&tag_exp=0~115938465~115938469&u_w=1280&u_h=720&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&top=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&gacid=1424954106.1781173765&ae=a&frm=0&tiba=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&gdid=dMWZhNz&npa=0&us_privacy=1---&pscdl=noapi&auid=9212342.1781173765&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&rcb=10",
+      "status": 302,
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://region1.analytics.google.com/measurement/1p-conversion/?random=1751676674&cv=11&tid=G-GNWX91X2WH&fst=1781173765420&fmt=8&en=first_visit&gtm=45je6691v9105574709za20gzb71703898zd71703898xec&gcs=G111&gcd=13r3rPr2r5l1&dma_cps=a&dma=1&tag_exp=0~115938465~115938469&u_w=1280&u_h=720&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&top=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&gacid=1424954106.1781173765&ae=a&frm=0&tiba=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&gdid=dMWZhNz&npa=0&us_privacy=1---&pscdl=noapi&auid=9212342.1781173765&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&rcb=10&ct_cookie_present=false&crd=CLTesQII8t-xAgit4bECCK_hsQIIobixAgixwbECCLDBsQIIscOxAgiKxbECCMLJsQIItMaxAgiT2rECCNvcsQIIh9uxAgjTxbECCOvMsQII7c6xAgjVz7ECCPTasQIIl9SxAgjJ27ECCLHhsQIIs-GxAgim3bECCLDesQIIgNuxAg&fsk=ChEI8Lmp0QYQ5ZOc2_rK966lARIsAE0m5wleuDrFbB6tbBvOm1HmKBxrEEDDgqJUK6RHmbGJEBCM0bh_U1yK_90aAuwq&pscrd=IhMI0JPTrP3-lAMVGHdBAh2OUxONOhpodHRwczovL3d3dy5hdXNiaWxkdW5nLmRlL0JYQ2hFSThMbXAwUVlReVlhdDZicVM4S3JGQVJJdEFCS25GNVFxbnd1X1dfZUlEcXJycXdYZTV2NXZrSkdPMThpSUxNdGJXZGg1bEo4aXU1NDROQTZiYlVfSXoMCAliCAgAEAAYACAA",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "url": "https://sgtm-data.ausbildung.de/g/collect?v=2&tid=G-BJYYFQ1N8Y&gtm=45je6691v9168959293za20gzb71703898zd71703898&_p=1781173752501&gcs=G111&gcd=13r3rPr2r5l1&npa=0&dma_cps=a&dma=1&gdid=dMWZhNz&ecid=502029798&_eu=AEAEAGA&_fplc=0&ae=a&are=1&cid=1424954106.1781173765&frm=0&pscdl=noapi&rcb=12&sr=1280x720&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uam=&uamb=0&uap=macOS&uapv=10_15_7&uaw=0&ul=de-de&ur=DE-BB&sst.rnd=306493478.1781173765&sst.etld=google.de&sst.gcsub=region1&sst.us_privacy=1---&sst.tft=1781173752501&sst.em_event=1&sst.sp=1&sst.lpc=66077630&sst.navt=n&sst.ude=0&sst.sw_exp=1&gaf=2&_s=1&tag_exp=0~115938465~115938468~117776793&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&sid=1781173765&sct=1&seg=0&dt=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&_tu=DA&en=view_search_results&_fv=1&_nsi=1&_ss=1&ep.=false&ep.gtm_container_id_version=GTM-KJGR87%20-%20524&ep.page_type=SucheABS&ep.page_target_group=Sch%C3%BCler&ep.page_category_full=SucheABS&ep.user_role=not-logged-in&ep.partner_status=&ep.login_status=not%20logged%20in&ep.consent_status=%7Cpreferences%7Cstatistics%7Cmarketing%7C&ep.product_t1=keine%20Zuordnung&ep.content_cat=Transactional&ep.page_cat=HauptsucheABS&ep.page_folder1=suche&ep.page_folder2=keine%20Zuordnung&ep.page_folder3=keine%20Zuordnung&ep.page_folder4=keine%20Zuordnung&epn.user_nef=0&ep.search_term=Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&tfd=18896&richsstsse",
+      "status": 200,
+      "content_type": "text/plain"
+    },
+    {
+      "url": "https://sgtm-data.ausbildung.de/g/collect?v=2&tid=G-BJYYFQ1N8Y&gtm=45je6691v9168959293z871703898za20gzb71703898zd71703898&_p=1781173752501&gcs=G111&gcd=13r3rPr2r5l1&npa=0&dma_cps=a&dma=1&gdid=dMWZhNz&ecid=502029798&_eu=AAAAAGQ&_fplc=0&are=1&cid=1424954106.1781173765&frm=0&pscdl=noapi&rcb=12&sr=1280x720&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uam=&uamb=0&uap=macOS&uapv=10_15_7&uaw=0&ul=de-de&ur=DE-BB&sst.rnd=306493478.1781173765&sst.etld=google.de&sst.gcsub=region1&sst.us_privacy=1---&sst.tft=1781173752501&sst.lpc=66077630&sst.navt=n&sst.ude=0&sst.sw_exp=1&gaf=2&_s=2&tag_exp=0~115938465~115938468~117776793&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%7C&sid=1781173765&sct=1&seg=1&dt=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&_tu=DA&en=page_view&ep.=false&ep.gtm_container_id_version=GTM-KJGR87%20-%20524&ep.page_type=SucheABS&ep.page_target_group=Sch%C3%BCler&ep.page_category_full=SucheABS&ep.user_role=not-logged-in&ep.partner_status=&ep.login_status=not%20logged%20in&ep.consent_status=%7Cpreferences%7Cstatistics%7Cmarketing%7C&ep.product_t1=keine%20Zuordnung&ep.content_cat=Transactional&ep.page_cat=HauptsucheABS&ep.page_folder1=suche&ep.page_folder2=keine%20Zuordnung&ep.page_folder3=keine%20Zuordnung&ep.page_folder4=keine%20Zuordnung&epn.user_nef=0&_et=3&tfd=18902&richsstsse",
+      "status": 200,
+      "content_type": "text/plain"
+    },
+    {
+      "url": "https://www.facebook.com/tr/?id=294025404710576&ev=PageView&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&rl=&if=false&ts=1781173765684&iw=false&sw=1280&sh=720&cud[external_id]=%23%23%23%23%23%23*%23*%23%23%23%23*%23%23%23*%23%23%23%23*%23*%23%23%23****&ncud[external_id]=%23%23%23%23%23%23*%23*%23%23%23%23*%23%23%23*%23%23%23%23*%23*%23%23%23****&ud[external_id]=449611d9b7493b657e2872e9f431fefa&aud[external_id]=449611d9b7493b657e2872e9f431fefa&v=2.9.337&r=stable&a=hubspot&ec=0&o=4126&aems=0%3B0&fbp=fb.1.1781173765462.427299074961827241&ler=empty&pmd[title]=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&pmd[locale]=de&pmd[description]=Ausbildung%20finden%20anhand%20von%20tausenden%20freien%20Ausbildungspl%C3%A4tzen.%20Mache%20jetzt%20den%20Berufscheck%20und%20finde%20heraus%2C%20welcher%20Beruf%20zu%20dir%20passt.&plt=5908.600000143051&iss=1&imft=1&tz=120&it=1781173765192&coo=false&dpo=LDU&dpoco=0&dpost=0&expv2[0]=pl0&expv2[1]=el2&expv2[2]=bc1&expv2[3]=ra2&expv2[4]=rp2&expv2[5]=im1&expv2[6]=hf0&rqm=GET",
+      "status": 200,
+      "content_type": "text/plain"
+    },
+    {
+      "url": "https://cta-service-cms2.hubspot.com/web-interactives/public/v1/embed/combinedConfigs?portalId=8347045&currentUrl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&utk=449611d9b7493b657e2872e9f431fefa&__hstc=265785296.449611d9b7493b657e2872e9f431fefa.1781173765368.1781173765368.1781173765368.1&__hssc=265785296.1.1781173765368",
+      "status": 200,
+      "content_type": "application/json;charset=utf-8",
+      "json_keys": [
+        "sortedAudienceConfigs",
+        "requestedConfigs",
+        "gates"
+      ],
+      "sample": "{\"sortedAudienceConfigs\": [], \"requestedConfigs\": [], \"gates\": []}"
+    },
+    {
+      "url": "https://api.hubspot.com/livechat-public/v1/message/public?portalId=8347045&conversations-embed=static-1.27058&mobile=false&messagesUtk=9219123948df486cb30fe1a9e7f15f75&traceId=9219123948df486cb30fe1a9e7f15f75&hubspotUtk=449611d9b7493b657e2872e9f431fefa&__hstc=265785296.449611d9b7493b657e2872e9f431fefa.1781173765368.1781173765368.1781173765368.1&__hssc=265785296.1.1781173765368",
+      "status": 200,
+      "content_type": "application/json;charset=utf-8",
+      "json_keys": [
+        "@type",
+        "metadata",
+        "type"
+      ],
+      "sample": "{\"@type\": \"HIDE_WIDGET\", \"metadata\": {\"@type\": \"HIDE_WIDGET_META\", \"reason\": \"NO_MATCHING_WELCOME_MESSAGE\", \"description\": \"No matching welcome message for portal 8347045 page https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung%7C or visitor does not match targeting rules\"}, \"type\": \"HIDE_WIDGET\"}"
+    },
+    {
+      "url": "https://www.google.com/ccm/collect?rcb=4&frm=0&auid=9212342.1781173765&dt=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&en=page_view&dl=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F&scrsrc=www.googletagmanager.com&rnd=306493478.1781173765&navt=n&npa=0&us_privacy=1---&did=dMWZhNz%2CdZTQ1Zm&gdid=dMWZhNz.dZTQ1Zm&_tu=CA&gtm=45be6691v9116714181za200zb71703898zd71703898xec&gcs=G111&gcd=13r3rPr2r5l1&dma_cps=a&dma=1&tag_exp=0~115938465~115938468~117227716&apve=1&apvf=f&apvc=0&tids=AW-850561483&tid=AW-850561483&tft=1781173765960&tfd=19564",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "url": "https://www.google.com/rmkt/collect/850561483/?random=1781173765940&cv=11&fst=1781173765940&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6691v9116714181za200zb71703898zd71703898xec&gcd=13r3rPr2r5l1&dma_cps=a&dma=1&tag_exp=0~115938465~115938468~117227716&u_w=1280&u_h=720&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&rcb=4&frm=0&tiba=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&did=dMWZhNz%2CdZTQ1Zm&gdid=dMWZhNz.dZTQ1Zm&hn=www.googleadservices.com&npa=0&us_privacy=1---&pscdl=noapi&auid=9212342.1781173765&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&data=event%3Dgtag.config&ept=68&gcp=5",
+      "status": 200,
+      "content_type": ""
+    },
+    {
+      "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/850561483/?random=1781173765940&cv=11&fst=1781173765940&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6691v9116714181za200zb71703898zd71703898xec&gcd=13r3rPr2r5l1&dma_cps=a&dma=1&tag_exp=0~115938465~115938468~117227716&u_w=1280&u_h=720&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&rcb=4&frm=0&tiba=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&did=dMWZhNz%2CdZTQ1Zm&gdid=dMWZhNz.dZTQ1Zm&hn=www.googleadservices.com&npa=0&us_privacy=1---&pscdl=noapi&auid=9212342.1781173765&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&data=event%3Dgtag.config&ept=9&rfmt=3&fmt=4",
+      "status": 200,
+      "content_type": "text/javascript; charset=UTF-8"
+    },
+    {
+      "url": "https://www.google.de/pagead/1p-user-list/850561483/?random=1781173765940&cv=11&fst=1781172000000&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6691v9116714181za200zb71703898zd71703898xec&gcd=13r3rPr2r5l1&dma_cps=a&dma=1&tag_exp=0~115938465~115938468~117227716&u_w=1280&u_h=720&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&rcb=4&frm=0&tiba=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&did=dMWZhNz%2CdZTQ1Zm&gdid=dMWZhNz.dZTQ1Zm&hn=www.googleadservices.com&npa=0&us_privacy=1---&pscdl=noapi&auid=9212342.1781173765&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&data=event%3Dgtag.config&ept=9&rfmt=3&fmt=3&is_vtc=1&cid=CAQSXAARCiqBCpta4_GdKKmm6Xika1e65QKSYYPYMJOMoWSzg029koVBdmcK3Y4OBDqCDGYWlzLmC1GpzlFqHHdz3ZpeYVBArO8f4fdcwGdkP2dfFpCLMNibMf-asCpl&random=1249446359&rmt_tld=1&ipr=y",
+      "status": 200,
+      "content_type": "image/gif"
+    },
+    {
+      "url": "https://www.google.com/pagead/1p-user-list/850561483/?random=1781173765940&cv=11&fst=1781172000000&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6691v9116714181za200zb71703898zd71703898xec&gcd=13r3rPr2r5l1&dma_cps=a&dma=1&tag_exp=0~115938465~115938468~117227716&u_w=1280&u_h=720&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&rcb=4&frm=0&tiba=Ausbildung%20finden%20-%20Tausende%20freie%20Lehrstellen%20auf%20Ausbildung.de&did=dMWZhNz%2CdZTQ1Zm&gdid=dMWZhNz.dZTQ1Zm&hn=www.googleadservices.com&npa=0&us_privacy=1---&pscdl=noapi&auid=9212342.1781173765&uaa=x86&uab=64&uafvl=Chromium%3B148.0.7778.96%7CHeadlessChrome%3B148.0.7778.96%7CNot%252FA)Brand%3B99.0.0.0&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&data=event%3Dgtag.config&ept=9&rfmt=3&fmt=3&is_vtc=1&cid=CAQSXAARCiqBCpta4_GdKKmm6Xika1e65QKSYYPYMJOMoWSzg029koVBdmcK3Y4OBDqCDGYWlzLmC1GpzlFqHHdz3ZpeYVBArO8f4fdcwGdkP2dfFpCLMNibMf-asCpl&random=1249446359&rmt_tld=0&ipr=y",
+      "status": 200,
+      "content_type": "image/gif"
+    },
+    {
+      "url": "https://px.ads.linkedin.com/collect?v=2&fmt=js&pid=418545%2C4957417&time=1781173765862&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C",
+      "status": 302,
+      "content_type": ""
+    },
+    {
+      "url": "https://px.ads.linkedin.com/attribution_trigger?pid=418545%2C4957417&time=1781173765862&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C",
+      "status": 200,
+      "content_type": "application/json",
+      "json_keys": [],
+      "sample": "{}"
+    },
+    {
+      "url": "https://px4.ads.linkedin.com/collect?v=2&fmt=js&pid=418545%2C4957417&time=1781173765862&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&e_ipv6=AQJCX9_Dgsi1vgAAAZ62OsgJ2LSDogWBo3LBc15w0tjngSgadnF2JKpIETF-C9HIOlvOjo7f_9Dd6hjldzHWk2WzYVtuFnG1",
+      "status": 200,
+      "content_type": "application/javascript"
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?e_c=a54a3069-6d6d-464f-a491-c1061d84f829&e_a=search_clicks&e_n=Suche%20Klicks&ca=1&idsite=2&rec=1&r=296459&h=12&m=29&s=27&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&pv_id=9YgISu&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?e_c=select_item_hauptsuche&e_a=a54a3069-6d6d-464f-a491-c1061d84f829&e_n=25199b97-b5bc-4fbc-823d-b69644279d75&ca=1&idsite=8&rec=1&r=162703&h=12&m=29&s=27&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&dimension1=&dimension2=&dimension3=&dimension4=&dimension5=&dimension6=&dimension7=&dimension8=a54a3069-6d6d-464f-a491-c1061d84f829&dimension10=B%C3%B6nen&dimension11=Ausbildung%20Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%20(m%2Fw%2Fd)&dimension12=Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung&dimension13=Job-Posting&dimension14=PharmLog%20Pharma%20Logistik%20GmbH&dimension15=&dimension16=25199b97-b5bc-4fbc-823d-b69644279d75&dimension17=a54a3069-6d6d-464f-a491-c1061d84f829&dimension18=1&dimension19=1&dimension20=EUR&dimension22=&dimension23=&dimension24=&pv_id=JgQsF1&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://matomo.talentplatforms.net/matomo.php?e_c=select_item_all&e_a=a54a3069-6d6d-464f-a491-c1061d84f829&e_n=25199b97-b5bc-4fbc-823d-b69644279d75&ca=1&idsite=8&rec=1&r=646494&h=12&m=29&s=27&url=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%2Fin%2Bf%C3%BCr%2BAnwendungsentwicklung%7C&_id=&_idn=1&send_image=0&_refts=0&dimension1=&dimension2=&dimension3=&dimension4=&dimension5=&dimension6=&dimension7=&dimension8=a54a3069-6d6d-464f-a491-c1061d84f829&dimension10=B%C3%B6nen&dimension11=Ausbildung%20Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung%20(m%2Fw%2Fd)&dimension12=Fachinformatiker%2Fin%20f%C3%BCr%20Anwendungsentwicklung&dimension13=Job-Posting&dimension14=PharmLog%20Pharma%20Logistik%20GmbH&dimension15=&dimension16=25199b97-b5bc-4fbc-823d-b69644279d75&dimension17=a54a3069-6d6d-464f-a491-c1061d84f829&dimension18=1&dimension19=1&dimension20=EUR&dimension22=&dimension23=&dimension24=&pv_id=JgQsF1&uadata=%7B%22formFactors%22%3A%5B%22Desktop%22%5D%2C%22fullVersionList%22%3A%5B%7B%22brand%22%3A%22Chromium%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22HeadlessChrome%22%2C%22version%22%3A%22148.0.7778.96%22%7D%2C%7B%22brand%22%3A%22Not%2FA)Brand%22%2C%22version%22%3A%2299.0.0.0%22%7D%5D%2C%22mobile%22%3Afalse%2C%22model%22%3A%22%22%2C%22platform%22%3A%22macOS%22%2C%22platformVersion%22%3A%2210_15_7%22%7D&cookie=1&res=1280x720",
+      "status": 204,
+      "content_type": ""
+    },
+    {
+      "url": "https://track.hubspot.com/__ptc.gif?_hs_tag_name=A&_hs_element_id=&_hs_element_class=&_hs_element_text=Ausbildung+Fachinformatiker%2Fin+f%C3%BCr+Anwendungsentwicklung+(m%2Fw%2Fd)%0Abei+PharmLog+Pharma+Logistik+GmbH%0A5&_hs_element_visible=true&_hs_link_href=https%3A%2F%2Fwww.ausbildung.de%2Fstellen%2Fausbildung-fachinformatiker-in-fuer-anwendungsentwicklung-m-w-d-bei-pharmlog-pharma-logistik-gmbh-in-boenen-25199b97-b5bc-4fbc-823d-b69644279d75%2F&_hs_parent_module_id=&_hs_viewport_width=1280&_hs_viewport_height=720&_hs_document_width=1280&_hs_document_height=4133&_hs_screen_width=1280&_hs_screen_height=720&_hs_scroll_x_coordinate=&_hs_scroll_y_coordinate=&_hs_mouse_x_coordinate=857&_hs_mouse_y_coordinate=505&_hs_offset_x=262&_hs_offset_y=10&_hs_key_ctrl=&_hs_key_shift=&_hs_key_alt=&_hs_key_meta=&_hs_touch_screen=&_hs_selector=body.inter_1db00677-module__WhbPaa__className.arboria_1ad433c2-module___akBTW__variable.layout-module__jz1IVa__base+%3E+main.layout-module__j0v1la__mainContent+%3E+div.Search-module__2D3Qnq__searchGrid+%3E+div.Search-module__2D3Qnq__results+%3E+div.infinite-scroll-component__outerdiv+%3E+div.infinite-scroll-component+%3E+div.SearchResults-module__6Vm6GG__CardArea+%3E+article%3Anth-of-type(1)+%3E+a&_hs_is_navigation=&sd=1280x720&cd=24-bit&cs=UTF-8&ln=de-de&bfp=43d1e5489d5f49a595cc0bda65a59439&v=1.1&a=8347045&rcu=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F&pu=https%3A%2F%2Fwww.ausbildung.de%2Fsuche%2F%3Fsearch%3DFachinformatiker%252Fin%2Bf%25C3%25BCr%2BAnwendungsentwicklung%257C&t=Ausbildung+finden+-+Tausende+freie+Lehrstellen+auf+Ausbildung.de&cts=1781173767778&vi=449611d9b7493b657e2872e9f431fefa&nc=true&u=265785296.449611d9b7493b657e2872e9f431fefa.1781173765368.1781173765368.1781173765368.1&b=265785296.1.1781173765368&cc=15",
+      "status": 200,
+      "content_type": "image/gif"
+    }
+  ],
+  "ld_json_count": 0,
+  "ld_json_sample": [],
+  "html_snippet": "<!DOCTYPE html><html lang=\"de\"><head><link rel=\"stylesheet\" href=\"/_next/static/chunks/0.yq04-yfrl2i.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0ss9-wzvrziww.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0rckremynxob_.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0ejful82dk.hr.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0a-s-k.b1f1gu.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0n3s8-ruyz0pf.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0ao-~jvhoinup.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0b9b89fd3hcww.css\" data-precedence=\"next\"><link rel=\"stylesheet\" href=\"/_next/static/chunks/0p8_zxo7lyg7y.css\" data-precedence=\"next\"><link rel=\"preload\" as=\"script\" fetchpriority=\"low\" href=\"/_next/static/chunks/07th6v0j2_.fb.js\"><script type=\"text/javascript\" async=\"\" src=\"https://edge.fullstory.com/datalayer/v4/latest.js\"></script><script async=\"\" src=\"https://snap.licdn.com/li.lms-analytics/insight.old.min.js\"></script><script type=\"text/javascript\" async=\"\" src=\"https://snap.licdn.com/li.lms-analytics/insight.min.js\"></script><script type=\"text/javascript\" async=\"\" src=\"https://www.googletagmanager.com/gtag/js?id=AW-850561483&amp;cx=c&amp;gtm=4e6691\"></script><script src=\"https://js.usemessages.com/conversations-embed.js\" type=\"text/javascript\" id=\"hubspot-messages-loader\" data-loader=\"hs-scriptloader\" data-hsjs-portal=\"8347045\" data-hsjs-env=\"prod\" data-hsjs-hublet=\"na1\"></script><script src=\"https://js.hs-analytics.net/analytics/1781173500000/8347045.js\" type=\"text/javascript\" id=\"hs-analytics\"></script><script src=\"https://js.hs-banner.com/integrations.js\" type=\"text/javascript\" id=\"cookieBanner-8347045\" data-cookieconsent=\"ignore\" data-hs-ignore=\"true\" data-loader=\"hs-scriptloader\" data-hsjs-portal=\"8347045\" data-hsjs-env=\"prod\" data-hsjs-hublet=\"na1\"></script><script src=\"https://js.hubspot.com/web-interactives-embed.js\" type=\"text/javascript\" id=\"hubspot-web-interactives-loader\" crossorigin=\"anonymous\" data-loader=\"hs-scriptloader\" data-hsjs-portal=\"8347045\" data-hsjs-env=\"prod\" data-hsjs-hublet=\"na1\"></script><script src=\"https://js.hsadspixel.net/pixels.js\" type=\"text/javascript\" id=\"hs-ads-pixel-8347045\" data-ads-portal-id=\"8347045\" data-ads-env=\"prod\" data-loader=\"hs-scriptloader\" data-hsjs-portal=\"8347045\" data-hsjs-env=\"prod\" data-hsjs-hublet=\"na1\"></script><script type=\"text/javascript\" charset=\"UTF-8\" async=\"\" src=\"https://consentcdn.cookiebot.com/consentconfig/e18ca35e-d10c-42de-9aa8-9d3a297c2c5b/state.js\"></script><script async=\"\" crossorigin=\"anonymous\" src=\"https://edge.fullstory.com/s/fs.js\"></script><script src=\"https://connect.facebook.net/signals/config/294025404710576?v=2.9.337&amp;r=stable&amp;domain=www.ausbildung.de&amp;hme=a4ca9981c995923b5752040373feb3dd5ae6be6b3954c741d676eccf72e2f0a2&amp;ex_m=105%2C208%2C156%2C22%2C73%2C74%2C147%2C69%2C68%2C11%2C165%2C91%2C16%2C139%2C128%2C39%2C76%2C79%2C135%2C161%2C167%2C8%2C4%2C5%2C7%2C6%2C3%2C92%2C102%2C168%2C173%2C222%2C30%2C75%2C234%2C233%2C232%2C23%2C33%2C55%2C104%2C61%2C10%2C64%2C98%2C99%2C100%2C106%2C131%2C31%2C29%2C133%2C134%2C130%2C129%2C157%2C77%2C160%2C158%2C159%2C50%2C60%2C124%2C15%2C164%2C45%2C267%2C268%2C266%2C26%2C27%2C28%2C48%2C148%2C78%2C113%2C18%2C20%2C44%2C40%2C42%2C41%2C84%2C93%2C97%2C111%2C146%2C149%2C46%2C112%2C24%2C21%2C120%2C70%2C36%2C151%2C150%2C152%2C143%2C141%2C25%2C35%2C59%2C110%2C163%2C71%2C17%2C154%2C115%2C82%2C67%2C19%2C86%2C87%2C117%2C85%2C137%2C136%2C140%2C162%2C34%2C281%2C297%2C215%2C204%2C62%2C205%2C203%2C300%2C291%2C52%2C216%2C108%2C132%2C81%2C122%2C54%2C47%2C49%2C114%2C121%2C127%2C126%2C58%2C65%2C63%2C153%2C116%2C37%2C32%2C53%2C56%2C101%2C166%2C1%2C125%2C14%2C123%2C12%2C2%2C57%2C94%2C66%2C119%2C90%2C89%2C169%2C170%2C95%2C96%2C9%2C103%2C51%2C144%2C88%2C80%2C72%2C118%2C107%2C43%2C145%2C0%2C83%2C138%2C142%2C155%2C38%2C109%2C13%2C171%2C231%2C230%2C225%2C227%2C228%2C229%2C226%2C214%2C224%2C236%2C196%2C193%2C194%2C188%2C192%2C195%2C191%2C186%2C321%2C199%2C189%2C190%2C218%2C187%2C185%2C213%2C238%2C209%2C179%2C180%2C175%2C181%2C178%2C176%2C177%2C174%2C172%2C183%2C184%2C182%2C269%2C320%2C290%2C288%2C289%2C287%2C197%2C241%2C247%2C242%2C244%2C246%2C245%2C243%2C240%2C256%2C251%2C253%2C250%2C257%2C254%2C249%2C255%2C252%2C248%2C283%2C294\" async=\"\"></script><script src=\"https://connect.facebook.net/signals/config/252097418558493?v=2.9.337&amp;r=stable&amp;domain=www.ausbildung.de&amp;hme=a4ca9981c995923b5752040373feb3dd5ae6be6b3954c741d676eccf72e2f0a2&amp;ex_m=105%2C208%2C156%2C22%2C73%2C74%2C147%2C69%2C68%2C11%2C165%2C91%2C16%2C139%2C128%2C39%2C76%2C79%2C135%2C161%2C167%2C8%2C4%2C5%2C7%2C6%2C3%2C92%2C102%2C168%2C173%2C222%2C30%2C75%2C234%2C233%2C232%2C23%2C33%2C55%2C104%2C61%2C10%2C64%2C98%2C99%2C100%2C106%2C131%2C31%2C29%2C133%2C134%2C130%2C129%2C157%2C77%2C160%2C158%2C159%2C50%2C60%2C124%2C15%2C16"
+}

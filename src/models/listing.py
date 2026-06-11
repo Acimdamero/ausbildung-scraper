@@ -32,6 +32,10 @@ class AusbildungListing:
     kontak_penanggung_jawab: str = ""
     dokumen_yang_harus_dipenuhi: str = ""
     ba_job_url: str = ""
+    sumber_data: str = ""
+    ausbildung_de_url: str = ""
+    is_duplicate_of_arbeitsagentur: bool = False
+    duplicate_of_refnr: str = ""
     kelengkapan_score: int = 0
     scraped_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()

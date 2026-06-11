@@ -12,7 +12,9 @@ PLZ_RE = re.compile(r"\b(\d{5})\b")
 
 # Higher value = more specific category; kept when the same job spans searches.
 CATEGORY_PRIORITY: dict[str, int] = {
-    "fachinformatiker_ae_2026": 3,
+    "fachinformatiker_ae_2026": 4,
+    "ausbildung_de_ae": 3,
+    "ausbildung_de_dpa": 3,
     "fachinformatiker_dpa": 2,
     "fachinformatiker_ae": 1,
 }
@@ -186,3 +188,141 @@ def split_by_category(listings: list[dict[str, Any]]) -> dict[str, list[dict[str
     for item in listings:
         grouped[item.get("category_id", "unknown")].append(item)
     return dict(grouped)
+
+
+def _normalize_company(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", (name or "").lower())
+
+
+def _title_similarity_key(listing: dict[str, Any]) -> str:
+    title = (listing.get("jenis_ausbildung") or listing.get("detail_deskripsi") or "")[:80]
+    return re.sub(r"[^a-z0-9]+", "", title.lower())
+
+
+def _job_family_key(listing: dict[str, Any]) -> str:
+    blob = " ".join(
+        [
+            listing.get("jenis_ausbildung") or "",
+            (listing.get("detail_deskripsi") or "")[:120],
+        ]
+    ).lower()
+    if "daten" in blob and "prozess" in blob:
+        return "dpa"
+    if "anwendungsentwicklung" in blob:
+        return "ae"
+    return _title_similarity_key(listing)
+
+
+def cross_source_key(listing: dict[str, Any]) -> tuple[str, ...]:
+    """Company + city + job family for cross-portal matching."""
+    return (
+        _normalize_company(listing.get("nama_perusahaan", "")),
+        (listing.get("posisi_kota") or "").strip().lower(),
+        _job_family_key(listing),
+    )
+
+
+def _is_arbeitsagentur_source(listing: dict[str, Any]) -> bool:
+    source = (listing.get("sumber_data") or "").strip().lower()
+    if source == "ausbildung_de":
+        return False
+    refnr = (listing.get("referenznummer") or "").strip()
+    if refnr.startswith("AD-"):
+        return False
+    return True
+
+
+def _collect_ba_url_tokens(listing: dict[str, Any]) -> set[str]:
+    tokens: set[str] = set()
+    for field in ("link_bewerbung", "link_bewerbung_externe", "link_bewerbung_efektif", "ba_job_url"):
+        value = (listing.get(field) or "").strip().lower()
+        if not value:
+            continue
+        tokens.add(value)
+        for match in re.finditer(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", value):
+            tokens.add(match.group(0))
+    return tokens
+
+
+@dataclass
+class CrossSourceDedupStats:
+    ausbildung_de_total: int = 0
+    marked_duplicates: int = 0
+    unique_new: int = 0
+    by_category: dict[str, dict[str, int]] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+def mark_cross_source_duplicates(
+    ausbildung_de_listings: list[dict[str, Any]],
+    arbeitsagentur_listings: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], CrossSourceDedupStats]:
+    """Flag ausbildung.de rows that match existing Arbeitsagentur data."""
+    stats = CrossSourceDedupStats(ausbildung_de_total=len(ausbildung_de_listings))
+
+    ba_near_keys: set[tuple[str, ...]] = set()
+    ba_cross_keys: set[tuple[str, ...]] = set()
+    ba_url_tokens: set[str] = set()
+
+    for item in arbeitsagentur_listings:
+        if not _is_arbeitsagentur_source(item):
+            continue
+        near = near_duplicate_key(item)
+        if all(near):
+            ba_near_keys.add(near)
+        cross = cross_source_key(item)
+        if cross[0] and cross[1]:
+            ba_cross_keys.add(cross)
+        ba_url_tokens.update(_collect_ba_url_tokens(item))
+
+    result: list[dict[str, Any]] = []
+    by_category: dict[str, dict[str, int]] = defaultdict(
+        lambda: {"scraped": 0, "cross_duplicates": 0, "unique_new": 0, "failed": 0}
+    )
+
+    for item in ausbildung_de_listings:
+        marked = dict(item)
+        category = marked.get("category_id", "unknown")
+        by_category[category]["scraped"] += 1
+
+        is_dup = False
+        dup_refnr = ""
+
+        ade_url = (marked.get("ausbildung_de_url") or marked.get("ba_job_url") or "").lower()
+        if ade_url and any(token in ade_url for token in ba_url_tokens if len(token) > 8):
+            is_dup = True
+
+        if not is_dup:
+            near = near_duplicate_key(marked)
+            if all(near) and near in ba_near_keys:
+                is_dup = True
+
+        if not is_dup:
+            cross = cross_source_key(marked)
+            if cross[0] and cross[1] and cross in ba_cross_keys:
+                is_dup = True
+
+        if is_dup:
+            for ba_item in arbeitsagentur_listings:
+                if near_duplicate_key(ba_item) == near_duplicate_key(marked) and all(
+                    near_duplicate_key(marked)
+                ):
+                    dup_refnr = ba_item.get("referenznummer", "")
+                    break
+                if cross_source_key(ba_item) == cross_source_key(marked) and cross[0]:
+                    dup_refnr = ba_item.get("referenznummer", "")
+                    break
+            marked["is_duplicate_of_arbeitsagentur"] = True
+            marked["duplicate_of_refnr"] = dup_refnr
+            stats.marked_duplicates += 1
+            by_category[category]["cross_duplicates"] += 1
+        else:
+            stats.unique_new += 1
+            by_category[category]["unique_new"] += 1
+
+        result.append(marked)
+
+    stats.by_category = {k: dict(v) for k, v in by_category.items()}
+    return result, stats

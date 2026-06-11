@@ -30,3 +30,20 @@ categories:
     angebotsart: 4
     sheet_tab: "FI_DPA_2"
     duplicate_of: fachinformatiker_dpa
+
+  # ausbildung.de (Playwright scraper — scripts/run_ausbildung_de.py)
+  - id: ausbildung_de_ae
+    name: "ausbildung.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (ausbildung.de)"
+    source: ausbildung_de
+    search_url: "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+für+Anwendungsentwicklung%7C"
+    sheet_tab: "ADE_AE"
+
+  - id: ausbildung_de_dpa
+    name: "ausbildung.de — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (ausbildung.de)"
+    source: ausbildung_de
+    # User URL (aktuelle-ausbildungsplaetze) ignores query params on new site; use /suche/ equivalent.
+    search_url: "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+für+Daten-+und+Prozessanalyse%7C"
+    user_url_note: "https://www.ausbildung.de/aktuelle-ausbildungsplaetze/?form_main_search[what]=Daten-+und+Prozessanalyse"
+    sheet_tab: "ADE_DPA"

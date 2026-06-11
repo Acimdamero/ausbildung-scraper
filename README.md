@@ -38,10 +38,21 @@ cd ~/Projects/ausbildung-scraper
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+playwright install chromium   # hanya untuk scraper ausbildung.de
 cp .env.example .env
 ```
 
-### Jalankan scraper
+### Scraper ausbildung.de (Playwright)
+
+Situs dinamis — butuh Chromium:
+
+```bash
+python scripts/run_ausbildung_de.py
+```
+
+Hasil digabung ke `data/processed/all_listings_deduped.json` dengan deduplikasi lintas sumber (Arbeitsagentur + ausbildung.de). Panduan: [docs/AUSBILDUNG_DE_SCRAPING.md](docs/AUSBILDUNG_DE_SCRAPING.md).
+
+### Jalankan scraper Arbeitsagentur (API)
 
 ```bash
 # Cepat — 1 halaman per kategori (~75 listing total)
@@ -228,7 +239,8 @@ ausbildung-scraper/
 ├── scripts/          # run_scraper.py, dedup_data.py, generate_viewer.py
 ├── src/
 │   ├── api_client/   # Jobsuche REST client
-│   ├── parser/       # API → normalized listing
+│   ├── scraper/      # arbeitsagentur.py (API), ausbildung_de.py (Playwright)
+│   ├── parser/       # API / ausbildung.de → normalized listing
 │   ├── storage/      # JSON, CSV, Sheets, progress
 │   └── models/       # AusbildungListing dataclass
 └── data/
@@ -262,10 +274,32 @@ ausbildung-scraper/
 
 See `config/fields_mapping.yaml`, `docs/DATA_COMPLETENESS.md`, and `docs/API_INVESTIGATION.md`.
 
+### ausbildung.de vs Arbeitsagentur (field availability)
+
+| Field | Arbeitsagentur API | ausbildung.de (JSON-LD + DOM) |
+|-------|-------------------|-------------------------------|
+| Nama perusahaan | ✅ | ✅ |
+| Koordinat peta | ✅ | ❌ (tidak di JSON-LD) |
+| Kota / alamat | ✅ | ✅ (street + PLZ) |
+| Deskripsi | ✅ | ✅ |
+| Gaji | ⚠️ ~6% | ⚠️ ~51% (tabel tahun di DOM) |
+| Persyaratan | ⚠️ education code | ✅ section terstruktur |
+| Jenis Ausbildung | ✅ | ✅ |
+| Deskripsi perusahaan | ❌ | ✅ Corporation schema |
+| Yang ditawarkan | ⚠️ heuristic | ⚠️ ~39% section |
+| Website perusahaan | ⚠️ partner URL | ✅ `hiringOrganization.sameAs` |
+| Email bewerbung | ❌ | ⚠️ ~65% (mailto) |
+| Link bewerbung | ✅ externe/BA | ✅ `/direktbewerbung/` |
+| Kontak HR | ❌ | ⚠️ ~25% |
+| Dokumen | ❌ | ⚠️ ~26% |
+| `referenznummer` BA | ✅ | ❌ (pakai `AD-{uuid}`) |
+| `sumber_data` | `arbeitsagentur` | `ausbildung_de` |
+
 ## Progress Tracking
 
 After each run:
-- `data/progress.json` — machine-readable
+- `data/progress.json` — Arbeitsagentur scrape stats
+- `data/progress_ausbildung_de.json` — ausbildung.de scrape stats
 - `data/PROGRESS.md` — markdown table for GitHub
 
 ## Documentation

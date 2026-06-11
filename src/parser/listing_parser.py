@@ -197,6 +197,7 @@ class ListingParser:
             kontak_penanggung_jawab=self._extract_contact(description),
             dokumen_yang_harus_dipenuhi=self._extract_documents(description),
             ba_job_url=self.BA_JOB_URL_TEMPLATE.format(referenznummer=referenznummer),
+            sumber_data="arbeitsagentur",
         )
         if scraped_at:
             listing.scraped_at = scraped_at
