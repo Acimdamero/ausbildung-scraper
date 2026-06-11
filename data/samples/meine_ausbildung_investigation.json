@@ -1,0 +1,85 @@
+{
+  "initial_url": "https://meine-ausbildung-in-deutschland.de/",
+  "title": "Ausbildungsplätze | Meine Ausbildung in Deutschland",
+  "inputs": [
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "name": "",
+      "id": "essential",
+      "placeholder": "",
+      "ariaLabel": null
+    },
+    {
+      "tag": "INPUT",
+      "type": "checkbox",
+      "name": "",
+      "id": "statistics",
+      "placeholder": "",
+      "ariaLabel": null
+    }
+  ],
+  "beruf_selector": null,
+  "labels": [
+    {
+      "text": "Essenziell",
+      "for": ""
+    },
+    {
+      "text": "Statistiken",
+      "for": ""
+    }
+  ],
+  "api_calls": [
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/assets/files/1/ihk_azubi_kampagne.896x0.jpg",
+      "status": 200,
+      "content_type": "image/jpeg"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/templates/css/styles.css",
+      "status": 200,
+      "content_type": "text/css"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/templates/scripts/main-min.js",
+      "status": 200,
+      "content_type": "text/javascript"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/templates/scripts/cookieConsent-min.js",
+      "status": 200,
+      "content_type": "text/javascript"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/templates/fonts/OpenSans-ExtraBold-webfont.woff",
+      "status": 200,
+      "content_type": "font/woff"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/templates/fonts/OpenSans-Light-webfont.woff",
+      "status": 200,
+      "content_type": "font/woff"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/templates/img/animated-background/background.webp",
+      "status": 200,
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/templates/img/animated-background/noise.webp",
+      "status": 200,
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://meine-ausbildung-in-deutschland.de/site/assets/files/1041/ihk_azubi_kampagne_20936_03.600x0.webp",
+      "status": 200,
+      "content_type": "image/webp"
+    }
+  ]
+}
