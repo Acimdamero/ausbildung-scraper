@@ -118,10 +118,11 @@ class MeineAusbildungDeScraper:
             title_filter = SEARCH_CATEGORIES.get(category_id, {}).get("title_filter")
         report = ScrapeReport(category_id=category_id, query=query)
         progress = self._load_progress() if resume else {}
-        if resume and progress.get("category_id") not in ("", category_id):
+        saved_category = progress.get("category_id")
+        if resume and saved_category and saved_category != category_id:
             logger.info(
                 "Progress category %s != %s; starting fresh",
-                progress.get("category_id"),
+                saved_category,
                 category_id,
             )
             progress = {}

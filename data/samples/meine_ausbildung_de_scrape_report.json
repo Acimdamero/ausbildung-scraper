@@ -1,0 +1,68 @@
+{
+  "scraped_at": "2026-06-11T11:42:19.866392+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "playwright_iframe + http_pagination + ba_api_when_redirect",
+    "iframe_host": "ihk-azubi-stellenmarkt.indexinternet.de",
+    "pagination": "index.php?page=N&jobs=query",
+    "detail_redirect": "jobs.meine-ausbildung -> employer site or arbeitsagentur.de/jobdetail"
+  },
+  "report": {
+    "category_id": "meine_ausbildung_dpa",
+    "query": "daten",
+    "expected_total": 208,
+    "expected_pages": 11,
+    "pages_scraped": 11,
+    "discovered_raw": 208,
+    "discovered_urls": 190,
+    "filtered_out": 18,
+    "scraped": 190,
+    "failed": 0,
+    "failed_urls": []
+  },
+  "within_source_dedup": {
+    "input_total": 190,
+    "output_total": 190,
+    "removed_total": 0,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 0,
+    "input_by_category": {
+      "meine_ausbildung_dpa": 190
+    },
+    "output_by_category": {
+      "meine_ausbildung_dpa": 190
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 190,
+    "internal_dupes": 0,
+    "cross_dupes": 84,
+    "unique_new": 106,
+    "by_category": {
+      "meine_ausbildung_dpa": {
+        "scraped": 190,
+        "cross_duplicates": 84,
+        "unique_new": 106
+      }
+    }
+  },
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 33.2,
+    "posisi_kota": 100.0,
+    "alamat_detail": 33.2,
+    "detail_deskripsi": 100.0,
+    "gaji": 5.3,
+    "persyaratan": 32.6,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 28.4,
+    "apa_yang_ditawarkan": 24.2,
+    "link_website_perusahaan": 100.0,
+    "alamat_email_bewerbung": 10.0,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 18.4,
+    "dokumen_yang_harus_dipenuhi": 21.1
+  }
+}

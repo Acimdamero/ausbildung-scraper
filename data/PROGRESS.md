@@ -49,3 +49,18 @@
 - `data/processed/all_listings_deduped_2026-06-11.csv`
 - `data/processed/all_listings_deduped.json`
 - `data/processed/all_listings_deduped.csv`
+## meine-ausbildung-in-deutschland.de Scraper
+
+**Last run:** 2026-06-11T11:42:21
+**Category:** meine_ausbildung_dpa
+**Query:** daten
+**Expected:** 208 listings / 11 pages
+**Pages scraped:** 11
+**Discovered:** 190
+**Scraped:** 190
+**Failed:** 0
+**Cross-duplicates (vs master):** 84
+**New unique (vs master):** 106
+**Master total after merge:** 1398
+
+Progress JSON: `data/progress_meine_ausbildung_de.json`
