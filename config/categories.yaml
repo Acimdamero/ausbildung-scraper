@@ -47,3 +47,30 @@ categories:
     search_url: "https://www.ausbildung.de/suche/?search=Fachinformatiker%2Fin+für+Daten-+und+Prozessanalyse%7C"
     user_url_note: "https://www.ausbildung.de/aktuelle-ausbildungsplaetze/?form_main_search[what]=Daten-+und+Prozessanalyse"
     sheet_tab: "ADE_DPA"
+
+  # meine-ausbildung-in-deutschland.de (Playwright + IHK iframe — scripts/run_meine_ausbildung_de.py)
+  - id: meine_ausbildung_ae
+    name: "meine-ausbildung-in-deutschland.de — Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (meine-ausbildung)"
+    source: meine_ausbildung_de
+    search_query: "anwendungsentwicklung"
+    expected_results: 1478
+    expected_pages: 74
+    sheet_tab: "MAD_AE"
+
+  - id: meine_ausbildung_dpa
+    name: "meine-ausbildung-in-deutschland.de — Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (meine-ausbildung)"
+    source: meine_ausbildung_de
+    search_query: "daten"
+    expected_results: 208
+    expected_pages: 11
+    sheet_tab: "MAD_DPA"
+
+  - id: meine_ausbildung_dpa
+    name: "meine-ausbildung-in-deutschland.de — Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (meine-ausbildung)"
+    source: meine_ausbildung_de
+    search_query: "daten"
+    target_beruf: "Fachinformatiker für Daten und Prozessanalyse"
+    sheet_tab: "MAD_DPA"

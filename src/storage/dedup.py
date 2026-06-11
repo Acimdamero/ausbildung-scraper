@@ -15,6 +15,8 @@ CATEGORY_PRIORITY: dict[str, int] = {
     "fachinformatiker_ae_2026": 4,
     "ausbildung_de_ae": 3,
     "ausbildung_de_dpa": 3,
+    "meine_ausbildung_ae": 3,
+    "meine_ausbildung_dpa": 3,
     "fachinformatiker_dpa": 2,
     "fachinformatiker_ae": 1,
 }
@@ -224,12 +226,17 @@ def cross_source_key(listing: dict[str, Any]) -> tuple[str, ...]:
 
 def _is_arbeitsagentur_source(listing: dict[str, Any]) -> bool:
     source = (listing.get("sumber_data") or "").strip().lower()
-    if source == "ausbildung_de":
+    if source in ("ausbildung_de", "meine_ausbildung_de"):
         return False
     refnr = (listing.get("referenznummer") or "").strip()
-    if refnr.startswith("AD-"):
+    if refnr.startswith(("AD-", "MAD-")):
         return False
     return True
+
+
+def _is_third_party_source(listing: dict[str, Any]) -> bool:
+    source = (listing.get("sumber_data") or "").strip().lower()
+    return source in ("ausbildung_de", "meine_ausbildung_de")
 
 
 def _collect_ba_url_tokens(listing: dict[str, Any]) -> set[str]:
@@ -326,3 +333,116 @@ def mark_cross_source_duplicates(
 
     stats.by_category = {k: dict(v) for k, v in by_category.items()}
     return result, stats
+
+
+@dataclass
+class MasterCrossDedupStats:
+    scraped_total: int = 0
+    internal_dupes: int = 0
+    cross_dupes: int = 0
+    unique_new: int = 0
+    by_category: dict[str, dict[str, int]] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+def _build_master_indexes(
+    existing: list[dict[str, Any]],
+) -> tuple[set[str], set[tuple[str, ...]], set[tuple[str, ...]], set[str]]:
+    refnrs: set[str] = set()
+    near_keys: set[tuple[str, ...]] = set()
+    cross_keys: set[tuple[str, ...]] = set()
+    url_tokens: set[str] = set()
+
+    for item in existing:
+        refnr = (item.get("referenznummer") or "").strip()
+        if refnr:
+            refnrs.add(refnr)
+        near = near_duplicate_key(item)
+        if all(near):
+            near_keys.add(near)
+        cross = cross_source_key(item)
+        if cross[0] and cross[1]:
+            cross_keys.add(cross)
+        url_tokens.update(_collect_ba_url_tokens(item))
+
+    return refnrs, near_keys, cross_keys, url_tokens
+
+
+def _matches_existing_master(
+    listing: dict[str, Any],
+    *,
+    refnrs: set[str],
+    near_keys: set[tuple[str, ...]],
+    cross_keys: set[tuple[str, ...]],
+    url_tokens: set[str],
+) -> tuple[bool, str]:
+    refnr = (listing.get("referenznummer") or "").strip()
+    if refnr and refnr in refnrs:
+        return True, refnr
+
+    for field in ("ba_job_url", "link_bewerbung", "link_bewerbung_externe"):
+        value = (listing.get(field) or "").strip().lower()
+        if value and any(token in value for token in url_tokens if len(token) > 8):
+            return True, "url_token"
+
+    near = near_duplicate_key(listing)
+    if all(near) and near in near_keys:
+        return True, "near_duplicate"
+
+    cross = cross_source_key(listing)
+    if cross[0] and cross[1] and cross in cross_keys:
+        return True, "cross_source"
+
+    return False, ""
+
+
+def filter_new_against_master(
+    new_listings: list[dict[str, Any]],
+    existing_master: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], MasterCrossDedupStats]:
+    """Return (unique_new, cross_duplicates_marked, stats) for a third-party scrape."""
+    stats = MasterCrossDedupStats(scraped_total=len(new_listings))
+    refnrs, near_keys, cross_keys, url_tokens = _build_master_indexes(existing_master)
+
+    unique: list[dict[str, Any]] = []
+    cross_marked: list[dict[str, Any]] = []
+    by_category: dict[str, dict[str, int]] = defaultdict(
+        lambda: {"scraped": 0, "cross_duplicates": 0, "unique_new": 0}
+    )
+
+    for item in new_listings:
+        marked = dict(item)
+        category = marked.get("category_id", "unknown")
+        by_category[category]["scraped"] += 1
+
+        is_dup, reason = _matches_existing_master(
+            marked,
+            refnrs=refnrs,
+            near_keys=near_keys,
+            cross_keys=cross_keys,
+            url_tokens=url_tokens,
+        )
+        if is_dup:
+            marked["is_duplicate_of_arbeitsagentur"] = True
+            marked["duplicate_of_refnr"] = reason if reason not in ("url_token", "near_duplicate", "cross_source") else ""
+            cross_marked.append(marked)
+            stats.cross_dupes += 1
+            by_category[category]["cross_duplicates"] += 1
+        else:
+            unique.append(marked)
+            stats.unique_new += 1
+            by_category[category]["unique_new"] += 1
+            refnr = (marked.get("referenznummer") or "").strip()
+            if refnr:
+                refnrs.add(refnr)
+            near = near_duplicate_key(marked)
+            if all(near):
+                near_keys.add(near)
+            cross = cross_source_key(marked)
+            if cross[0] and cross[1]:
+                cross_keys.add(cross)
+
+    stats.by_category = {k: dict(v) for k, v in by_category.items()}
+    return unique, cross_marked, stats
