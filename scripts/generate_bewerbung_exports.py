@@ -19,6 +19,7 @@ from src.parser.bewerbung_fields import (
     suggest_prioritas,
 )
 from src.parser.enrichment import enrich_listing
+from src.parser.listing_sort import sort_listings
 
 logging.basicConfig(
     level=logging.INFO,
@@ -34,6 +35,7 @@ MASTER_COLUMNS: list[tuple[str, str]] = [
     ("posisi_kota", "kota"),
     ("alamat_detail", "alamat"),
     ("jenis_ausbildung", "jenis_ausbildung"),
+    ("beruf_typ", "spesialisasi"),
     ("gaji", "gaji"),
     ("kelengkapan_score", "skor_kelengkapan"),
     ("website_type", "tipe_website"),
@@ -110,14 +112,7 @@ def prepare_listings(
         row["status_lamaran"] = saved.get("status_lamaran", DEFAULT_STATUS)
         row["prioritas"] = saved.get("prioritas") or suggest_prioritas(row)
         prepared.append(row)
-    prepared.sort(
-        key=lambda r: (
-            -int(r.get("kelengkapan_score") or 0),
-            (r.get("posisi_kota") or "").lower(),
-            (r.get("nama_perusahaan") or "").lower(),
-        )
-    )
-    return prepared
+    return sort_listings(prepared)
 
 
 def row_for_csv(listing: dict) -> dict[str, str]:
@@ -190,6 +185,19 @@ def main() -> int:
     write_csv(high_path, high)
     write_csv(manual_path, manual)
     city_paths = export_by_city(by_city_dir, listings)
+
+    by_spec_dir = processed_dir / "by_specialization"
+    by_spec_dir.mkdir(parents=True, exist_ok=True)
+    for spec in ("ae", "dpa", "other"):
+        subset = [item for item in listings if item.get("beruf_typ") == spec]
+        spec_path = by_spec_dir / f"{spec}_listings.csv"
+        write_csv(spec_path, subset)
+        logger.info(
+            "By specialization %s: %s (%d)",
+            spec.upper(),
+            spec_path.relative_to(ROOT),
+            len(subset),
+        )
 
     # JSON mirror for automation / future Bewerbung bot
     master_json = processed_dir / "master_bewerbung.json"

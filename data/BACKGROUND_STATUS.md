@@ -1,6 +1,6 @@
 # Status pipeline background
 
-- **State:** RUNNING
-- **Updated (UTC):** 2026-06-11T11:43:09Z
+- **State:** COMPLETED
+- **Updated (UTC):** 2026-06-11T12:06:14Z
 
-Scrape `meine_ausbildung_ae` (query=`anwendungsentwicklung`) sedang berjalan. Log: `logs/meine_ausbildung_ae.log`
+Scrape `meine_ausbildung_ae` selesai: 1439/1439 listing, 770 unik baru ditambahkan ke master (total 2168).

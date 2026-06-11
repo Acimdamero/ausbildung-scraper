@@ -29,6 +29,7 @@ class DedupProgress:
     removed_by_refnr_within_category: int = 0
     removed_by_secondary_key: int = 0
     removed_by_near_duplicate: int = 0
+    removed_by_cross_source: int = 0
     input_by_category: dict[str, int] = field(default_factory=dict)
     output_by_category: dict[str, int] = field(default_factory=dict)
     processed_paths: dict[str, list[str]] = field(default_factory=dict)
@@ -88,6 +89,7 @@ class ProgressTracker:
             removed_by_refnr_within_category=stats.removed_by_refnr_within_category,
             removed_by_secondary_key=stats.removed_by_secondary_key,
             removed_by_near_duplicate=stats.removed_by_near_duplicate,
+            removed_by_cross_source=getattr(stats, "removed_by_cross_source", 0),
             input_by_category=dict(stats.input_by_category),
             output_by_category=dict(stats.output_by_category),
             processed_paths=processed_paths or {},
@@ -219,6 +221,7 @@ class ProgressTracker:
                     f"| Referenznummer dalam kategori | {dedup.removed_by_refnr_within_category} |",
                     f"| Hash sekunder (tanpa refnr) | {dedup.removed_by_secondary_key} |",
                     f"| Near-duplicate (perusahaan+lokasi) | {dedup.removed_by_near_duplicate} |",
+                    f"| Cross-source (portal vs BA) | {getattr(dedup, 'removed_by_cross_source', 0)} |",
                     "",
                     "### Per Kategori (sebelum → sesudah)",
                     "",

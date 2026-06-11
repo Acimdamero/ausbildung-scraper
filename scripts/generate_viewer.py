@@ -13,6 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from src.parser.listing_sort import sort_listings
+
 
 def find_json_files(data_dir: Path, source: str = "exports") -> list[Path]:
     files: list[Path] = []
@@ -200,6 +202,31 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .badge.score-high {{ color: #7ddea2; border-color: #2d6b47; }}
     .badge.score-mid {{ color: #e8c547; border-color: #6b5a1f; }}
     .badge.score-low {{ color: #e88a7d; border-color: #6b2d2d; }}
+    .badge.spec-ae {{ color: #8ec8ff; border-color: #2a4a6b; }}
+    .badge.spec-dpa {{ color: #d4a5ff; border-color: #5a2a6b; }}
+    .badge.spec-other {{ color: var(--muted); }}
+    .spec-tabs {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }}
+    .spec-tab {{
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }}
+    .spec-tab:hover {{ border-color: var(--accent); }}
+    .spec-tab.active {{
+      background: rgba(61, 139, 253, 0.18);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }}
     footer {{
       padding: 1rem 1.5rem 2rem;
       color: var(--muted);
@@ -320,6 +347,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="">Semua kategori</option>
       </select>
       <select id="sort">
+        <option value="spec-priority" selected>AE → DPA (default)</option>
         <option value="score-desc">Kelengkapan tertinggi</option>
         <option value="score-asc">Kelengkapan terendah</option>
         <option value="city">Kota A–Z</option>
@@ -334,6 +362,11 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="">Manual: semua</option>
         <option value="ya">Butuh cek manual</option>
         <option value="tidak">Siap otomatisasi</option>
+      </select>
+      <select id="specFilter">
+        <option value="">Spesialisasi: semua</option>
+        <option value="ae">AE (Anwendungsentwicklung)</option>
+        <option value="dpa">DPA (Daten- und Prozessanalyse)</option>
       </select>
     </div>
   </header>
@@ -414,8 +447,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
           <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
           ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
           ${{item.bewerbung_sumber ? `<span class="badge">Sumber: ${{escapeHtml(item.bewerbung_sumber)}}</span>` : ""}}
+          ${{item.beruf_typ ? `<span class="badge">${{item.beruf_typ === "dpa" ? "DPA" : "AE"}}</span>` : ""}}
           ${{item.category_id ? `<span class="badge">${{escapeHtml(item.category_id)}}</span>` : ""}}
         </div>
+        ${{detailSection("Spesialisasi", item.beruf_typ === "dpa" ? "DPA — Daten- und Prozessanalyse" : item.beruf_typ === "ae" ? "AE — Anwendungsentwicklung" : item.beruf_typ)}}
         ${{detailSection("Kota", item.posisi_kota)}}
         ${{detailSection("Alamat", item.alamat_detail)}}
         ${{detailSection("Jenis Ausbildung", item.jenis_ausbildung)}}
@@ -428,6 +463,12 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         ${{detailSection("Kontak HR", item.kontak_penanggung_jawab)}}
         ${{detailSection("Dokumen yang Diperlukan", item.dokumen_yang_harus_dipenuhi, {{ scrollable: true }})}}
         ${{detailSection("Referenznummer", item.referenznummer, {{ muted: true }})}}
+        ${{detailSection("Sumber Data", item.sumber_data, {{ muted: true }})}}
+        ${{detailSection("Cara Apply", item.cara_apply)}}
+        ${{detailSection("Ringkasan", item.ringkasan_1_baris)}}
+        ${{detailSection("Status Lamaran", item.status_lamaran)}}
+        ${{detailSection("Prioritas", item.prioritas)}}
+        ${{detailSection("Butuh Manual", item.butuh_manual)}}
         ${{links ? `<div class="detail-section"><div class="detail-label">Tautan</div><div class="modal-links">${{links}}</div></div>` : ""}}
       `;
 
@@ -467,8 +508,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       const sort = document.getElementById("sort").value;
       const emailFilter = document.getElementById("emailFilter").value;
       const manualFilter = document.getElementById("manualFilter").value;
+      const specFilter = document.getElementById("specFilter").value;
       let filtered = LISTINGS.filter(item => {{
         if (cat && item.category_id !== cat) return false;
+        if (specFilter && item.beruf_typ !== specFilter) return false;
         if (emailFilter === "yes" && !hasEmail(item)) return false;
         if (emailFilter === "no" && hasEmail(item)) return false;
         const manual = butuhManual(item) ? "ya" : "tidak";
@@ -515,6 +558,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
             ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
             ${{hasEmail(item) ? `<span class="badge score-high">Email</span>` : ""}}
             ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
+            ${{item.beruf_typ ? `<span class="badge">${{item.beruf_typ === "dpa" ? "DPA" : "AE"}}</span>` : ""}}
           </div>
           ${{item.gaji ? `<div class="salary">Gaji: ${{escapeHtml(item.gaji)}}</div>` : ""}}
           <div class="type">${{escapeHtml(item.category_id)}}</div>
@@ -564,6 +608,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     document.getElementById("sort").addEventListener("change", render);
     document.getElementById("emailFilter").addEventListener("change", render);
     document.getElementById("manualFilter").addEventListener("change", render);
+    document.getElementById("specFilter").addEventListener("change", render);
     render();
   </script>
 </body>

@@ -33,6 +33,7 @@ class DedupStats:
     removed_by_refnr_within_category: int = 0
     removed_by_secondary_key: int = 0
     removed_by_near_duplicate: int = 0
+    removed_by_cross_source: int = 0
     input_by_category: dict[str, int] = field(default_factory=dict)
     output_by_category: dict[str, int] = field(default_factory=dict)
 
@@ -182,6 +183,49 @@ def deduplicate_listings(
     stats.output_total = len(result)
     stats.removed_total = stats.input_total - stats.output_total
     stats.output_by_category = _count_by_category(result)
+    return result, stats
+
+
+def _merge_stats(base: DedupStats, extra: DedupStats) -> None:
+    base.removed_by_refnr_cross_category += extra.removed_by_refnr_cross_category
+    base.removed_by_refnr_within_category += extra.removed_by_refnr_within_category
+    base.removed_by_secondary_key += extra.removed_by_secondary_key
+    base.removed_by_near_duplicate += extra.removed_by_near_duplicate
+
+
+def deduplicate_all_sources(
+    listings: list[dict[str, Any]],
+    *,
+    category_priority_map: dict[str, int] | None = None,
+) -> tuple[list[dict[str, Any]], DedupStats]:
+    """Deduplicate BA + third-party listings with cross-portal matching."""
+    ba_listings = [item for item in listings if _is_arbeitsagentur_source(item)]
+    third_party = [item for item in listings if _is_third_party_source(item)]
+    other = [
+        item
+        for item in listings
+        if not _is_arbeitsagentur_source(item) and not _is_third_party_source(item)
+    ]
+
+    ba_deduped, ba_stats = deduplicate_listings(
+        ba_listings, category_priority_map=category_priority_map
+    )
+    unique_tp, _cross_marked, cross_stats = filter_new_against_master(third_party, ba_deduped)
+    tp_deduped, tp_stats = deduplicate_listings(
+        unique_tp, category_priority_map=category_priority_map
+    )
+
+    result = ba_deduped + tp_deduped + other
+    stats = DedupStats(
+        input_total=len(listings),
+        output_total=len(result),
+        removed_total=len(listings) - len(result),
+        removed_by_cross_source=cross_stats.cross_dupes,
+        input_by_category=_count_by_category(listings),
+        output_by_category=_count_by_category(result),
+    )
+    _merge_stats(stats, ba_stats)
+    _merge_stats(stats, tp_stats)
     return result, stats
 
 

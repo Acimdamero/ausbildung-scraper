@@ -19,6 +19,7 @@ class AusbildungListing:
     gaji: str = ""
     persyaratan: str = ""
     jenis_ausbildung: str = ""
+    beruf_typ: str = ""
     deskripsi_perusahaan: str = ""
     apa_yang_ditawarkan: str = ""
     link_website_perusahaan: str = ""

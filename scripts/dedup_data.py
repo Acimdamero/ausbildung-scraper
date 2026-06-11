@@ -16,7 +16,14 @@ sys.path.insert(0, str(ROOT))
 
 from src.models.listing import AusbildungListing
 from src.parser.enrichment import enrich_listing
-from src.storage.dedup import DedupStats, deduplicate_listings, split_by_category
+from src.parser.listing_sort import sort_listings
+from src.storage.dedup import DedupStats, deduplicate_all_sources, split_by_category
+
+SPECIALIZATION_FILES = {
+    "ae": "ae_listings.csv",
+    "dpa": "dpa_listings.csv",
+    "other": "other_listings.csv",
+}
 from src.storage.local import LocalStorage
 from src.storage.progress import ProgressTracker
 
@@ -114,6 +121,40 @@ def save_processed(
     return paths
 
 
+def save_by_specialization(
+    storage: LocalStorage,
+    deduped: list[dict],
+) -> list[str]:
+    """Write AE/DPA split CSVs under data/processed/by_specialization/."""
+    import csv
+
+    out_dir = storage.base_dir / "processed" / "by_specialization"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    paths: list[str] = []
+    by_spec: dict[str, list[dict]] = {"ae": [], "dpa": [], "other": []}
+    for item in deduped:
+        spec = item.get("beruf_typ") or item.get("ausbildung_specialization") or "other"
+        if spec not in by_spec:
+            spec = "other"
+        by_spec[spec].append(item)
+
+    fieldnames = AusbildungListing.field_names()
+    for spec, filename in SPECIALIZATION_FILES.items():
+        items = by_spec.get(spec, [])
+        path = out_dir / filename
+        with path.open("w", encoding="utf-8-sig", newline="") as fh:
+            writer = csv.DictWriter(fh, fieldnames=fieldnames)
+            writer.writeheader()
+            for row in items:
+                writer.writerow(
+                    {k: row.get(k, "") for k in fieldnames}
+                )
+        rel = str(path.relative_to(ROOT))
+        paths.append(rel)
+        logger.info("Specialization %s: %d -> %s", spec.upper(), len(items), rel)
+    return paths
+
+
 def regenerate_viewer(output: Path) -> Path | None:
     viewer_script = ROOT / "scripts" / "generate_viewer.py"
     result = subprocess.run(
@@ -183,8 +224,8 @@ def main() -> int:
         count = sum(1 for item in listings if item.get("category_id") == category_id)
         logger.info("  %s: %d from %s", category_id, count, src)
 
-    deduped, stats = deduplicate_listings(listings)
-    deduped = [enrich_listing(item) for item in deduped]
+    deduped, stats = deduplicate_all_sources(listings)
+    deduped = sort_listings([enrich_listing(item) for item in deduped])
     logger.info(
         "Deduplicated: %d -> %d (removed %d)",
         stats.input_total,
@@ -192,16 +233,19 @@ def main() -> int:
         stats.removed_total,
     )
     logger.info(
-        "  refnr cross-category: %d, within-category: %d, secondary: %d, near-dup: %d",
+        "  refnr cross-category: %d, within-category: %d, secondary: %d, near-dup: %d, cross-source: %d",
         stats.removed_by_refnr_cross_category,
         stats.removed_by_refnr_within_category,
         stats.removed_by_secondary_key,
         stats.removed_by_near_duplicate,
+        stats.removed_by_cross_source,
     )
 
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     storage = LocalStorage(args.data_dir)
     processed_paths = save_processed(storage, deduped, stamp)
+    spec_paths = save_by_specialization(storage, deduped)
+    processed_paths.setdefault("by_specialization", []).extend(spec_paths)
 
     bewerbung_script = ROOT / "scripts" / "generate_bewerbung_exports.py"
     bewerbung_result = subprocess.run(
@@ -223,6 +267,19 @@ def main() -> int:
         viewer_path = regenerate_viewer(args.data_dir / "viewer" / "index.html")
         if viewer_path:
             viewer_path = str(viewer_path.relative_to(ROOT))
+
+    audit_script = ROOT / "scripts" / "audit_field_completeness.py"
+    audit_result = subprocess.run(
+        [sys.executable, str(audit_script), "--data-dir", str(args.data_dir)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if audit_result.returncode != 0:
+        logger.warning("Field audit failed: %s", audit_result.stderr.strip())
+    else:
+        logger.info(audit_result.stdout.strip())
 
     tracker = ProgressTracker(args.data_dir / "progress.json")
     update_progress(

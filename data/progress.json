@@ -29,27 +29,32 @@
   "total_scraped": 1764,
   "total_failed": 0,
   "dedup": {
-    "last_dedup_at": "2026-06-11T11:24:52.648974+00:00",
-    "input_total": 1935,
-    "output_total": 1277,
-    "removed_total": 658,
-    "removed_by_refnr_cross_category": 582,
+    "last_dedup_at": "2026-06-11T12:38:59.015205+00:00",
+    "input_total": 3564,
+    "output_total": 2142,
+    "removed_total": 1422,
+    "removed_by_refnr_cross_category": 581,
     "removed_by_refnr_within_category": 4,
     "removed_by_secondary_key": 0,
     "removed_by_near_duplicate": 72,
+    "removed_by_cross_source": 765,
     "input_by_category": {
       "ausbildung_de_ae": 144,
       "ausbildung_de_dpa": 27,
       "fachinformatiker_ae": 948,
       "fachinformatiker_ae_2026": 679,
-      "fachinformatiker_dpa": 137
+      "fachinformatiker_dpa": 137,
+      "meine_ausbildung_ae": 1439,
+      "meine_ausbildung_dpa": 190
     },
     "output_by_category": {
-      "ausbildung_de_ae": 143,
-      "ausbildung_de_dpa": 27,
       "fachinformatiker_ae": 343,
       "fachinformatiker_ae_2026": 650,
-      "fachinformatiker_dpa": 114
+      "fachinformatiker_dpa": 114,
+      "ausbildung_de_ae": 110,
+      "ausbildung_de_dpa": 19,
+      "meine_ausbildung_ae": 802,
+      "meine_ausbildung_dpa": 104
     },
     "processed_paths": {
       "all": [
@@ -78,7 +83,19 @@
         "data/processed/fachinformatiker_dpa_deduped_2026-06-11.json",
         "data/processed/fachinformatiker_dpa_deduped_2026-06-11.csv",
         "data/processed/fachinformatiker_dpa_deduped.json",
-        "data/processed/fachinformatiker_dpa_deduped.csv"
+        "data/processed/fachinformatiker_dpa_deduped.csv",
+        "data/processed/meine_ausbildung_ae_deduped_2026-06-11.json",
+        "data/processed/meine_ausbildung_ae_deduped_2026-06-11.csv",
+        "data/processed/meine_ausbildung_ae_deduped.json",
+        "data/processed/meine_ausbildung_ae_deduped.csv",
+        "data/processed/meine_ausbildung_dpa_deduped_2026-06-11.json",
+        "data/processed/meine_ausbildung_dpa_deduped_2026-06-11.csv",
+        "data/processed/meine_ausbildung_dpa_deduped.json",
+        "data/processed/meine_ausbildung_dpa_deduped.csv"
+      ],
+      "by_specialization": [
+        "data/processed/by_specialization/ae_listings.csv",
+        "data/processed/by_specialization/dpa_listings.csv"
       ],
       "viewer": [
         "data/viewer/index.html"
@@ -89,7 +106,9 @@
       "ausbildung_de_dpa": "data/exports/ausbildung_de_dpa_2026-06-11.json",
       "fachinformatiker_ae": "data/exports/fachinformatiker_ae_2026-06-11.json",
       "fachinformatiker_ae_2026": "data/exports/fachinformatiker_ae_2026_2026-06-11.json",
-      "fachinformatiker_dpa": "data/exports/fachinformatiker_dpa_2026-06-11.json"
+      "fachinformatiker_dpa": "data/exports/fachinformatiker_dpa_2026-06-11.json",
+      "meine_ausbildung_ae": "data/exports/meine_ausbildung_ae_2026-06-11.json",
+      "meine_ausbildung_dpa": "data/exports/meine_ausbildung_dpa_2026-06-11.json"
     }
   }
 }

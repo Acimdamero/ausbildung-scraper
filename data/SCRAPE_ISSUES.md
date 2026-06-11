@@ -32,3 +32,14 @@ tail -f logs/meine_ausbildung_dpa.log
 cat data/progress_meine_ausbildung_dpa.json | python3 -m json.tool | head -30
 pgrep -fl meine_ausbildung
 ```
+
+## meine_ausbildung_ae — 2026-06-11 12:06 UTC
+
+- Discovered: 1439 (expected 1478)
+- Scraped: 1439, failed: 0
+- Cross-dup vs master: 647, unique new: 770
+
+Known limitations:
+- Many click-through links redirect to employer career pages, not Arbeitsagentur jobdetail.
+- Listings without BA redirect use stub fields (title, company, city) + final redirect URL.
+- Query `daten` may include non-DPA roles (e.g. dual study); filter by title if needed.

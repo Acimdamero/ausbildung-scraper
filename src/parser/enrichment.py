@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import Any
 from urllib.parse import urlparse
 
+from src.parser.specialization import derive_beruf_typ
+
 # Job-board / partner portals surfaced via allianzpartnerUrl (not employer sites).
 PARTNER_DOMAINS = frozenset(
     {
@@ -132,4 +134,7 @@ def enrich_listing(listing: dict[str, Any]) -> dict[str, Any]:
     listing["website_type"] = website_type
     listing["link_website_perusahaan_resmi"] = official_company_website(website, website_type)
     listing["kelengkapan_score"] = compute_kelengkapan_score(listing)
+    spec = derive_beruf_typ(listing)
+    listing["beruf_typ"] = spec
+    listing["ausbildung_specialization"] = spec
     return listing
