@@ -1,9 +1,9 @@
 # Scrape Progress
 
-**Last run:** 2026-06-11T08:07:55.157541+00:00
-**Total scraped:** 225
+**Last run:** 2026-06-11T08:16:30.193530+00:00
+**Total scraped:** 1763
 **Total failed:** 0
-**Settings:** workers=3, delay=0.3s per request
+**Settings:** workers=8, delay=0.3s per request
 
 ## Lihat Data
 
@@ -14,9 +14,9 @@
 
 | Category | Available | Scraped | Failed | Last Run |
 |----------|-----------|---------|--------|----------|
-| Fachinformatiker/in Anwendungsentwicklung | 947 | 75 | 0 | 2026-06-11T08:07:07 |
-| Fachinformatiker/in Anwendungsentwicklung Jahr 2026 | 679 | 75 | 0 | 2026-06-11T08:07:31 |
-| Fachinformatiker/in Daten- und Prozessanalyse | 137 | 75 | 0 | 2026-06-11T08:07:55 |
+| Fachinformatiker/in Anwendungsentwicklung | 947 | 947 | 0 | 2026-06-11T08:12:12 |
+| Fachinformatiker/in Anwendungsentwicklung Jahr 2026 | 679 | 679 | 0 | 2026-06-11T08:15:46 |
+| Fachinformatiker/in Daten- und Prozessanalyse | 137 | 137 | 0 | 2026-06-11T08:16:30 |
 
 ## File Export Terbaru
 
