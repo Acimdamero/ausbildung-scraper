@@ -302,6 +302,14 @@ After each run:
 - `data/progress_ausbildung_de.json` — ausbildung.de scrape stats
 - `data/PROGRESS.md` — markdown table for GitHub
 
+**Monitor real-time (Bahasa Indonesia):** lihat [docs/BACKGROUND_RUN.md](docs/BACKGROUND_RUN.md#monitor-progress-real-time-saat-scrape-berjalan). Ringkas:
+
+```bash
+./scripts/watch_progress.sh          # dashboard terminal
+tail -f logs/meine_ausbildung_ae.log # log live
+cat data/LIVE_STATUS.md              # snapshot terakhir
+```
+
 ## Documentation
 
 - [PRD](docs/PRD.md)

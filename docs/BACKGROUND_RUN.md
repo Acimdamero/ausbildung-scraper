@@ -90,6 +90,39 @@ pgrep -fl "run_ausbildung_de.py"
 pgrep -fl "run_background_pipeline"
 ```
 
+## Monitor progress real-time (saat scrape berjalan)
+
+```bash
+cd ~/Projects/ausbildung-scraper
+
+# Opsi 1 — dashboard terminal (refresh otomatis ~7 detik)
+./scripts/watch_progress.sh
+
+# Opsi 2 — ikuti log scrape aktif
+tail -f logs/meine_ausbildung_ae.log
+# atau DPA / ausbildung.de:
+tail -f logs/meine_ausbildung_dpa.log
+tail -f logs/ausbildung_de_scrape.log
+
+# Opsi 3 — baca progress JSON (ringkas)
+watch -n 5 'python3 -c "
+import json
+from pathlib import Path
+for p in sorted(Path(\"data\").glob(\"progress*.json\")):
+    d = json.loads(p.read_text())
+    if \"scraped\" in d:
+        print(p.name, d.get(\"scraped\"), \"/\", d.get(\"discovered\"), \"failed\", d.get(\"failed\"))
+    elif \"total_scraped\" in d:
+        print(p.name, \"scraped\", d[\"total_scraped\"])
+"'
+
+# Opsi 4 — snapshot status background / live
+cat data/BACKGROUND_STATUS.md
+cat data/LIVE_STATUS.md
+```
+
+Satu kali tanpa loop: `./scripts/watch_progress.sh --once`
+
 ## Cek progress setelah kembali
 
 ```bash

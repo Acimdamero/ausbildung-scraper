@@ -7,6 +7,7 @@ import logging
 import re
 import time
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -398,6 +399,7 @@ class MeineAusbildungDeScraper:
         payload = {
             "query": query,
             "category_id": category_id,
+            "updated_at": datetime.now(timezone.utc).isoformat(),
             "pages_completed": pages_completed,
             "pages_total": report.expected_pages,
             "expected_total": report.expected_total,
