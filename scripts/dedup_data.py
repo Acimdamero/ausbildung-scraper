@@ -203,21 +203,6 @@ def main() -> int:
     storage = LocalStorage(args.data_dir)
     processed_paths = save_processed(storage, deduped, stamp)
 
-    viewer_path = None
-    if not args.no_viewer:
-        viewer_path = regenerate_viewer(args.data_dir / "viewer" / "index.html")
-        if viewer_path:
-            viewer_path = str(viewer_path.relative_to(ROOT))
-
-    tracker = ProgressTracker(args.data_dir / "progress.json")
-    update_progress(
-        tracker,
-        stats,
-        viewer_path=viewer_path,
-        processed_paths=processed_paths,
-        export_sources=sources,
-    )
-
     bewerbung_script = ROOT / "scripts" / "generate_bewerbung_exports.py"
     bewerbung_result = subprocess.run(
         [sys.executable, str(bewerbung_script), "--data-dir", str(args.data_dir)],
@@ -232,6 +217,21 @@ def main() -> int:
         for line in (bewerbung_result.stdout + bewerbung_result.stderr).strip().splitlines():
             if line.strip():
                 logger.info(line.strip())
+
+    viewer_path = None
+    if not args.no_viewer:
+        viewer_path = regenerate_viewer(args.data_dir / "viewer" / "index.html")
+        if viewer_path:
+            viewer_path = str(viewer_path.relative_to(ROOT))
+
+    tracker = ProgressTracker(args.data_dir / "progress.json")
+    update_progress(
+        tracker,
+        stats,
+        viewer_path=viewer_path,
+        processed_paths=processed_paths,
+        export_sources=sources,
+    )
 
     logger.info("Processed files written under data/processed/")
     if viewer_path:

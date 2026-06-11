@@ -1,13 +1,13 @@
 {
-  "last_run_at": "2026-06-11T08:16:30.193530+00:00",
+  "last_run_at": "2026-06-11T09:15:07.870953+00:00",
   "categories": [
     {
       "category_id": "fachinformatiker_ae",
       "category_name": "Fachinformatiker/in Anwendungsentwicklung",
-      "total_available": 947,
-      "scraped_count": 947,
+      "total_available": 948,
+      "scraped_count": 948,
       "failed_count": 0,
-      "last_run_at": "2026-06-11T08:12:12.360999+00:00"
+      "last_run_at": "2026-06-11T09:15:07.870953+00:00"
     },
     {
       "category_id": "fachinformatiker_ae_2026",
@@ -26,19 +26,19 @@
       "last_run_at": "2026-06-11T08:16:30.193530+00:00"
     }
   ],
-  "total_scraped": 1763,
+  "total_scraped": 1764,
   "total_failed": 0,
   "dedup": {
-    "last_dedup_at": "2026-06-11T09:04:09.772252+00:00",
-    "input_total": 1763,
+    "last_dedup_at": "2026-06-11T09:15:12.237061+00:00",
+    "input_total": 1764,
     "output_total": 1107,
-    "removed_total": 656,
+    "removed_total": 657,
     "removed_by_refnr_cross_category": 581,
-    "removed_by_refnr_within_category": 3,
+    "removed_by_refnr_within_category": 4,
     "removed_by_secondary_key": 0,
     "removed_by_near_duplicate": 72,
     "input_by_category": {
-      "fachinformatiker_ae": 947,
+      "fachinformatiker_ae": 948,
       "fachinformatiker_ae_2026": 679,
       "fachinformatiker_dpa": 137
     },
