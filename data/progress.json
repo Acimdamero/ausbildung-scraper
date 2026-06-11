@@ -27,5 +27,55 @@
     }
   ],
   "total_scraped": 1763,
-  "total_failed": 0
+  "total_failed": 0,
+  "dedup": {
+    "last_dedup_at": "2026-06-11T08:37:31.795437+00:00",
+    "input_total": 1763,
+    "output_total": 1107,
+    "removed_total": 656,
+    "removed_by_refnr_cross_category": 581,
+    "removed_by_refnr_within_category": 3,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 72,
+    "input_by_category": {
+      "fachinformatiker_ae": 947,
+      "fachinformatiker_ae_2026": 679,
+      "fachinformatiker_dpa": 137
+    },
+    "output_by_category": {
+      "fachinformatiker_ae": 343,
+      "fachinformatiker_ae_2026": 650,
+      "fachinformatiker_dpa": 114
+    },
+    "processed_paths": {
+      "all": [
+        "data/processed/all_listings_deduped_2026-06-11.json",
+        "data/processed/all_listings_deduped_2026-06-11.csv",
+        "data/processed/all_listings_deduped.json",
+        "data/processed/all_listings_deduped.csv"
+      ],
+      "categories": [
+        "data/processed/fachinformatiker_ae_deduped_2026-06-11.json",
+        "data/processed/fachinformatiker_ae_deduped_2026-06-11.csv",
+        "data/processed/fachinformatiker_ae_deduped.json",
+        "data/processed/fachinformatiker_ae_deduped.csv",
+        "data/processed/fachinformatiker_ae_2026_deduped_2026-06-11.json",
+        "data/processed/fachinformatiker_ae_2026_deduped_2026-06-11.csv",
+        "data/processed/fachinformatiker_ae_2026_deduped.json",
+        "data/processed/fachinformatiker_ae_2026_deduped.csv",
+        "data/processed/fachinformatiker_dpa_deduped_2026-06-11.json",
+        "data/processed/fachinformatiker_dpa_deduped_2026-06-11.csv",
+        "data/processed/fachinformatiker_dpa_deduped.json",
+        "data/processed/fachinformatiker_dpa_deduped.csv"
+      ],
+      "viewer": [
+        "data/viewer/index.html"
+      ]
+    },
+    "export_sources": {
+      "fachinformatiker_ae": "data/exports/fachinformatiker_ae_2026-06-11.json",
+      "fachinformatiker_ae_2026": "data/exports/fachinformatiker_ae_2026_2026-06-11.json",
+      "fachinformatiker_dpa": "data/exports/fachinformatiker_dpa_2026-06-11.json"
+    }
+  }
 }

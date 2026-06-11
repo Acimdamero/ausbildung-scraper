@@ -15,9 +15,11 @@ venv/
 dist/
 build/
 
-# Data outputs (keep samples)
+# Data outputs (keep samples + deduplicated processed)
 data/raw/
-data/processed/
+data/processed/*
+!data/processed/*.json
+!data/processed/*.csv
 data/exports/
 !data/samples/
 

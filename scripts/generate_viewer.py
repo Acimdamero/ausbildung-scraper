@@ -14,8 +14,19 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 
-def find_json_files(data_dir: Path) -> list[Path]:
+def find_json_files(data_dir: Path, source: str = "exports") -> list[Path]:
     files: list[Path] = []
+    if source == "processed":
+        folder = data_dir / "processed"
+        if folder.is_dir():
+            preferred = folder / "all_listings_deduped.json"
+            if preferred.exists():
+                return [preferred]
+            files.extend(
+                sorted(folder.glob("*_deduped.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+            )
+        return files
+
     for sub in ("exports", "samples"):
         folder = data_dir / sub
         if folder.is_dir():
@@ -23,12 +34,20 @@ def find_json_files(data_dir: Path) -> list[Path]:
     return files
 
 
-def load_listings(data_dir: Path) -> tuple[list[dict], dict[str, str]]:
-    """Load listings; keep newest file per category_id."""
-    by_category: dict[str, tuple[Path, list[dict]]] = {}
+def load_listings(data_dir: Path, source: str = "exports") -> tuple[list[dict], dict[str, str]]:
+    """Load listings; keep newest file per category_id (or combined deduped file)."""
     sources: dict[str, str] = {}
 
-    for path in find_json_files(data_dir):
+    if source == "processed":
+        combined = data_dir / "processed" / "all_listings_deduped.json"
+        if combined.exists():
+            payload = json.loads(combined.read_text(encoding="utf-8"))
+            if isinstance(payload, list) and payload:
+                sources["all_deduped"] = str(combined.relative_to(ROOT))
+                return payload, sources
+
+    by_category: dict[str, tuple[Path, list[dict]]] = {}
+    for path in find_json_files(data_dir, source=source):
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
@@ -241,6 +260,12 @@ def main() -> int:
         help="Data directory containing exports/ and samples/",
     )
     parser.add_argument(
+        "--source",
+        choices=("exports", "processed", "samples"),
+        default="exports",
+        help="Load from raw exports or deduplicated processed files",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=ROOT / "data" / "viewer" / "index.html",
@@ -248,7 +273,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    listings, sources = load_listings(args.data_dir)
+    listings, sources = load_listings(args.data_dir, source=args.source)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(build_html(listings, sources), encoding="utf-8")
     print(f"Viewer written: {args.output} ({len(listings)} listings)")

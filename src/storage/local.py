@@ -14,9 +14,18 @@ class LocalStorage:
     def __init__(self, base_dir: str | Path = "data") -> None:
         self.base_dir = Path(base_dir)
         self.exports_dir = self.base_dir / "exports"
+        self.processed_dir = self.base_dir / "processed"
         self.samples_dir = self.base_dir / "samples"
         self.exports_dir.mkdir(parents=True, exist_ok=True)
+        self.processed_dir.mkdir(parents=True, exist_ok=True)
         self.samples_dir.mkdir(parents=True, exist_ok=True)
+
+    def _target_dir(self, *, samples: bool = False, processed: bool = False) -> Path:
+        if processed:
+            return self.processed_dir
+        if samples:
+            return self.samples_dir
+        return self.exports_dir
 
     def save_json(
         self,
@@ -24,8 +33,9 @@ class LocalStorage:
         filename: str,
         *,
         samples: bool = False,
+        processed: bool = False,
     ) -> Path:
-        target_dir = self.samples_dir if samples else self.exports_dir
+        target_dir = self._target_dir(samples=samples, processed=processed)
         path = target_dir / filename
         payload = [item.to_dict() for item in listings]
         path.write_text(
@@ -40,8 +50,9 @@ class LocalStorage:
         filename: str,
         *,
         samples: bool = False,
+        processed: bool = False,
     ) -> Path:
-        target_dir = self.samples_dir if samples else self.exports_dir
+        target_dir = self._target_dir(samples=samples, processed=processed)
         path = target_dir / filename
         if not listings:
             path.write_text("", encoding="utf-8")

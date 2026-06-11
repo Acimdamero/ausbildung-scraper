@@ -54,9 +54,26 @@ python scripts/run_scraper.py --max-pages 3 --workers 3
 python scripts/run_scraper.py --max-pages 0 --workers 3
 ```
 
+### Deduplikasi data
+
+Scrape mentah sering berisi duplikat (lowongan sama muncul di beberapa kategori pencarian). Jalankan deduplikasi setelah scrape:
+
+```bash
+python scripts/dedup_data.py
+```
+
+Script ini:
+- Membaca `data/exports/*.json` (terbaru per kategori)
+- Menghapus duplikat berdasarkan `referenznummer` (prioritas utama) dan hash sekunder
+- Menyimpan hasil bersih ke `data/processed/` (JSON + CSV)
+- Memperbarui `data/viewer/index.html` dengan data deduplikasi
+- Memperbarui statistik di `data/progress.json` dan `data/PROGRESS.md`
+
+Prioritas kategori saat duplikat lintas-kategori: `ae_2026` > `dpa` > `ae`.
+
 ### Lihat data langsung
 
-Setelah scrape selesai, buka di browser:
+Setelah scrape (dan deduplikasi), buka di browser:
 
 ```bash
 open data/viewer/index.html
@@ -74,9 +91,10 @@ open data/viewer/index.html
 | Format | Lokasi | Cara buka |
 |--------|--------|-----------|
 | HTML Viewer | `data/viewer/index.html` | Double-click / `open` di browser |
-| CSV | `data/exports/*.csv` | Excel, Numbers, Google Sheets upload |
-| JSON | `data/exports/*.json` | VS Code, editor teks |
-| Progress | `data/PROGRESS.md` | Ringkasan + link file |
+| JSON/CSV deduplikasi | `data/processed/all_listings_deduped.*` | Disarankan untuk analisis |
+| CSV mentah | `data/exports/*.csv` | Excel, Numbers, Google Sheets upload |
+| JSON mentah | `data/exports/*.json` | VS Code, editor teks |
+| Progress | `data/PROGRESS.md` | Ringkasan + statistik dedup |
 | Google Sheets | Tab `FI_AE`, dll. | Perlu setup service account |
 
 ### Rate limit — aman vs agresif
@@ -181,7 +199,7 @@ Each category exports to its own tab (`FI_AE`, `FI_AE_2026`, `FI_DPA`).
 ausbildung-scraper/
 ├── config/           # categories + field mapping
 ├── docs/             # PRD, architecture, pipeline
-├── scripts/          # run_scraper.py, generate_viewer.py
+├── scripts/          # run_scraper.py, dedup_data.py, generate_viewer.py
 ├── src/
 │   ├── api_client/   # Jobsuche REST client
 │   ├── parser/       # API → normalized listing
@@ -189,7 +207,8 @@ ausbildung-scraper/
 │   └── models/       # AusbildungListing dataclass
 └── data/
     ├── samples/      # test output
-    ├── exports/      # production output (JSON + CSV)
+    ├── exports/      # raw scrape output (JSON + CSV)
+    ├── processed/    # deduplicated output (JSON + CSV)
     ├── viewer/       # index.html — buka di browser
     └── progress.json # scrape stats
 ```
