@@ -29,7 +29,7 @@
   "total_scraped": 1764,
   "total_failed": 0,
   "dedup": {
-    "last_dedup_at": "2026-06-11T12:38:59.015205+00:00",
+    "last_dedup_at": "2026-06-11T12:39:56.620914+00:00",
     "input_total": 3564,
     "output_total": 2142,
     "removed_total": 1422,
@@ -95,7 +95,8 @@
       ],
       "by_specialization": [
         "data/processed/by_specialization/ae_listings.csv",
-        "data/processed/by_specialization/dpa_listings.csv"
+        "data/processed/by_specialization/dpa_listings.csv",
+        "data/processed/by_specialization/other_listings.csv"
       ],
       "viewer": [
         "data/viewer/index.html"

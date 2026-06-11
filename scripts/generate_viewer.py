@@ -363,11 +363,11 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="ya">Butuh cek manual</option>
         <option value="tidak">Siap otomatisasi</option>
       </select>
-      <select id="specFilter">
-        <option value="">Spesialisasi: semua</option>
-        <option value="ae">AE (Anwendungsentwicklung)</option>
-        <option value="dpa">DPA (Daten- und Prozessanalyse)</option>
-      </select>
+    </div>
+    <div class="spec-tabs" id="specTabs" role="tablist" aria-label="Filter spesialisasi">
+      <button type="button" class="spec-tab" data-spec="" role="tab" aria-selected="false">Semua</button>
+      <button type="button" class="spec-tab active" data-spec="ae" role="tab" aria-selected="true">AE</button>
+      <button type="button" class="spec-tab" data-spec="dpa" role="tab" aria-selected="false">DPA</button>
     </div>
   </header>
   <main>
@@ -447,10 +447,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
           <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
           ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
           ${{item.bewerbung_sumber ? `<span class="badge">Sumber: ${{escapeHtml(item.bewerbung_sumber)}}</span>` : ""}}
-          ${{item.beruf_typ ? `<span class="badge">${{item.beruf_typ === "dpa" ? "DPA" : "AE"}}</span>` : ""}}
+          ${{specBadgeLabel(item.beruf_typ) ? `<span class="badge ${{specBadgeClass(item.beruf_typ)}}">${{specBadgeLabel(item.beruf_typ)}}</span>` : ""}}
           ${{item.category_id ? `<span class="badge">${{escapeHtml(item.category_id)}}</span>` : ""}}
         </div>
-        ${{detailSection("Spesialisasi", item.beruf_typ === "dpa" ? "DPA — Daten- und Prozessanalyse" : item.beruf_typ === "ae" ? "AE — Anwendungsentwicklung" : item.beruf_typ)}}
+        ${{detailSection("Spesialisasi", specDetailLabel(item.beruf_typ))}}
         ${{detailSection("Kota", item.posisi_kota)}}
         ${{detailSection("Alamat", item.alamat_detail)}}
         ${{detailSection("Jenis Ausbildung", item.jenis_ausbildung)}}
@@ -490,6 +490,35 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       return "score-low";
     }}
 
+    function berufTypOrder(typ) {{
+      if (typ === "ae") return 1;
+      if (typ === "dpa") return 2;
+      return 3;
+    }}
+
+    function specBadgeLabel(typ) {{
+      if (typ === "ae") return "AE";
+      if (typ === "dpa") return "DPA";
+      if (typ === "other") return "Other";
+      return "";
+    }}
+
+    function specBadgeClass(typ) {{
+      if (typ === "ae") return "spec-ae";
+      if (typ === "dpa") return "spec-dpa";
+      if (typ === "other") return "spec-other";
+      return "";
+    }}
+
+    function specDetailLabel(typ) {{
+      if (typ === "dpa") return "DPA — Daten- und Prozessanalyse";
+      if (typ === "ae") return "AE — Anwendungsentwicklung";
+      if (typ === "other") return "Other";
+      return typ || "";
+    }}
+
+    let activeSpecFilter = "ae";
+
     function hasEmail(item) {{
       return Boolean((item.alamat_email_bewerbung || "").trim());
     }}
@@ -508,10 +537,9 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       const sort = document.getElementById("sort").value;
       const emailFilter = document.getElementById("emailFilter").value;
       const manualFilter = document.getElementById("manualFilter").value;
-      const specFilter = document.getElementById("specFilter").value;
       let filtered = LISTINGS.filter(item => {{
         if (cat && item.category_id !== cat) return false;
-        if (specFilter && item.beruf_typ !== specFilter) return false;
+        if (activeSpecFilter && item.beruf_typ !== activeSpecFilter) return false;
         if (emailFilter === "yes" && !hasEmail(item)) return false;
         if (emailFilter === "no" && hasEmail(item)) return false;
         const manual = butuhManual(item) ? "ya" : "tidak";
@@ -529,6 +557,11 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       }});
 
       filtered = [...filtered].sort((a, b) => {{
+        if (sort === "spec-priority") {{
+          const specDiff = berufTypOrder(a.beruf_typ) - berufTypOrder(b.beruf_typ);
+          if (specDiff) return specDiff;
+          return (b.kelengkapan_score || 0) - (a.kelengkapan_score || 0);
+        }}
         if (sort === "score-desc") return (b.kelengkapan_score || 0) - (a.kelengkapan_score || 0);
         if (sort === "score-asc") return (a.kelengkapan_score || 0) - (b.kelengkapan_score || 0);
         if (sort === "city") return (a.posisi_kota || "").localeCompare(b.posisi_kota || "", "de");
@@ -558,7 +591,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
             ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
             ${{hasEmail(item) ? `<span class="badge score-high">Email</span>` : ""}}
             ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
-            ${{item.beruf_typ ? `<span class="badge">${{item.beruf_typ === "dpa" ? "DPA" : "AE"}}</span>` : ""}}
+            ${{specBadgeLabel(item.beruf_typ) ? `<span class="badge ${{specBadgeClass(item.beruf_typ)}}">${{specBadgeLabel(item.beruf_typ)}}</span>` : ""}}
           </div>
           ${{item.gaji ? `<div class="salary">Gaji: ${{escapeHtml(item.gaji)}}</div>` : ""}}
           <div class="type">${{escapeHtml(item.category_id)}}</div>
@@ -608,7 +641,17 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     document.getElementById("sort").addEventListener("change", render);
     document.getElementById("emailFilter").addEventListener("change", render);
     document.getElementById("manualFilter").addEventListener("change", render);
-    document.getElementById("specFilter").addEventListener("change", render);
+    document.getElementById("specTabs").addEventListener("click", (e) => {{
+      const tab = e.target.closest(".spec-tab");
+      if (!tab) return;
+      activeSpecFilter = tab.dataset.spec || "";
+      document.querySelectorAll(".spec-tab").forEach(btn => {{
+        const active = btn === tab;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      }});
+      render();
+    }});
     render();
   </script>
 </body>
@@ -639,6 +682,7 @@ def main() -> int:
     args = parser.parse_args()
 
     listings, sources = load_listings(args.data_dir, source=args.source)
+    listings = sort_listings(listings)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(build_html(listings, sources), encoding="utf-8")
     print(f"Viewer written: {args.output} ({len(listings)} listings)")

@@ -21,7 +21,7 @@
 
 ## Deduplikasi
 
-**Last dedup:** 2026-06-11T12:38:59.015205+00:00
+**Last dedup:** 2026-06-11T12:39:56.620914+00:00
 **Sebelum:** 3564 listing
 **Sesudah:** 2142 listing
 **Dihapus:** 1422 duplikat
@@ -52,24 +52,3 @@
 - `data/processed/all_listings_deduped_2026-06-11.csv`
 - `data/processed/all_listings_deduped.json`
 - `data/processed/all_listings_deduped.csv`
-- **AE listings:** `data/processed/by_specialization/ae_listings.csv` (1905)
-- **DPA listings:** `data/processed/by_specialization/dpa_listings.csv` (237)
-- **Field audit:** `data/FIELD_COMPLETENESS_REPORT.md`
-
-## Spesialisasi (master dedup)
-
-| Spesialisasi | Jumlah |
-|--------------|--------|
-| AE (Anwendungsentwicklung) | 1905 |
-| DPA (Daten- und Prozessanalyse) | 237 |
-| **Total master** | **2142** |
-
-## meine-ausbildung-in-deutschland.de
-
-**Last run:** 2026-06-11T12:06:14
-**AE scrape:** selesai — 1439/1439 (74 halaman, discovered 1439 vs expected 1478)
-**DPA scrape:** selesai — 190/190 (11 halaman)
-
-Cross-source dedup terintegrasi di `dedup_data.py` (765 duplikat portal vs BA dihapus).
-
-Progress JSON: `data/progress_meine_ausbildung_ae.json`, `data/progress_meine_ausbildung_dpa.json`
