@@ -29,20 +29,24 @@
   "total_scraped": 1764,
   "total_failed": 0,
   "dedup": {
-    "last_dedup_at": "2026-06-11T09:15:12.237061+00:00",
-    "input_total": 1764,
-    "output_total": 1107,
-    "removed_total": 657,
-    "removed_by_refnr_cross_category": 581,
+    "last_dedup_at": "2026-06-11T11:24:52.648974+00:00",
+    "input_total": 1935,
+    "output_total": 1277,
+    "removed_total": 658,
+    "removed_by_refnr_cross_category": 582,
     "removed_by_refnr_within_category": 4,
     "removed_by_secondary_key": 0,
     "removed_by_near_duplicate": 72,
     "input_by_category": {
+      "ausbildung_de_ae": 144,
+      "ausbildung_de_dpa": 27,
       "fachinformatiker_ae": 948,
       "fachinformatiker_ae_2026": 679,
       "fachinformatiker_dpa": 137
     },
     "output_by_category": {
+      "ausbildung_de_ae": 143,
+      "ausbildung_de_dpa": 27,
       "fachinformatiker_ae": 343,
       "fachinformatiker_ae_2026": 650,
       "fachinformatiker_dpa": 114
@@ -55,6 +59,14 @@
         "data/processed/all_listings_deduped.csv"
       ],
       "categories": [
+        "data/processed/ausbildung_de_ae_deduped_2026-06-11.json",
+        "data/processed/ausbildung_de_ae_deduped_2026-06-11.csv",
+        "data/processed/ausbildung_de_ae_deduped.json",
+        "data/processed/ausbildung_de_ae_deduped.csv",
+        "data/processed/ausbildung_de_dpa_deduped_2026-06-11.json",
+        "data/processed/ausbildung_de_dpa_deduped_2026-06-11.csv",
+        "data/processed/ausbildung_de_dpa_deduped.json",
+        "data/processed/ausbildung_de_dpa_deduped.csv",
         "data/processed/fachinformatiker_ae_deduped_2026-06-11.json",
         "data/processed/fachinformatiker_ae_deduped_2026-06-11.csv",
         "data/processed/fachinformatiker_ae_deduped.json",
@@ -73,6 +85,8 @@
       ]
     },
     "export_sources": {
+      "ausbildung_de_ae": "data/exports/ausbildung_de_ae_2026-06-11.json",
+      "ausbildung_de_dpa": "data/exports/ausbildung_de_dpa_2026-06-11.json",
       "fachinformatiker_ae": "data/exports/fachinformatiker_ae_2026-06-11.json",
       "fachinformatiker_ae_2026": "data/exports/fachinformatiker_ae_2026_2026-06-11.json",
       "fachinformatiker_dpa": "data/exports/fachinformatiker_dpa_2026-06-11.json"
