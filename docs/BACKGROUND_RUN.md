@@ -2,14 +2,34 @@
 
 Panduan singkat agar scrape **ausbildung.de** tetap berjalan saat Anda menutup Cursor/terminal — dengan catatan penting tentang **sleep** MacBook.
 
-## Peringatan: tutup lid MacBook
+## Mulai dan hentikan (paling praktis)
 
-- **Menutup lid MacBook hampir selalu membuat Mac tidur (sleep)** — tethering hotspot saja **tidak** mencegah sleep.
-- Saat Mac tidur, proses scrape **berhenti** sampai Mac dibangunkan lagi.
-- **Rekomendasi:**
-  1. Biarkan **lid terbuka**, atau
-  2. Colok **charger** + di **System Settings → Displays / Battery** kurangi sleep (mis. “Prevent automatic sleeping when display is off” saat adaptor daya), atau
-  3. Jalankan dengan **`caffeinate -i`** (sudah dipakai di skrip background) — membantu saat **daya terpasang**, tetapi **lid tertutup** tetap sering memaksa sleep di banyak model Mac.
+Dari folder proyek (`~/Projects/ausbildung-scraper`):
+
+- **Mulai:** `./scripts/start_background_pipeline.sh`
+- **Hentikan kapan saja:** `./scripts/stop_background_pipeline.sh`
+
+Skrip stop aman dipanggil meski tidak ada yang jalan: menghentikan proses scrape (PID di `logs/ausbildung_de_scrape.pid`), menutup sesi `screen` bernama `ausbildung_pipeline`, dan menulis **STOPPED (by user)** ke `data/BACKGROUND_STATUS.md`.
+
+Cek status: `cat data/BACKGROUND_STATUS.md`
+
+
+## Peringatan: tutup lid MacBook (jujur)
+
+- **macOS:** menutup lid hampir selalu membuat Mac **tidur (sleep)**. Proses scrape/pipeline **berhenti atau tertunda** sampai Mac dibangunkan lagi.
+- **Tethering hotspot saja tidak mencegah sleep** — koneksi internet tidak menjaga Mac tetap bangun.
+
+**Opsi agar tetap jalan:**
+
+| Opsi | Keterangan |
+|------|------------|
+| **(a) Lid terbuka** | Paling sederhana dan andal. |
+| **(b) Clamshell mode** | Lid tertutup **hanya** jika ada monitor eksternal + keyboard + mouse/trackpad **dan** Mac terpasang adaptor daya (sesuai aturan Apple). |
+| **(c) `caffeinate -dims`** | Jalankan di terminal terpisah saat adaptor daya; membantu menahan sleep, tetapi **lid tertutup** di banyak Mac tetap bisa memaksa tidur. Skrip start sudah memakai `caffeinate -i` di dalam sesi screen. |
+| **(d) System Settings** | Kurangi/matikan sleep saat colok listrik (Battery / Energy / Displays — tergantung versi macOS). |
+| **(e) Amphetamine** (atau app sejenis) | Third-party untuk menahan sleep; tetap baca batasan hardware saat lid tertutup. |
+
+Anda **bisa menghentikan pipeline kapan saja** dengan `./scripts/stop_background_pipeline.sh` tanpa harus menunggu selesai.
 
 
 ## Cara paling andal dari Cursor (GNU `screen`)
