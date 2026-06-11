@@ -14,21 +14,19 @@ SUFFIX="${CATEGORY#meine_ausbildung_}"
 LOG="logs/meine_ausbildung_${SUFFIX}.log"
 PID_FILE="logs/meine_ausbildung_${SUFFIX}.pid"
 
-if [[ -f "$PID_FILE" ]]; then
-  OLD_PID="$(cat "$PID_FILE")"
-  if kill -0 "$OLD_PID" 2>/dev/null; then
-    echo "Scrape already running (PID $OLD_PID). Log: $LOG"
-    exit 0
-  fi
+SESSION="meine_${SUFFIX}"
+
+if screen -ls 2>/dev/null | grep -q "\\.${SESSION}"; then
+  echo "Screen session ${SESSION} already running. Attach: screen -r ${SESSION}"
+  exit 0
 fi
 
-nohup caffeinate -i python scripts/run_meine_ausbildung_de.py --delay 0.2 \
-  --category "$CATEGORY" \
-  >> "$LOG" 2>&1 &
-echo $! > "$PID_FILE"
+screen -dmS "$SESSION" bash -c \
+  "caffeinate -i python scripts/run_meine_ausbildung_de.py --delay 0.2 --category ${CATEGORY} >> ${LOG} 2>&1"
 
-echo "Started meine-ausbildung scrape (PID $(cat "$PID_FILE"))"
+echo "Started screen session: ${SESSION}"
 echo "Log: $LOG"
 echo "Progress: data/progress_${CATEGORY}.json"
 echo "Status: data/BACKGROUND_STATUS.md"
+echo "Attach: screen -r ${SESSION}"
 echo "Monitor: tail -f $LOG"
