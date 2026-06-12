@@ -206,6 +206,7 @@ class StepstoneDeScraper:
             if expected_total:
                 logger.info("Search reports %d total results", expected_total)
 
+            stagnant_pages = 0
             for page_num in range(1, MAX_PAGES + 1):
                 if page_num > 1:
                     if not self._goto_search_page(page, search_url, page_num):
@@ -231,7 +232,11 @@ class StepstoneDeScraper:
                     f" / ~{expected_total}" if expected_total else "",
                 )
                 if new_count == 0:
-                    break
+                    stagnant_pages += 1
+                    if stagnant_pages >= 2:
+                        break
+                else:
+                    stagnant_pages = 0
                 if expected_total and len(all_urls) >= expected_total:
                     break
         finally:
@@ -239,19 +244,23 @@ class StepstoneDeScraper:
         return sorted(all_urls)
 
     def _goto_search_page(self, page: Page, search_url: str, page_num: int) -> bool:
-        page_url = self._page_url(search_url, page_num)
-        if self._goto_with_retry(page, page_url):
-            return True
-
+        # Click pagination in-session — direct goto often triggers HTTP/2 errors on StepStone.
         try:
             link = page.locator(f'a[href*="page={page_num}"]').first
-            if link.is_visible(timeout=3000):
+            if link.is_visible(timeout=5000):
                 link.click()
-                page.wait_for_timeout(4000)
-                return True
-        except Exception:
-            pass
-        return False
+                page.wait_for_timeout(4500)
+                current = urlparse(page.url)
+                query = parse_qs(current.query)
+                if query.get("page", [""])[0] == str(page_num):
+                    return True
+                if f"page={page_num}" in page.url:
+                    return True
+        except Exception as exc:
+            logger.warning("Pagination click failed for page %d: %s", page_num, exc)
+
+        page_url = self._page_url(search_url, page_num)
+        return self._goto_with_retry(page, page_url)
 
     @staticmethod
     def _page_url(search_url: str, page_num: int) -> str:
