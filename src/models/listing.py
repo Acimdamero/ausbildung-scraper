@@ -38,6 +38,9 @@ class AusbildungListing:
     is_duplicate_of_arbeitsagentur: bool = False
     duplicate_of_refnr: str = ""
     kelengkapan_score: int = 0
+    tahun_mulai: int | None = None
+    bulan_mulai: int | None = None
+    tanggal_mulai: str = ""
     scraped_at: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )

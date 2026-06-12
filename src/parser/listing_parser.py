@@ -202,7 +202,12 @@ class ListingParser:
         if scraped_at:
             listing.scraped_at = scraped_at
 
-        enriched = enrich_listing(listing.to_dict())
+        data = listing.to_dict()
+        if detail is not None:
+            eintritt = detail.get("eintrittsdatum") or ""
+            if eintritt:
+                data["eintrittsdatum"] = str(eintritt)
+        enriched = enrich_listing(data)
         return AusbildungListing(**{k: enriched[k] for k in AusbildungListing.field_names()})
 
     @staticmethod

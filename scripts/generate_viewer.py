@@ -205,6 +205,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .badge.spec-ae {{ color: #8ec8ff; border-color: #2a4a6b; }}
     .badge.spec-dpa {{ color: #d4a5ff; border-color: #5a2a6b; }}
     .badge.spec-other {{ color: var(--muted); }}
+    .badge.start-date {{ color: #a8d4a0; border-color: #3a5a3a; }}
     .spec-tabs {{
       display: flex;
       flex-wrap: wrap;
@@ -363,6 +364,27 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="ya">Butuh cek manual</option>
         <option value="tidak">Siap otomatisasi</option>
       </select>
+      <select id="tahunFilter">
+        <option value="">Tahun: semua</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="unknown">Tidak diketahui</option>
+      </select>
+      <select id="bulanFilter">
+        <option value="">Bulan: semua</option>
+        <option value="1">Jan</option>
+        <option value="2">Feb</option>
+        <option value="3">Mar</option>
+        <option value="4">Apr</option>
+        <option value="5">Mei</option>
+        <option value="6">Jun</option>
+        <option value="7">Jul</option>
+        <option value="8">Agu</option>
+        <option value="9">Sep</option>
+        <option value="10">Okt</option>
+        <option value="11">Nov</option>
+        <option value="12">Des</option>
+      </select>
     </div>
     <div class="spec-tabs" id="specTabs" role="tablist" aria-label="Filter spesialisasi">
       <button type="button" class="spec-tab" data-spec="" role="tab" aria-selected="false">Semua</button>
@@ -454,6 +476,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         ${{detailSection("Kota", item.posisi_kota)}}
         ${{detailSection("Alamat", item.alamat_detail)}}
         ${{detailSection("Jenis Ausbildung", item.jenis_ausbildung)}}
+        ${{detailSection("Tanggal Mulai", startDateDetail(item))}}
         ${{detailSection("Gaji", item.gaji)}}
         ${{detailSection("Persyaratan", item.persyaratan)}}
         ${{detailSection("Deskripsi Perusahaan", item.deskripsi_perusahaan)}}
@@ -517,6 +540,34 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       return typ || "";
     }}
 
+    const BULAN_LABELS = {{
+      1: "Januari", 2: "Februari", 3: "Maret", 4: "April",
+      5: "Mei", 6: "Juni", 7: "Juli", 8: "Agustus",
+      9: "September", 10: "Oktober", 11: "November", 12: "Desember",
+    }};
+
+    function bulanLabel(bulan) {{
+      const n = Number(bulan);
+      return BULAN_LABELS[n] || "";
+    }}
+
+    function startDateBadge(item) {{
+      const tahun = item.tahun_mulai;
+      const bulan = item.bulan_mulai;
+      if (!tahun) return "";
+      const bulanText = bulan ? ` ${{bulanLabel(bulan)}}` : "";
+      return `<span class="badge start-date">Mulai ${{tahun}}${{bulanText}}</span>`;
+    }}
+
+    function startDateDetail(item) {{
+      const tahun = item.tahun_mulai;
+      if (!tahun) return "";
+      const parts = [`Tahun: ${{tahun}}`];
+      if (item.bulan_mulai) parts.push(`Bulan: ${{bulanLabel(item.bulan_mulai)}} (${{item.bulan_mulai}})`);
+      if (item.tanggal_mulai) parts.push(`Tanggal: ${{item.tanggal_mulai}}`);
+      return parts.join(" · ");
+    }}
+
     let activeSpecFilter = "ae";
 
     function hasEmail(item) {{
@@ -537,6 +588,8 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       const sort = document.getElementById("sort").value;
       const emailFilter = document.getElementById("emailFilter").value;
       const manualFilter = document.getElementById("manualFilter").value;
+      const tahunFilter = document.getElementById("tahunFilter").value;
+      const bulanFilter = document.getElementById("bulanFilter").value;
       let filtered = LISTINGS.filter(item => {{
         if (cat && item.category_id !== cat) return false;
         if (activeSpecFilter && item.beruf_typ !== activeSpecFilter) return false;
@@ -544,6 +597,9 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         if (emailFilter === "no" && hasEmail(item)) return false;
         const manual = butuhManual(item) ? "ya" : "tidak";
         if (manualFilter && manual !== manualFilter) return false;
+        if (tahunFilter === "unknown" && item.tahun_mulai) return false;
+        if (tahunFilter && tahunFilter !== "unknown" && String(item.tahun_mulai) !== tahunFilter) return false;
+        if (bulanFilter && String(item.bulan_mulai) !== bulanFilter) return false;
         if (!q) return true;
         const hay = [
           item.nama_perusahaan,
@@ -592,6 +648,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
             ${{hasEmail(item) ? `<span class="badge score-high">Email</span>` : ""}}
             ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
             ${{specBadgeLabel(item.beruf_typ) ? `<span class="badge ${{specBadgeClass(item.beruf_typ)}}">${{specBadgeLabel(item.beruf_typ)}}</span>` : ""}}
+            ${{startDateBadge(item)}}
           </div>
           ${{item.gaji ? `<div class="salary">Gaji: ${{escapeHtml(item.gaji)}}</div>` : ""}}
           <div class="type">${{escapeHtml(item.category_id)}}</div>
@@ -641,6 +698,8 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     document.getElementById("sort").addEventListener("change", render);
     document.getElementById("emailFilter").addEventListener("change", render);
     document.getElementById("manualFilter").addEventListener("change", render);
+    document.getElementById("tahunFilter").addEventListener("change", render);
+    document.getElementById("bulanFilter").addEventListener("change", render);
     document.getElementById("specTabs").addEventListener("click", (e) => {{
       const tab = e.target.closest(".spec-tab");
       if (!tab) return;

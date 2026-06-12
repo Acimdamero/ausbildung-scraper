@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 from urllib.parse import urlparse
 
+from src.parser.date_extraction import extract_start_date, is_date_only_contact
 from src.parser.specialization import derive_beruf_typ
 
 # Job-board / partner portals surfaced via allianzpartnerUrl (not employer sites).
@@ -137,4 +138,10 @@ def enrich_listing(listing: dict[str, Any]) -> dict[str, Any]:
     spec = derive_beruf_typ(listing)
     listing["beruf_typ"] = spec
     listing["ausbildung_specialization"] = spec
+
+    contact = listing.get("kontak_penanggung_jawab", "") or ""
+    if is_date_only_contact(contact):
+        listing["kontak_penanggung_jawab"] = ""
+
+    extract_start_date(listing)
     return listing

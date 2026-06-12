@@ -36,6 +36,8 @@ MASTER_COLUMNS: list[tuple[str, str]] = [
     ("alamat_detail", "alamat"),
     ("jenis_ausbildung", "jenis_ausbildung"),
     ("beruf_typ", "spesialisasi"),
+    ("tahun_mulai", "tahun_mulai"),
+    ("bulan_mulai", "bulan_mulai"),
     ("gaji", "gaji"),
     ("kelengkapan_score", "skor_kelengkapan"),
     ("website_type", "tipe_website"),

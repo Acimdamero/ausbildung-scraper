@@ -34,6 +34,9 @@ TRACKED_FIELDS = (
     "alamat_email_bewerbung",
     "kontak_penanggung_jawab",
     "dokumen_yang_harus_dipenuhi",
+    "tahun_mulai",
+    "bulan_mulai",
+    "tanggal_mulai",
 )
 
 
@@ -218,6 +221,13 @@ def main() -> int:
         out_path = args.input
         out_path.write_text(json.dumps(after, ensure_ascii=False, indent=2), encoding="utf-8")
         logger.info("Updated %s", out_path)
+        return 0
+
+    if args.source == "processed":
+        out_path = args.data_dir / "processed" / "all_listings_deduped.json"
+        out_path.write_text(json.dumps(after, ensure_ascii=False, indent=2), encoding="utf-8")
+        logger.info("Updated %s", out_path.relative_to(ROOT))
+        logger.info("Re-run: python scripts/generate_bewerbung_exports.py && python scripts/generate_viewer.py --source processed")
         return 0
 
     storage = LocalStorage(args.data_dir)
