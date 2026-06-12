@@ -10,12 +10,44 @@ import re
 import subprocess
 import sys
 import time
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 LOGS = ROOT / "logs"
+
+SCRAPE_PATTERNS = (
+    "run_scraper.py",
+    "run_ausbildung_de.py",
+    "run_meine_ausbildung_de.py",
+    "run_ausbildung_nrw.py",
+    "run_azubiyo_de.py",
+)
+
+SOURCE_LOGS: dict[str, Path] = {
+    "arbeitsagentur": LOGS / "arbeitsagentur_scrape.log",
+    "ausbildung_de": LOGS / "ausbildung_de_scrape.log",
+    "meine_ae": LOGS / "meine_ausbildung_ae.log",
+    "meine_dpa": LOGS / "meine_ausbildung_dpa.log",
+    "ausbildung_nrw": LOGS / "ausbildung_nrw_scrape.log",
+    "azubiyo_de": LOGS / "azubiyo_de_scrape.log",
+}
+
+SOURCE_PID_FILES: dict[str, Path] = {
+    "ausbildung_de": LOGS / "ausbildung_de_scrape.pid",
+    "meine_ae": LOGS / "meine_ausbildung_ae.pid",
+    "meine_dpa": LOGS / "meine_ausbildung_dpa.pid",
+}
+
+DEDUP_SOURCE_LABELS = {
+    "fachinformatiker": "Arbeitsagentur",
+    "ausbildung_de": "ausbildung.de",
+    "meine_ausbildung": "meine-ausbildung",
+    "ausbildung_nrw": "ausbildung.nrw",
+    "azubiyo_de": "azubiyo.de",
+}
 
 
 def load_json(path: Path) -> dict | list | None:
@@ -25,11 +57,6 @@ def load_json(path: Path) -> dict | list | None:
         return json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
-
-
-def master_count() -> int | None:
-    data = load_json(DATA / "processed" / "master_bewerbung.json")
-    return len(data) if isinstance(data, list) else None
 
 
 def is_pid_running(pid_file: Path) -> bool:
@@ -107,44 +134,147 @@ def eta_from_log(log_path: Path, scraped: int, total: int) -> str:
         return "?"
 
 
-def detect_running() -> dict[str, bool]:
-    procs = " ".join(pgrep_lines("run_meine_ausbildung_de.py", "run_ausbildung_de.py"))
-    return {
-        "meine_ae": is_pid_running(LOGS / "meine_ausbildung_ae.pid")
-        or "meine_ausbildung_ae" in procs,
-        "meine_dpa": is_pid_running(LOGS / "meine_ausbildung_dpa.pid")
-        or "meine_ausbildung_dpa" in procs,
-        "ausbildung_de": is_pid_running(LOGS / "ausbildung_de_scrape.pid")
-        or "run_ausbildung_de.py" in procs,
+def dedup_source_key(category_id: str) -> str:
+    if category_id.startswith("fachinformatiker"):
+        return "fachinformatiker"
+    for prefix in ("ausbildung_de", "meine_ausbildung", "ausbildung_nrw", "azubiyo_de"):
+        if category_id.startswith(prefix):
+            return prefix
+    return category_id.split("_")[0]
+
+
+def is_ae_category(category_id: str) -> bool:
+    return category_id.endswith("_ae") or category_id in {
+        "fachinformatiker_ae",
+        "fachinformatiker_ae_2026",
     }
 
 
-def format_arbeitsagentur(data: dict) -> list[str]:
+def is_dpa_category(category_id: str) -> bool:
+    return category_id.endswith("_dpa") or category_id == "fachinformatiker_dpa"
+
+
+def deduped_stats() -> dict:
+    data = load_json(DATA / "processed" / "all_listings_deduped.json")
+    if not isinstance(data, list):
+        return {
+            "total": None,
+            "ae": None,
+            "dpa": None,
+            "by_source": {},
+            "by_category": {},
+        }
+    by_category: Counter[str] = Counter()
+    by_source: Counter[str] = Counter()
+    ae = 0
+    dpa = 0
+    for row in data:
+        cat = str(row.get("category_id", "unknown"))
+        by_category[cat] += 1
+        by_source[dedup_source_key(cat)] += 1
+        if is_ae_category(cat):
+            ae += 1
+        elif is_dpa_category(cat):
+            dpa += 1
+    return {
+        "total": len(data),
+        "ae": ae,
+        "dpa": dpa,
+        "by_source": dict(by_source),
+        "by_category": dict(by_category),
+    }
+
+
+def detect_running(proc_blob: str) -> dict[str, bool]:
+    return {
+        "arbeitsagentur": "run_scraper.py" in proc_blob,
+        "ausbildung_de": is_pid_running(SOURCE_PID_FILES["ausbildung_de"])
+        or "run_ausbildung_de.py" in proc_blob,
+        "meine_ae": is_pid_running(SOURCE_PID_FILES["meine_ae"])
+        or "meine_ausbildung_ae" in proc_blob,
+        "meine_dpa": is_pid_running(SOURCE_PID_FILES["meine_dpa"])
+        or "meine_ausbildung_dpa" in proc_blob,
+        "ausbildung_nrw": "run_ausbildung_nrw.py" in proc_blob,
+        "azubiyo_de": "run_azubiyo_de.py" in proc_blob,
+    }
+
+
+def multi_category_status(data: dict, running: bool) -> str:
+    if running:
+        return "RUNNING"
+    cats = data.get("categories", [])
+    if not cats:
+        return "IDLE"
+    discovered = sum(int(c.get("discovered_urls", 0) or 0) for c in cats)
+    scraped = sum(int(c.get("scraped", 0) or 0) for c in cats)
+    if discovered > 0 and scraped >= discovered:
+        return "DONE"
+    if scraped > 0:
+        return "PARTIAL"
+    return "IDLE"
+
+
+def format_arbeitsagentur(data: dict, running: bool) -> list[str]:
+    cats = data.get("categories", [])
+    discovered = sum(int(c.get("total_available", 0) or 0) for c in cats)
+    scraped = int(data.get("total_scraped", 0) or 0)
+    if running:
+        status = "RUNNING"
+    elif discovered > 0 and scraped >= discovered:
+        status = "DONE"
+    elif scraped > 0:
+        status = "PARTIAL"
+    else:
+        status = "IDLE"
     lines = [
-        f"  Arbeitsagentur: {data.get('total_scraped', 0)} scraped, "
+        f"  Arbeitsagentur [{status}]: {scraped} scraped, "
         f"{data.get('total_failed', 0)} failed"
     ]
-    for cat in data.get("categories", []):
+    for cat in cats:
         name = cat.get("category_name", cat.get("category_id", "?"))
         avail = cat.get("total_available", 0)
-        scraped = cat.get("scraped_count", 0)
-        lines.append(f"    • {name}: {scraped}/{avail} ({pct(scraped, avail)})")
+        count = cat.get("scraped_count", 0)
+        lines.append(f"    • {name}: {count}/{avail} ({pct(count, avail)})")
     return lines
 
 
-def format_ausbildung_de(data: dict) -> list[str]:
+def format_multi_category(
+    data: dict,
+    label: str,
+    log_path: Path,
+    running: bool,
+    *,
+    extra_fields: list[str] | None = None,
+) -> list[str]:
+    status = multi_category_status(data, running)
+    scraped = int(data.get("total_scraped", 0) or 0)
+    failed = int(data.get("total_failed", 0) or 0)
+    discovered = sum(int(c.get("discovered_urls", 0) or 0) for c in data.get("categories", []))
+    eta = eta_from_log(log_path, scraped, discovered) if status == "RUNNING" else "—"
     lines = [
-        f"  ausbildung.de: {data.get('total_scraped', 0)} scraped, "
-        f"master merge {data.get('merged_master_total', '—')}"
+        f"  {label} [{status}]: {scraped} scraped"
+        + (f", {discovered} discovered" if discovered else "")
+        + f", failed {failed}, master merge {data.get('merged_master_total', '—')}, ETA {eta}"
     ]
+    if extra_fields:
+        for field in extra_fields:
+            if field in data:
+                lines.append(f"    {field}: {data[field]}")
     for cat in data.get("categories", []):
         cid = cat.get("category_id", "?")
-        disc = cat.get("discovered_urls", 0)
-        scraped = cat.get("scraped", 0)
-        failed = cat.get("failed", 0)
+        disc = int(cat.get("discovered_urls", 0) or 0)
+        count = int(cat.get("scraped", 0) or 0)
+        cat_failed = int(cat.get("failed", 0) or 0)
+        extra = ""
+        skipped = cat.get("skipped_wrong_beruf")
+        if skipped:
+            extra = f", skipped {skipped}"
         lines.append(
-            f"    • {cid}: {scraped}/{disc} ({pct(scraped, disc)}), failed {failed}"
+            f"    • {cid}: {count}/{disc} ({pct(count, disc)}), failed {cat_failed}{extra}"
         )
+    updated = data.get("last_run_at")
+    if updated:
+        lines.append(f"    updated: {str(updated)[:19]}")
     return lines
 
 
@@ -178,22 +308,57 @@ def format_meine(
     return lines
 
 
+def format_deduped_summary(stats: dict) -> list[str]:
+    lines = [
+        f"  Total: {stats['total'] or '?'} listing",
+        f"  AE: {stats['ae'] or '?'} | DPA: {stats['dpa'] or '?'}",
+    ]
+    if stats["by_source"]:
+        lines.append("  Per source (deduped):")
+        for key in (
+            "fachinformatiker",
+            "ausbildung_de",
+            "meine_ausbildung",
+            "ausbildung_nrw",
+            "azubiyo_de",
+        ):
+            count = stats["by_source"].get(key)
+            if count:
+                label = DEDUP_SOURCE_LABELS.get(key, key)
+                ae = sum(
+                    n
+                    for cat, n in stats["by_category"].items()
+                    if dedup_source_key(cat) == key and is_ae_category(cat)
+                )
+                dpa = sum(
+                    n
+                    for cat, n in stats["by_category"].items()
+                    if dedup_source_key(cat) == key and is_dpa_category(cat)
+                )
+                lines.append(f"    • {label}: {count} (AE {ae}, DPA {dpa})")
+    return lines
+
+
 def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    dedup = deduped_stats()
     lines = [
         "=" * 62,
         "  AUSBILDUNG SCRAPER — LIVE PROGRESS",
         f"  {now}  (refresh {interval}s, Ctrl+C keluar)",
         "=" * 62,
         "",
-        f"MASTER TOTAL: {master_count() or '?'} listing (master_bewerbung.json)",
+        f"MASTER TOTAL: {dedup['total'] or '?'} listing (all_listings_deduped.json)",
+        "",
+        "AE / DPA (deduped):",
+        *format_deduped_summary(dedup),
         "",
     ]
 
     bg = DATA / "BACKGROUND_STATUS.md"
     if bg.is_file():
         lines.append("BACKGROUND STATUS:")
-        for row in bg.read_text(encoding="utf-8").splitlines()[2:6]:
+        for row in bg.read_text(encoding="utf-8").splitlines()[2:8]:
             if row.strip():
                 lines.append(f"  {row.strip()}")
         lines.append("")
@@ -201,11 +366,18 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
     lines.append("SOURCES:")
     aa = load_json(DATA / "progress.json")
     if isinstance(aa, dict):
-        lines.extend(format_arbeitsagentur(aa))
+        lines.extend(format_arbeitsagentur(aa, running["arbeitsagentur"]))
 
     ad = load_json(DATA / "progress_ausbildung_de.json")
     if isinstance(ad, dict):
-        lines.extend(format_ausbildung_de(ad))
+        lines.extend(
+            format_multi_category(
+                ad,
+                "ausbildung.de",
+                SOURCE_LOGS["ausbildung_de"],
+                running["ausbildung_de"],
+            )
+        )
 
     ae = load_json(DATA / "progress_meine_ausbildung_ae.json")
     if isinstance(ae, dict):
@@ -213,7 +385,7 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             format_meine(
                 ae,
                 "meine-ausbildung AE",
-                LOGS / "meine_ausbildung_ae.log",
+                SOURCE_LOGS["meine_ae"],
                 running["meine_ae"],
             )
         )
@@ -224,8 +396,36 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             format_meine(
                 dpa,
                 "meine-ausbildung DPA",
-                LOGS / "meine_ausbildung_dpa.log",
+                SOURCE_LOGS["meine_dpa"],
                 running["meine_dpa"],
+            )
+        )
+
+    nrw = load_json(DATA / "progress_ausbildung_nrw.json")
+    if isinstance(nrw, dict):
+        lines.extend(
+            format_multi_category(
+                nrw,
+                "ausbildung.nrw",
+                SOURCE_LOGS["ausbildung_nrw"],
+                running["ausbildung_nrw"],
+                extra_fields=["new_unique_vs_master", "cross_duplicates_with_master"],
+            )
+        )
+
+    azu = load_json(DATA / "progress_azubiyo_de.json")
+    if isinstance(azu, dict):
+        lines.extend(
+            format_multi_category(
+                azu,
+                "azubiyo.de",
+                SOURCE_LOGS["azubiyo_de"],
+                running["azubiyo_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
             )
         )
 
@@ -238,34 +438,38 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
         screen_lines = []
     shown_screen = False
     for row in screen_lines:
-        if any(token in row.lower() for token in ("meine", "ausbildung", "socket")):
+        if any(
+            token in row.lower()
+            for token in ("meine", "ausbildung", "azubiyo", "nrw", "socket", "scraper")
+        ):
             lines.append(f"  {row.strip()}")
             shown_screen = True
     if not shown_screen:
         lines.append("  (tidak ada sesi screen terkait)")
 
-    procs = pgrep_lines("run_meine_ausbildung_de.py", "run_ausbildung_de.py")
+    procs = pgrep_lines(*SCRAPE_PATTERNS)
     if procs:
-        for proc in procs[:6]:
+        for proc in procs[:10]:
             lines.append(f"  {proc}")
     else:
         lines.append("  (tidak ada proses scrape Python aktif)")
 
     lines.append("")
     lines.append("LOG TERAKHIR:")
-    if running["meine_ae"]:
-        log_targets = [("meine_ae", LOGS / "meine_ausbildung_ae.log")]
-    elif running["meine_dpa"]:
-        log_targets = [("meine_dpa", LOGS / "meine_ausbildung_dpa.log")]
-    elif running["ausbildung_de"]:
-        log_targets = [("ausbildung_de", LOGS / "ausbildung_de_scrape.log")]
-    else:
-        log_targets = [
-            ("meine_ae", LOGS / "meine_ausbildung_ae.log"),
-            ("meine_dpa", LOGS / "meine_ausbildung_dpa.log"),
+    active_logs = [
+        (name, path)
+        for name, path in SOURCE_LOGS.items()
+        if running.get(name) and path.is_file()
+    ]
+    if not active_logs:
+        active_logs = [
+            (name, path) for name, path in SOURCE_LOGS.items() if path.is_file()
         ]
-    for name, log_path in log_targets:
-        lines.append(f"  [{name}] {last_log_line(log_path)}")
+    if not active_logs:
+        lines.append("  (tidak ada log scrape)")
+    else:
+        for name, log_path in active_logs:
+            lines.append(f"  [{name}] {last_log_line(log_path)}")
 
     lines.append("")
     lines.append("=" * 62)
@@ -299,7 +503,8 @@ def main() -> int:
 
     try:
         while True:
-            running = detect_running()
+            proc_blob = " ".join(pgrep_lines(*SCRAPE_PATTERNS))
+            running = detect_running(proc_blob)
             text, md = build_display(running, interval)
             if not args.no_live_file:
                 DATA.mkdir(parents=True, exist_ok=True)

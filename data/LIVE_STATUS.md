@@ -1,21 +1,21 @@
 # Live Scrape Status
 
-**Updated:** 2026-06-11 13:54:37
+**Updated:** 2026-06-12 12:51:28
 
 Snapshot otomatis dari `scripts/watch_progress.py`.
 
 ```
 ==============================================================
   AUSBILDUNG SCRAPER — LIVE PROGRESS
-  2026-06-11 13:54:37  (refresh 7s, Ctrl+C keluar)
+  2026-06-12 12:51:28  (refresh 7s, Ctrl+C keluar)
 ==============================================================
 
-MASTER TOTAL: 1398 listing (master_bewerbung.json)
+MASTER TOTAL: 2316 listing (master_bewerbung.json)
 
 BACKGROUND STATUS:
-  - **State:** RUNNING
-  - **Updated (UTC):** 2026-06-11T11:43:09Z
-  Scrape `meine_ausbildung_ae` (query=`anwendungsentwicklung`) sedang berjalan. Log: `logs/meine_ausbildung_ae.log`
+  - **State:** COMPLETED
+  - **Updated (UTC):** 2026-06-12T10:01:34Z
+  Scrape suche.ausbildung.nrw selesai: 215 listing, 48 unik baru (master total 2316).
 
 SOURCES:
   Arbeitsagentur: 1764 scraped, 0 failed
@@ -25,21 +25,18 @@ SOURCES:
   ausbildung.de: 171 scraped, master merge 1236
     • ausbildung_de_ae: 144/144 (100.0%), failed 0
     • ausbildung_de_dpa: 27/27 (100.0%), failed 0
-  meine-ausbildung AE [RUNNING]: 875/1439 (60.8%), failed 0, ETA ~9 menit
+  meine-ausbildung AE [DONE]: 1439/1439 (100.0%), failed 0, ETA —
     query: anwendungsentwicklung
   meine-ausbildung DPA [DONE]: 190/190 (100.0%), failed 0, ETA —
     query: daten
 
 PROSES AKTIF:
   (tidak ada sesi screen terkait)
-  98512 SCREEN -dmS meine_ae bash -c source .venv/bin/activate && caffeinate -i python scripts/run_meine_ausbildung_de.py --category meine_ausbildung_ae --delay 0.2 >> logs/meine_ausbildung_ae.log 2>&1
-  98514 login -pflq acim.agwengmail.com /bin/bash -c source .venv/bin/activate && caffeinate -i python scripts/run_meine_ausbildung_de.py --category meine_ausbildung_ae --delay 0.2 >> logs/meine_ausbildung_ae.log 2>&1
-  98515 bash -c source .venv/bin/activate && caffeinate -i python scripts/run_meine_ausbildung_de.py --category meine_ausbildung_ae --delay 0.2 >> logs/meine_ausbildung_ae.log 2>&1
-  98516 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python scripts/run_meine_ausbildung_de.py --category meine_ausbildung_ae --delay 0.2
-  98517 caffeinate -i python scripts/run_meine_ausbildung_de.py --category meine_ausbildung_ae --delay 0.2
+  (tidak ada proses scrape Python aktif)
 
 LOG TERAKHIR:
-  [meine_ae] 2026-06-11 13:54:29,451 [INFO] meine_ausbildung_ae: 875/1439 details (0 failed)
+  [meine_ae] Master setelah merge: 2168
+  [meine_dpa] Master setelah merge: 1398
 
 ==============================================================
 ```
