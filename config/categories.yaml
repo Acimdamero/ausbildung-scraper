@@ -67,3 +67,37 @@ categories:
     expected_results: 208
     expected_pages: 11
     sheet_tab: "MAD_DPA"
+
+  # suche.ausbildung.nrw (Playwright + API intercept — scripts/run_ausbildung_nrw.py)
+  - id: ausbildung_nrw_ae
+    name: "suche.ausbildung.nrw — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (Ausbildung.NRW)"
+    source: ausbildung_nrw
+    search_url: "https://suche.ausbildung.nrw/?apprenticeships=322&branches=6"
+    apprenticeship_id: 322
+    branch_id: 6
+    sheet_tab: "NRW_AE"
+
+  - id: ausbildung_nrw_dpa
+    name: "suche.ausbildung.nrw — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (Ausbildung.NRW)"
+    source: ausbildung_nrw
+    search_url: "https://suche.ausbildung.nrw/?apprenticeships=430&branches=6"
+    apprenticeship_id: 430
+    branch_id: 6
+    sheet_tab: "NRW_DPA"
+
+  # azubiyo.de (Playwright — scripts/run_azubiyo_de.py)
+  - id: azubiyo_de_ae
+    name: "azubiyo.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (azubiyo.de)"
+    source: azubiyo_de
+    search_url: "https://www.azubiyo.de/ausbildung/fachinformatiker-anwendungsentwicklung/?subject=1__252&radius=25&start=20262"
+    sheet_tab: "AZUB_AE"
+
+  - id: azubiyo_de_dpa
+    name: "azubiyo.de — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (azubiyo.de)"
+    source: azubiyo_de
+    search_url: "https://www.azubiyo.de/ausbildung/fachinformatiker-daten-prozessanalyse/?job=454fa85c"
+    sheet_tab: "AZUB_DPA"
