@@ -24,6 +24,7 @@ SCRAPE_PATTERNS = (
     "run_meine_ausbildung_de.py",
     "run_ausbildung_nrw.py",
     "run_azubiyo_de.py",
+    "run_stepstone_de.py",
 )
 
 SOURCE_LOGS: dict[str, Path] = {
@@ -33,12 +34,14 @@ SOURCE_LOGS: dict[str, Path] = {
     "meine_dpa": LOGS / "meine_ausbildung_dpa.log",
     "ausbildung_nrw": LOGS / "ausbildung_nrw_scrape.log",
     "azubiyo_de": LOGS / "azubiyo_de_scrape.log",
+    "stepstone_de": LOGS / "stepstone_de_scrape.log",
 }
 
 SOURCE_PID_FILES: dict[str, Path] = {
     "ausbildung_de": LOGS / "ausbildung_de_scrape.pid",
     "meine_ae": LOGS / "meine_ausbildung_ae.pid",
     "meine_dpa": LOGS / "meine_ausbildung_dpa.pid",
+    "stepstone_de": LOGS / "stepstone_de_scrape.pid",
 }
 
 DEDUP_SOURCE_LABELS = {
@@ -47,6 +50,7 @@ DEDUP_SOURCE_LABELS = {
     "meine_ausbildung": "meine-ausbildung",
     "ausbildung_nrw": "ausbildung.nrw",
     "azubiyo_de": "azubiyo.de",
+    "stepstone_de": "stepstone.de",
 }
 
 
@@ -134,10 +138,25 @@ def eta_from_log(log_path: Path, scraped: int, total: int) -> str:
         return "?"
 
 
+def normalize_categories(data: dict) -> list[dict]:
+    cats = data.get("categories") or []
+    if isinstance(cats, dict):
+        return [v for v in cats.values() if isinstance(v, dict)]
+    if isinstance(cats, list):
+        return [c for c in cats if isinstance(c, dict)]
+    return []
+
+
 def dedup_source_key(category_id: str) -> str:
     if category_id.startswith("fachinformatiker"):
         return "fachinformatiker"
-    for prefix in ("ausbildung_de", "meine_ausbildung", "ausbildung_nrw", "azubiyo_de"):
+    for prefix in (
+        "ausbildung_de",
+        "meine_ausbildung",
+        "ausbildung_nrw",
+        "azubiyo_de",
+        "stepstone_de",
+    ):
         if category_id.startswith(prefix):
             return prefix
     return category_id.split("_")[0]
@@ -196,16 +215,18 @@ def detect_running(proc_blob: str) -> dict[str, bool]:
         or "meine_ausbildung_dpa" in proc_blob,
         "ausbildung_nrw": "run_ausbildung_nrw.py" in proc_blob,
         "azubiyo_de": "run_azubiyo_de.py" in proc_blob,
+        "stepstone_de": is_pid_running(SOURCE_PID_FILES["stepstone_de"])
+        or "run_stepstone_de.py" in proc_blob,
     }
 
 
 def multi_category_status(data: dict, running: bool) -> str:
     if running:
         return "RUNNING"
-    cats = data.get("categories", [])
+    cats = normalize_categories(data)
     if not cats:
         return "IDLE"
-    discovered = sum(int(c.get("discovered_urls", 0) or 0) for c in cats)
+    discovered = sum(int(c.get("discovered_urls", c.get("discovered", 0)) or 0) for c in cats)
     scraped = sum(int(c.get("scraped", 0) or 0) for c in cats)
     if discovered > 0 and scraped >= discovered:
         return "DONE"
@@ -247,9 +268,14 @@ def format_multi_category(
     extra_fields: list[str] | None = None,
 ) -> list[str]:
     status = multi_category_status(data, running)
+    cats = normalize_categories(data)
     scraped = int(data.get("total_scraped", 0) or 0)
+    if not scraped and cats:
+        scraped = sum(int(c.get("scraped", 0) or 0) for c in cats)
     failed = int(data.get("total_failed", 0) or 0)
-    discovered = sum(int(c.get("discovered_urls", 0) or 0) for c in data.get("categories", []))
+    if not failed and cats:
+        failed = sum(int(c.get("failed", 0) or 0) for c in cats)
+    discovered = sum(int(c.get("discovered_urls", c.get("discovered", 0)) or 0) for c in cats)
     eta = eta_from_log(log_path, scraped, discovered) if status == "RUNNING" else "—"
     lines = [
         f"  {label} [{status}]: {scraped} scraped"
@@ -260,9 +286,9 @@ def format_multi_category(
         for field in extra_fields:
             if field in data:
                 lines.append(f"    {field}: {data[field]}")
-    for cat in data.get("categories", []):
+    for cat in cats:
         cid = cat.get("category_id", "?")
-        disc = int(cat.get("discovered_urls", 0) or 0)
+        disc = int(cat.get("discovered_urls", cat.get("discovered", 0)) or 0)
         count = int(cat.get("scraped", 0) or 0)
         cat_failed = int(cat.get("failed", 0) or 0)
         extra = ""
@@ -321,6 +347,7 @@ def format_deduped_summary(stats: dict) -> list[str]:
             "meine_ausbildung",
             "ausbildung_nrw",
             "azubiyo_de",
+            "stepstone_de",
         ):
             count = stats["by_source"].get(key)
             if count:
@@ -429,6 +456,22 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             )
         )
 
+    step = load_json(DATA / "progress_stepstone_de.json")
+    if isinstance(step, dict):
+        lines.extend(
+            format_multi_category(
+                step,
+                "stepstone.de",
+                SOURCE_LOGS["stepstone_de"],
+                running["stepstone_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
     lines.append("")
     lines.append("PROSES AKTIF:")
     try:
@@ -440,7 +483,7 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
     for row in screen_lines:
         if any(
             token in row.lower()
-            for token in ("meine", "ausbildung", "azubiyo", "nrw", "socket", "scraper")
+            for token in ("meine", "ausbildung", "azubiyo", "stepstone", "nrw", "socket", "scraper")
         ):
             lines.append(f"  {row.strip()}")
             shown_screen = True

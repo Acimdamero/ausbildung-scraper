@@ -101,3 +101,18 @@ categories:
     source: azubiyo_de
     search_url: "https://www.azubiyo.de/ausbildung/fachinformatiker-daten-prozessanalyse/?job=454fa85c"
     sheet_tab: "AZUB_DPA"
+
+  # stepstone.de (Playwright — scripts/run_stepstone_de.py)
+  - id: stepstone_de_ae
+    name: "stepstone.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (stepstone.de)"
+    source: stepstone_de
+    search_url: "https://www.stepstone.de/jobs/ausbildung-fachinformatiker-anwendungsentwicklung?searchOrigin=jobad&rsearch=2"
+    sheet_tab: "STEP_AE"
+
+  - id: stepstone_de_dpa
+    name: "stepstone.de — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (stepstone.de)"
+    source: stepstone_de
+    search_url: "https://www.stepstone.de/jobs/ausbildung-fachinformatiker-daten-und-prozessanalyse?searchOrigin=jobad&rsearch=2"
+    sheet_tab: "STEP_DPA"
