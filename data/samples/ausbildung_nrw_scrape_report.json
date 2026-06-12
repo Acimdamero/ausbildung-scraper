@@ -1,0 +1,89 @@
+{
+  "scraped_at": "2026-06-12T10:01:22.096422+00:00",
+  "investigation": {
+    "api_available": true,
+    "method": "playwright_discovery_api_intercept + playwright_detail_pages",
+    "discovery_api": "https://api.ausbildung.nrw/api/user/companies?ids=",
+    "apprenticeship_ids": {
+      "ae": 322,
+      "dpa": 430,
+      "dual_study_user_url_527": 527
+    },
+    "branch_it": 6,
+    "notes": "No public unauthenticated search API; company batches load during virtual scroll. Detail pages use JSON-LD Organization schema."
+  },
+  "categories": [
+    {
+      "category_id": "ausbildung_nrw_ae",
+      "apprenticeship_id": 322,
+      "discovered_urls": 181,
+      "scraped": 181,
+      "failed": 0,
+      "failed_urls": []
+    },
+    {
+      "category_id": "ausbildung_nrw_dpa",
+      "apprenticeship_id": 430,
+      "discovered_urls": 34,
+      "scraped": 34,
+      "failed": 0,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 215,
+    "output_total": 213,
+    "removed_total": 2,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 2,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "ausbildung_nrw_ae": 181,
+      "ausbildung_nrw_dpa": 34
+    },
+    "output_by_category": {
+      "ausbildung_nrw_ae": 179,
+      "ausbildung_nrw_dpa": 34
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 213,
+    "internal_dupes": 0,
+    "cross_dupes": 165,
+    "unique_new": 48,
+    "by_category": {
+      "ausbildung_nrw_ae": {
+        "scraped": 179,
+        "cross_duplicates": 143,
+        "unique_new": 36
+      },
+      "ausbildung_nrw_dpa": {
+        "scraped": 34,
+        "cross_duplicates": 22,
+        "unique_new": 12
+      }
+    }
+  },
+  "total_scraped_raw": 215,
+  "total_after_within_dedup": 213,
+  "total_failed": 0,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 100.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 0.0,
+    "persyaratan": 2.3,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 85.9,
+    "apa_yang_ditawarkan": 47.9,
+    "link_website_perusahaan": 84.5,
+    "alamat_email_bewerbung": 85.9,
+    "link_bewerbung": 85.9,
+    "kontak_penanggung_jawab": 100.0,
+    "dokumen_yang_harus_dipenuhi": 35.7
+  }
+}
