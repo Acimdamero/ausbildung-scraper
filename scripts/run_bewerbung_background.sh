@@ -90,8 +90,9 @@ fi
 
 # shellcheck disable=SC1091
 source "$ROOT/.venv/bin/activate"
+PYTHON="$ROOT/.venv/bin/python"
 
-CMD=(python scripts/run_bewerbung_pilot.py --workers "$WORKERS")
+CMD=("$PYTHON" scripts/run_bewerbung_pilot.py --workers "$WORKERS")
 case "$TARGET" in
   ae_email)
     CMD+=(--all --beruf-typ ae)
