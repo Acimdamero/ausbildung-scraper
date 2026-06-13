@@ -29,6 +29,10 @@ CATEGORY_PRIORITY: dict[str, int] = {
     "ausbildungsstellen_dpa": 3,
     "ausbildungsstellen_dv": 3,
     "ausbildungsstellen_si": 3,
+    "meinestadt_ae": 3,
+    "meinestadt_dpa": 3,
+    "meinestadt_dv": 3,
+    "meinestadt_si": 3,
     "fachinformatiker_dpa": 2,
     "fachinformatiker_ae": 1,
 }

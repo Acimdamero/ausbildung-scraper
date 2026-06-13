@@ -188,3 +188,42 @@ categories:
     source: ausbildungsstellen_de
     search_url: "https://www.ausbildungsstellen.de/suche.html?q=Fachinformatiker%2Fin+Systemintegration&l=&r=100"
     sheet_tab: "AST_SI"
+
+  # meinestadt.de (Playwright — scripts/run_meinestadt_de.py)
+  - id: meinestadt_ae
+    name: "meinestadt.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (meinestadt.de)"
+    source: meinestadt_de
+    search_url: "https://www.meinestadt.de/deutschland/lehrstellen/jkl/97268-16197-16203-13659#order=search(stelle%2Ctrue)"
+    path_ids: "97268-16197-16203-13659"
+    expected_results: 206
+    expected_pages: 11
+    sheet_tab: "MSD_AE"
+
+  - id: meinestadt_dpa
+    name: "meinestadt.de — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (meinestadt.de)"
+    source: meinestadt_de
+    search_url: "https://www.meinestadt.de/deutschland/lehrstellen/jkl/97268-16360-17489-18734#order=search(stelle%2Ctrue)"
+    path_ids: "97268-16360-17489-18734"
+    filter_beruf: dpa
+    sheet_tab: "MSD_DPA"
+
+  - id: meinestadt_dv
+    name: "meinestadt.de — Fachinformatiker/in Digitale Vernetzung"
+    name_id: "Fachinformatiker/in Digitale Vernetzung (meinestadt.de)"
+    source: meinestadt_de
+    search_url: "https://www.meinestadt.de/deutschland/lehrstellen/jkl/97268-16360-17489-18734#order=search(stelle%2Ctrue)"
+    path_ids: "97268-16360-17489-18734"
+    filter_beruf: dv
+    sheet_tab: "MSD_DV"
+
+  - id: meinestadt_si
+    name: "meinestadt.de — Fachinformatiker/in Systemintegration"
+    name_id: "Fachinformatiker/in Systemintegration (meinestadt.de)"
+    source: meinestadt_de
+    search_url: "https://www.meinestadt.de/deutschland/lehrstellen/jkl/97268-16197-16203-7817#order=search(stelle%2Ctrue)"
+    path_ids: "97268-16197-16203-7817"
+    expected_results: 399
+    expected_pages: 20
+    sheet_tab: "MSD_SI"

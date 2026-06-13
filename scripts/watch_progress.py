@@ -27,6 +27,7 @@ SCRAPE_PATTERNS = (
     "run_stepstone_de.py",
     "run_indeed_de.py",
     "run_ausbildungsstellen_de.py",
+    "run_meinestadt_de.py",
 )
 
 SOURCE_LOGS: dict[str, Path] = {
@@ -39,6 +40,7 @@ SOURCE_LOGS: dict[str, Path] = {
     "stepstone_de": LOGS / "stepstone_de_scrape.log",
     "indeed_de": LOGS / "indeed_de_scrape.log",
     "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.log",
+    "meinestadt_de": LOGS / "meinestadt_de_scrape.log",
 }
 
 SOURCE_PID_FILES: dict[str, Path] = {
@@ -48,6 +50,7 @@ SOURCE_PID_FILES: dict[str, Path] = {
     "stepstone_de": LOGS / "stepstone_de_scrape.pid",
     "indeed_de": LOGS / "indeed_de_scrape.pid",
     "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.pid",
+    "meinestadt_de": LOGS / "meinestadt_de_scrape.pid",
 }
 
 DEDUP_SOURCE_LABELS = {
@@ -59,6 +62,7 @@ DEDUP_SOURCE_LABELS = {
     "stepstone_de": "stepstone.de",
     "indeed_de": "indeed.de",
     "ausbildungsstellen_de": "ausbildungsstellen.de",
+    "meinestadt_de": "meinestadt.de",
 }
 
 
@@ -170,6 +174,8 @@ def dedup_source_key(category_id: str) -> str:
             return prefix
     if category_id.startswith("ausbildungsstellen_"):
         return "ausbildungsstellen_de"
+    if category_id.startswith("meinestadt_"):
+        return "meinestadt_de"
     return category_id.split("_")[0]
 
 
@@ -232,6 +238,8 @@ def detect_running(proc_blob: str) -> dict[str, bool]:
         or "run_indeed_de.py" in proc_blob,
         "ausbildungsstellen_de": is_pid_running(SOURCE_PID_FILES["ausbildungsstellen_de"])
         or "run_ausbildungsstellen_de.py" in proc_blob,
+        "meinestadt_de": is_pid_running(SOURCE_PID_FILES["meinestadt_de"])
+        or "run_meinestadt_de.py" in proc_blob,
     }
 
 
@@ -365,6 +373,7 @@ def format_deduped_summary(stats: dict) -> list[str]:
             "stepstone_de",
             "indeed_de",
             "ausbildungsstellen_de",
+            "meinestadt_de",
         ):
             count = stats["by_source"].get(key)
             if count:
@@ -521,6 +530,22 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             )
         )
 
+    msd = load_json(DATA / "progress_meinestadt_de.json")
+    if isinstance(msd, dict):
+        lines.extend(
+            format_multi_category(
+                msd,
+                "meinestadt.de",
+                SOURCE_LOGS["meinestadt_de"],
+                running["meinestadt_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
     lines.append("")
     lines.append("PROSES AKTIF:")
     try:
@@ -539,6 +564,7 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
                 "stepstone",
                 "indeed",
                 "ausbildungsstellen",
+                "meinestadt",
                 "nrw",
                 "socket",
                 "scraper",
