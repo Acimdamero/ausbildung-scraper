@@ -51,6 +51,28 @@ flowchart TB
     RES --> DOC --> ENR --> BUI
 ```
 
+## Tech stack
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Playwright](https://img.shields.io/badge/Playwright-Chromium-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-deploy-2088FF?logo=githubactions&logoColor=white)](../.github/workflows/pages.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-hosting-222222?logo=githubpages&logoColor=white)](https://acimdamero.github.io/ausbildung-scraper/)
+
+| Layer | Components |
+|-------|------------|
+| **Runtime** | Python 3.10+, stdlib (`json`, `csv`, `re`, `dataclasses`, `argparse`, `logging`, `pathlib`, `threading`) |
+| **Ingestion** | `requests` + Arbeitsagentur Jobsuche API; Playwright/Chromium for JS-rendered portals; portal runners in `scripts/run_*.py` |
+| **Parsing** | Per-portal parsers in `src/parser/`; JSON-LD extraction; regex HTML stripping; `AusbildungListing` dataclass |
+| **Storage** | Local JSON/CSV (`src/storage/local.py`), dedup engine (`src/storage/dedup.py`), progress JSON, optional Google Sheets (`gspread`) |
+| **Processing** | `dedup_data.py`, `export_one_per_company.py`, `generate_bewerbung_exports.py`; YAML config via `pyyaml` |
+| **Presentation** | `generate_viewer.py` → embedded JSON in static HTML; vanilla JS filters + smart search; Bewerbung UI via `generate_bewerbung_ui.py` |
+| **Bewerbung (local)** | `company_research.py`, `doc_generator.py`, `contact_extractor.py`, `user_profile.local.py` |
+| **Deploy** | GitHub Actions `pages.yml` publishes `data/viewer/`; Bash orchestration (`run_background_pipeline.sh`, `watch_progress.sh`) |
+
+**Dependencies** (`requirements.txt`): `requests`, `playwright`, `pyyaml`, `python-dotenv`, `gspread`, `google-auth`.
+
+**Intentionally not used:** Selenium, BeautifulSoup — API-first where possible; Playwright only when a real browser is required.
+
 ## Repository layout
 
 ```

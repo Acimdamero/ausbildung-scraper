@@ -30,6 +30,30 @@
 | Bewerbung Intelligence | Firmenrecherche, Anschreiben, Motivationsschreiben, E-Mail-Entwürfe (DE + ID) |
 | Datenschutz zuerst | Bewerberprofil und Briefe bleiben lokal — nie in Git |
 
+## Technologie-Stack
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Playwright](https://img.shields.io/badge/Playwright-Chromium-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
+[![Requests](https://img.shields.io/badge/requests-HTTP%20Client-009688)](https://requests.readthedocs.io/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?logo=githubactions&logoColor=white)](.github/workflows/pages.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Statisches%20Hosting-222222?logo=githubpages&logoColor=white)](https://acimdamero.github.io/ausbildung-scraper/)
+[![YAML](https://img.shields.io/badge/PyYAML-Konfiguration-CB171E?logo=yaml)](config/categories.yaml)
+
+| Kategorie | Technologien |
+|-----------|--------------|
+| **Sprachen** | Python 3.10+, HTML5, CSS3, Vanilla JavaScript |
+| **Backend & Scraping** | `requests` (Arbeitsagentur REST-API + Firmenrecherche), Playwright/Chromium (14 dynamische Portale), `ThreadPoolExecutor` für parallele API-Abfragen |
+| **Parsing & Konfiguration** | JSON / JSON-LD, Regex-HTML-Extraktion, `pyyaml` (`config/categories.yaml`, `fields_mapping.yaml`), `python-dotenv` |
+| **Daten-Pipeline** | JSON- & CSV-I/O, quellenübergreifende Dedup (`src/storage/dedup.py`), One-per-Company-Export, Fortschritts-Tracking, optional `gspread` → Google Sheets |
+| **Frontend** | Eigenständiger HTML-Viewer (`data/viewer/`), intelligente Suche mit Autovervollständigung, eingebettetes JSON (ohne Backend), Dark-Theme-CSS, `localStorage`-Status (Bewerbungs-UI) |
+| **Bewerbung Intelligence** | `company_research.py`, `contact_extractor.py`, `doc_generator.py` (DE + ID), `user_profile.local.py`, mailto-Helfer — alles nur lokal |
+| **DevOps & Tooling** | Git, Bash-Pipeline-Skripte (`run_background_pipeline.sh`), GitHub Actions → GitHub Pages, MIT-Lizenz |
+
+```text
+Python-Scraper ──► JSON/CSV ──► Dedup ──► HTML-Viewer ──► GitHub Pages
+                                      └──► Bewerbungsdokumente (lokal)
+```
+
 ## Live-Demo
 
 **Stellenviewer (öffentlich):** https://acimdamero.github.io/ausbildung-scraper/

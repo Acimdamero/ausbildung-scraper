@@ -30,6 +30,30 @@
 | Bewerbung Intelligence | Riset perusahaan, Anschreiben, Motivationsschreiben, draft email (DE + ID) |
 | Privasi dulu | Profil pelamar dan surat lamaran tetap lokal — tidak masuk git |
 
+## Tech Stack
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Playwright](https://img.shields.io/badge/Playwright-Chromium-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
+[![Requests](https://img.shields.io/badge/requests-HTTP%20client-009688)](https://requests.readthedocs.io/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?logo=githubactions&logoColor=white)](.github/workflows/pages.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Hosting%20Statis-222222?logo=githubpages&logoColor=white)](https://acimdamero.github.io/ausbildung-scraper/)
+[![YAML](https://img.shields.io/badge/PyYAML-konfigurasi-CB171E?logo=yaml)](config/categories.yaml)
+
+| Kategori | Teknologi |
+|----------|-----------|
+| **Bahasa** | Python 3.10+, HTML5, CSS3, Vanilla JavaScript |
+| **Backend & Scraping** | `requests` (API REST Arbeitsagentur + riset perusahaan), Playwright/Chromium (14 portal dinamis), `ThreadPoolExecutor` untuk fetch API paralel |
+| **Parsing & Konfigurasi** | JSON / JSON-LD, ekstraksi HTML regex, `pyyaml` (`config/categories.yaml`, `fields_mapping.yaml`), `python-dotenv` |
+| **Pipeline Data** | I/O JSON & CSV, dedup lintas sumber (`src/storage/dedup.py`), ekspor one-per-company, pelacakan progress, opsional `gspread` → Google Sheets |
+| **Frontend** | HTML viewer mandiri (`data/viewer/`), smart search dengan autocomplete, JSON tertanam (tanpa backend), CSS dark theme, status `localStorage` (UI Bewerbung) |
+| **Bewerbung Intelligence** | `company_research.py`, `contact_extractor.py`, `doc_generator.py` (DE + ID), `user_profile.local.py`, helper mailto — semua lokal saja |
+| **DevOps & Tooling** | Git, skrip pipeline Bash (`run_background_pipeline.sh`), GitHub Actions → GitHub Pages, lisensi MIT |
+
+```text
+Python scraper ──► JSON/CSV ──► dedup ──► HTML viewer ──► GitHub Pages
+                                      └──► dokumen Bewerbung (lokal)
+```
+
 ## Demo live
 
 **Viewer lowongan (publik):** https://acimdamero.github.io/ausbildung-scraper/

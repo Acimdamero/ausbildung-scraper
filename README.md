@@ -30,6 +30,30 @@
 | Bewerbung Intelligence | Company research, Anschreiben, Motivationsschreiben, email drafts (DE + ID) |
 | Privacy-first | Applicant profile and generated letters stay local — never in git |
 
+## Tech Stack
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Playwright](https://img.shields.io/badge/Playwright-Chromium-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
+[![Requests](https://img.shields.io/badge/requests-HTTP%20client-009688)](https://requests.readthedocs.io/)
+[![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-2088FF?logo=githubactions&logoColor=white)](.github/workflows/pages.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Static%20Host-222222?logo=githubpages&logoColor=white)](https://acimdamero.github.io/ausbildung-scraper/)
+[![YAML](https://img.shields.io/badge/PyYAML-config-CB171E?logo=yaml)](config/categories.yaml)
+
+| Category | Technologies |
+|----------|--------------|
+| **Languages** | Python 3.10+, HTML5, CSS3, Vanilla JavaScript |
+| **Backend & Scraping** | `requests` (Arbeitsagentur REST API + company research), Playwright/Chromium (14 dynamic portals), `ThreadPoolExecutor` for parallel API fetches |
+| **Parsing & Config** | JSON / JSON-LD, regex HTML extraction, `pyyaml` (`config/categories.yaml`, `fields_mapping.yaml`), `python-dotenv` |
+| **Data Pipeline** | JSON & CSV I/O, cross-source dedup (`src/storage/dedup.py`), one-per-company export, progress tracking, optional `gspread` → Google Sheets |
+| **Frontend** | Self-contained HTML viewer (`data/viewer/`), smart search with autocomplete, embedded JSON (zero backend), dark-theme CSS, `localStorage` status (Bewerbung UI) |
+| **Bewerbung Intelligence** | `company_research.py`, `contact_extractor.py`, `doc_generator.py` (DE + ID), `user_profile.local.py`, mailto helpers — all local-only |
+| **DevOps & Tooling** | Git, Bash pipeline scripts (`run_background_pipeline.sh`), GitHub Actions → GitHub Pages, MIT license |
+
+```text
+Python scrapers ──► JSON/CSV ──► dedup ──► HTML viewer ──► GitHub Pages
+                                      └──► Bewerbung docs (local)
+```
+
 ## Live demo
 
 **Job listing viewer (public):** https://acimdamero.github.io/ausbildung-scraper/
