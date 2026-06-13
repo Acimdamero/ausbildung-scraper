@@ -21,6 +21,26 @@ from src.parser.specialization import (
     TARGET_FI_CODES,
 )
 
+# Friendly portal names for sumber_data / all_sources keys (viewer only).
+PORTAL_LABELS: dict[str, str] = {
+    "arbeitsagentur": "arbeitsagentur.de",
+    "ausbildungsstellen_de": "ausbildungsstellen.de",
+    "suche_ausbildung_nrw": "ausbildung.nrw",
+    "ausbildung_de": "ausbildung.de",
+    "ausbildung.de": "ausbildung.de",
+    "meine_ausbildung_de": "meine-ausbildung.de",
+    "azubiyo_de": "azubiyo.de",
+    "indeed_de": "indeed.de",
+    "azubi_de": "azubi.de",
+    "stepstone_de": "stepstone.de",
+    "aubi_plus_de": "aubi-plus.de",
+    "karriere_suedwestfalen_de": "karriere-suedwestfalen.de",
+    "wir_sind_bund_de": "wir-sind-bund.de",
+    "meinestadt_de": "meinestadt.de",
+    "backinjob_de": "backinjob.de",
+    "ausbildungsmarkt_de": "ausbildungsmarkt.de",
+}
+
 
 def find_json_files(data_dir: Path, source: str = "exports") -> list[Path]:
     files: list[Path] = []
@@ -86,6 +106,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     beruf_typ_labels_json = json.dumps(BERUF_TYP_LABELS, ensure_ascii=False)
     beruf_typ_tab_labels_json = json.dumps(BERUF_TYP_TAB_LABELS, ensure_ascii=False)
     beruf_typ_order_json = json.dumps(BERUF_TYP_PRIORITY, ensure_ascii=False)
+    portal_labels_json = json.dumps(PORTAL_LABELS, ensure_ascii=False)
     main_tab_buttons = (
         '<button type="button" class="spec-tab active" data-spec="target" role="tab" '
         'aria-selected="true">Semua FI</button>'
@@ -111,7 +132,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Ausbildung Listings Viewer</title>
   <style>
     :root {{
@@ -121,17 +142,29 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       --muted: #8b9cb3;
       --accent: #3d8bfd;
       --border: #2a3544;
+      --touch-min: 44px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
     }}
     * {{ box-sizing: border-box; }}
+    html {{ overflow-x: hidden; }}
     body {{
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
+      overflow-x: hidden;
+      max-width: 100vw;
+      padding-left: var(--safe-left);
+      padding-right: var(--safe-right);
+      padding-bottom: var(--safe-bottom);
     }}
     header {{
       padding: 1.25rem 1.5rem;
+      padding-top: max(1.25rem, var(--safe-top));
       border-bottom: 1px solid var(--border);
       background: var(--card);
       position: sticky;
@@ -140,11 +173,69 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     }}
     h1 {{ margin: 0 0 0.5rem; font-size: 1.35rem; }}
     .meta {{ color: var(--muted); font-size: 0.9rem; }}
+    .public-banner {{
+      margin-top: 0.65rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      background: rgba(125, 222, 162, 0.1);
+      border: 1px solid #2d6b47;
+      color: #7ddea2;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }}
+    .public-banner a {{ color: #8ec8ff; }}
+    .search-sticky-bar {{
+      display: flex;
+      align-items: stretch;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }}
+    .filter-toggle {{
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+      min-height: var(--touch-min);
+      min-width: var(--touch-min);
+      padding: 0 0.85rem;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }}
+    .filter-toggle:hover,
+    .filter-toggle[aria-expanded="true"] {{
+      border-color: var(--accent);
+      background: rgba(61, 139, 253, 0.12);
+      color: var(--accent);
+    }}
+    .filter-count {{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.35rem;
+      height: 1.35rem;
+      padding: 0 0.35rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1;
+    }}
+    .filter-count[hidden] {{ display: none; }}
+    .filter-panel {{
+      margin-top: 0.5rem;
+    }}
     .controls {{
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
-      margin-top: 1rem;
     }}
     input, select {{
       background: var(--bg);
@@ -153,12 +244,14 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       border-radius: 8px;
       padding: 0.55rem 0.75rem;
       font-size: 0.95rem;
+      min-height: var(--touch-min);
     }}
-    input {{ flex: 1 1 240px; min-width: 200px; }}
+    input {{ flex: 1 1 240px; min-width: 0; }}
+    select {{ min-width: 0; }}
     .search-wrap {{
       position: relative;
       flex: 1 1 280px;
-      min-width: 220px;
+      min-width: 0;
     }}
     .search-wrap input {{
       width: 100%;
@@ -318,12 +411,41 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .badge.spec-skip {{ color: #888; border-color: #444; opacity: 0.85; }}
     .badge.spec-other {{ color: var(--muted); }}
     .badge.start-date {{ color: #a8d4a0; border-color: #3a5a3a; }}
+    .badge.source {{ color: #9ec8ff; border-color: #3a5a7b; }}
+    .card-sources {{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+      margin: 0.35rem 0 0.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }}
+    .card-sources .source-label {{
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      flex-shrink: 0;
+    }}
     .spec-tabs {{
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-top: 0.75rem;
+      margin-top: 0.5rem;
     }}
+    .spec-tabs-scroll {{
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 0.15rem;
+      margin-left: -0.15rem;
+      margin-right: -0.15rem;
+      padding-left: 0.15rem;
+      padding-right: 0.15rem;
+    }}
+    .spec-tabs-scroll::-webkit-scrollbar {{ display: none; }}
     .spec-tab {{
       background: var(--bg);
       color: var(--text);
@@ -332,6 +454,11 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       padding: 0.4rem 0.9rem;
       font-size: 0.9rem;
       cursor: pointer;
+      min-height: var(--touch-min);
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
     }}
     .spec-tab:hover {{ border-color: var(--accent); }}
     .spec-tab-secondary {{
@@ -412,8 +539,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       border: 1px solid var(--border);
       color: var(--text);
       border-radius: 8px;
-      width: 2.25rem;
-      height: 2.25rem;
+      width: var(--touch-min);
+      height: var(--touch-min);
+      min-width: var(--touch-min);
+      min-height: var(--touch-min);
       font-size: 1.35rem;
       line-height: 1;
       cursor: pointer;
@@ -423,6 +552,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .modal-body {{
       overflow-y: auto;
       padding: 1rem 1.25rem 1.25rem;
+      -webkit-overflow-scrolling: touch;
     }}
     .detail-section {{
       margin-bottom: 1.1rem;
@@ -467,19 +597,191 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     }}
     .modal-links a:hover {{ background: rgba(61, 139, 253, 0.12); }}
     body.modal-open {{ overflow: hidden; }}
+
+    /* Tablet */
+    @media (min-width: 768px) {{
+      .filter-panel {{
+        display: block;
+        margin-top: 0.75rem;
+      }}
+      .search-sticky-bar {{
+        margin-top: 0.75rem;
+      }}
+    }}
+    @media (min-width: 768px) and (max-width: 1024px) {{
+      .controls select {{
+        flex: 1 1 calc(50% - 0.375rem);
+      }}
+      .grid {{
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }}
+      main {{ padding: 1rem 1.25rem 2rem; }}
+    }}
+
+    /* Mobile */
+    @media (max-width: 767px) {{
+      header {{
+        position: relative;
+        top: auto;
+        padding: 0.75rem 1rem;
+        padding-top: max(0.75rem, var(--safe-top));
+      }}
+      h1 {{
+        font-size: 1.1rem;
+        margin-bottom: 0.2rem;
+      }}
+      .meta-subtitle {{
+        display: none;
+      }}
+      .meta {{
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }}
+      .public-banner {{
+        margin-top: 0.45rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+      }}
+      .search-sticky-bar {{
+        position: sticky;
+        top: 0;
+        z-index: 25;
+        background: var(--card);
+        margin: 0.5rem -1rem 0;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid var(--border);
+      }}
+      .filter-toggle {{
+        display: inline-flex;
+      }}
+      .filter-panel:not(.expanded) {{
+        display: none;
+      }}
+      .filter-panel.expanded {{
+        display: block;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+        margin-top: 0.5rem;
+      }}
+      .controls {{
+        flex-direction: column;
+        gap: 0.5rem;
+      }}
+      .controls select {{
+        width: 100%;
+        flex: none;
+      }}
+      .search-preview {{
+        margin-top: 0.35rem;
+        font-size: 0.82rem;
+      }}
+      .spec-tabs-label {{
+        margin-top: 0.45rem;
+        font-size: 0.7rem;
+      }}
+      .spec-tabs {{
+        margin-top: 0.35rem;
+        gap: 0.4rem;
+      }}
+      main {{
+        padding: 0.75rem 1rem 1.5rem;
+      }}
+      .stats {{
+        margin-bottom: 0.75rem;
+        font-size: 0.88rem;
+      }}
+      .grid {{
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }}
+      .card {{
+        padding: 1rem 1.05rem;
+        border-radius: 10px;
+      }}
+      .card h2 {{
+        font-size: 1.05rem;
+        line-height: 1.35;
+      }}
+      .card .company {{
+        font-size: 0.95rem;
+      }}
+      .card .location {{
+        font-size: 0.88rem;
+      }}
+      .card .desc {{
+        font-size: 0.92rem;
+        max-height: 5.5rem;
+      }}
+      .card .links a {{
+        min-height: var(--touch-min);
+        display: inline-flex;
+        align-items: center;
+        padding: 0.4rem 0.65rem;
+      }}
+      .card-sources {{
+        gap: 0.3rem;
+      }}
+      .badge {{
+        font-size: 0.72rem;
+        padding: 0.2rem 0.5rem;
+      }}
+      footer {{
+        padding: 0.85rem 1rem 1.5rem;
+        font-size: 0.82rem;
+      }}
+      .modal-overlay {{
+        padding: 0;
+        align-items: stretch;
+      }}
+      .modal {{
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        height: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        padding-bottom: var(--safe-bottom);
+      }}
+      .modal-header {{
+        padding-top: max(1rem, var(--safe-top));
+      }}
+      .suggest-item {{
+        min-height: var(--touch-min);
+      }}
+    }}
+
+    @media (max-width: 380px) {{
+      h1 {{ font-size: 1rem; }}
+      .filter-toggle-label {{ display: none; }}
+      .filter-toggle::before {{
+        content: "☰";
+        font-size: 1.1rem;
+      }}
+    }}
   </style>
 </head>
 <body>
   <header>
     <h1>Ausbildung Listings Viewer</h1>
-    <div class="meta">Generated: {generated_at} · Buka langsung di browser (tanpa server)</div>
-    <div class="controls">
+    <div class="meta"><span class="meta-subtitle">Generated: {generated_at} · </span>Buka langsung di browser (tanpa server)</div>
+    <div class="search-sticky-bar">
       <div class="search-wrap">
         <input id="search" type="search" placeholder="Cari cerdas: perusahaan, kota, AE, portal…" autocomplete="off" spellcheck="false">
         <div id="search-suggestions" class="search-suggestions" hidden></div>
       </div>
+      <button type="button" id="filter-toggle" class="filter-toggle" aria-expanded="false" aria-controls="filter-panel">
+        <span class="filter-toggle-label">Filter</span>
+        <span id="filter-count" class="filter-count" hidden>0</span>
+      </button>
+    </div>
+    <div id="filter-panel" class="filter-panel">
+    <div class="controls">
       <select id="category">
         <option value="">Semua kategori</option>
+      </select>
+      <select id="portalFilter">
+        <option value="">Portal: semua</option>
       </select>
       <select id="sort">
         <option value="spec-priority" selected>AE → DPA → SI → DV → …</option>
@@ -522,12 +824,13 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     </div>
     <div class="search-preview" id="search-preview"></div>
     <div class="spec-tabs-label">Target Fachinformatiker</div>
-    <div class="spec-tabs" id="specTabsMain" role="tablist" aria-label="Filter target FI">
+    <div class="spec-tabs spec-tabs-scroll" id="specTabsMain" role="tablist" aria-label="Filter target FI">
       {main_tab_buttons}
     </div>
     <div class="spec-tabs-label">Terpisah (non-target)</div>
-    <div class="spec-tabs spec-tabs-secondary" id="specTabsSecondary" role="tablist" aria-label="Filter terpisah">
+    <div class="spec-tabs spec-tabs-scroll spec-tabs-secondary" id="specTabsSecondary" role="tablist" aria-label="Filter terpisah">
       {secondary_tab_buttons}
+    </div>
     </div>
   </header>
   <main>
@@ -555,6 +858,86 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     const BERUF_TYP_LABELS = {beruf_typ_labels_json};
     const BERUF_TYP_TAB_LABELS = {beruf_typ_tab_labels_json};
     const BERUF_TYP_ORDER = {beruf_typ_order_json};
+    const PORTAL_LABELS = {portal_labels_json};
+
+    const CATEGORY_SOURCE_HINTS = [
+      ["fachinformatiker_", "arbeitsagentur"],
+      ["ausbildungsstellen_", "ausbildungsstellen_de"],
+      ["ausbildung_nrw_", "suche_ausbildung_nrw"],
+      ["ausbildung_de_", "ausbildung_de"],
+      ["meine_ausbildung_", "meine_ausbildung_de"],
+      ["azubiyo_de_", "azubiyo_de"],
+      ["indeed_de_", "indeed_de"],
+      ["azubi_de_", "azubi_de"],
+      ["stepstone_de_", "stepstone_de"],
+      ["aubi_plus_", "aubi_plus_de"],
+      ["karriere_sw_", "karriere_suedwestfalen_de"],
+      ["wir_sind_bund_", "wir_sind_bund_de"],
+      ["meinestadt_", "meinestadt_de"],
+      ["backinjob_", "backinjob_de"],
+      ["ausbildungsmarkt_", "ausbildungsmarkt_de"],
+    ];
+
+    function normalizeSourceKey(raw) {{
+      return String(raw || "").trim().toLowerCase().replace(/\\./g, "_");
+    }}
+
+    function inferSourceKey(item) {{
+      const explicit = normalizeSourceKey(item.sumber_data);
+      if (explicit) return explicit;
+      if (item.ba_job_url || item.link_bewerbung || item.link_bewerbung_efektif) return "arbeitsagentur";
+      const cat = item.category_id || "";
+      for (const [prefix, key] of CATEGORY_SOURCE_HINTS) {{
+        if (cat.startsWith(prefix)) return key;
+      }}
+      return "";
+    }}
+
+    function listingSourceKeys(item) {{
+      const keys = [];
+      const add = (raw) => {{
+        const key = normalizeSourceKey(raw);
+        if (key && !keys.includes(key)) keys.push(key);
+      }};
+      if (Array.isArray(item.all_sources)) {{
+        for (const source of item.all_sources) add(source);
+      }}
+      add(item.sumber_data);
+      const inferred = inferSourceKey(item);
+      if (inferred && !keys.includes(inferred)) keys.unshift(inferred);
+      return keys;
+    }}
+
+    function portalLabel(key) {{
+      return PORTAL_LABELS[key] || key.replace(/_/g, ".");
+    }}
+
+    function listingPortalLabels(item) {{
+      return listingSourceKeys(item).map(portalLabel);
+    }}
+
+    function sourceBadgesHtml(item, q) {{
+      const labels = listingPortalLabels(item);
+      if (!labels.length) return "";
+      return labels.map(label => `<span class="badge source">${{highlightHtml(label, q)}}</span>`).join("");
+    }}
+
+    function sourceLineHtml(item, q) {{
+      const labels = listingPortalLabels(item);
+      if (!labels.length) return "";
+      const chips = labels.map(label => `<span class="badge source">${{highlightHtml(label, q)}}</span>`).join("");
+      return `<div class="card-sources"><span class="source-label">Diperoleh dari:</span>${{chips}}</div>`;
+    }}
+
+    function sourceDetailText(item) {{
+      const labels = listingPortalLabels(item);
+      return labels.length ? labels.join(" + ") : "";
+    }}
+
+    function matchesPortalFilter(item, portalKey) {{
+      if (!portalKey) return true;
+      return listingSourceKeys(item).includes(portalKey);
+    }}
 
     const categories = [...new Set(LISTINGS.map(l => l.category_id))].sort();
     const categorySelect = document.getElementById("category");
@@ -563,6 +946,17 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       opt.value = cat;
       opt.textContent = cat;
       categorySelect.appendChild(opt);
+    }});
+
+    const portalFilter = document.getElementById("portalFilter");
+    const portalKeys = [...new Set(LISTINGS.flatMap(listingSourceKeys))].sort((a, b) =>
+      portalLabel(a).localeCompare(portalLabel(b), "de")
+    );
+    portalKeys.forEach(key => {{
+      const opt = document.createElement("option");
+      opt.value = key;
+      opt.textContent = portalLabel(key);
+      portalFilter.appendChild(opt);
     }});
 
     function excerpt(text, max = 320) {{
@@ -608,11 +1002,13 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       document.getElementById("modal-body").innerHTML = `
         <div class="badges" style="margin-bottom:1rem">
           <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
+          ${{sourceBadgesHtml(item, "")}}
           ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
-          ${{item.bewerbung_sumber ? `<span class="badge">Sumber: ${{escapeHtml(item.bewerbung_sumber)}}</span>` : ""}}
+          ${{item.bewerbung_sumber ? `<span class="badge">Apply-Quelle: ${{escapeHtml(item.bewerbung_sumber)}}</span>` : ""}}
           ${{specBadgeLabel(item.beruf_typ) ? `<span class="badge ${{specBadgeClass(item.beruf_typ)}}">${{specBadgeLabel(item.beruf_typ)}}</span>` : ""}}
           ${{item.category_id ? `<span class="badge">${{escapeHtml(item.category_id)}}</span>` : ""}}
         </div>
+        ${{detailSection("Diperoleh dari (Quelle)", sourceDetailText(item))}}
         ${{detailSection("Spesialisasi", specDetailLabel(item.beruf_typ))}}
         ${{detailSection("Kota", item.posisi_kota)}}
         ${{detailSection("Alamat", item.alamat_detail)}}
@@ -627,7 +1023,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         ${{detailSection("Kontak HR", item.kontak_penanggung_jawab)}}
         ${{detailSection("Dokumen yang Diperlukan", item.dokumen_yang_harus_dipenuhi, {{ scrollable: true }})}}
         ${{detailSection("Referenznummer", item.referenznummer, {{ muted: true }})}}
-        ${{detailSection("Sumber Data", item.sumber_data, {{ muted: true }})}}
+        ${{detailSection("Sumber Data (raw)", item.sumber_data, {{ muted: true }})}}
         ${{detailSection("Cara Apply", item.cara_apply)}}
         ${{detailSection("Ringkasan", item.ringkasan_1_baris)}}
         ${{detailSection("Status Lamaran", item.status_lamaran)}}
@@ -727,6 +1123,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     function listingSearchBlob(item) {{
       const specShort = BERUF_TYP_TAB_LABELS[item.beruf_typ] || "";
       const specLong = BERUF_TYP_LABELS[item.beruf_typ] || "";
+      const portals = listingPortalLabels(item);
       return normalizeSearchText([
         item.nama_perusahaan,
         item.posisi_kota,
@@ -734,6 +1131,8 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         item.jenis_ausbildung,
         item.category_id,
         item.sumber_data,
+        ...listingSourceKeys(item),
+        ...portals,
         item.alamat_email_bewerbung,
         emailDomain(item.alamat_email_bewerbung),
         item.deskripsi_perusahaan,
@@ -749,6 +1148,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     function primarySearchFields(item) {{
       const specShort = BERUF_TYP_TAB_LABELS[item.beruf_typ] || "";
       const specLong = BERUF_TYP_LABELS[item.beruf_typ] || "";
+      const portalFields = [
+        ...listingSourceKeys(item).map(normalizeSearchText),
+        ...listingPortalLabels(item).map(normalizeSearchText),
+      ];
       return [
         normalizeSearchText(item.nama_perusahaan),
         normalizeSearchText(item.posisi_kota),
@@ -756,6 +1159,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         normalizeSearchText(item.jenis_ausbildung),
         normalizeSearchText(item.category_id),
         normalizeSearchText(item.sumber_data),
+        ...portalFields,
         emailDomain(item.alamat_email_bewerbung),
         normalizeSearchText(item.alamat_email_bewerbung),
         normalizeSearchText(item.beruf_typ),
@@ -856,7 +1260,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         add("company", "Perusahaan", item.nama_perusahaan, normalizeSearchText(item.nama_perusahaan));
         add("city", "Kota", item.posisi_kota, normalizeSearchText(item.posisi_kota));
         add("title", "Judul", item.jenis_ausbildung, normalizeSearchText(item.jenis_ausbildung));
-        add("source", "Portal", item.sumber_data, normalizeSearchText(item.sumber_data));
+        for (const key of listingSourceKeys(item)) {{
+          const label = portalLabel(key);
+          add("source", "Portal", label, normalizeSearchText(label + " " + key));
+        }}
         const dom = emailDomain(item.alamat_email_bewerbung);
         if (dom) add("email", "Email-Domain", dom, dom);
         const specShort = BERUF_TYP_TAB_LABELS[item.beruf_typ];
@@ -1070,6 +1477,52 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
 
     let activeSpecFilter = "target";
 
+    const filterPanel = document.getElementById("filter-panel");
+    const filterToggle = document.getElementById("filter-toggle");
+    const filterCountEl = document.getElementById("filter-count");
+    const MOBILE_FILTER_MQ = window.matchMedia("(max-width: 767px)");
+
+    function isMobileFilters() {{
+      return MOBILE_FILTER_MQ.matches;
+    }}
+
+    function setFilterPanelExpanded(expanded) {{
+      if (!isMobileFilters()) {{
+        filterPanel.classList.remove("expanded");
+        filterToggle.setAttribute("aria-expanded", "true");
+        return;
+      }}
+      filterPanel.classList.toggle("expanded", expanded);
+      filterToggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+    }}
+
+    function countActiveFilters() {{
+      let n = 0;
+      if (categorySelect.value) n++;
+      if (portalFilter.value) n++;
+      if (document.getElementById("sort").value !== "spec-priority") n++;
+      if (document.getElementById("emailFilter").value) n++;
+      if (document.getElementById("manualFilter").value) n++;
+      if (document.getElementById("tahunFilter").value) n++;
+      if (document.getElementById("bulanFilter").value) n++;
+      if (activeSpecFilter && activeSpecFilter !== "target") n++;
+      return n;
+    }}
+
+    function updateFilterCount() {{
+      const n = countActiveFilters();
+      filterCountEl.textContent = String(n);
+      filterCountEl.hidden = n === 0;
+    }}
+
+    filterToggle.addEventListener("click", () => {{
+      setFilterPanelExpanded(!filterPanel.classList.contains("expanded"));
+    }});
+
+    MOBILE_FILTER_MQ.addEventListener("change", () => {{
+      setFilterPanelExpanded(false);
+    }});
+
     function matchesSpecFilter(item) {{
       if (!activeSpecFilter) return true;
       if (activeSpecFilter === "target") return TARGET_FI_CODES.includes(item.beruf_typ);
@@ -1096,8 +1549,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       const manualFilter = document.getElementById("manualFilter").value;
       const tahunFilter = document.getElementById("tahunFilter").value;
       const bulanFilter = document.getElementById("bulanFilter").value;
+      const portalFilterVal = portalFilter.value;
       let filtered = LISTINGS.filter(item => {{
         if (cat && item.category_id !== cat) return false;
+        if (!matchesPortalFilter(item, portalFilterVal)) return false;
         if (!matchesSpecFilter(item)) return false;
         if (emailFilter === "yes" && !hasEmail(item)) return false;
         if (emailFilter === "no" && hasEmail(item)) return false;
@@ -1133,6 +1588,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       }} else {{
         statsEl.textContent = `Menampilkan ${{filtered.length}} dari ${{LISTINGS.length}} listing`;
       }}
+      updateFilterCount();
 
       const grid = document.getElementById("grid");
       grid.innerHTML = filtered.map(item => {{
@@ -1147,6 +1603,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
           <div class="company">${{highlightHtml(item.nama_perusahaan || "—", q)}}</div>
           <h2>${{highlightHtml(item.jenis_ausbildung || item.category_id, q)}}</h2>
           <div class="location">${{highlightHtml(item.posisi_kota || "—", q)}} · ${{highlightHtml(item.alamat_detail || "", q)}}</div>
+          ${{sourceLineHtml(item, q)}}
           <div>
             <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
             ${{cara ? `<span class="badge">Apply: ${{escapeHtml(cara)}}</span>` : ""}}
@@ -1155,7 +1612,6 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
             ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
             ${{specBadgeLabel(item.beruf_typ) ? `<span class="badge ${{specBadgeClass(item.beruf_typ)}}">${{specBadgeLabel(item.beruf_typ)}}</span>` : ""}}
             ${{startDateBadge(item)}}
-            ${{item.sumber_data ? `<span class="badge">${{highlightHtml(item.sumber_data, q)}}</span>` : ""}}
           </div>
           ${{item.gaji ? `<div class="salary">Gaji: ${{highlightHtml(item.gaji, q)}}</div>` : ""}}
           <div class="type">${{highlightHtml(item.category_id, q)}}</div>
@@ -1201,6 +1657,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     }});
 
     categorySelect.addEventListener("change", render);
+    portalFilter.addEventListener("change", render);
     document.getElementById("sort").addEventListener("change", render);
     document.getElementById("emailFilter").addEventListener("change", render);
     document.getElementById("manualFilter").addEventListener("change", render);
@@ -1213,6 +1670,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         btn.classList.toggle("active", active);
         btn.setAttribute("aria-selected", active ? "true" : "false");
       }});
+      updateFilterCount();
       render();
     }}
 
@@ -1227,6 +1685,8 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       setActiveSpecTab(tab);
     }});
     render();
+    updateFilterCount();
+    setFilterPanelExpanded(false);
   </script>
 </body>
 </html>

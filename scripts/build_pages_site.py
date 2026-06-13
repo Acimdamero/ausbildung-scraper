@@ -95,10 +95,9 @@ def build() -> None:
     shutil.copy2(VIEWER_SRC, VIEWER_DST)
     viewer_html = VIEWER_DST.read_text(encoding="utf-8")
     public_banner = (
-        '<div class="meta" style="margin-top:.65rem;padding:.55rem .75rem;border-radius:8px;'
-        'background:rgba(125,222,162,.1);border:1px solid #2d6b47;color:#7ddea2">'
+        '<div class="public-banner">'
         "PUBLIC · Job listings only · No applicant PII · "
-        '<a href="../" style="color:#8ec8ff">Back to demo home</a></div>'
+        '<a href="../">Back to demo home</a></div>'
     )
     viewer_html = viewer_html.replace("<h1>Ausbildung Listings Viewer</h1>", 
         "<h1>Ausbildung Listings Viewer</h1>\n    " + public_banner, 1)
