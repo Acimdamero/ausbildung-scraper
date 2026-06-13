@@ -6,6 +6,42 @@ Jeder kann **AusbildungHunter Intelligence** klonen, ausführen und prüfen — 
 |---------|----------|
 | English | [ACCESS.md](ACCESS.md) |
 
+## Öffentlich vs. privat — Link-Tabelle
+
+### Öffentlich (GitHub Pages — sicher teilbar)
+
+| Link | Inhalt |
+|------|--------|
+| https://acimdamero.github.io/ausbildung-scraper/ | Startseite mit Links |
+| https://acimdamero.github.io/ausbildung-scraper/viewer/ | Stellendatenbank (6.850+ Einträge, keine PII) |
+| https://acimdamero.github.io/ausbildung-scraper/bewerbung-demo/ | Bewerbungs-UI-Demo (Max Mustermann, keine echten Daten) |
+| https://github.com/Acimdamero/ausbildung-scraper | Quellcode & Dokumentation |
+
+Im Browser öffnen:
+
+```bash
+./scripts/open_public.sh
+```
+
+### Privat (nur lokal — Ihr Rechner)
+
+| Link / Befehl | Inhalt |
+|---------------|--------|
+| `./scripts/open_private.sh` | Lokales Portal mit Links zu Viewer + persönlicher Bewerbung |
+| `file://…/data/viewer/index.html` | Stellenviewer (gleiche öffentliche Daten, offline) |
+| `file://…/data/bewerbung/index.html` | Persönliche Bewerbung mit echtem Profil & Briefen |
+| `src/bewerbung/user_profile.local.py` | Echter Name, Adresse, E-Mail (gitignored) |
+
+Persönliche Bewerbungs-UI erzeugen:
+
+```bash
+cp src/bewerbung/user_profile.example.py src/bewerbung/user_profile.local.py
+python scripts/generate_bewerbung_exports.py
+python scripts/run_bewerbung_pilot.py --limit 10
+python scripts/generate_bewerbung_ui.py
+./scripts/open_private.sh
+```
+
 ---
 
 ## Schnelllinks
@@ -13,8 +49,9 @@ Jeder kann **AusbildungHunter Intelligence** klonen, ausführen und prüfen — 
 | Ressource | URL / Pfad |
 |-----------|------------|
 | Repository | https://github.com/Acimdamero/ausbildung-scraper |
-| Live-Stellenviewer (GitHub Pages) | https://acimdamero.github.io/ausbildung-scraper/ |
-| Bewerbungs-UI-Demo (Beispieldaten) | `data/public/bewerbung-demo/index.html` |
+| Live-Demo (Startseite) | https://acimdamero.github.io/ausbildung-scraper/ |
+| Stellenviewer (Pages) | https://acimdamero.github.io/ausbildung-scraper/viewer/ |
+| Bewerbungs-Demo (Pages) | https://acimdamero.github.io/ausbildung-scraper/bewerbung-demo/ |
 | Architektur | [ARCHITECTURE.de.md](ARCHITECTURE.de.md) |
 | Datenschutz | [PRIVACY.md](PRIVACY.md) |
 
@@ -22,11 +59,9 @@ Jeder kann **AusbildungHunter Intelligence** klonen, ausführen und prüfen — 
 
 ## Für Reviewer (ohne Setup)
 
-1. **Live-Demo öffnen:** [Stellenviewer](https://acimdamero.github.io/ausbildung-scraper/)
-2. Nach Unternehmen, Stadt oder Stichwort suchen; nach Quellportal filtern
-3. **Bewerbungs-UI-Struktur** ansehen (keine echten personenbezogenen Daten): Repository klonen und `data/public/bewerbung-demo/index.html` im Browser öffnen
-
-> Wenn die GitHub-Pages-URL 404 zurückgibt, muss Pages einmalig unter **Settings → Pages → GitHub Actions** aktiviert werden.
+1. **Live-Demo öffnen:** [Startseite](https://acimdamero.github.io/ausbildung-scraper/)
+2. **Viewer öffnen** — nach Unternehmen, Stadt oder Stichwort suchen; nach Quellportal filtern
+3. **Demo öffnen** für Bewerbungs-UI-Struktur (nur Beispieldaten, keine PII)
 
 ---
 
@@ -59,7 +94,7 @@ cp src/bewerbung/user_profile.example.py src/bewerbung/user_profile.local.py
 python scripts/generate_bewerbung_exports.py
 python scripts/run_bewerbung_pilot.py --limit 10
 python scripts/generate_bewerbung_ui.py
-open data/bewerbung/index.html
+./scripts/open_private.sh
 ```
 
 Die Ausgabe bleibt in gitignored Pfaden — wird niemals zu GitHub gepusht.
@@ -82,8 +117,8 @@ Der Autor kann **geschwärzte Exporte** oder Bildschirmaufnahmen aus der lokalen
 
 | Ziel | Sicherer Weg |
 |------|--------------|
-| Stellendatenbank zeigen | GitHub-Pages-Viewer-URL teilen |
-| Briefstruktur prüfen | `data/public/bewerbung-demo/` oder lokal geschwärzte PDFs |
+| Stellendatenbank zeigen | GitHub-Pages-URLs (Startseite oder `/viewer/`) |
+| Briefstruktur prüfen | `/bewerbung-demo/` oder lokal geschwärzte PDFs |
 | Echte Briefe prüfen | Dateien direkt senden (E-Mail/USB) — nicht über öffentliches Repo |
 
 ---
@@ -94,8 +129,9 @@ Der Autor kann **geschwärzte Exporte** oder Bildschirmaufnahmen aus der lokalen
 # Stellenviewer
 python -m http.server 8765 --directory data/viewer
 
-# Bewerbungs-Demo (öffentlich sicher)
-python -m http.server 8766 --directory data/public/bewerbung-demo
+# Öffentliche Demo (lokaler Build)
+python scripts/build_pages_site.py
+python -m http.server 8766 --directory data/public
 ```
 
 Dann `http://localhost:8765` oder `http://localhost:8766` im Browser öffnen.
@@ -109,6 +145,6 @@ Dann `http://localhost:8765` oder `http://localhost:8766` im Browser öffnen.
 | Viewer leer | `python scripts/dedup_data.py` dann `python scripts/generate_viewer.py` ausführen |
 | Bewerbungs-Pilot schlägt fehl: kein Profil | `user_profile.local.py` aus dem Beispiel erstellen |
 | Playwright-Scraper schlägt fehl | `playwright install chromium` |
-| GitHub Pages 404 | Pages unter Repo Settings → Pages → GitHub Actions aktivieren |
+| GitHub Pages 404 | Repository muss **öffentlich** sein (Free-Plan). Pages aktivieren: Settings → Pages → GitHub Actions. Workflow erneut ausführen. |
 
 Siehe auch [github-pages-setup.md](github-pages-setup.md).

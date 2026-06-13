@@ -3,6 +3,11 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main, cursor/arbeitsagentur-ausbildung-scraper]
+    paths:
+      - 'data/viewer/**'
+      - 'data/public/**'
+      - 'scripts/build_pages_site.py'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -26,13 +31,14 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
+
+      - name: Build public site
+        run: python3 scripts/build_pages_site.py
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: data/viewer
+          path: data/public
 
       - name: Deploy to GitHub Pages
         id: deployment

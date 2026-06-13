@@ -84,14 +84,20 @@ Größte Quellen nach deduplizierter Anzahl: ausbildungsstellen.de (2.647), Arbe
 
 ---
 
-## Live-Demo
+## Live-Demo (öffentlich)
 
-| Ressource | URL / Pfad |
-|-----------|------------|
-| **Stellenviewer** (öffentlich) | https://acimdamero.github.io/ausbildung-scraper/ |
-| **Bewerbungs-UI-Demo** (Beispieldaten, keine PII) | `data/public/bewerbung-demo/index.html` |
+| Ressource | URL |
+|-----------|-----|
+| **Startseite** | https://acimdamero.github.io/ausbildung-scraper/ |
+| **Stellenviewer** | https://acimdamero.github.io/ausbildung-scraper/viewer/ |
+| **Bewerbungs-UI-Demo** (Beispieldaten) | https://acimdamero.github.io/ausbildung-scraper/bewerbung-demo/ |
 
-> **Hinweis:** Wenn die GitHub-Pages-URL 404 zurückgibt, aktivieren Sie Pages unter **Settings → Pages → Build and deployment → GitHub Actions**. Siehe [docs/github-pages-setup.md](docs/github-pages-setup.md).
+```bash
+./scripts/open_public.sh    # GitHub Pages (oder lokaler Public-Build als Fallback)
+./scripts/open_private.sh   # nur lokal — echte Bewerbung + Viewer
+```
+
+> **Hinweis:** GitHub Pages erfordert ein **öffentliches** Repository im Free-Plan. Pages aktivieren unter **Settings → Pages → GitHub Actions**. Siehe [docs/github-pages-setup.md](docs/github-pages-setup.md).
 
 ---
 
@@ -318,13 +324,12 @@ Vollständiger Zugangsleitfaden: [docs/ACCESS.de.md](docs/ACCESS.de.md) · [Engl
 
 ## Datenschutz: öffentlich vs. privat
 
-| Öffentlich (GitHub + Pages) | Privat (nur lokal) |
-|-----------------------------|---------------------|
-| Stellenviewer | `user_profile.local.py` |
-| Bewerbungs-Demo | `data/bewerbung/index.html` |
-| Scraper-Code & Docs | `bewerbung_enriched.json` |
-| Dedup-Statistiken | Echte Anschreiben / E-Mails |
-| | `.env`, Zugangsdaten |
+| Öffentlich (GitHub Pages — diese Links teilen) | Privat (nur lokal) |
+|------------------------------------------------|---------------------|
+| https://acimdamero.github.io/ausbildung-scraper/ | `./scripts/open_private.sh` |
+| `/viewer/` — Stellendatenbank (6.850+ Einträge) | `data/bewerbung/index.html` |
+| `/bewerbung-demo/` — Max Mustermann Demo | `user_profile.local.py` |
+| Scraper-Code & Docs | `bewerbung_enriched.json`, echte Briefe |
 
 Vor dem Push prüfen, dass keine PII gestaged ist:
 
@@ -354,9 +359,9 @@ Siehe [CONTRIBUTING.md](CONTRIBUTING.md) für die vollständige Checkliste.
 
 ## GitHub Pages
 
-Der Viewer wird automatisch aus `data/viewer/` bei Push auf `main` oder `cursor/arbeitsagentur-ausbildung-scraper` über [`.github/workflows/pages.yml`](.github/workflows/pages.yml) deployed.
+Die öffentliche Site wird aus `data/public/` (Build via `scripts/build_pages_site.py`) bei Push über [`.github/workflows/pages.yml`](.github/workflows/pages.yml) deployed.
 
-**Ersteinrichtung:** Repository **Settings → Pages → Source: GitHub Actions**. Siehe [docs/github-pages-setup.md](docs/github-pages-setup.md).
+**Voraussetzung:** Repository muss **öffentlich** sein (Free-Plan). **Settings → Pages → Source: GitHub Actions**. Siehe [docs/github-pages-setup.md](docs/github-pages-setup.md).
 
 ---
 

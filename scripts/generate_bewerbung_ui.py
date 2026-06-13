@@ -87,9 +87,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
   <header>
-    <h1>Bewerbung Intelligence</h1>
-    <div class="meta">Generated __GENERATED_AT__ · __RECORD_COUNT__ enriched listings · Preview only — no auto-send</div>
-    <div class="banner">⚠ Keine automatischen E-Mails. „Vorschau“ und „E-Mail vorbereiten“ öffnen Entwürfe zur manuellen Prüfung.</div>
+    <h1>Bewerbung Intelligence <span style="font-size:0.72rem;color:#f0c674;border:1px solid #6b5a2a;border-radius:999px;padding:0.15rem 0.5rem;vertical-align:middle">PRIVATE</span></h1>
+    <div class="meta">Generated __GENERATED_AT__ · __RECORD_COUNT__ enriched listings · Local only — never on GitHub Pages</div>
+    <div class="banner">🔒 PRIVATE — Real applicant data. Do not share or commit. For public demo see <code>data/public/bewerbung-demo/</code>.</div>
+    <div class="banner" style="margin-top:0.5rem;background:rgba(232,138,125,.12);border-color:#6b2d2d;color:#f0b0a8">⚠ Keine automatischen E-Mails. „Vorschau“ und „E-Mail vorbereiten“ öffnen Entwürfe zur manuellen Prüfung.</div>
     <div class="controls">
       <input type="search" id="search" placeholder="Firma, Stadt, E-Mail…">
       <select id="filter-status">
