@@ -6,6 +6,7 @@ import hashlib
 import json
 import logging
 import re
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -31,8 +32,13 @@ logger = logging.getLogger(__name__)
 USER_AGENT = "AusbildungScraper-BewerbungBot/1.0 (+local research)"
 REQUEST_TIMEOUT = 15
 RATE_LIMIT_SECONDS = 2.0
+DOMAIN_RATE_LIMIT_SECONDS = 2.0
 
 BA_MARKERS = ("arbeitsagentur.de", "jobboerse.de")
+
+_cache_lock = threading.Lock()
+_domain_lock = threading.Lock()
+_domain_last_request: dict[str, float] = {}
 
 
 def _now_iso() -> str:
@@ -180,7 +186,60 @@ class CompanyResearcher:
             time.sleep(self.rate_limit - elapsed)
         self._last_request = time.monotonic()
 
+    @staticmethod
+    def _wait_domain_rate_limit(url: str) -> None:
+        domain = urlparse(url).netloc.lower()
+        if not domain:
+            return
+        with _domain_lock:
+            elapsed = time.monotonic() - _domain_last_request.get(domain, 0.0)
+            if elapsed < DOMAIN_RATE_LIMIT_SECONDS:
+                time.sleep(DOMAIN_RATE_LIMIT_SECONDS - elapsed)
+            _domain_last_request[domain] = time.monotonic()
+
     def _load_cache(self, url: str) -> dict[str, Any] | None:
+        path = self.cache_dir / f"{_cache_key(url)}.json"
+        with _cache_lock:
+            if path.exists():
+                try:
+                    return json.loads(path.read_text(encoding="utf-8"))
+                except json.JSONDecodeError:
+                    return None
+        return None
+
+    def _save_cache(self, url: str, payload: dict[str, Any]) -> None:
+        path = self.cache_dir / f"{_cache_key(url)}.json"
+        with _cache_lock:
+            path.write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+
+    def fetch_website(self, url: str) -> dict[str, Any]:
+        cached = self._load_cache(url)
+        if cached:
+            logger.debug("Cache hit: %s", url)
+            return cached
+
+        with _cache_lock:
+            cached = self._load_cache_unlocked(url)
+            if cached:
+                logger.debug("Cache hit (after lock): %s", url)
+                return cached
+
+        self._wait_rate_limit()
+        self._wait_domain_rate_limit(url)
+        result = self._fetch_website_uncached(url)
+
+        with _cache_lock:
+            cached = self._load_cache_unlocked(url)
+            if cached:
+                logger.debug("Cache hit (post-fetch): %s", url)
+                return cached
+            self._save_cache_unlocked(url, result)
+        return result
+
+    def _load_cache_unlocked(self, url: str) -> dict[str, Any] | None:
         path = self.cache_dir / f"{_cache_key(url)}.json"
         if path.exists():
             try:
@@ -189,17 +248,14 @@ class CompanyResearcher:
                 return None
         return None
 
-    def _save_cache(self, url: str, payload: dict[str, Any]) -> None:
+    def _save_cache_unlocked(self, url: str, payload: dict[str, Any]) -> None:
         path = self.cache_dir / f"{_cache_key(url)}.json"
-        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
-    def fetch_website(self, url: str) -> dict[str, Any]:
-        cached = self._load_cache(url)
-        if cached:
-            logger.debug("Cache hit: %s", url)
-            return cached
-
-        self._wait_rate_limit()
+    def _fetch_website_uncached(self, url: str) -> dict[str, Any]:
         result: dict[str, Any] = {
             "url": url,
             "fetched_at": _now_iso(),
@@ -229,8 +285,6 @@ class CompanyResearcher:
         except requests.RequestException as exc:
             result["error"] = str(exc)[:200]
             logger.warning("Fetch failed %s: %s", url, exc)
-
-        self._save_cache(url, result)
         return result
 
     def research_listing(self, listing: dict[str, Any]) -> dict[str, Any]:

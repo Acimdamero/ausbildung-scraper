@@ -7,6 +7,9 @@ import argparse
 import json
 import logging
 import sys
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +26,9 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 logger = logging.getLogger("bewerbung_pilot")
+
+DEFAULT_PROGRESS_EVERY = 25
+STATUS_PATH = ROOT / "logs" / "bewerbung_research_status.txt"
 
 
 SOURCE_FILES = {
@@ -52,13 +58,17 @@ def select_pilot_listings(
     listings: list[dict],
     *,
     beruf_typ: str = "ae",
-    limit: int = 10,
+    limit: int | None = 10,
     require_email: bool = True,
 ) -> list[dict]:
-    candidates = [x for x in listings if x.get("beruf_typ") == beruf_typ]
+    candidates = list(listings)
+    if beruf_typ.lower() != "all":
+        candidates = [x for x in candidates if x.get("beruf_typ") == beruf_typ]
     if require_email:
         candidates = [x for x in candidates if str(x.get("alamat_email_bewerbung", "")).strip()]
     candidates.sort(key=lambda x: -(int(x.get("kelengkapan_score") or 0)))
+    if limit is None:
+        return candidates
     return candidates[:limit]
 
 
@@ -123,11 +133,114 @@ def print_stats(records: list[dict]) -> None:
     logger.info("  portal-only flagged: %d", portal)
 
 
+def _now_utc() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def write_status(
+    *,
+    state: str,
+    done: int,
+    total: int,
+    workers: int,
+    target: str,
+    last_ref: str = "",
+) -> None:
+    STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    pct = (100.0 * done / total) if total else 0.0
+    lines = [
+        f"state={state}",
+        f"updated_utc={_now_utc()}",
+        f"progress={done}/{total} ({pct:.1f}%)",
+        f"workers={workers}",
+        f"target={target}",
+    ]
+    if last_ref:
+        lines.append(f"last_ref={last_ref}")
+    STATUS_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+_thread_local = threading.local()
+
+
+def _get_researcher(cache_dir: Path) -> CompanyResearcher:
+    researcher = getattr(_thread_local, "researcher", None)
+    if researcher is None:
+        researcher = CompanyResearcher(cache_dir=cache_dir)
+        _thread_local.researcher = researcher
+    return researcher
+
+
+def _process_one_listing(
+    listing: dict,
+    store: dict,
+    cache_dir: Path,
+    *,
+    skip_research: bool,
+    store_lock: threading.Lock,
+    store_path: Path,
+    progress: dict[str, int],
+    progress_every: int,
+    total: int,
+    target_label: str,
+    workers: int,
+) -> dict:
+    researcher = _get_researcher(cache_dir)
+    enriched = process_listing(
+        listing,
+        store,
+        researcher,
+        skip_research=skip_research,
+    )
+    ref = listing.get("referenznummer", "?")
+    company = listing.get("nama_perusahaan", "?")
+
+    with store_lock:
+        upsert_record(store, enriched)
+        progress["done"] += 1
+        done = progress["done"]
+        if done % progress_every == 0 or done == total:
+            save_store(store_path, store)
+            logger.info(
+                "Progress %d/%d (%.1f%%) — last: %s | %s",
+                done,
+                total,
+                100.0 * done / total,
+                ref,
+                company,
+            )
+            write_status(
+                state="running",
+                done=done,
+                total=total,
+                workers=workers,
+                target=target_label,
+                last_ref=str(ref),
+            )
+
+    logger.info("✓ %s | %s", ref, company)
+    return enriched
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Bewerbung Intelligence pilot batch")
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data")
-    parser.add_argument("--limit", type=int, default=10)
-    parser.add_argument("--beruf-typ", default="ae")
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=10,
+        help="Max listings to process (0 = all matching; same as --all)",
+    )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Process all listings matching filters (ignores positive --limit)",
+    )
+    parser.add_argument(
+        "--beruf-typ",
+        default="ae",
+        help="Filter by beruf_typ (use 'all' for every specialization)",
+    )
     parser.add_argument("--no-email-required", action="store_true")
     parser.add_argument("--skip-research", action="store_true")
     parser.add_argument(
@@ -141,7 +254,23 @@ def main() -> int:
         default="master",
         help="Listing pool: master (all) or one_per_company (deduped by firma)",
     )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Parallel worker threads (recommended 3-5 for full batch)",
+    )
+    parser.add_argument(
+        "--progress-every",
+        type=int,
+        default=DEFAULT_PROGRESS_EVERY,
+        help="Log and checkpoint store every N completed listings",
+    )
     args = parser.parse_args()
+
+    if args.workers < 1:
+        logger.error("--workers must be >= 1")
+        return 1
 
     listings = load_listings(args.data_dir, source=args.source)
     store_path = args.data_dir / "processed" / "bewerbung_enriched.json"
@@ -151,35 +280,114 @@ def main() -> int:
         ref_set = set(args.refs)
         selected = [x for x in listings if x.get("referenznummer") in ref_set]
     else:
+        process_all = args.all or args.limit == 0
+        if args.limit < 0:
+            logger.error("--limit must be >= 0 (use --all or --limit 0 for full batch)")
+            return 1
         selected = select_pilot_listings(
             listings,
             beruf_typ=args.beruf_typ,
-            limit=args.limit,
+            limit=None if process_all else args.limit,
             require_email=not args.no_email_required,
         )
+        if process_all:
+            logger.info("Full batch mode: %d listings match filters", len(selected))
 
     if not selected:
         logger.error("No listings matched selection criteria")
         return 1
 
-    logger.info("Processing %d listings", len(selected))
-    researcher = CompanyResearcher(cache_dir=args.data_dir / "cache" / "company_research")
+    total = len(selected)
+    target_label = f"{args.source}:{args.beruf_typ}"
+    if not args.no_email_required:
+        target_label += "+email"
 
+    logger.info(
+        "Processing %d listings with %d worker(s)",
+        total,
+        args.workers,
+    )
+    write_status(
+        state="starting",
+        done=0,
+        total=total,
+        workers=args.workers,
+        target=target_label,
+    )
+
+    cache_dir = args.data_dir / "cache" / "company_research"
+    store_lock = threading.Lock()
+    progress = {"done": 0}
     processed: list[dict] = []
-    for listing in selected:
-        ref = listing.get("referenznummer", "?")
-        company = listing.get("nama_perusahaan", "?")
-        logger.info("→ %s | %s", ref, company)
-        enriched = process_listing(
-            listing,
-            store,
-            researcher,
-            skip_research=args.skip_research,
-        )
-        upsert_record(store, enriched)
-        processed.append(enriched)
+
+    if args.workers == 1:
+        researcher = CompanyResearcher(cache_dir=cache_dir)
+        for listing in selected:
+            ref = listing.get("referenznummer", "?")
+            company = listing.get("nama_perusahaan", "?")
+            logger.info("→ %s | %s", ref, company)
+            enriched = process_listing(
+                listing,
+                store,
+                researcher,
+                skip_research=args.skip_research,
+            )
+            upsert_record(store, enriched)
+            processed.append(enriched)
+            progress["done"] += 1
+            done = progress["done"]
+            if done % args.progress_every == 0 or done == total:
+                save_store(store_path, store)
+                logger.info(
+                    "Progress %d/%d (%.1f%%) — last: %s | %s",
+                    done,
+                    total,
+                    100.0 * done / total,
+                    ref,
+                    company,
+                )
+                write_status(
+                    state="running",
+                    done=done,
+                    total=total,
+                    workers=args.workers,
+                    target=target_label,
+                    last_ref=str(ref),
+                )
+    else:
+        with ThreadPoolExecutor(max_workers=args.workers) as executor:
+            futures = [
+                executor.submit(
+                    _process_one_listing,
+                    listing,
+                    store,
+                    cache_dir,
+                    skip_research=args.skip_research,
+                    store_lock=store_lock,
+                    store_path=store_path,
+                    progress=progress,
+                    progress_every=args.progress_every,
+                    total=total,
+                    target_label=target_label,
+                    workers=args.workers,
+                )
+                for listing in selected
+            ]
+            for future in as_completed(futures):
+                try:
+                    processed.append(future.result())
+                except Exception:
+                    logger.exception("Worker failed on a listing")
+                    raise
 
     save_store(store_path, store)
+    write_status(
+        state="completed",
+        done=total,
+        total=total,
+        workers=args.workers,
+        target=target_label,
+    )
     print_stats(processed)
 
     # Regenerate UI

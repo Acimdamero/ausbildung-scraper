@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import json
+import threading
 from pathlib import Path
 from typing import Any
 
 DEFAULT_PATH = Path("data/processed/bewerbung_enriched.json")
+
+_store_lock = threading.Lock()
 
 
 def load_store(path: Path) -> dict[str, dict[str, Any]]:
@@ -36,3 +39,25 @@ def upsert_record(
     ref = record.get("referenznummer", "")
     if ref:
         store[ref] = record
+
+
+def upsert_record_locked(
+    store: dict[str, dict[str, Any]],
+    record: dict[str, Any],
+    lock: threading.Lock | None = None,
+) -> None:
+    """Thread-safe upsert into the in-memory store."""
+    active = lock or _store_lock
+    with active:
+        upsert_record(store, record)
+
+
+def save_store_locked(
+    path: Path,
+    records: dict[str, dict[str, Any]],
+    lock: threading.Lock | None = None,
+) -> None:
+    """Thread-safe persist of the full store."""
+    active = lock or _store_lock
+    with active:
+        save_store(path, records)
