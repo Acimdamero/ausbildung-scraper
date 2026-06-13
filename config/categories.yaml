@@ -227,3 +227,41 @@ categories:
     expected_results: 399
     expected_pages: 20
     sheet_tab: "MSD_SI"
+
+  # backinjob.de (HTTP pagination + Playwright redirect — scripts/run_backinjob_de.py)
+  - id: backinjob_ae
+    name: "backinjob.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (backinjob.de)"
+    source: backinjob_de
+    search_url: "https://www.backinjob.de/jobsuche.html?a=L&s%5B%5D=fachinformatiker+Anwendungsentwicklung&o=&u=100&t=0&e%5B%5D=&f%5B%5D=&d=-1&pp=20&pd=0"
+    expected_results: 2862
+    expected_pages: 144
+    sheet_tab: "BIJ_AE"
+
+  - id: backinjob_dpa
+    name: "backinjob.de — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (backinjob.de)"
+    source: backinjob_de
+    search_url: "https://www.backinjob.de/jobsuche.html?a=L&s%5B%5D=fachinformatiker+Daten+und+Prozessanalyse&o=&u=100&t=0&e%5B%5D=&f%5B%5D=&d=-1&pp=20&pd=0"
+    expected_results: 162
+    expected_pages: 9
+    sheet_tab: "BIJ_DPA"
+
+  - id: backinjob_dv
+    name: "backinjob.de — Fachinformatiker/in Digitale Vernetzung"
+    name_id: "Fachinformatiker/in Digitale Vernetzung (backinjob.de)"
+    source: backinjob_de
+    search_url: "https://www.backinjob.de/jobsuche.html?a=L&s%5B%5D=fachinformatiker+Digitale+Vernetzung&o=&u=100&t=0&e%5B%5D=&f%5B%5D=&d=-1&pp=20&pd=0"
+    expected_results: 102
+    expected_pages: 6
+    sheet_tab: "BIJ_DV"
+
+  - id: backinjob_si
+    name: "backinjob.de — Fachinformatiker/in Systemintegration"
+    name_id: "Fachinformatiker/in Systemintegration (backinjob.de)"
+    source: backinjob_de
+    search_url: "https://www.backinjob.de/jobsuche.html?a=L&s%5B%5D=fachinformatiker+Systemintegration&o=&u=100&t=0&e%5B%5D=&f%5B%5D=&d=-1&pp=20&pd=0"
+    expected_results: 2865
+    expected_pages: 144
+    filter_beruf: si
+    sheet_tab: "BIJ_SI"

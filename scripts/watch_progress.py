@@ -28,6 +28,7 @@ SCRAPE_PATTERNS = (
     "run_indeed_de.py",
     "run_ausbildungsstellen_de.py",
     "run_meinestadt_de.py",
+    "run_backinjob_de.py",
 )
 
 SOURCE_LOGS: dict[str, Path] = {
@@ -41,6 +42,7 @@ SOURCE_LOGS: dict[str, Path] = {
     "indeed_de": LOGS / "indeed_de_scrape.log",
     "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.log",
     "meinestadt_de": LOGS / "meinestadt_de_scrape.log",
+    "backinjob_de": LOGS / "backinjob_de_scrape.log",
 }
 
 SOURCE_PID_FILES: dict[str, Path] = {
@@ -51,6 +53,7 @@ SOURCE_PID_FILES: dict[str, Path] = {
     "indeed_de": LOGS / "indeed_de_scrape.pid",
     "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.pid",
     "meinestadt_de": LOGS / "meinestadt_de_scrape.pid",
+    "backinjob_de": LOGS / "backinjob_de_scrape.pid",
 }
 
 DEDUP_SOURCE_LABELS = {
@@ -63,6 +66,7 @@ DEDUP_SOURCE_LABELS = {
     "indeed_de": "indeed.de",
     "ausbildungsstellen_de": "ausbildungsstellen.de",
     "meinestadt_de": "meinestadt.de",
+    "backinjob_de": "backinjob.de",
 }
 
 
@@ -176,6 +180,8 @@ def dedup_source_key(category_id: str) -> str:
         return "ausbildungsstellen_de"
     if category_id.startswith("meinestadt_"):
         return "meinestadt_de"
+    if category_id.startswith("backinjob_"):
+        return "backinjob_de"
     return category_id.split("_")[0]
 
 
@@ -240,6 +246,8 @@ def detect_running(proc_blob: str) -> dict[str, bool]:
         or "run_ausbildungsstellen_de.py" in proc_blob,
         "meinestadt_de": is_pid_running(SOURCE_PID_FILES["meinestadt_de"])
         or "run_meinestadt_de.py" in proc_blob,
+        "backinjob_de": is_pid_running(SOURCE_PID_FILES["backinjob_de"])
+        or "run_backinjob_de.py" in proc_blob,
     }
 
 
@@ -374,6 +382,7 @@ def format_deduped_summary(stats: dict) -> list[str]:
             "indeed_de",
             "ausbildungsstellen_de",
             "meinestadt_de",
+            "backinjob_de",
         ):
             count = stats["by_source"].get(key)
             if count:
@@ -546,6 +555,22 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             )
         )
 
+    bij = load_json(DATA / "progress_backinjob_de.json")
+    if isinstance(bij, dict):
+        lines.extend(
+            format_multi_category(
+                bij,
+                "backinjob.de",
+                SOURCE_LOGS["backinjob_de"],
+                running["backinjob_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
     lines.append("")
     lines.append("PROSES AKTIF:")
     try:
@@ -565,6 +590,7 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
                 "indeed",
                 "ausbildungsstellen",
                 "meinestadt",
+                "backinjob",
                 "nrw",
                 "socket",
                 "scraper",
