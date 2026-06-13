@@ -327,21 +327,34 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       border-radius: 3px;
       padding: 0 0.12em;
     }}
-    main {{ padding: 1rem 1.5rem 2rem; }}
+    main {{
+      padding: 1rem 1.5rem 2rem;
+      min-width: 0;
+      max-width: 100%;
+    }}
     .stats {{ color: var(--muted); margin-bottom: 1rem; }}
     .stats strong {{ color: var(--accent); font-weight: 600; }}
     .grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: 1fr;
       gap: 1rem;
+      min-width: 0;
+      width: 100%;
     }}
     .card {{
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1rem;
+      padding: 1rem 1.1rem;
       cursor: pointer;
       transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      hyphens: auto;
     }}
     .card:hover {{
       border-color: var(--accent);
@@ -356,39 +369,92 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .card h2 {{
       margin: 0 0 0.35rem;
       font-size: 1.05rem;
+      line-height: 1.35;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+      min-width: 0;
     }}
-    .card .company {{ color: var(--accent); font-weight: 600; }}
-    .card .location {{ color: var(--muted); font-size: 0.9rem; }}
-    .card .type {{ font-size: 0.85rem; margin: 0.5rem 0; }}
+    .card .company {{
+      color: var(--accent);
+      font-weight: 600;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+      min-width: 0;
+    }}
+    .card .location {{
+      color: var(--muted);
+      font-size: 0.9rem;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+      min-width: 0;
+    }}
+    .card .type {{
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }}
     .card .desc {{
       font-size: 0.9rem;
       color: #c9d4e3;
       max-height: 7rem;
       overflow: hidden;
-      white-space: pre-wrap;
+      white-space: normal;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+      min-width: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      line-clamp: 5;
     }}
-    .card .links {{ margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }}
+    .card .links {{
+      margin-top: 0.75rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }}
     .card a {{
       color: var(--accent);
       text-decoration: none;
       font-size: 0.85rem;
       border: 1px solid var(--border);
-      padding: 0.25rem 0.5rem;
+      padding: 0.55rem 0.75rem;
       border-radius: 6px;
+      min-height: var(--touch-min);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      min-width: 0;
     }}
     .card a:hover {{ background: rgba(61, 139, 253, 0.12); }}
-    .salary {{ color: #7ddea2; font-size: 0.9rem; margin-top: 0.35rem; }}
-    .badges {{ display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }}
-    .badge {{
-      font-size: 0.75rem;
-      padding: 0.15rem 0.45rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
+    .salary {{
+      color: #7ddea2;
+      font-size: 0.9rem;
+      margin-top: 0.35rem;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+      line-height: 1.45;
+      min-width: 0;
     }}
-    .badge.score {{ color: #7ddea2; border-color: #3a6b4f; }}
-    .badge.partner {{ color: #f0c674; border-color: #6b5a2a; }}
-    .badge.company {{ color: #8ec8ff; border-color: #2a4a6b; }}
+    .badges {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.4rem;
+      margin: 0.5rem 0;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }}
     .badge {{
       display: inline-block;
       font-size: 0.75rem;
@@ -396,8 +462,14 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       border-radius: 999px;
       border: 1px solid var(--border);
       color: var(--muted);
-      margin-right: 0.35rem;
+      max-width: 100%;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      flex-shrink: 0;
     }}
+    .badge.score {{ color: #7ddea2; border-color: #3a6b4f; }}
+    .badge.partner {{ color: #f0c674; border-color: #6b5a2a; }}
+    .badge.company {{ color: #8ec8ff; border-color: #2a4a6b; }}
     .badge.score-high {{ color: #7ddea2; border-color: #2d6b47; }}
     .badge.score-mid {{ color: #e8c547; border-color: #6b5a1f; }}
     .badge.score-low {{ color: #e88a7d; border-color: #6b2d2d; }}
@@ -420,6 +492,9 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       margin: 0.35rem 0 0.5rem;
       font-size: 0.82rem;
       color: var(--muted);
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
     }}
     .card-sources .source-label {{
       font-size: 0.72rem;
@@ -598,7 +673,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .modal-links a:hover {{ background: rgba(61, 139, 253, 0.12); }}
     body.modal-open {{ overflow: hidden; }}
 
-    /* Tablet */
+    /* Tablet / desktop grid */
     @media (min-width: 768px) {{
       .filter-panel {{
         display: block;
@@ -606,6 +681,20 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       }}
       .search-sticky-bar {{
         margin-top: 0.75rem;
+      }}
+      .grid {{
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }}
+      .card .links {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }}
+      .card a {{
+        display: inline-flex;
+        flex: 0 1 auto;
+        min-height: auto;
+        padding: 0.25rem 0.5rem;
       }}
     }}
     @media (min-width: 768px) and (max-width: 1024px) {{
@@ -616,6 +705,26 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       }}
       main {{ padding: 1rem 1.25rem 2rem; }}
+    }}
+
+    /* Phone landscape: keep single-column cards even when width >= 768px */
+    @media (max-height: 500px) and (orientation: landscape) and (max-width: 1024px) {{
+      .grid {{
+        grid-template-columns: 1fr !important;
+      }}
+      .card {{
+        padding: 1rem 1.1rem;
+      }}
+      .card .links {{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }}
+      .card a {{
+        min-height: var(--touch-min);
+        display: flex;
+        justify-content: center;
+      }}
     }}
 
     /* Mobile */
@@ -693,10 +802,12 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       .grid {{
         grid-template-columns: 1fr;
         gap: 0.85rem;
+        width: 100%;
       }}
       .card {{
-        padding: 1rem 1.05rem;
+        padding: 1rem 1.1rem;
         border-radius: 10px;
+        width: 100%;
       }}
       .card h2 {{
         font-size: 1.05rem;
@@ -709,14 +820,38 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         font-size: 0.88rem;
       }}
       .card .desc {{
-        font-size: 0.92rem;
-        max-height: 5.5rem;
+        font-size: 0.88rem;
+        max-height: none;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+      }}
+      .salary {{
+        font-size: 0.85rem;
+      }}
+      .card .links {{
+        grid-template-columns: 1fr;
       }}
       .card .links a {{
         min-height: var(--touch-min);
-        display: inline-flex;
+        width: 100%;
+        display: flex;
         align-items: center;
-        padding: 0.4rem 0.65rem;
+        justify-content: center;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.9rem;
+      }}
+      .modal-links {{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }}
+      .modal-links a {{
+        min-height: var(--touch-min);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0.55rem 0.75rem;
       }}
       .card-sources {{
         gap: 0.3rem;
@@ -959,9 +1094,26 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       portalFilter.appendChild(opt);
     }});
 
-    function excerpt(text, max = 320) {{
+    function stripMarkdown(text) {{
       if (!text) return "";
-      return text.length > max ? text.slice(0, max) + "…" : text;
+      return String(text)
+        .replace(/^#{1,6}\\s+/gm, "")
+        .replace(/\\*\\*([^*]+)\\*\\*/g, "$1")
+        .replace(/\\*([^*\\n]+)\\*/g, "$1")
+        .replace(/__([^_]+)__/g, "$1")
+        .replace(/_([^_\\n]+)_/g, "$1")
+        .replace(/`([^`]+)`/g, "$1")
+        .replace(/\\[([^\\]]+)\\]\\([^)]+\\)/g, "$1")
+        .replace(/^\\s*[-*+]\\s+/gm, "")
+        .replace(/^\\s*\\d+\\.\\s+/gm, "")
+        .replace(/\\n{3,}/g, "\\n\\n")
+        .trim();
+    }}
+
+    function excerpt(text, max = 280) {{
+      const plain = stripMarkdown(text);
+      if (!plain) return "";
+      return plain.length > max ? plain.slice(0, max) + "…" : plain;
     }}
 
     function escapeHtml(text) {{
@@ -1604,7 +1756,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
           <h2>${{highlightHtml(item.jenis_ausbildung || item.category_id, q)}}</h2>
           <div class="location">${{highlightHtml(item.posisi_kota || "—", q)}} · ${{highlightHtml(item.alamat_detail || "", q)}}</div>
           ${{sourceLineHtml(item, q)}}
-          <div>
+          <div class="badges">
             <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
             ${{cara ? `<span class="badge">Apply: ${{escapeHtml(cara)}}</span>` : ""}}
             ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
