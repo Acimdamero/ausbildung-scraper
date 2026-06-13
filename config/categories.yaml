@@ -131,6 +131,21 @@ categories:
     search_url: "https://www.stepstone.de/jobs/ausbildung-fachinformatiker-daten-und-prozessanalyse?searchOrigin=jobad&rsearch=2"
     sheet_tab: "STEP_DPA"
 
+  # indeed.de (Playwright — scripts/run_indeed_de.py)
+  - id: indeed_de_ae
+    name: "indeed.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (indeed.de)"
+    source: indeed_de
+    search_url: "https://de.indeed.com/jobs?q=ausbildung+fachinformatiker+anwendungsentwicklung&l=&from=searchOnDesktopSerp"
+    sheet_tab: "INDEED_AE"
+
+  - id: indeed_de_dpa
+    name: "indeed.de — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (indeed.de)"
+    source: indeed_de
+    search_url: "https://de.indeed.com/jobs?q=ausbildung+fachinformatiker+Daten+und+prozesanalyse&l=&from=searchOnDesktopSerp"
+    sheet_tab: "INDEED_DPA"
+
   - id: stepstone_de_si
     name: "stepstone.de — Fachinformatiker/in Systemintegration"
     name_id: "Fachinformatiker/in Systemintegration (stepstone.de)"

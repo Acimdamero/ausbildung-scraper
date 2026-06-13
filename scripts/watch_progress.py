@@ -25,6 +25,7 @@ SCRAPE_PATTERNS = (
     "run_ausbildung_nrw.py",
     "run_azubiyo_de.py",
     "run_stepstone_de.py",
+    "run_indeed_de.py",
 )
 
 SOURCE_LOGS: dict[str, Path] = {
@@ -35,6 +36,7 @@ SOURCE_LOGS: dict[str, Path] = {
     "ausbildung_nrw": LOGS / "ausbildung_nrw_scrape.log",
     "azubiyo_de": LOGS / "azubiyo_de_scrape.log",
     "stepstone_de": LOGS / "stepstone_de_scrape.log",
+    "indeed_de": LOGS / "indeed_de_scrape.log",
 }
 
 SOURCE_PID_FILES: dict[str, Path] = {
@@ -42,6 +44,7 @@ SOURCE_PID_FILES: dict[str, Path] = {
     "meine_ae": LOGS / "meine_ausbildung_ae.pid",
     "meine_dpa": LOGS / "meine_ausbildung_dpa.pid",
     "stepstone_de": LOGS / "stepstone_de_scrape.pid",
+    "indeed_de": LOGS / "indeed_de_scrape.pid",
 }
 
 DEDUP_SOURCE_LABELS = {
@@ -51,6 +54,7 @@ DEDUP_SOURCE_LABELS = {
     "ausbildung_nrw": "ausbildung.nrw",
     "azubiyo_de": "azubiyo.de",
     "stepstone_de": "stepstone.de",
+    "indeed_de": "indeed.de",
 }
 
 
@@ -156,6 +160,7 @@ def dedup_source_key(category_id: str) -> str:
         "ausbildung_nrw",
         "azubiyo_de",
         "stepstone_de",
+        "indeed_de",
     ):
         if category_id.startswith(prefix):
             return prefix
@@ -217,6 +222,8 @@ def detect_running(proc_blob: str) -> dict[str, bool]:
         "azubiyo_de": "run_azubiyo_de.py" in proc_blob,
         "stepstone_de": is_pid_running(SOURCE_PID_FILES["stepstone_de"])
         or "run_stepstone_de.py" in proc_blob,
+        "indeed_de": is_pid_running(SOURCE_PID_FILES["indeed_de"])
+        or "run_indeed_de.py" in proc_blob,
     }
 
 
@@ -348,6 +355,7 @@ def format_deduped_summary(stats: dict) -> list[str]:
             "ausbildung_nrw",
             "azubiyo_de",
             "stepstone_de",
+            "indeed_de",
         ):
             count = stats["by_source"].get(key)
             if count:
@@ -472,6 +480,22 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             )
         )
 
+    indeed = load_json(DATA / "progress_indeed_de.json")
+    if isinstance(indeed, dict):
+        lines.extend(
+            format_multi_category(
+                indeed,
+                "indeed.de",
+                SOURCE_LOGS["indeed_de"],
+                running["indeed_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
     lines.append("")
     lines.append("PROSES AKTIF:")
     try:
@@ -483,7 +507,7 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
     for row in screen_lines:
         if any(
             token in row.lower()
-            for token in ("meine", "ausbildung", "azubiyo", "stepstone", "nrw", "socket", "scraper")
+            for token in ("meine", "ausbildung", "azubiyo", "stepstone", "indeed", "nrw", "socket", "scraper")
         ):
             lines.append(f"  {row.strip()}")
             shown_screen = True

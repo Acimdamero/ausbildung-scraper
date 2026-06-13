@@ -23,6 +23,8 @@ CATEGORY_PRIORITY: dict[str, int] = {
     "azubiyo_de_dpa": 3,
     "stepstone_de_ae": 3,
     "stepstone_de_dpa": 3,
+    "indeed_de_ae": 3,
+    "indeed_de_dpa": 3,
     "fachinformatiker_dpa": 2,
     "fachinformatiker_ae": 1,
 }
