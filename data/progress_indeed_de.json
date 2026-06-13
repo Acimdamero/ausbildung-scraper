@@ -1,0 +1,70 @@
+{
+  "last_run_at": "2026-06-13T16:15:59.385110+00:00",
+  "source": "indeed_de",
+  "categories": [
+    {
+      "category_id": "indeed_de_ae",
+      "discovered_urls": 402,
+      "scraped": 0,
+      "failed": 5,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": [
+        "https://de.indeed.com/viewjob?jk=a1b2c3d4e5f67890",
+        "https://de.indeed.com/viewjob?jk=890abcdef0123456",
+        "https://de.indeed.com/viewjob?jk=f1e2d3c4b5a67890",
+        "https://de.indeed.com/viewjob?jk=cdef0123456789ab",
+        "https://de.indeed.com/viewjob?jk=0f1e2d3c4b5a6978"
+      ]
+    },
+    {
+      "category_id": "indeed_de_dpa",
+      "discovered_urls": 240,
+      "scraped": 105,
+      "failed": 5,
+      "skipped_wrong_beruf": 130,
+      "failed_urls": [
+        "https://de.indeed.com/viewjob?jk=0f1e2d3c4b5a6978",
+        "https://de.indeed.com/viewjob?jk=cdef0123456789ab",
+        "https://de.indeed.com/viewjob?jk=890abcdef0123456",
+        "https://de.indeed.com/viewjob?jk=f1e2d3c4b5a67890",
+        "https://de.indeed.com/viewjob?jk=a1b2c3d4e5f67890"
+      ]
+    }
+  ],
+  "total_scraped": 105,
+  "total_failed": 10,
+  "total_skipped_wrong_beruf": 130,
+  "cross_duplicates_with_master": 488,
+  "new_unique_vs_master": 0,
+  "within_source_removed": 3,
+  "by_category": {
+    "indeed_de_ae": {
+      "scraped": 383,
+      "cross_duplicates": 383,
+      "unique_new": 0
+    },
+    "indeed_de_dpa": {
+      "scraped": 105,
+      "cross_duplicates": 105,
+      "unique_new": 0
+    }
+  },
+  "merged_master_total": 6848,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 96.5,
+    "persyaratan": 64.5,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 74.0,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 34.0,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 35.9,
+    "dokumen_yang_harus_dipenuhi": 35.2
+  }
+}

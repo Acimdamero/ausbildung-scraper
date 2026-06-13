@@ -1,79 +1,172 @@
-# Architecture
+# Architecture — AusbildungHunter Intelligence
 
-## Overview
+> **Tagline:** Multi-portal FI apprenticeship discovery, deduplication, and intelligent Bewerbung generation.
 
-Sistem menggunakan **Arbeitsagentur Jobsuche REST API** (bukan browser scraping) untuk mengumpulkan data Ausbildung.
+## System overview
 
 ```mermaid
 flowchart TB
-    subgraph Config
-        CAT[categories.yaml]
-        FLD[fields_mapping.yaml]
-        ENV[.env]
+    subgraph Sources["Scraping sources (15+ portals)"]
+        BA[Arbeitsagentur API]
+        AD[ausbildung.de]
+        NRW[Ausbildung.NRW]
+        MA[meine-ausbildung]
+        AZ[azubi.de / azubiyo]
+        ST[StepStone]
+        Others[NRW, Bund, Indeed, ...]
     end
 
-    subgraph Core
-        RUN[scripts/run_scraper.py]
-        API[JobsucheClient]
-        PAR[ListingParser]
+    subgraph Ingest["Ingestion layer"]
+        SCR[src/scraper/*]
+        PAR[src/parser/*]
+        EXP[data/exports/]
     end
 
-    subgraph External
-        BA[(Arbeitsagentur API)]
-        GS[(Google Sheets)]
+    subgraph Process["Processing"]
+        DED[src/storage/dedup.py]
+        DEDSCRIPT[scripts/dedup_data.py]
+        PROC[data/processed/]
+        OPC[one_per_company]
     end
 
-    subgraph Storage
-        JSON[data/exports/*.json]
-        CSV[data/exports/*.csv]
-        PRG[data/progress.json]
+    subgraph Output["Public outputs"]
+        VIEW[data/viewer/index.html]
+        PAGES[GitHub Pages]
     end
 
-    CAT --> RUN
-    FLD --> PAR
-    ENV --> RUN
-    RUN --> API
-    API -->|GET /pc/v6/jobs| BA
-    API -->|GET /pc/v4/jobdetails| BA
-    BA --> PAR
-    PAR --> JSON
-    PAR --> CSV
-    PAR --> GS
-    RUN --> PRG
+    subgraph Bewerbung["Bewerbung Intelligence (local-only)"]
+        PROF[user_profile.local.py]
+        RES[company_research.py]
+        DOC[doc_generator.py]
+        ENR[bewerbung_enriched.json]
+        BUI[data/bewerbung/index.html]
+    end
+
+    Sources --> SCR --> PAR --> EXP
+    EXP --> DEDSCRIPT --> DED --> PROC
+    PROC --> VIEW --> PAGES
+    PROC --> OPC
+    PROC --> RES
+    PROF --> DOC
+    RES --> DOC --> ENR --> BUI
 ```
 
-## Komponen
+## Repository layout
 
-| Modul | Path | Tanggung jawab |
-|-------|------|----------------|
-| API Client | `src/api_client/jobsuche.py` | Search + detail fetch, rate limiting |
-| Parser | `src/parser/listing_parser.py` | Normalisasi API → `AusbildungListing` |
-| Models | `src/models/listing.py` | Dataclass field output |
-| Local Storage | `src/storage/local.py` | JSON/CSV export |
-| Sheets | `src/storage/sheets.py` | Tab per kategori |
-| Progress | `src/storage/progress.py` | Tracking & markdown export |
+```
+ausbildung-scraper/
+├── README.md, README.de.md, README.id.md
+├── LICENSE, CONTRIBUTING.md, .gitignore
+├── config/
+│   ├── categories.yaml          # FI search profiles (AE, AE 2026, DPA)
+│   └── fields_mapping.yaml      # Normalized field definitions
+├── docs/
+│   ├── ARCHITECTURE.md          # This file
+│   ├── PRIVACY.md, ACCESS.md
+│   ├── github-pages-setup.md
+│   └── *_SCRAPING.md            # Per-portal notes
+├── scripts/
+│   ├── run_scraper.py           # Arbeitsagentur API entry
+│   ├── run_*.py                 # Portal-specific scrapers
+│   ├── dedup_data.py            # Cross-source deduplication
+│   ├── generate_viewer.py       # HTML job viewer
+│   ├── generate_bewerbung_exports.py
+│   ├── run_bewerbung_pilot.py
+│   └── generate_bewerbung_ui.py
+├── src/
+│   ├── api_client/              # Jobsuche REST client
+│   ├── scraper/                 # Portal fetchers (API + Playwright)
+│   ├── parser/                  # Raw HTML/JSON → AusbildungListing
+│   ├── models/                  # listing.py dataclass
+│   ├── storage/                 # local, sheets, dedup, progress
+│   └── bewerbung/               # Profile, research, doc generation
+├── data/
+│   ├── exports/                 # Raw scrape output (gitignored)
+│   ├── processed/               # Deduped JSON/CSV
+│   ├── viewer/                  # Public HTML viewer
+│   ├── public/bewerbung-demo/   # Sample Bewerbung UI (no PII)
+│   └── samples/                 # Small test outputs
+└── .github/workflows/pages.yml  # GitHub Pages deploy
+```
 
-## Alur Data
+## Data model
 
-1. **Search** — `GET /pc/v6/jobs?was=...&angebotsart=4` → daftar `referenznummer`
-2. **Detail** — `GET /pc/v4/jobdetails/{base64(refnr)}` → deskripsi lengkap
-3. **Parse** — Map ke 15+ field user + metadata
-4. **Store** — JSON, CSV, Sheets, progress
+Central type: `AusbildungListing` (`src/models/listing.py`)
 
-## Keputusan Desain
+| Field group | Examples |
+|-------------|----------|
+| Identity | `referenznummer`, `sumber_data` |
+| Company | `firma`, `ort`, `strasse`, `plz` |
+| Job | `titel`, `beschreibung`, `ausbildungsart` |
+| Contact | `email_bewerbung`, `link_bewerbung`, `website` |
+| Meta | `kategorie`, `scraped_at`, completeness flags |
 
-| Keputusan | Alasan |
-|-----------|--------|
-| API over Playwright | Stabil, cepat, tidak butuh browser |
-| Dataclass model | Type-safe, mudah di-serialize |
-| Tab Sheets per kategori | Sesuai 3 profil pencarian user |
-| Dedup kategori duplikat | URL #3 dan #4 identik |
+## Deduplication strategy
 
-## Roadmap Arsitektur
+1. **Primary key:** `referenznummer` when present (Arbeitsagentur)
+2. **Secondary hash:** company + title + city + start date
+3. **Category priority:** `ae_2026` > `dpa` > `ae`
+4. **One-per-company:** `scripts/export_one_per_company.py` → best listing per `firma`
+
+Output: `all_listings_deduped.json` (~6,850 listings) and `one_per_company.json` (~3,895 companies).
+
+## Scraper types
+
+| Type | Portals | Technology |
+|------|---------|------------|
+| REST API | Arbeitsagentur | `requests`, public API key |
+| JSON-LD / DOM | ausbildung.de, azubiyo | Playwright Chromium |
+| HTML pagination | StepStone, Indeed, meinestadt | Playwright + anti-bot delays |
+| Portal-specific | NRW, Bund, karriere-suedwestfalen | Custom parsers in `src/parser/` |
+
+Common runner utilities: `scripts/portal_scrape_common.py`
+
+## Bewerbung Intelligence pipeline
 
 ```mermaid
-flowchart LR
-    MVP[MVP: API Scraper] --> NLP[NLP: ekstrak email dari deskripsi]
-    NLP --> BEW[Auto-Bewerbung Generator]
-    BEW --> TRACK[Lamaran Tracker]
+sequenceDiagram
+    participant M as master_bewerbung.json
+    participant P as run_bewerbung_pilot.py
+    participant R as company_research.py
+    participant D as doc_generator.py
+    participant U as generate_bewerbung_ui.py
+
+    M->>P: Top N listings (email + score)
+    P->>R: Fetch company website insights
+    R->>D: Enriched context + user_profile.local.py
+    D->>P: DE + ID documents per listing
+    P->>U: bewerbung_enriched.json
+    U->>U: data/bewerbung/index.html
 ```
+
+**Privacy boundary:** Everything after `user_profile.local.py` is local-only and gitignored.
+
+## Configuration
+
+| File | Purpose |
+|------|---------|
+| `.env` | API delays, workers, optional Google Sheets |
+| `config/categories.yaml` | Search queries for FI profiles |
+| `user_profile.local.py` | Private applicant data |
+
+## Design decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| API-first for Arbeitsagentur | Stable, fast, no browser |
+| Playwright for dynamic sites | Required for JS-rendered listings |
+| Embedded JSON in HTML viewer | Zero backend; works on GitHub Pages |
+| Local-only Bewerbung output | GDPR / personal data protection |
+| Monorepo scrapers + bewerbung | Single deduped dataset feeds both flows |
+
+## Extension points
+
+- Add portal: `src/scraper/new_portal.py` + `src/parser/new_portal_parser.py` + `scripts/run_new_portal.py`
+- NLP email extraction from descriptions (roadmap)
+- Gmail API send tracking (roadmap — manual send only today)
+
+## Related docs
+
+- [DATA_PIPELINE.md](DATA_PIPELINE.md) — scrape → export flow
+- [BEWERBUNG_SYSTEM.md](BEWERBUNG_SYSTEM.md) — document generation
+- [PRIVACY.md](PRIVACY.md) — public vs private data

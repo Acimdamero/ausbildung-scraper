@@ -1,0 +1,58 @@
+{
+  "last_run_at": "2026-06-12T09:57:00.617355+00:00",
+  "source": "azubiyo_de",
+  "categories": [
+    {
+      "category_id": "azubiyo_de_ae",
+      "discovered_urls": 98,
+      "scraped": 83,
+      "failed": 0,
+      "skipped_wrong_beruf": 15,
+      "failed_urls": []
+    },
+    {
+      "category_id": "azubiyo_de_dpa",
+      "discovered_urls": 22,
+      "scraped": 22,
+      "failed": 0,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": []
+    }
+  ],
+  "total_scraped": 105,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 15,
+  "cross_duplicates_with_master": 12,
+  "new_unique_vs_master": 91,
+  "within_source_removed": 2,
+  "by_category": {
+    "azubiyo_de_ae": {
+      "scraped": 82,
+      "cross_duplicates": 11,
+      "unique_new": 71
+    },
+    "azubiyo_de_dpa": {
+      "scraped": 21,
+      "cross_duplicates": 1,
+      "unique_new": 20
+    }
+  },
+  "merged_master_total": 2249,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 85.4,
+    "alamat_detail": 85.4,
+    "detail_deskripsi": 100.0,
+    "gaji": 59.2,
+    "persyaratan": 52.4,
+    "jenis_ausbildung": 85.4,
+    "deskripsi_perusahaan": 100.0,
+    "apa_yang_ditawarkan": 52.4,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 16.5,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 36.9,
+    "dokumen_yang_harus_dipenuhi": 29.1
+  }
+}

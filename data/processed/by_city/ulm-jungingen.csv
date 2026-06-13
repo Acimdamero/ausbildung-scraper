@@ -1,0 +1,33 @@
+﻿id_referensi,kategori,nama_perusahaan,kota,alamat,jenis_ausbildung,spesialisasi,tahun_mulai,bulan_mulai,gaji,skor_kelengkapan,tipe_website,email_bewerbung,link_bewerbung,cara_apply,kontak_hr,link_arbeitsagentur,ringkasan,butuh_manual,status_lamaran,prioritas,deskripsi,persyaratan,tanggal_scrape
+MAD-2355658635,meine_ausbildung_ae,ulrich GmbH & Co. KG,Ulm-Jungingen,,Fachinformatiker – Anwendungsentwicklung,ae,,,,40,company,,https://www.ulrichmedical.com/01-general/01-04-general-downloads/ulrich-medical-karriere-fachinformatiker-anwendungsentwicklung-de.pdf?utm_source=meine-ausbildung-in-deutschland,portal,,,ulrich GmbH & Co. KG | Fachinformatiker – Anwendungsentwicklung | Ulm-Jungingen,ya,belum,rendah,Fachinformatiker – Anwendungsentwicklung,,2026-06-11T12:05:40.194211+00:00
+ASD-990820003791626167,ausbildungsstellen_si,Müller Holding GmbH & Co. KG,Ulm-Jungingen,Albstraße 92 89081 Ulm-Jungingen BW,Ausbildung zum Fachinformatiker für Systemintegration - Schwerpunkt Filialtechnik (m/w/d),si,2026,9,1.250 €,67,company,,https://karriere.mueller.de/de/jobposting/4a796c6ab2779297a0f89461a7c22b6a7fad9b3d0/apply,portal,"KONTAKT
+Frau Amelie Specht
+BEWERBEN.
+WHATSAPP.
+function openClose() {
+let selector = document.getElementById('share');
+if (selector && selector.classList.contains('close')) {
+selector.classList.remove('close');
+} else {
+selector.classList.add('close');
+}
+}
+MEHR INFOS RUND UM UNSERE AUSBILDUNGEN.
+mueller.de/karriere",,Müller Holding GmbH & Co. KG | Ausbildung zum Fachinformatiker für Systemintegration - Schwerpunkt Filialtechnik (m/w/d) | Ulm-Jungingen,tidak,belum,sedang,"Ausbildung zum Fachinformatiker für Systemintegration - Schwerpunkt Filialtechnik (m/w/d)
+
+WAS WIR BIETEN
+- Übertarifliche Vergütung (1.250 €/Monat im 1. Lehrjahr).
+- Urlaubs- und Weihnachtsgeld.
+- Einkaufsrabatt für Mitarbeiter bis zu 20%.
+- Azubi-Lerntage für Fach- und Sozialkompetenzen.
+- Moderne IT-Ausstattung und praxisnahe Ausbildung.
+- Intensive Betreuung und Unterstützung während der Ausbildung
+- Sehr gute Übernahmechancen bei guten Leistungen.
+- Spannende Entwicklungsmöglichkeiten innerhalb der IT.
+STANDORT
+89081 Ulm-Jungingen
+Albstraße 92
+BESCHÄFTIGUNGSART
+Vollzeit
+EINTRITTSTERMIN
+zum 01.09.2026",,2026-06-13T12:19:57.837271+00:00

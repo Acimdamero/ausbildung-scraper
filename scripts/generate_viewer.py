@@ -155,8 +155,88 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       font-size: 0.95rem;
     }}
     input {{ flex: 1 1 240px; min-width: 200px; }}
+    .search-wrap {{
+      position: relative;
+      flex: 1 1 280px;
+      min-width: 220px;
+    }}
+    .search-wrap input {{
+      width: 100%;
+      flex: none;
+    }}
+    .search-suggestions {{
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      max-height: min(420px, 60vh);
+      overflow-y: auto;
+    }}
+    .search-suggestions[hidden] {{ display: none; }}
+    .suggest-header {{
+      padding: 0.55rem 0.75rem 0.35rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }}
+    .suggest-header:first-child {{ border-top: none; }}
+    .suggest-item {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+    }}
+    .suggest-item:hover,
+    .suggest-item.active {{
+      background: rgba(61, 139, 253, 0.14);
+    }}
+    .suggest-item .suggest-type {{
+      font-size: 0.72rem;
+      color: var(--muted);
+      flex-shrink: 0;
+    }}
+    .suggest-item .suggest-count {{
+      font-size: 0.75rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }}
+    .suggest-preview {{
+      padding: 0.55rem 0.75rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }}
+    .search-preview {{
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      min-height: 1.2em;
+    }}
+    .search-preview strong {{ color: var(--accent); font-weight: 600; }}
+    mark.search-hit {{
+      background: rgba(61, 139, 253, 0.28);
+      color: inherit;
+      border-radius: 3px;
+      padding: 0 0.12em;
+    }}
     main {{ padding: 1rem 1.5rem 2rem; }}
     .stats {{ color: var(--muted); margin-bottom: 1rem; }}
+    .stats strong {{ color: var(--accent); font-weight: 600; }}
     .grid {{
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -394,7 +474,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     <h1>Ausbildung Listings Viewer</h1>
     <div class="meta">Generated: {generated_at} · Buka langsung di browser (tanpa server)</div>
     <div class="controls">
-      <input id="search" type="search" placeholder="Cari perusahaan, kota, deskripsi...">
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Cari cerdas: perusahaan, kota, AE, portal…" autocomplete="off" spellcheck="false">
+        <div id="search-suggestions" class="search-suggestions" hidden></div>
+      </div>
       <select id="category">
         <option value="">Semua kategori</option>
       </select>
@@ -437,6 +520,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="12">Des</option>
       </select>
     </div>
+    <div class="search-preview" id="search-preview"></div>
     <div class="spec-tabs-label">Target Fachinformatiker</div>
     <div class="spec-tabs" id="specTabsMain" role="tablist" aria-label="Filter target FI">
       {main_tab_buttons}
@@ -620,6 +704,370 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
 
     const TARGET_FI_CODES = {json.dumps(list(TARGET_FI_CODES), ensure_ascii=False)};
 
+    // ── Smart search ──────────────────────────────────────────────
+    const SEARCH_DEBOUNCE_MS = 180;
+    const SUGGEST_LIMIT_PER_GROUP = 5;
+    const SUGGEST_MAX_TOTAL = 18;
+
+    function normalizeSearchText(text) {{
+      return String(text || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9@.\s-]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }}
+
+    function emailDomain(email) {{
+      const m = String(email || "").match(/@([^@\s]+)/);
+      return m ? m[1].toLowerCase() : "";
+    }}
+
+    function listingSearchBlob(item) {{
+      const specShort = BERUF_TYP_TAB_LABELS[item.beruf_typ] || "";
+      const specLong = BERUF_TYP_LABELS[item.beruf_typ] || "";
+      return normalizeSearchText([
+        item.nama_perusahaan,
+        item.posisi_kota,
+        item.alamat_detail,
+        item.jenis_ausbildung,
+        item.category_id,
+        item.sumber_data,
+        item.alamat_email_bewerbung,
+        emailDomain(item.alamat_email_bewerbung),
+        item.deskripsi_perusahaan,
+        item.gaji,
+        item.beruf_typ,
+        specShort,
+        specLong,
+        item.website_type,
+        item.bewerbung_sumber,
+      ].join(" "));
+    }}
+
+    function primarySearchFields(item) {{
+      const specShort = BERUF_TYP_TAB_LABELS[item.beruf_typ] || "";
+      const specLong = BERUF_TYP_LABELS[item.beruf_typ] || "";
+      return [
+        normalizeSearchText(item.nama_perusahaan),
+        normalizeSearchText(item.posisi_kota),
+        normalizeSearchText(item.alamat_detail),
+        normalizeSearchText(item.jenis_ausbildung),
+        normalizeSearchText(item.category_id),
+        normalizeSearchText(item.sumber_data),
+        emailDomain(item.alamat_email_bewerbung),
+        normalizeSearchText(item.alamat_email_bewerbung),
+        normalizeSearchText(item.beruf_typ),
+        normalizeSearchText(specShort),
+        normalizeSearchText(specLong),
+        normalizeSearchText(item.website_type),
+        normalizeSearchText(item.bewerbung_sumber),
+      ].filter(Boolean);
+    }}
+
+    const listingSearchCache = LISTINGS.map(item => ({{
+      item,
+      fields: primarySearchFields(item),
+      desc: normalizeSearchText((item.detail_deskripsi || "").slice(0, 1800)),
+    }}));
+    const listingSearchByItem = new Map(listingSearchCache.map(e => [e.item, e]));
+
+    function isSubsequence(needle, hay) {{
+      let i = 0;
+      for (let j = 0; j < hay.length && i < needle.length; j++) {{
+        if (hay[j] === needle[i]) i++;
+      }}
+      return i === needle.length;
+    }}
+
+    function fieldTokenScore(field, token) {{
+      if (!field || !token) return 0;
+      if (field === token) return 110;
+      const words = field.split(" ");
+      for (const w of words) {{
+        if (w === token) return 95;
+        if (w.startsWith(token)) return 80;
+      }}
+      if (token.length <= 2) return 0;
+      if (field.includes(token)) {{
+        const idx = field.indexOf(token);
+        return 100 - Math.min(idx, 40);
+      }}
+      return 0;
+    }}
+
+    function tokenMatchScore(fields, desc, token) {{
+      let best = 0;
+      for (const f of fields) best = Math.max(best, fieldTokenScore(f, token));
+      if (!best && token.length >= 4 && desc.includes(token)) best = 28;
+      return best;
+    }}
+
+    function matchListingSearch(item, query) {{
+      const q = normalizeSearchText(query);
+      if (!q) return {{ match: true, score: 0 }};
+      const entry = listingSearchByItem.get(item);
+      const fields = entry ? entry.fields : primarySearchFields(item);
+      const desc = entry ? entry.desc : normalizeSearchText((item.detail_deskripsi || "").slice(0, 1800));
+      const tokens = q.split(" ").filter(Boolean);
+      let total = 0;
+      for (const token of tokens) {{
+        const s = tokenMatchScore(fields, desc, token);
+        if (!s) return {{ match: false, score: 0 }};
+        total += s;
+      }}
+      return {{ match: true, score: total }};
+    }}
+
+    function countMatches(query) {{
+      const q = normalizeSearchText(query);
+      if (!q) return LISTINGS.length;
+      let n = 0;
+      for (const {{ item }} of listingSearchCache) {{
+        if (matchListingSearch(item, q).match) n++;
+      }}
+      return n;
+    }}
+
+    const SUGGEST_GROUPS = [
+      {{ type: "company", label: "Perusahaan", field: "nama_perusahaan" }},
+      {{ type: "city", label: "Kota", field: "posisi_kota" }},
+      {{ type: "title", label: "Judul", field: "jenis_ausbildung" }},
+      {{ type: "source", label: "Portal", field: "sumber_data" }},
+      {{ type: "email", label: "Email-Domain", field: "_email_domain" }},
+      {{ type: "spec", label: "Spesialisasi", field: "_spec" }},
+    ];
+
+    function buildSuggestionIndex() {{
+      const index = new Map();
+      function add(type, label, value, norm) {{
+        if (!value || !norm) return;
+        const key = type + "\\0" + norm;
+        const existing = index.get(key);
+        if (existing) {{
+          existing.count++;
+          return;
+        }}
+        index.set(key, {{ type, typeLabel: label, value, norm, count: 1 }});
+      }}
+
+      for (const {{ item }} of listingSearchCache) {{
+        add("company", "Perusahaan", item.nama_perusahaan, normalizeSearchText(item.nama_perusahaan));
+        add("city", "Kota", item.posisi_kota, normalizeSearchText(item.posisi_kota));
+        add("title", "Judul", item.jenis_ausbildung, normalizeSearchText(item.jenis_ausbildung));
+        add("source", "Portal", item.sumber_data, normalizeSearchText(item.sumber_data));
+        const dom = emailDomain(item.alamat_email_bewerbung);
+        if (dom) add("email", "Email-Domain", dom, dom);
+        const specShort = BERUF_TYP_TAB_LABELS[item.beruf_typ];
+        const specLong = BERUF_TYP_LABELS[item.beruf_typ];
+        if (specShort) add("spec", "Spesialisasi", specShort + " — " + (specLong || ""), normalizeSearchText(specShort + " " + specLong));
+        if (specLong && specLong !== specShort) add("spec", "Spesialisasi", specLong, normalizeSearchText(specLong));
+      }}
+
+      const specExtras = [
+        ["AE", "ae anwendungsentwicklung"],
+        ["Anwendungsentwicklung", "anwendungsentwicklung ae"],
+        ["SI", "si systemintegration"],
+        ["DPA", "dpa daten prozessanalyse"],
+        ["DV", "dv digitale vernetzung"],
+      ];
+      for (const [display, normExtra] of specExtras) {{
+        add("spec", "Spesialisasi", display, normalizeSearchText(normExtra));
+      }}
+
+      return [...index.values()];
+    }}
+
+    const suggestionIndex = buildSuggestionIndex();
+
+    function suggestScore(s, query) {{
+      const q = normalizeSearchText(query);
+      if (!q) return 0;
+      if (s.norm === q) return 200;
+      if (s.norm.startsWith(q)) return 150 - Math.min(s.norm.length - q.length, 30);
+      if (s.norm.includes(q)) return 120 - s.norm.indexOf(q);
+      const words = s.norm.split(" ");
+      for (const w of words) {{
+        if (w.startsWith(q)) return 90;
+      }}
+      if (q.length >= 2 && isSubsequence(q, s.norm)) return 50;
+      return 0;
+    }}
+
+    function buildSuggestions(query) {{
+      const q = normalizeSearchText(query);
+      if (!q || q.length < 1) return {{ preview: "", groups: [], flat: [] }};
+
+      const scored = suggestionIndex
+        .map(s => ({{ ...s, score: suggestScore(s, q) + Math.min(s.count, 20) }}))
+        .filter(s => s.score > 0)
+        .sort((a, b) => b.score - a.score || b.count - a.count || a.value.localeCompare(b.value, "de"));
+
+      const groups = [];
+      const flat = [];
+      for (const g of SUGGEST_GROUPS) {{
+        const items = scored.filter(s => s.type === g.type).slice(0, SUGGEST_LIMIT_PER_GROUP);
+        if (items.length) {{
+          groups.push({{ ...g, items }});
+          flat.push(...items);
+        }}
+      }}
+      const trimmedFlat = flat.slice(0, SUGGEST_MAX_TOTAL);
+
+      const total = countMatches(q);
+      const preview = total
+        ? `<strong>${{total}}</strong> hasil cocok · ketik lebih spesifik atau pilih saran`
+        : "Tidak ada hasil — coba kata kunci lain";
+
+      return {{ preview, groups, flat: trimmedFlat }};
+    }}
+
+    function highlightHtml(text, query) {{
+      const raw = String(text || "");
+      if (!raw || !query) return escapeHtml(raw);
+      const q = normalizeSearchText(query);
+      if (!q) return escapeHtml(raw);
+      const tokens = q.split(" ").filter(Boolean).sort((a, b) => b.length - a.length);
+      let normPos = 0;
+      const normChars = [];
+      const map = [];
+      for (let i = 0; i < raw.length; i++) {{
+        const ch = raw[i];
+        const n = normalizeSearchText(ch);
+        if (!n || n === " ") continue;
+        for (const c of n) {{
+          normChars.push(c);
+          map.push(i);
+        }}
+      }}
+      const normStr = normChars.join("");
+      const ranges = [];
+      for (const token of tokens) {{
+        let start = 0;
+        while (start <= normStr.length - token.length) {{
+          const idx = normStr.indexOf(token, start);
+          if (idx === -1) break;
+          const from = map[idx];
+          const to = map[idx + token.length - 1] + 1;
+          ranges.push([from, to]);
+          start = idx + 1;
+        }}
+      }}
+      if (!ranges.length) return escapeHtml(raw);
+      ranges.sort((a, b) => a[0] - b[0]);
+      const merged = [];
+      for (const [s, e] of ranges) {{
+        if (!merged.length || s > merged[merged.length - 1][1]) merged.push([s, e]);
+        else merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], e);
+      }}
+      let out = "";
+      let pos = 0;
+      for (const [s, e] of merged) {{
+        out += escapeHtml(raw.slice(pos, s));
+        out += `<mark class="search-hit">${{escapeHtml(raw.slice(s, e))}}</mark>`;
+        pos = e;
+      }}
+      out += escapeHtml(raw.slice(pos));
+      return out;
+    }}
+
+    const searchInput = document.getElementById("search");
+    const suggestBox = document.getElementById("search-suggestions");
+    const searchPreview = document.getElementById("search-preview");
+    let suggestDebounce = null;
+    let activeSuggestIdx = -1;
+    let currentFlatSuggestions = [];
+
+    function hideSuggestions() {{
+      suggestBox.hidden = true;
+      suggestBox.innerHTML = "";
+      activeSuggestIdx = -1;
+      currentFlatSuggestions = [];
+    }}
+
+    function renderSuggestions(query) {{
+      const {{ preview, groups, flat }} = buildSuggestions(query);
+      currentFlatSuggestions = flat;
+      searchPreview.innerHTML = normalizeSearchText(query) ? preview : "";
+
+      if (!groups.length) {{
+        hideSuggestions();
+        if (normalizeSearchText(query)) {{
+          suggestBox.hidden = false;
+          suggestBox.innerHTML = `<div class="suggest-preview">${{preview}}</div>`;
+        }}
+        return;
+      }}
+
+      let html = `<div class="suggest-preview">${{preview}}</div>`;
+      let idx = 0;
+      for (const g of groups) {{
+        if (idx >= SUGGEST_MAX_TOTAL) break;
+        html += `<div class="suggest-header">${{escapeHtml(g.label)}}</div>`;
+        for (const s of g.items) {{
+          if (idx >= SUGGEST_MAX_TOTAL) break;
+          const active = idx === activeSuggestIdx ? " active" : "";
+          html += `<button type="button" class="suggest-item${{active}}" data-idx="${{idx}}">
+            <span>${{highlightHtml(s.value, query)}}</span>
+            <span class="suggest-count">${{s.count}}</span>
+          </button>`;
+          idx++;
+        }}
+      }}
+      suggestBox.innerHTML = html;
+      suggestBox.hidden = false;
+    }}
+
+    function applySuggestion(value) {{
+      searchInput.value = value;
+      hideSuggestions();
+      render();
+      searchInput.focus();
+    }}
+
+    function onSearchInput() {{
+      clearTimeout(suggestDebounce);
+      activeSuggestIdx = -1;
+      suggestDebounce = setTimeout(() => {{
+        renderSuggestions(searchInput.value);
+        render();
+      }}, SEARCH_DEBOUNCE_MS);
+    }}
+
+    searchInput.addEventListener("input", onSearchInput);
+    searchInput.addEventListener("focus", () => {{
+      if (normalizeSearchText(searchInput.value)) renderSuggestions(searchInput.value);
+    }});
+    searchInput.addEventListener("keydown", (e) => {{
+      if (suggestBox.hidden) return;
+      const max = currentFlatSuggestions.length;
+      if (e.key === "ArrowDown" && max) {{
+        e.preventDefault();
+        activeSuggestIdx = (activeSuggestIdx + 1) % max;
+        renderSuggestions(searchInput.value);
+      }} else if (e.key === "ArrowUp" && max) {{
+        e.preventDefault();
+        activeSuggestIdx = activeSuggestIdx <= 0 ? max - 1 : activeSuggestIdx - 1;
+        renderSuggestions(searchInput.value);
+      }} else if (e.key === "Enter" && activeSuggestIdx >= 0 && currentFlatSuggestions[activeSuggestIdx]) {{
+        e.preventDefault();
+        applySuggestion(currentFlatSuggestions[activeSuggestIdx].value);
+      }} else if (e.key === "Escape") {{
+        hideSuggestions();
+      }}
+    }});
+    suggestBox.addEventListener("click", (e) => {{
+      const btn = e.target.closest(".suggest-item");
+      if (!btn) return;
+      const idx = Number(btn.dataset.idx);
+      const s = currentFlatSuggestions[idx];
+      if (s) applySuggestion(s.value);
+    }});
+    document.addEventListener("click", (e) => {{
+      if (!e.target.closest(".search-wrap")) hideSuggestions();
+    }});
+
     let activeSpecFilter = "target";
 
     function matchesSpecFilter(item) {{
@@ -641,7 +1089,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     }}
 
     function render() {{
-      const q = document.getElementById("search").value.toLowerCase().trim();
+      const q = searchInput.value.trim();
       const cat = categorySelect.value;
       const sort = document.getElementById("sort").value;
       const emailFilter = document.getElementById("emailFilter").value;
@@ -658,19 +1106,15 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         if (tahunFilter === "unknown" && item.tahun_mulai) return false;
         if (tahunFilter && tahunFilter !== "unknown" && String(item.tahun_mulai) !== tahunFilter) return false;
         if (bulanFilter && String(item.bulan_mulai) !== bulanFilter) return false;
-        if (!q) return true;
-        const hay = [
-          item.nama_perusahaan,
-          item.posisi_kota,
-          item.alamat_detail,
-          item.detail_deskripsi,
-          item.jenis_ausbildung,
-          item.gaji,
-        ].join(" ").toLowerCase();
-        return hay.includes(q);
+        return matchListingSearch(item, q).match;
       }});
 
       filtered = [...filtered].sort((a, b) => {{
+        if (q) {{
+          const sa = matchListingSearch(a, q).score;
+          const sb = matchListingSearch(b, q).score;
+          if (sb !== sa) return sb - sa;
+        }}
         if (sort === "spec-priority") {{
           const specDiff = berufTypOrder(a.beruf_typ) - berufTypOrder(b.beruf_typ);
           if (specDiff) return specDiff;
@@ -683,8 +1127,12 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         return 0;
       }});
 
-      document.getElementById("stats").textContent =
-        `Menampilkan ${{filtered.length}} dari ${{LISTINGS.length}} listing`;
+      const statsEl = document.getElementById("stats");
+      if (normalizeSearchText(q)) {{
+        statsEl.innerHTML = `Menampilkan <strong>${{filtered.length}}</strong> dari ${{LISTINGS.length}} listing · pencarian: <strong>${{escapeHtml(q)}}</strong>`;
+      }} else {{
+        statsEl.textContent = `Menampilkan ${{filtered.length}} dari ${{LISTINGS.length}} listing`;
+      }}
 
       const grid = document.getElementById("grid");
       grid.innerHTML = filtered.map(item => {{
@@ -696,9 +1144,9 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         const ref = item.referenznummer || "";
         return `
         <article class="card" data-ref="${{escapeHtml(ref)}}" tabindex="0" role="button" aria-label="Lihat detail ${{escapeHtml(item.nama_perusahaan || "")}}">
-          <div class="company">${{escapeHtml(item.nama_perusahaan || "—")}}</div>
-          <h2>${{escapeHtml(item.jenis_ausbildung || item.category_id)}}</h2>
-          <div class="location">${{escapeHtml(item.posisi_kota || "—")}} · ${{escapeHtml(item.alamat_detail || "")}}</div>
+          <div class="company">${{highlightHtml(item.nama_perusahaan || "—", q)}}</div>
+          <h2>${{highlightHtml(item.jenis_ausbildung || item.category_id, q)}}</h2>
+          <div class="location">${{highlightHtml(item.posisi_kota || "—", q)}} · ${{highlightHtml(item.alamat_detail || "", q)}}</div>
           <div>
             <span class="badge ${{scoreClass(score)}}">Kelengkapan ${{score}}%</span>
             ${{cara ? `<span class="badge">Apply: ${{escapeHtml(cara)}}</span>` : ""}}
@@ -707,10 +1155,11 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
             ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
             ${{specBadgeLabel(item.beruf_typ) ? `<span class="badge ${{specBadgeClass(item.beruf_typ)}}">${{specBadgeLabel(item.beruf_typ)}}</span>` : ""}}
             ${{startDateBadge(item)}}
+            ${{item.sumber_data ? `<span class="badge">${{highlightHtml(item.sumber_data, q)}}</span>` : ""}}
           </div>
-          ${{item.gaji ? `<div class="salary">Gaji: ${{escapeHtml(item.gaji)}}</div>` : ""}}
-          <div class="type">${{escapeHtml(item.category_id)}}</div>
-          <div class="desc">${{escapeHtml(excerpt(item.detail_deskripsi))}}</div>
+          ${{item.gaji ? `<div class="salary">Gaji: ${{highlightHtml(item.gaji, q)}}</div>` : ""}}
+          <div class="type">${{highlightHtml(item.category_id, q)}}</div>
+          <div class="desc">${{highlightHtml(excerpt(item.detail_deskripsi), q)}}</div>
           <div class="card-hint">Klik untuk detail lengkap →</div>
           <div class="links">
             ${{item.ba_job_url ? `<a href="${{item.ba_job_url}}" target="_blank" rel="noopener">Arbeitsagentur</a>` : ""}}
@@ -751,7 +1200,6 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       if (e.key === "Escape") closeModal();
     }});
 
-    document.getElementById("search").addEventListener("input", render);
     categorySelect.addEventListener("change", render);
     document.getElementById("sort").addEventListener("change", render);
     document.getElementById("emailFilter").addEventListener("change", render);

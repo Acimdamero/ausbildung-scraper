@@ -29,6 +29,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 100,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:16.470460+00:00"
   },
   {
@@ -61,6 +64,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 100,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-13",
     "scraped_at": "2026-06-11T08:16:16.828479+00:00"
   },
   {
@@ -93,71 +99,10 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 100,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:28.161564+00:00"
-  },
-  {
-    "referenznummer": "10000-1203185821-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "Evonik Operations GmbH",
-    "titik_data_di_peta": "51.6802609,7.1018834",
-    "posisi_kota": "Marl, Westfalen",
-    "alamat_detail": "Paul-Baumann-Str. 1, 45772 Marl, Westfalen",
-    "detail_deskripsi": "## Ausbildung 2026 Fachinformatiker Bachelor of Science (m/w/d) - Marl\n\nWir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.\n\n### **Was wir bieten** \n\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:\n\n- **Ausbildungsvergütung** \nBereits im ersten Ausbildungsjahr erhältst du über 1.100 €/Monat Gehalt. Danach steigt dein Monatsgehalt pro Ausbildungsjahr. On top erhältst du noch Zusatzleistungen wie Urlaubs- und Weihnachtsgeld.\n- **Urlaub und Arbeitszeit** \nWir bieten dir eine gute Work-Life-Balance mit 30 Urlaubstagen und modernen Arbeitszeitmodellen.\n- **Spaß bei der Arbeit** \nWir bieten dir ein gutes Arbeitsklima mit vielseitigen Praxiseinsätzen in großartigen Teams\n- **kostenfreie Lernunterstützung** Wir bieten dir Unterstützung beim Lernen und eine gute Betreuung durch den Betrieb\n\n…und vieles mehr!\n\n### **Verantwortlichkeiten**\n\nTheoriephasen an der Westfälischen Hochschule in Gelsenkirchen:\n\n- Studium bietet eine Kombination aus betriebswirtschaftlichem und informationstechnischem Wissen\n- Fundiertes theoretisches Grundwissen mit Praxisbezug\n- Lernen Softwarelösungen zur Unterstützung betriebswirtschaftlicher Aufgabenstellungen zu erstellen und zum Einsatz zu bringen, wie auch Geschäftsprozesse zu erfassen, analysieren und optimieren\n- Digitalisierung und Automatisierung kreativ vorantreiben und damit die Leistungsangebote optimieren\n\nDie betriebliche Ausbildung: \n\n- Entwicklung, Installation und Optimierung neuer IT-Systeme und Cloud Services \n- Anwendungen von Programmiersprachen  \n- Testen neuer Software und Hardware \n- Analyse von IT-gestützten Geschäftsprozessen\n- Mitarbeit an IT-Projekten \n- Daten- und Prozessanalyse zur Optimierung von IT-Systemen \n\n**Ausbildungsdauer:** 3 Jahre Ausbildung / 8 Semester Studium\n\n**Ausbildungsbeginn:** 01.09.2026\n\n**Ausbildungsstandort:** Chemiepark Marl und Westfälische Hochschule Gelsenkirchen \n\n**Ansprechpartner:** Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com)) \n\n### **Anforderungen**\n\n- Allgemeine Hochschulreife \n- Gute Mathematik-, Informatik- und Englischkenntnisse \n\n\n\n- Kommunikationsfähigkeit und gewandte Ausdrucksweise in Wort und Schrift  \n- Interesse an digitalen Lösungen und Programmieren sicherer Systeme \n- Freude an der IT-Branche und der Digitalisierung \n- Lust auf Analyse von Zahlen, Algorithmen und Datenstrukturen \n- Verantwortungsbewusstsein, Zuverlässigkeit und Teamfähigkeit \n- Sorgfalt, Konzentrationsfähigkeit und eigenverantwortliche Lernbereitschaft  \n\n### **AUSBILDUNG GESCHAFFT – WAS DANN?**\n\nAls Bachelor of Science (m/w/d) des Studiengangs Wirtschaftsinformatik hast du vielfältige Entwicklungsmöglichkeiten, beispielweise im Projektmanagement oder in der Systementwicklung.  Deine berufliche Reise kann natürlich noch weitergehen: Wie wäre es zum Beispiel durch interne Workshops oder mit einem berufsbegleitendem Masterstudium? Das Ziel wählst du! \n\nHinweis: Aufgrund unseres Recruitingsystems Workday und teilweise automatisierten Prozessschritten werden wir im weiteren Bewerbungsprozess deine persönliche Anrede auf die Sie-Form umstellen.\n\n### **Ihre Bewerbung** \n\nUm eine schnellstmögliche Bearbeitung Ihrer Bewerbung zu gewährleisten und die Umwelt zu schonen, bewerben Sie sich bitte online über unser [Karriereportal](https://evonik.wd3.myworkdayjobs.com/de-DE/External_Careers). Weitere Informationen über Evonik als Arbeitgeber finden Sie unter [https://careers.evonik.com](https://careers.evonik.com/).\n\n**Ihr Talent Acquisition Manager:**\n\nAnna Waterkotte, Lara Ide, Mara Winkelhagen, Oliver Lesch, Sonja Kensbock, Vanessa Jordan\n\nUnternehmen ist Evonik Operations GmbH",
-    "gaji": "1.100 €/Monat",
-    "persyaratan": "### **Anforderungen**\n- Allgemeine Hochschulreife\n- Gute Mathematik-, Informatik- und Englischkenntnisse\nAbitur / Allgemeine Hochschulreife",
-    "jenis_ausbildung": "Duales Studium | Industriekaufmann/-frau",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Ausbildung 2026 Fachinformatiker Bachelor of Science (m/w/d) - Marl",
-    "apa_yang_ditawarkan": "### **Was wir bieten**\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "ausbildung-marl@evonik.com",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203185821-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203185821-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "**Ansprechpartner:** Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com))",
-    "dokumen_yang_harus_dipenuhi": "Wir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203185821-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 100,
-    "scraped_at": "2026-06-11T08:16:29.048505+00:00"
-  },
-  {
-    "referenznummer": "10000-1206744232-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "SYNEQT GmbH",
-    "titik_data_di_peta": "51.6631334,7.1110601",
-    "posisi_kota": "Marl, Westfalen",
-    "alamat_detail": "Marl, Westfalen",
-    "detail_deskripsi": "### Ausbildung 2027 Fachinformatiker Bachelor of Science (m/w/d) - Marl\n\nWir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.\n\n**Was wir bieten**\n\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:\n\n- **Ausbildungsvergütung**\nBereits im ersten Ausbildungsjahr erhältst du über 1.100 €/Monat Gehalt. Danach steigt dein Monatsgehalt pro Ausbildungsjahr. On top erhältst du noch Zusatzleistungen wie Urlaubs- und Weihnachtsgeld.\n- **Urlaub und Arbeitszeit&#160;**\nWir bieten dir eine gute Work-Life-Balance mit 30 Urlaubstagen und modernen Arbeitszeitmodellen.\n- **Spaß bei der Arbeit**\nWir bieten dir ein gutes Arbeitsklima mit vielseitigen Praxiseinsätzen in großartigen Teams.\n- **kostenfreie Lernunterstützung&#160;**\nWir bieten dir Unterstützung beim Lernen und eine gute Betreuung durch den Betrieb\n\nWeitere **Benefits** findest du auf der **Landing-Page** unserer **Ausbildungsseite**.\n\n**Verantwortlichkeiten**\n\nTheoriephasen an der Westfälischen Hochschule in Gelsenkirchen:\n\n- Studium bietet eine Kombination aus betriebswirtschaftlichem und informationstechnischem Wissen\n- Fundiertes theoretisches Grundwissen mit Praxisbezug\n- Lernen Softwarelösungen zur Unterstützung betriebswirtschaftlicher Aufgabenstellungen zu erstellen und zum Einsatz zu bringen, wie auch Geschäftsprozesse zu erfassen, analysieren und optimieren\n- Digitalisierung und Automatisierung kreativ vorantreiben und damit die Leistungsangebote optimieren\n\nDie betriebliche Ausbildung:\n\n- Entwicklung, Installation und Optimierung neuer IT-Systeme und Cloud Services\n- Anwendungen von Programmiersprachen\n- Testen neuer Software und Hardware\n- Analyse von IT-gestützten Geschäftsprozessen\n- Mitarbeit an IT-Projekten\n- Daten- und Prozessanalyse zur Optimierung von IT-Systemen\n\n**Ausbildungsdauer:** 3 Jahre Ausbildung / 8 Semester Studium\n\n**Ausbildungsbeginn:** 01.09.2027\n\n**Ausbildungsstandort:** Chemiepark Marl und Westfälische Hochschule Gelsenkirchen\n\n**Ansprechpartner:&#160;**Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com))\n\n**Anforderungen**:\n\n- Allgemeine Hochschulreife\n- Gute Mathematik-, Informatik- und Englischkenntnisse\n- Kommunikationsfähigkeit und gewandte Ausdrucksweise in Wort und Schrift\n- Interesse an digitalen Lösungen und Programmieren sicherer Systeme\n- Freude an der IT-Branche und der Digitalisierung\n- Lust auf Analyse von Zahlen, Algorithmen und Datenstrukturen\n- Verantwortungsbewusstsein, Zuverlässigkeit und Teamfähigkeit\n- Sorgfalt, Konzentrationsfähigkeit und eigenverantwortliche Lernbereitschaft\n\n**AUSBILDUNG GESCHAFFT – WAS DANN?**\n\nAls Bachelor of Science (m/w/d) des Studiengangs Wirtschaftsinformatik hast du vielfältige Entwicklungsmöglichkeiten, beispielweise im Projektmanagement oder in der Systementwicklung.  Deine berufliche Reise kann natürlich noch weitergehen: Wie wäre es zum Beispiel durch interne Workshops oder mit einem berufsbegleitendem Masterstudium? Das Ziel wählst du!\n\nHinweis: Aufgrund unseres Recruitingsystems Workday und teilweise automatisierten Prozessschritten werden wir im weiteren Bewerbungsprozess deine persönliche Anrede auf die Sie-Form umstellen.\n\n## Deine Vorteile bei uns\n\nBei uns sollst du dich von Anfang an wohlfühlen. Hierauf kannst du dich bei uns freuen:\n\n### Attraktive tarifliche Zusatzleistungen\n\nZukunftsbetrag von 23 % der monatlichen Ausbildungsvergütung.\n\n### Fahrtkostenzuschuss\n\nAbhängig von der Entfernung deines Wohnortes zu deinem Evonik-Standort bzw. Berufsschule/Hochschule, erhältst du von uns einen Zuschuss zu deinen Fahrtkosten.\n\n### Einführungswoche\n\nGemeinsame Aktionswoche, um den Start in die Ausbildung zu erleichtern.\n\n### Gut versorgt\n\nOb Kantine oder Altersvorsorge – bei uns wirst du gut versorgt.\n\n### Moderne Ausstattung\n\nWeg von Papier und Stift - bei uns nutzt du während deiner Ausbildung personalisierte Notebooks oder iPads.\n\n### Flexibles Lernen mit der Evonik-Mediathek\n\nIn mehreren Sprachen und rund um die Uhr - von Lernplänen, Q&As bis hin zu Quizzes und Games ist alles dabei!",
-    "gaji": "1.100 €/Monat",
-    "persyaratan": "**Anforderungen**:\n- Allgemeine Hochschulreife\n- Gute Mathematik-, Informatik- und Englischkenntnisse\n- Kommunikationsfähigkeit und gewandte Ausdrucksweise in Wort und Schrift\n- Interesse an digitalen Lösungen und Programmieren sicherer Systeme\n- Freude an der IT-Branche und der Digitalisierung\n- Lust auf Analyse von Zahlen, Algorithmen und Datenstrukturen\n- Verantwortungsbewusstsein, Zuverlässigkeit und Teamfähigkeit\n- Sorgfalt, Konzentrationsfähigkeit und eigenverantwortliche Lernbereitschaft\nAbitur / Allgemeine Hochschulreife",
-    "jenis_ausbildung": "Duales Studium | Industriekaufmann/-frau",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Ausbildung 2027 Fachinformatiker Bachelor of Science (m/w/d) - Marl",
-    "apa_yang_ditawarkan": "**Was wir bieten**\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "ausbildung-marl@evonik.com",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206744232-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206744232-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "**Ansprechpartner:&#160;**Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com))",
-    "dokumen_yang_harus_dipenuhi": "Wir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.\n**Was wir bieten**",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206744232-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 100,
-    "scraped_at": "2026-06-11T08:16:28.774080+00:00"
   },
   {
     "referenznummer": "10000-1206744247-S",
@@ -189,6 +134,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 100,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:25.917456+00:00"
   },
   {
@@ -221,6 +169,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 100,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:27.855052+00:00"
   },
   {
@@ -253,6 +204,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
     "scraped_at": "2026-06-11T08:15:59.163379+00:00"
   },
   {
@@ -277,7 +231,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1204258252-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.09.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "**✈ Do YOU share our passion? Lass Deine Bewerbung zu uns rüberfliegen! ✈**\nAlle Unterlagen vollständig? [Hier](http://ausbildungunddualesstudiumunterlagencheckliste.events.airbus.com/)[ ](http://ausbildungunddualesstudiumunterlagencheckliste.events.airbus.com/)findest Du eine Checkliste für Deine vollständige Bewerbung.",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1204258252-S",
     "sumber_data": "",
@@ -285,6 +239,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
     "scraped_at": "2026-06-11T08:16:12.303223+00:00"
   },
   {
@@ -317,6 +274,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:02.539515+00:00"
   },
   {
@@ -349,6 +309,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:15:50.766013+00:00"
   },
   {
@@ -381,6 +344,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:19.059858+00:00"
   },
   {
@@ -413,6 +379,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:00.434705+00:00"
   },
   {
@@ -445,6 +414,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:52.822292+00:00"
   },
   {
@@ -469,7 +441,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002918233-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Dann freuen wir uns auf deine vollständigen Bewerbungsunterlagen. Bitte sende diese an:\nWEPA Apothekenbedarf GmbH & Co KG",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002918233-S",
     "sumber_data": "",
@@ -477,6 +449,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:13.333024+00:00"
   },
   {
@@ -501,7 +476,7 @@
     "link_bewerbung_externe": "https://www.yourfirm.de/job/detail/YF28886552/?utm_source=bundesagentur&utm_medium=unpaid-partner&utm_campaign=000",
     "link_bewerbung_efektif": "https://www.yourfirm.de/job/detail/YF28886552/?utm_source=bundesagentur&utm_medium=unpaid-partner&utm_campaign=000",
     "bewerbung_sumber": "externe",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Dann freuen wir uns auf deine vollständigen Bewerbungsunterlagen. Bitte sende diese unter Angabe der Referenznummer YF-42109 an:\nWEPA Apothekenbedarf GmbH & Co KG\nMyriam Zimmermann\nAm Fichtenstrauch 6 – 10\n56204 Hillscheid\nE-Mail: bewerbungen@wepa-apothekenbedarf.de\nhttps://www.wepa-apothekenbedarf.de/",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/12117-28886552-YF-S",
     "sumber_data": "",
@@ -509,6 +484,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:15:56.296877+00:00"
   },
   {
@@ -541,6 +519,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
     "scraped_at": "2026-06-11T08:16:20.008692+00:00"
   },
   {
@@ -573,6 +554,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:15:56.555582+00:00"
   },
   {
@@ -605,6 +589,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:30.150895+00:00"
   },
   {
@@ -637,6 +624,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:49.172389+00:00"
   },
   {
@@ -669,6 +659,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:10.397082+00:00"
   },
   {
@@ -701,6 +694,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 93,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:51.292042+00:00"
   },
   {
@@ -733,6 +729,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:04.094208+00:00"
   },
   {
@@ -765,6 +764,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:47.781152+00:00"
   },
   {
@@ -789,7 +791,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002387031-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.09.2027",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "**Wir freuen uns auf deine Bewerbung!**\n**Auf Wunsch können wir überregionalen** **Bewerber/innen (m/w/d) gerne bei der Wohnungssuche unterstützen.**",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002387031-S",
     "sumber_data": "",
@@ -797,6 +799,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:02.207630+00:00"
   },
   {
@@ -829,6 +834,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:03.290251+00:00"
   },
   {
@@ -853,7 +861,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002699590-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.09.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Bewirb dich jetzt für den **Ausbildungsstart am 01.09.2026** für folgenden Ausbildungsberuf in unserer Zentrale in Emmendingen:\n- **Fachinformatiker (m/w/d) für Daten- & Prozessanalyse**",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002699590-S",
     "sumber_data": "",
@@ -861,6 +869,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
     "scraped_at": "2026-06-11T08:15:57.208048+00:00"
   },
   {
@@ -893,6 +904,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:09.200076+00:00"
   },
   {
@@ -917,7 +931,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203506295-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Wir freuen uns auf deine Bewerbung.\n**Über Sartorius**",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203506295-S",
     "sumber_data": "",
@@ -925,6 +939,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:07.986464+00:00"
   },
   {
@@ -957,6 +974,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:08.567026+00:00"
   },
   {
@@ -989,6 +1009,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:08.266383+00:00"
   },
   {
@@ -1021,6 +1044,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:16.156729+00:00"
   },
   {
@@ -1053,6 +1079,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:15:49.652231+00:00"
   },
   {
@@ -1085,6 +1114,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:54.001262+00:00"
   },
   {
@@ -1117,6 +1149,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:12.968618+00:00"
   },
   {
@@ -1149,6 +1184,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:57.479020+00:00"
   },
   {
@@ -1173,7 +1211,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203695504-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Bei Interesse freuen wir uns auf Deine Bewerbung.",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203695504-S",
     "sumber_data": "",
@@ -1181,6 +1219,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:00.693482+00:00"
   },
   {
@@ -1213,6 +1254,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:04.538490+00:00"
   },
   {
@@ -1245,6 +1289,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:57.963619+00:00"
   },
   {
@@ -1277,6 +1324,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:01.314360+00:00"
   },
   {
@@ -1301,7 +1351,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206754871-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.09.2027",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Wir freuen uns auf deine Bewerbung!\nBitte nutze das Bewerbungsformular unter **\"Jetzt bewerben\".**",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206754871-S",
     "sumber_data": "",
@@ -1309,6 +1359,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:07.361294+00:00"
   },
   {
@@ -1341,6 +1394,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": 2026,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:15.567396+00:00"
   },
   {
@@ -1373,6 +1429,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 87,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:53.687050+00:00"
   },
   {
@@ -1397,7 +1456,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203821432-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203821432-S",
     "sumber_data": "",
@@ -1405,6 +1464,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:15:58.554929+00:00"
   },
   {
@@ -1437,6 +1499,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:19.717869+00:00"
   },
   {
@@ -1469,6 +1534,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:05.565186+00:00"
   },
   {
@@ -1501,6 +1569,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:29.514956+00:00"
   },
   {
@@ -1533,6 +1604,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:22.874134+00:00"
   },
   {
@@ -1565,6 +1639,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:25.292240+00:00"
   },
   {
@@ -1597,6 +1674,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:27.098295+00:00"
   },
   {
@@ -1629,6 +1709,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:24.970828+00:00"
   },
   {
@@ -1661,6 +1744,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:11.496957+00:00"
   },
   {
@@ -1693,6 +1779,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:20.992816+00:00"
   },
   {
@@ -1725,6 +1814,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:49.388361+00:00"
   },
   {
@@ -1757,6 +1849,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:53.082863+00:00"
   },
   {
@@ -1789,39 +1884,10 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:12.639226+00:00"
-  },
-  {
-    "referenznummer": "10000-1206387734-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "Bernard Krone Holding SE & Co. KG",
-    "titik_data_di_peta": "52.6764461,7.4715601",
-    "posisi_kota": "Haselünne",
-    "alamat_detail": "49740 Haselünne",
-    "detail_deskripsi": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finde Deinen Platz bei der Bernard Krone Holding SE & Co. KG an unserem Standort in Spelle, Werlte, Haselünne oder Herzlake ab dem 01.08.2027 als\n\nDualstudierender zum **Bachelor of Science (m/w/d) Wirtschaftsinformatik & Nachhaltige IT**\n\nAls Bachelor of Science (m/w/d) Wirtschaftsinformatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Wenn Du nicht nur an der Wirtschaft sondern auch an der IT interessiert bist und Dich zusammenhängende Themen in den Bereichen interessieren, dann wird das der perfekte Mix für Dich sein. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen wirtschaftswissenschaftliches Fachwissen mit angewandter Informatik und kannst dieses während der Praxispahse im Unternehmen demonstrieren.\n\n**Du lernst**\n\n- Durchführung von Tests bei bestehenden Anwendungen\n- Anpassung von Programmen\n- Fehlerbehebung und Fehleranalyse\n- Dokumentation von Lösungen\n- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit&#160;&#160;**\n\n- Allgemeine Hochschulreife oder Fachhochschulreife mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengänge\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Systemintegration (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
-    "gaji": "",
-    "persyaratan": "- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\nAbitur / Allgemeine Hochschulreife",
-    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
-    "apa_yang_ditawarkan": "",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387734-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387734-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2027",
-    "dokumen_yang_harus_dipenuhi": "Für Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387734-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 80,
-    "scraped_at": "2026-06-11T08:16:24.378954+00:00"
   },
   {
     "referenznummer": "10000-1206386853-S",
@@ -1845,7 +1911,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206386853-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2027",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Für Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206386853-S",
     "sumber_data": "",
@@ -1853,6 +1919,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2027-08-01",
     "scraped_at": "2026-06-11T08:15:48.748435+00:00"
   },
   {
@@ -1885,6 +1954,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:09.486818+00:00"
   },
   {
@@ -1917,6 +1989,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:22.582677+00:00"
   },
   {
@@ -1949,6 +2024,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:05.492193+00:00"
   },
   {
@@ -1981,6 +2059,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:21.176585+00:00"
   },
   {
@@ -2013,6 +2094,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:13.481331+00:00"
   },
   {
@@ -2045,6 +2129,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:00.984538+00:00"
   },
   {
@@ -2069,7 +2156,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/17102-43795005-1120-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.09.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Klingt gut? Dann bewirb Dich jetzt!\nDafür brauchen wir Deinen Lebenslauf, Deine beiden letzten Zeugnisse und ein Anschreiben. Lade alle Deine Bewerbungsunterlagen unter dem Button \"Dokument\" in PDF-Format zusammengefügt hoch.\nDu möchtest persönlicher punkten als mit einem Anschreiben? Dann präsentiere Dich stattdessen mit einem kurzen Handy-Video. Sag uns in 60 bis 90 Sekunden:\n*  Wer bist Du?\n*  Wofür bewirbst Du Dich?\n*  Was macht Dich aus und was tust Du gerne?",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/17102-43795005-1120-S",
     "sumber_data": "",
@@ -2077,6 +2164,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
     "scraped_at": "2026-06-11T08:16:05.836563+00:00"
   },
   {
@@ -2101,7 +2191,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1001843278-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1001843278-S",
     "sumber_data": "",
@@ -2109,6 +2199,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:15:50.359205+00:00"
   },
   {
@@ -2141,6 +2234,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:49.753009+00:00"
   },
   {
@@ -2173,6 +2269,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:14.043734+00:00"
   },
   {
@@ -2205,6 +2304,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:14.969860+00:00"
   },
   {
@@ -2237,6 +2339,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:17.450569+00:00"
   },
   {
@@ -2269,6 +2374,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:04.199357+00:00"
   },
   {
@@ -2301,6 +2409,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:21.356466+00:00"
   },
   {
@@ -2325,7 +2436,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205931328-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.09.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205931328-S",
     "sumber_data": "",
@@ -2333,135 +2444,10 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
     "scraped_at": "2026-06-11T08:16:19.427852+00:00"
-  },
-  {
-    "referenznummer": "10000-1202201960-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "HORSCH Maschinen SE & Co. KG",
-    "titik_data_di_peta": "49.3142363,12.0947929",
-    "posisi_kota": "Schwandorf, Bayern",
-    "alamat_detail": "Schwandorf, Bayern",
-    "detail_deskripsi": "*Willkommen bei HORSCH! Hier startest Du in eine moderne Ausbildung oder duales Studium. In unserer innovativen Umgebung entdeckst Du nicht nur neueste Technologien, sondern auch Deine wahre Begeisterung. Bei HORSCH fördern wir nicht nur Dein Fachwissen, sondern auch Deine persönliche Entwicklung.*\n\n*In einer digitalen Arbeitsweise unterstützen wir Dich dabei, deine Fähigkeiten voll zu entfalten. Werde Teil eines Teams, das nach Spitzenleistungen in der Landtechnik strebt und gleichzeitig Deinen individuellen Entwicklungsweg fördert. Deine Leidenschaft und Talente bestimmen den Weg bei HORSCH!*\n \n**Ausbildung als Fachinformatiker (m/w/d) für Daten- & Prozessanalyse in Schwandorf, zum 01.09.2026.**\n\n\n#Berufsschule: Wiesau\n#Dauer: 3 Jahre\n#Gehalt: 1.302 – 1.570 €\n#Weiterbildung: Finde Dein Talent, werde Spezialist & erlebe Wachstum! Viele verschiedenen interne & externe Weiterbildungsmöglichkeiten.\n\n\nBei HORSCH bist Du der IT-Profi. Du überprüfst nicht nur die bestehenden Arbeits- und Geschäftsprozesse, sondern spürst Schwachstellen auf\nund bringst frische Ideen für die Verbesserung der Abläufe ein.\nDatengesteuerte Prozesse gestaltest Du effizienter und Du treibst die Digitalisierung von Geschäftsabläufen voran. Big Data und Machine Learning gehören zu Deinen Aufgaben\n\n\nWas bieten wir:\n\n- Moderner Arbeitsplatz mit voller Büroausstattung\n- Umfangreiche Schulungsangebote für deine persönliche & fachliche Weiterentwicklung\n- Weiter Specials findest du unter: [SPECIALS](http://ausbildung.horsch.com/specials)\n \nCheck:\n\n- Du bist begeistert von neuen Technologien?\n- Du Hast Interesse an IT & Englisch?\n- Du bist kreativ und hast Lust neue IT-Lösungen zu entdecken und zu implementieren\n \nDann ist dieser Beruf genau der Richtige für Dich!\n\n\nDie Mitarbeit in verschiedensten Abteilungen bietet Dir die Möglichkeit herauszufinden, wo Deine Stärken & Talente liegen.\nHast Du Spaß am Lernen & nimmst gerne Herausforderungen an?**** \n\n**Komm zu uns & bewirb dich jetzt!**\n\n\nWir freuen uns über Deine aussagekräftige Bewerbung über unser Bewerbungsmanagementsystem. \nDie Bewerbungsunterlagen werden bei uns digitalisiert.  Mit der Zusendung der Bewerbung erklärst du dich mit der Digitalisierung einverstanden. \nBitte bewirb Dich erst, wenn Du mindestens 14 Jahre alt bist.  Falls Du jünger als 18 Jahre bist, gehen wir davon aus, dass Deine Erziehungsberechtigten einverstanden sind.",
-    "gaji": "",
-    "persyaratan": "",
-    "jenis_ausbildung": "Ausbildung | Fachinformatiker/in - Daten- und Prozessanalyse",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Willkommen bei HORSCH! Hier startest Du in eine moderne Ausbildung oder duales Studium. In unserer innovativen Umgebung entdeckst Du nicht nur neueste Technologien, sondern auch Deine wahre Begeisterung. Bei HORSCH fördern wir nicht nur Dein Fachwissen, sondern auch Deine persönliche Entwicklung.*",
-    "apa_yang_ditawarkan": "#Gehalt: 1.302 – 1.570 €\n#Weiterbildung: Finde Dein Talent, werde Spezialist & erlebe Wachstum! Viele verschiedenen interne & externe Weiterbildungsmöglichkeiten.",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202201960-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202201960-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.09.2026",
-    "dokumen_yang_harus_dipenuhi": "**Komm zu uns & bewirb dich jetzt!**\nWir freuen uns über Deine aussagekräftige Bewerbung über unser Bewerbungsmanagementsystem.\nDie Bewerbungsunterlagen werden bei uns digitalisiert.  Mit der Zusendung der Bewerbung erklärst du dich mit der Digitalisierung einverstanden.\nBitte bewirb Dich erst, wenn Du mindestens 14 Jahre alt bist.  Falls Du jünger als 18 Jahre bist, gehen wir davon aus, dass Deine Erziehungsberechtigten einverstanden sind.",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202201960-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 80,
-    "scraped_at": "2026-06-11T08:15:55.343270+00:00"
-  },
-  {
-    "referenznummer": "10000-1206387666-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "Bernard Krone Holding SE & Co. KG",
-    "titik_data_di_peta": "52.3710714,7.4590321",
-    "posisi_kota": "Spelle",
-    "alamat_detail": "48480 Spelle",
-    "detail_deskripsi": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finde Deinen Platz bei der Bernard Krone Holding SE & Co. KG an unserem Standort in Spelle, Werlte, Haselünne oder Herzlake ab dem 01.08.2027 als\n\nDualstudierender zum **Bachelor of Science (m/w/d) Wirtschaftsinformatik & Nachhaltige IT**\n\nAls Bachelor of Science (m/w/d) Wirtschaftsinformatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Wenn Du nicht nur an der Wirtschaft sondern auch an der IT interessiert bist und Dich zusammenhängende Themen in den Bereichen interessieren, dann wird das der perfekte Mix für Dich sein. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen wirtschaftswissenschaftliches Fachwissen mit angewandter Informatik und kannst dieses während der Praxispahse im Unternehmen demonstrieren.\n\n**Du lernst**\n\n- Durchführung von Tests bei bestehenden Anwendungen\n- Anpassung von Programmen\n- Fehlerbehebung und Fehleranalyse\n- Dokumentation von Lösungen\n- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit&#160;&#160;**\n\n- Allgemeine Hochschulreife oder Fachhochschulreife mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengänge\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Daten- und Prozessanalyse (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
-    "gaji": "",
-    "persyaratan": "- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\nAbitur / Allgemeine Hochschulreife",
-    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Systemintegration",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
-    "apa_yang_ditawarkan": "",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387666-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387666-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2027",
-    "dokumen_yang_harus_dipenuhi": "Für Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387666-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 80,
-    "scraped_at": "2026-06-11T08:16:29.832745+00:00"
-  },
-  {
-    "referenznummer": "10000-1206388366-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "Bernard Krone Holding SE & Co. KG",
-    "titik_data_di_peta": "52.3710714,7.4590321",
-    "posisi_kota": "Spelle",
-    "alamat_detail": "48480 Spelle",
-    "detail_deskripsi": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finden Deinen Platz bei der Bernard Krone Holding SE & Co. KG an unserem Standort in Spelle und Werlte ab dem 01.08.2027 als\n\nDualstudierender zum **Bachelor of Engineering (m/w/d) Technische Informatik**\n\nAls Bachelor of Engineering (m/w/d) im Bereich technische Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du nicht nur eine Auge für technische Zusammenhänge hast sondern auch an der Informatik interessiert bist. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen Ingenieurswissenschaften mit angewandter Informatik und wirst so gut auf die Anforderungen im Unternehmen vorbereitet.\n\n**Dauer des Studiums**\n\n- 3 Jahre\n\n**Du lernst**\n\n- Planung und Weiterentwicklung komplexer IT-Systeme bis Embedded Systems\n- Erstellung von Dokumentationsunterlagen\n- Qualifizierung von Problemen und Serviceanfragen\n- Mitarbeit in interdisziplinären Teams\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit**\n\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengäng\n\n**Integrierte Berufsausbildung**\n\nAls Bachelor of Engineering (m/w/d) im Bereich technische Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du nicht nur eine Auge für technische Zusammenhänge hast sondern auch an der Informatik interessiert bist. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen Ingenieurswissenschaften mit angewandter Informatik und wirst so gut auf die Anforderungen im Unternehmen vorbereitet.\n\n**Dauer des Studiums**\n\n- 3 Jahre\n\n**Du lernst**\n\n- Planung und Weiterentwicklung komplexer IT-Systeme bis Embedded Systems\n- Erstellung von Dokumentationsunterlagen\n- Qualifizierung von Problemen und Serviceanfragen\n- Mitarbeit in interdisziplinären Teams\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit**\n\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengänge\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Daten- und Prozessanalyse (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
-    "gaji": "",
-    "persyaratan": "Als Bachelor of Engineering (m/w/d) im Bereich technische Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du nicht nur eine Auge für technische Zusammenhänge hast sondern auch an der Informatik interessiert bist. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen Ingenieurswissenschaften mit angewandter Informatik und wirst so gut auf die Anforderungen im Unternehmen vorbereitet.\n**Dauer des Studiums**\nAbitur / Allgemeine Hochschulreife",
-    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
-    "apa_yang_ditawarkan": "",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388366-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388366-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2027",
-    "dokumen_yang_harus_dipenuhi": "- Erstellung von Dokumentationsunterlagen\n- Qualifizierung von Problemen und Serviceanfragen\n- Mitarbeit in interdisziplinären Teams",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388366-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 80,
-    "scraped_at": "2026-06-11T08:16:24.070446+00:00"
-  },
-  {
-    "referenznummer": "10000-1206388713-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "KRONE Business Center DigITAL GmbH & Co. KG",
-    "titik_data_di_peta": "52.358958,7.474212",
-    "posisi_kota": "Spelle",
-    "alamat_detail": "Heinrich-Krone-Str. 10, 48480 Spelle",
-    "detail_deskripsi": "Als führender Hersteller in der Landtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben und gemeinsam mit uns die stärksten Erntemaschinen der Welt herstellen möchten. Als familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finde Deinen Platz bei der KRONE Business Center DigITAL GmbH & Co.KG an unserem Standort in Spelle ab dem 01.08.2027 als\n\n**Dualstudierender zum Bachelor of Science (m/w/d) Informatik**\n\nAls Bachelor of Science (m/w/d) im Bereich Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du Interesse daran hast, weitere Innovationen voranzutreiben, bestehende Systeme zu optimieren und Fehler zu beheben. Was du dafür brauchst lernst du im dualen Studium an der FH Münster.\n\n**Dauer des Studiums**\n\n- 4 Jahre\n\n**Du lernst**\n\n- Planung und Weiterentwicklung komplexer IT-Systeme bis Embedded Systems\n- Erstellung von Dokumentationsunterlagen\n- Durchführung von Tests bei bestehenden Anwendungen\n- Fehlerbehebung und Fehleranalyse\n- Entwicklung von Webanwendungen (Server, Web und Apps)\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n\n **Du bringst mit**\n\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nFH Münster, Campus Steinfurt\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Daten- und Prozessanalyse (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
-    "gaji": "",
-    "persyaratan": "**Du bringst mit**\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\nAbitur / Allgemeine Hochschulreife",
-    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Als führender Hersteller in der Landtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben und gemeinsam mit uns die stärksten Erntemaschinen der Welt herstellen möchten. Als familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
-    "apa_yang_ditawarkan": "",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388713-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388713-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2027",
-    "dokumen_yang_harus_dipenuhi": "- Erstellung von Dokumentationsunterlagen\n- Durchführung von Tests bei bestehenden Anwendungen\n- Fehlerbehebung und Fehleranalyse\n- Entwicklung von Webanwendungen (Server, Web und Apps)",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388713-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 80,
-    "scraped_at": "2026-06-11T08:16:23.761837+00:00"
   },
   {
     "referenznummer": "10000-1204235703-S",
@@ -2485,7 +2471,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1204235703-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.01.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1204235703-S",
     "sumber_data": "",
@@ -2493,6 +2479,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-24",
     "scraped_at": "2026-06-11T08:16:20.325073+00:00"
   },
   {
@@ -2517,7 +2506,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202917922-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "Dann freuen wir uns auf die Zusendung Ihrer aussagekräftigen Bewerbung inklusive der letzten drei Schulzeugnisse gern direkt über unser Online-Formular.",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202917922-S",
     "sumber_data": "",
@@ -2525,6 +2514,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:15:54.595814+00:00"
   },
   {
@@ -2557,6 +2549,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
     "scraped_at": "2026-06-11T08:16:28.472219+00:00"
   },
   {
@@ -2589,6 +2584,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:01.585813+00:00"
   },
   {
@@ -2621,6 +2619,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:13.732909+00:00"
   },
   {
@@ -2653,6 +2654,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 80,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:52.489930+00:00"
   },
   {
@@ -2677,7 +2681,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202833562-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "0.06.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202833562-S",
     "sumber_data": "",
@@ -2685,6 +2689,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:15.275344+00:00"
   },
   {
@@ -2717,6 +2724,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:47.541578+00:00"
   },
   {
@@ -2749,6 +2759,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:48.412675+00:00"
   },
   {
@@ -2781,6 +2794,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:03.704518+00:00"
   },
   {
@@ -2813,6 +2829,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:50.095638+00:00"
   },
   {
@@ -2845,39 +2864,10 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:56.864579+00:00"
-  },
-  {
-    "referenznummer": "10000-1205460876-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "Deutsche Bank AG",
-    "titik_data_di_peta": "50.1113194,8.6818977",
-    "posisi_kota": "Frankfurt am Main",
-    "alamat_detail": "60311 Frankfurt am Main",
-    "detail_deskripsi": "**Herzlich willkommen!**\n\nWir freuen uns darauf, dich auf deinem Weg ins Berufsleben zu begleiten und gemeinsam deine Fähigkeiten zu entwickeln. Unsere global ausgerichtete Bank mit all ihren Möglichkeiten steht dir offen.\n\nDu willst Wirtschaft und IT verbinden? In unserem ausbildungsintegrierten Studium Wirtschaftsinformatik gestaltest du die digitale Zukunft der Deutschen Bank. Dabei sind Theorie und Praxis eng miteinander verzahnt. Du hast nach 2 Jahren einen IHK-Abschluss als Fachinformatiker:in und nach 3,5 Jahren außerdem einen Bachelor of Science in der Tasche. Beste Voraussetzungen, um beruflich in jeder Hinsicht durchzustarten.\n\n**Aufgaben während der Ausbildung:**\n\n— Aktiv an digitalen Lösungen mitarbeiten und unsere Produkte und Services im Bereich Technology, Data & Innovation verbessern\n\n— Im Tagesgeschäft und in Projekten an der Schnittstelle von Technologie und Praxis mitwirken\n\n— An innovativen IT-Themen wie Cloud, Künstliche Intelligenz, Cyber-Securitiy, Softwareentwicklung und Datenanalyse mitwirken\n\n— Schrittweise eigene Aufgaben & Projekte übernehmen, die unsere Syteme smarter machen und Prozesse effizienter gestalten\n\n**Fähigkeiten:**\n\n— Gutes (Fach-) Abitur\n\n— Interesse an IT und Wirtschaft\n\n— Kommunikations- und Konfliktfähigkeit\n\n— Ausdauer und Kreativität\n\n— Analytische und sprachliche Fähigkeiten\n\n— Hohe Lern- und Leistungsbereitschaft\n\n**Deine ausbildungsintegriertes Studium bei uns ist …**\n\n**Facettenreich**\n\nErgreife die Chance, in Technology, Data & Innvoation Prozesse und Lösungen in echten Projekten zu entwickeln, die unsere Bank noch leistungsfähiger machen.\n\n**Innovativ & zukunftssicher**\n\nErlebe Digitalisierung, Künstliche Intelligenz, Innovation & Nachhaltigkeit hautnah.\n\n**Vernetzt & karrierestark**\n\nWerde Teil eines starken (inter-) nationalen Netzwerks mit Top-Perspektiven.\n\n**Individuell, flexibel & vielfältig**\n\nSetze eigene Schwerpunkte und gestalte deine Einsätze nach deinen Stärken und Interessen.\n\n**Gehalt und mehr**\n\n- 1. Ausbildungsjahr: 1.470 EUR\n- 2. Ausbildungsjahr: 1.550 EUR\n- Nach erfolgreichem IHK-Abschluss bis zum Abschluss der Bachelorthesis: Teilzeit Arbeitsvertrag nach Bankentarif\n- individueller Bonus\n- Kostenloses Gehaltskonto\n- Vermögenswirksame Leistungen\n- Belegschaftsaktien und Betriebsrente\n- Lernmittel-, Miet- und Fahrtkostenzuschüsse möglich\n- 30 Tage Urlaub (den 24.12. und 31.12. gibt es gleich noch obendrauf)\n\n**Hier kannst du dich bewerben:**\n\ncareers.db.com/ausbildung-studium",
-    "gaji": "",
-    "persyaratan": "Du willst Wirtschaft und IT verbinden? In unserem ausbildungsintegrierten Studium Wirtschaftsinformatik gestaltest du die digitale Zukunft der Deutschen Bank. Dabei sind Theorie und Praxis eng miteinander verzahnt. Du hast nach 2 Jahren einen IHK-Abschluss als Fachinformatiker:in und nach 3,5 Jahren außerdem einen Bachelor of Science in der Tasche. Beste Voraussetzungen, um beruflich in jeder Hinsicht durchzustarten.\n**Aufgaben während der Ausbildung:**",
-    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Herzlich willkommen!**",
-    "apa_yang_ditawarkan": "**Gehalt und mehr**\n- 1. Ausbildungsjahr: 1.470 EUR\n- 2. Ausbildungsjahr: 1.550 EUR\n- Nach erfolgreichem IHK-Abschluss bis zum Abschluss der Bachelorthesis: Teilzeit Arbeitsvertrag nach Bankentarif\n- individueller Bonus\n- Kostenloses Gehaltskonto\n- Vermögenswirksame Leistungen\n- Belegschaftsaktien und Betriebsrente\n- Lernmittel-, Miet- und Fahrtkostenzuschüsse möglich\n- 30 Tage Urlaub (den 24.12. und 31.12. gibt es gleich noch obendrauf)",
-    "link_website_perusahaan": "http://www.arbeitsagentur.de",
-    "link_website_perusahaan_resmi": "",
-    "website_type": "ba_portal",
-    "alamat_email_bewerbung": "",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205460876-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205460876-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "",
-    "dokumen_yang_harus_dipenuhi": "",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205460876-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 73,
-    "scraped_at": "2026-06-11T08:16:24.691519+00:00"
   },
   {
     "referenznummer": "14756-56f0cf92233b4932-S",
@@ -2909,6 +2899,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:09.792984+00:00"
   },
   {
@@ -2941,6 +2934,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": 2026,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:17.240684+00:00"
   },
   {
@@ -2973,6 +2969,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:14.355017+00:00"
   },
   {
@@ -3005,6 +3004,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:10.094064+00:00"
   },
   {
@@ -3037,6 +3039,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:22.259964+00:00"
   },
   {
@@ -3069,6 +3074,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:06.777989+00:00"
   },
   {
@@ -3101,6 +3109,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:54.303820+00:00"
   },
   {
@@ -3133,6 +3144,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:06.165958+00:00"
   },
   {
@@ -3165,6 +3179,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:58.898113+00:00"
   },
   {
@@ -3197,6 +3214,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:07.065306+00:00"
   },
   {
@@ -3229,6 +3249,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:06.471196+00:00"
   },
   {
@@ -3261,6 +3284,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:11.770736+00:00"
   },
   {
@@ -3293,39 +3319,10 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:15.865749+00:00"
-  },
-  {
-    "referenznummer": "15740-1535-1728440-0-S",
-    "category_id": "fachinformatiker_dpa",
-    "nama_perusahaan": "Kassenärztl. Bundesvereinigung",
-    "titik_data_di_peta": "52.5149147,13.3343333",
-    "posisi_kota": "Berlin",
-    "alamat_detail": "Herbert-Lewin-Platz 2, 10623 Berlin",
-    "detail_deskripsi": "Wir suchen Sie für unser Dezernat Digitalisierung und IT, Abteilung Daten und Automatisierung, für das Duale Studium \"Bachelor of Science Informatik / Data Science\" im Zentrum Berlins für den Studienstart Oktober 2026. Als Teil unseres Teams lernen Sie in verschiedenen Abteilungen der IT in der KBV (z.B. Daten und Automatisierung, Entwicklung, IT in der Arztpraxis, Betrieb und Service, IT Sicherheit) neueste Technologien und echten Teamgeist kennen.\n\t\t\t\t\t\n\nDuales Studium - Bachelor of Science Informatik / Data Science\n\n\t\t\nDas Dezernat Digitalisierung und IT beschäftigt sich mit einer Vielzahl von spannenden Fragestellungen und Zukunftsthemen. In der Abteilung Daten und Automatisierung arbeiten Sie als Data Engineer, Data Scientist und Data Analyst an anspruchsvollen Projekten und Aufgaben. Wir unterstützen und beraten die Dezernate und Fachabteilungen der KBV zu folgenden Themen:\n\t\t\t\n\n- Beratung zu den Themen Datenanalyse, Datenmanagement und Datennutzung\n- Durchführung von komplexen Datenanalysen und Unterstützung der Fachbereiche\n- Datenmanagement in Form der Integration von Daten\n- Automatisierung von Datenverarbeitungsprozessen und Monitoring mittels Datenlieferungsverwaltung\n- Datenaustausch zwischen den Stakeholdern im Gesundheitswesen\n- Betreuung Data Warehouse (DWH) und Business Intelligence (BI)\n- Einsatz von KI\n\t\t\n\t\n- Allgemeine Hochschulreife (Abitur), Fachhochschulreife oder fachgebundene Hochschulreife\n- Gute bis sehr gute Leistungen in den Leistungsfächern Mathematik und Informatik\n- Ausgeprägte Fähigkeit zu analytischem, logischem und abstraktem Denken\n- Lernbereitschaft, Selbstorganisation, strukturierte Arbeitsweise, Zielstrebigkeit sowie gute Kommunikationsfähigkeit in Wort und Schrift\n- Abwechslung: Sie genießen die Vorteile eines öffentlichen Arbeitgebers und agieren zugleich in einem innovativen Umfeld\n- Frühaufsteher oder Langschläfer? Ihre Arbeitszeit können Sie flexibel durch mobiles Arbeiten und unser Gleitzeitmodell gestalten\n- Vergütung: Wir wertschätzen Ihre Arbeit mit einer attraktiven Bezahlung\n- Berufliche Entwicklung: Bei uns können Sie wachsen: Wir fördern Sie durch verantwortungsvolle und praxisnahe Aufgaben\n- Weitere Benefits: Kantine, Sportangebote sowie Zuschuss zum Firmenticket sind nur einige Beispiele\n\nDie KBV gewährleistet die berufliche Gleichstellung von Frauen und Männern. Schwerbehinderte Menschen werden bei gleicher Eignung besonders berücksichtigt. Die Stelle ist für die Besetzung mit Teilzeitkräften grundsätzlich geeignet. Gerne können Sie auch die externe Bewerbungsfrist über den angegebenen Link nutzen.",
-    "gaji": "",
-    "persyaratan": "",
-    "jenis_ausbildung": "Ausbildung | Fachinformatiker/in - Daten- und Prozessanalyse",
-    "beruf_typ": "dpa",
-    "deskripsi_perusahaan": "Wir suchen Sie für unser Dezernat Digitalisierung und IT, Abteilung Daten und Automatisierung, für das Duale Studium \"Bachelor of Science Informatik / Data Science\" im Zentrum Berlins für den Studienstart Oktober 2026. Als Teil unseres Teams lernen Sie in verschiedenen Abteilungen der IT in der KBV (z.B. Daten und Automatisierung, Entwicklung, IT in der Arztpraxis, Betrieb und Service, IT Sicherheit) neueste Technologien und echten Teamgeist kennen.",
-    "apa_yang_ditawarkan": "- Vergütung: Wir wertschätzen Ihre Arbeit mit einer attraktiven Bezahlung\n- Berufliche Entwicklung: Bei uns können Sie wachsen: Wir fördern Sie durch verantwortungsvolle und praxisnahe Aufgaben\n- Weitere Benefits: Kantine, Sportangebote sowie Zuschuss zum Firmenticket sind nur einige Beispiele",
-    "link_website_perusahaan": "https://www.kbv.de",
-    "link_website_perusahaan_resmi": "https://www.kbv.de",
-    "website_type": "company",
-    "alamat_email_bewerbung": "",
-    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/15740-1535-1728440-0-S",
-    "link_bewerbung_externe": "",
-    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/15740-1535-1728440-0-S",
-    "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "",
-    "dokumen_yang_harus_dipenuhi": "",
-    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/15740-1535-1728440-0-S",
-    "sumber_data": "",
-    "ausbildung_de_url": "",
-    "is_duplicate_of_arbeitsagentur": false,
-    "duplicate_of_refnr": "",
-    "kelengkapan_score": 67,
-    "scraped_at": "2026-06-11T08:16:23.459855+00:00"
   },
   {
     "referenznummer": "10001-1001657676-S",
@@ -3357,6 +3354,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 67,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:51.585691+00:00"
   },
   {
@@ -3389,6 +3389,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 67,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:51.877035+00:00"
   },
   {
@@ -3421,6 +3424,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 67,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:55.670450+00:00"
   },
   {
@@ -3445,7 +3451,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/17391-0065240461-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2027",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/17391-0065240461-S",
     "sumber_data": "",
@@ -3453,6 +3459,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 67,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2027-08-01",
     "scraped_at": "2026-06-11T08:15:51.114377+00:00"
   },
   {
@@ -3485,6 +3494,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 67,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:52.205914+00:00"
   },
   {
@@ -3517,6 +3529,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 67,
+    "tahun_mulai": 2026,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:01.922389+00:00"
   },
   {
@@ -3549,6 +3564,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 60,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:48.201516+00:00"
   },
   {
@@ -3581,6 +3599,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 60,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:15:57.654185+00:00"
   },
   {
@@ -3605,7 +3626,7 @@
     "link_bewerbung_externe": "",
     "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002166442-S",
     "bewerbung_sumber": "ba_portal",
-    "kontak_penanggung_jawab": "01.08.2026",
+    "kontak_penanggung_jawab": "",
     "dokumen_yang_harus_dipenuhi": "",
     "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10001-1002166442-S",
     "sumber_data": "",
@@ -3613,7 +3634,325 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 60,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2026-08-01",
     "scraped_at": "2026-06-11T08:16:25.598618+00:00"
+  },
+  {
+    "referenznummer": "10000-1203185821-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "Evonik Operations GmbH",
+    "titik_data_di_peta": "51.6802609,7.1018834",
+    "posisi_kota": "Marl, Westfalen",
+    "alamat_detail": "Paul-Baumann-Str. 1, 45772 Marl, Westfalen",
+    "detail_deskripsi": "## Ausbildung 2026 Fachinformatiker Bachelor of Science (m/w/d) - Marl\n\nWir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.\n\n### **Was wir bieten** \n\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:\n\n- **Ausbildungsvergütung** \nBereits im ersten Ausbildungsjahr erhältst du über 1.100 €/Monat Gehalt. Danach steigt dein Monatsgehalt pro Ausbildungsjahr. On top erhältst du noch Zusatzleistungen wie Urlaubs- und Weihnachtsgeld.\n- **Urlaub und Arbeitszeit** \nWir bieten dir eine gute Work-Life-Balance mit 30 Urlaubstagen und modernen Arbeitszeitmodellen.\n- **Spaß bei der Arbeit** \nWir bieten dir ein gutes Arbeitsklima mit vielseitigen Praxiseinsätzen in großartigen Teams\n- **kostenfreie Lernunterstützung** Wir bieten dir Unterstützung beim Lernen und eine gute Betreuung durch den Betrieb\n\n…und vieles mehr!\n\n### **Verantwortlichkeiten**\n\nTheoriephasen an der Westfälischen Hochschule in Gelsenkirchen:\n\n- Studium bietet eine Kombination aus betriebswirtschaftlichem und informationstechnischem Wissen\n- Fundiertes theoretisches Grundwissen mit Praxisbezug\n- Lernen Softwarelösungen zur Unterstützung betriebswirtschaftlicher Aufgabenstellungen zu erstellen und zum Einsatz zu bringen, wie auch Geschäftsprozesse zu erfassen, analysieren und optimieren\n- Digitalisierung und Automatisierung kreativ vorantreiben und damit die Leistungsangebote optimieren\n\nDie betriebliche Ausbildung: \n\n- Entwicklung, Installation und Optimierung neuer IT-Systeme und Cloud Services \n- Anwendungen von Programmiersprachen  \n- Testen neuer Software und Hardware \n- Analyse von IT-gestützten Geschäftsprozessen\n- Mitarbeit an IT-Projekten \n- Daten- und Prozessanalyse zur Optimierung von IT-Systemen \n\n**Ausbildungsdauer:** 3 Jahre Ausbildung / 8 Semester Studium\n\n**Ausbildungsbeginn:** 01.09.2026\n\n**Ausbildungsstandort:** Chemiepark Marl und Westfälische Hochschule Gelsenkirchen \n\n**Ansprechpartner:** Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com)) \n\n### **Anforderungen**\n\n- Allgemeine Hochschulreife \n- Gute Mathematik-, Informatik- und Englischkenntnisse \n\n\n\n- Kommunikationsfähigkeit und gewandte Ausdrucksweise in Wort und Schrift  \n- Interesse an digitalen Lösungen und Programmieren sicherer Systeme \n- Freude an der IT-Branche und der Digitalisierung \n- Lust auf Analyse von Zahlen, Algorithmen und Datenstrukturen \n- Verantwortungsbewusstsein, Zuverlässigkeit und Teamfähigkeit \n- Sorgfalt, Konzentrationsfähigkeit und eigenverantwortliche Lernbereitschaft  \n\n### **AUSBILDUNG GESCHAFFT – WAS DANN?**\n\nAls Bachelor of Science (m/w/d) des Studiengangs Wirtschaftsinformatik hast du vielfältige Entwicklungsmöglichkeiten, beispielweise im Projektmanagement oder in der Systementwicklung.  Deine berufliche Reise kann natürlich noch weitergehen: Wie wäre es zum Beispiel durch interne Workshops oder mit einem berufsbegleitendem Masterstudium? Das Ziel wählst du! \n\nHinweis: Aufgrund unseres Recruitingsystems Workday und teilweise automatisierten Prozessschritten werden wir im weiteren Bewerbungsprozess deine persönliche Anrede auf die Sie-Form umstellen.\n\n### **Ihre Bewerbung** \n\nUm eine schnellstmögliche Bearbeitung Ihrer Bewerbung zu gewährleisten und die Umwelt zu schonen, bewerben Sie sich bitte online über unser [Karriereportal](https://evonik.wd3.myworkdayjobs.com/de-DE/External_Careers). Weitere Informationen über Evonik als Arbeitgeber finden Sie unter [https://careers.evonik.com](https://careers.evonik.com/).\n\n**Ihr Talent Acquisition Manager:**\n\nAnna Waterkotte, Lara Ide, Mara Winkelhagen, Oliver Lesch, Sonja Kensbock, Vanessa Jordan\n\nUnternehmen ist Evonik Operations GmbH",
+    "gaji": "1.100 €/Monat",
+    "persyaratan": "### **Anforderungen**\n- Allgemeine Hochschulreife\n- Gute Mathematik-, Informatik- und Englischkenntnisse\nAbitur / Allgemeine Hochschulreife",
+    "jenis_ausbildung": "Duales Studium | Industriekaufmann/-frau",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Ausbildung 2026 Fachinformatiker Bachelor of Science (m/w/d) - Marl",
+    "apa_yang_ditawarkan": "### **Was wir bieten**\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "ausbildung-marl@evonik.com",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203185821-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203185821-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "**Ansprechpartner:** Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com))",
+    "dokumen_yang_harus_dipenuhi": "Wir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1203185821-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 100,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
+    "scraped_at": "2026-06-11T08:16:29.048505+00:00"
+  },
+  {
+    "referenznummer": "10000-1206744232-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "SYNEQT GmbH",
+    "titik_data_di_peta": "51.6631334,7.1110601",
+    "posisi_kota": "Marl, Westfalen",
+    "alamat_detail": "Marl, Westfalen",
+    "detail_deskripsi": "### Ausbildung 2027 Fachinformatiker Bachelor of Science (m/w/d) - Marl\n\nWir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.\n\n**Was wir bieten**\n\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:\n\n- **Ausbildungsvergütung**\nBereits im ersten Ausbildungsjahr erhältst du über 1.100 €/Monat Gehalt. Danach steigt dein Monatsgehalt pro Ausbildungsjahr. On top erhältst du noch Zusatzleistungen wie Urlaubs- und Weihnachtsgeld.\n- **Urlaub und Arbeitszeit&#160;**\nWir bieten dir eine gute Work-Life-Balance mit 30 Urlaubstagen und modernen Arbeitszeitmodellen.\n- **Spaß bei der Arbeit**\nWir bieten dir ein gutes Arbeitsklima mit vielseitigen Praxiseinsätzen in großartigen Teams.\n- **kostenfreie Lernunterstützung&#160;**\nWir bieten dir Unterstützung beim Lernen und eine gute Betreuung durch den Betrieb\n\nWeitere **Benefits** findest du auf der **Landing-Page** unserer **Ausbildungsseite**.\n\n**Verantwortlichkeiten**\n\nTheoriephasen an der Westfälischen Hochschule in Gelsenkirchen:\n\n- Studium bietet eine Kombination aus betriebswirtschaftlichem und informationstechnischem Wissen\n- Fundiertes theoretisches Grundwissen mit Praxisbezug\n- Lernen Softwarelösungen zur Unterstützung betriebswirtschaftlicher Aufgabenstellungen zu erstellen und zum Einsatz zu bringen, wie auch Geschäftsprozesse zu erfassen, analysieren und optimieren\n- Digitalisierung und Automatisierung kreativ vorantreiben und damit die Leistungsangebote optimieren\n\nDie betriebliche Ausbildung:\n\n- Entwicklung, Installation und Optimierung neuer IT-Systeme und Cloud Services\n- Anwendungen von Programmiersprachen\n- Testen neuer Software und Hardware\n- Analyse von IT-gestützten Geschäftsprozessen\n- Mitarbeit an IT-Projekten\n- Daten- und Prozessanalyse zur Optimierung von IT-Systemen\n\n**Ausbildungsdauer:** 3 Jahre Ausbildung / 8 Semester Studium\n\n**Ausbildungsbeginn:** 01.09.2027\n\n**Ausbildungsstandort:** Chemiepark Marl und Westfälische Hochschule Gelsenkirchen\n\n**Ansprechpartner:&#160;**Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com))\n\n**Anforderungen**:\n\n- Allgemeine Hochschulreife\n- Gute Mathematik-, Informatik- und Englischkenntnisse\n- Kommunikationsfähigkeit und gewandte Ausdrucksweise in Wort und Schrift\n- Interesse an digitalen Lösungen und Programmieren sicherer Systeme\n- Freude an der IT-Branche und der Digitalisierung\n- Lust auf Analyse von Zahlen, Algorithmen und Datenstrukturen\n- Verantwortungsbewusstsein, Zuverlässigkeit und Teamfähigkeit\n- Sorgfalt, Konzentrationsfähigkeit und eigenverantwortliche Lernbereitschaft\n\n**AUSBILDUNG GESCHAFFT – WAS DANN?**\n\nAls Bachelor of Science (m/w/d) des Studiengangs Wirtschaftsinformatik hast du vielfältige Entwicklungsmöglichkeiten, beispielweise im Projektmanagement oder in der Systementwicklung.  Deine berufliche Reise kann natürlich noch weitergehen: Wie wäre es zum Beispiel durch interne Workshops oder mit einem berufsbegleitendem Masterstudium? Das Ziel wählst du!\n\nHinweis: Aufgrund unseres Recruitingsystems Workday und teilweise automatisierten Prozessschritten werden wir im weiteren Bewerbungsprozess deine persönliche Anrede auf die Sie-Form umstellen.\n\n## Deine Vorteile bei uns\n\nBei uns sollst du dich von Anfang an wohlfühlen. Hierauf kannst du dich bei uns freuen:\n\n### Attraktive tarifliche Zusatzleistungen\n\nZukunftsbetrag von 23 % der monatlichen Ausbildungsvergütung.\n\n### Fahrtkostenzuschuss\n\nAbhängig von der Entfernung deines Wohnortes zu deinem Evonik-Standort bzw. Berufsschule/Hochschule, erhältst du von uns einen Zuschuss zu deinen Fahrtkosten.\n\n### Einführungswoche\n\nGemeinsame Aktionswoche, um den Start in die Ausbildung zu erleichtern.\n\n### Gut versorgt\n\nOb Kantine oder Altersvorsorge – bei uns wirst du gut versorgt.\n\n### Moderne Ausstattung\n\nWeg von Papier und Stift - bei uns nutzt du während deiner Ausbildung personalisierte Notebooks oder iPads.\n\n### Flexibles Lernen mit der Evonik-Mediathek\n\nIn mehreren Sprachen und rund um die Uhr - von Lernplänen, Q&As bis hin zu Quizzes und Games ist alles dabei!",
+    "gaji": "1.100 €/Monat",
+    "persyaratan": "**Anforderungen**:\n- Allgemeine Hochschulreife\n- Gute Mathematik-, Informatik- und Englischkenntnisse\n- Kommunikationsfähigkeit und gewandte Ausdrucksweise in Wort und Schrift\n- Interesse an digitalen Lösungen und Programmieren sicherer Systeme\n- Freude an der IT-Branche und der Digitalisierung\n- Lust auf Analyse von Zahlen, Algorithmen und Datenstrukturen\n- Verantwortungsbewusstsein, Zuverlässigkeit und Teamfähigkeit\n- Sorgfalt, Konzentrationsfähigkeit und eigenverantwortliche Lernbereitschaft\nAbitur / Allgemeine Hochschulreife",
+    "jenis_ausbildung": "Duales Studium | Industriekaufmann/-frau",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Ausbildung 2027 Fachinformatiker Bachelor of Science (m/w/d) - Marl",
+    "apa_yang_ditawarkan": "**Was wir bieten**\nWir bieten dir eine abwechslungsreiche und qualitativ hochwertige Ausbildung in verschiedensten Berufen der Naturwissenschaft, Technik, Logistik, Gastronomie und der kaufmännischen Verwaltung. Bei uns als top Ausbildungsbetrieb kannst du dich unter anderem über die folgenden Vorteile freuen:",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "ausbildung-marl@evonik.com",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206744232-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206744232-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "**Ansprechpartner:&#160;**Oliver Lesch ([ausbildung-marl@evonik.com](mailto:ausbildung-marl@evonik.com))",
+    "dokumen_yang_harus_dipenuhi": "Wir haben keine Bewerbungsfristen. Solange die Stelle ausgeschrieben ist, kannst du deine Bewerbung einreichen. Je früher du dich bewirbst, umso besser stehen deine Chancen.\n**Was wir bieten**",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206744232-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 100,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2027-09-01",
+    "scraped_at": "2026-06-11T08:16:28.774080+00:00"
+  },
+  {
+    "referenznummer": "10000-1206387734-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "Bernard Krone Holding SE & Co. KG",
+    "titik_data_di_peta": "52.6764461,7.4715601",
+    "posisi_kota": "Haselünne",
+    "alamat_detail": "49740 Haselünne",
+    "detail_deskripsi": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finde Deinen Platz bei der Bernard Krone Holding SE & Co. KG an unserem Standort in Spelle, Werlte, Haselünne oder Herzlake ab dem 01.08.2027 als\n\nDualstudierender zum **Bachelor of Science (m/w/d) Wirtschaftsinformatik & Nachhaltige IT**\n\nAls Bachelor of Science (m/w/d) Wirtschaftsinformatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Wenn Du nicht nur an der Wirtschaft sondern auch an der IT interessiert bist und Dich zusammenhängende Themen in den Bereichen interessieren, dann wird das der perfekte Mix für Dich sein. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen wirtschaftswissenschaftliches Fachwissen mit angewandter Informatik und kannst dieses während der Praxispahse im Unternehmen demonstrieren.\n\n**Du lernst**\n\n- Durchführung von Tests bei bestehenden Anwendungen\n- Anpassung von Programmen\n- Fehlerbehebung und Fehleranalyse\n- Dokumentation von Lösungen\n- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit&#160;&#160;**\n\n- Allgemeine Hochschulreife oder Fachhochschulreife mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengänge\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Systemintegration (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
+    "gaji": "",
+    "persyaratan": "- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\nAbitur / Allgemeine Hochschulreife",
+    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
+    "apa_yang_ditawarkan": "",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387734-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387734-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "",
+    "dokumen_yang_harus_dipenuhi": "Für Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387734-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 80,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2027-08-01",
+    "scraped_at": "2026-06-11T08:16:24.378954+00:00"
+  },
+  {
+    "referenznummer": "10000-1202201960-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "HORSCH Maschinen SE & Co. KG",
+    "titik_data_di_peta": "49.3142363,12.0947929",
+    "posisi_kota": "Schwandorf, Bayern",
+    "alamat_detail": "Schwandorf, Bayern",
+    "detail_deskripsi": "*Willkommen bei HORSCH! Hier startest Du in eine moderne Ausbildung oder duales Studium. In unserer innovativen Umgebung entdeckst Du nicht nur neueste Technologien, sondern auch Deine wahre Begeisterung. Bei HORSCH fördern wir nicht nur Dein Fachwissen, sondern auch Deine persönliche Entwicklung.*\n\n*In einer digitalen Arbeitsweise unterstützen wir Dich dabei, deine Fähigkeiten voll zu entfalten. Werde Teil eines Teams, das nach Spitzenleistungen in der Landtechnik strebt und gleichzeitig Deinen individuellen Entwicklungsweg fördert. Deine Leidenschaft und Talente bestimmen den Weg bei HORSCH!*\n \n**Ausbildung als Fachinformatiker (m/w/d) für Daten- & Prozessanalyse in Schwandorf, zum 01.09.2026.**\n\n\n#Berufsschule: Wiesau\n#Dauer: 3 Jahre\n#Gehalt: 1.302 – 1.570 €\n#Weiterbildung: Finde Dein Talent, werde Spezialist & erlebe Wachstum! Viele verschiedenen interne & externe Weiterbildungsmöglichkeiten.\n\n\nBei HORSCH bist Du der IT-Profi. Du überprüfst nicht nur die bestehenden Arbeits- und Geschäftsprozesse, sondern spürst Schwachstellen auf\nund bringst frische Ideen für die Verbesserung der Abläufe ein.\nDatengesteuerte Prozesse gestaltest Du effizienter und Du treibst die Digitalisierung von Geschäftsabläufen voran. Big Data und Machine Learning gehören zu Deinen Aufgaben\n\n\nWas bieten wir:\n\n- Moderner Arbeitsplatz mit voller Büroausstattung\n- Umfangreiche Schulungsangebote für deine persönliche & fachliche Weiterentwicklung\n- Weiter Specials findest du unter: [SPECIALS](http://ausbildung.horsch.com/specials)\n \nCheck:\n\n- Du bist begeistert von neuen Technologien?\n- Du Hast Interesse an IT & Englisch?\n- Du bist kreativ und hast Lust neue IT-Lösungen zu entdecken und zu implementieren\n \nDann ist dieser Beruf genau der Richtige für Dich!\n\n\nDie Mitarbeit in verschiedensten Abteilungen bietet Dir die Möglichkeit herauszufinden, wo Deine Stärken & Talente liegen.\nHast Du Spaß am Lernen & nimmst gerne Herausforderungen an?**** \n\n**Komm zu uns & bewirb dich jetzt!**\n\n\nWir freuen uns über Deine aussagekräftige Bewerbung über unser Bewerbungsmanagementsystem. \nDie Bewerbungsunterlagen werden bei uns digitalisiert.  Mit der Zusendung der Bewerbung erklärst du dich mit der Digitalisierung einverstanden. \nBitte bewirb Dich erst, wenn Du mindestens 14 Jahre alt bist.  Falls Du jünger als 18 Jahre bist, gehen wir davon aus, dass Deine Erziehungsberechtigten einverstanden sind.",
+    "gaji": "",
+    "persyaratan": "",
+    "jenis_ausbildung": "Ausbildung | Fachinformatiker/in - Daten- und Prozessanalyse",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Willkommen bei HORSCH! Hier startest Du in eine moderne Ausbildung oder duales Studium. In unserer innovativen Umgebung entdeckst Du nicht nur neueste Technologien, sondern auch Deine wahre Begeisterung. Bei HORSCH fördern wir nicht nur Dein Fachwissen, sondern auch Deine persönliche Entwicklung.*",
+    "apa_yang_ditawarkan": "#Gehalt: 1.302 – 1.570 €\n#Weiterbildung: Finde Dein Talent, werde Spezialist & erlebe Wachstum! Viele verschiedenen interne & externe Weiterbildungsmöglichkeiten.",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202201960-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202201960-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "",
+    "dokumen_yang_harus_dipenuhi": "**Komm zu uns & bewirb dich jetzt!**\nWir freuen uns über Deine aussagekräftige Bewerbung über unser Bewerbungsmanagementsystem.\nDie Bewerbungsunterlagen werden bei uns digitalisiert.  Mit der Zusendung der Bewerbung erklärst du dich mit der Digitalisierung einverstanden.\nBitte bewirb Dich erst, wenn Du mindestens 14 Jahre alt bist.  Falls Du jünger als 18 Jahre bist, gehen wir davon aus, dass Deine Erziehungsberechtigten einverstanden sind.",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1202201960-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 80,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 9,
+    "tanggal_mulai": "2026-09-01",
+    "scraped_at": "2026-06-11T08:15:55.343270+00:00"
+  },
+  {
+    "referenznummer": "10000-1206387666-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "Bernard Krone Holding SE & Co. KG",
+    "titik_data_di_peta": "52.3710714,7.4590321",
+    "posisi_kota": "Spelle",
+    "alamat_detail": "48480 Spelle",
+    "detail_deskripsi": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finde Deinen Platz bei der Bernard Krone Holding SE & Co. KG an unserem Standort in Spelle, Werlte, Haselünne oder Herzlake ab dem 01.08.2027 als\n\nDualstudierender zum **Bachelor of Science (m/w/d) Wirtschaftsinformatik & Nachhaltige IT**\n\nAls Bachelor of Science (m/w/d) Wirtschaftsinformatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Wenn Du nicht nur an der Wirtschaft sondern auch an der IT interessiert bist und Dich zusammenhängende Themen in den Bereichen interessieren, dann wird das der perfekte Mix für Dich sein. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen wirtschaftswissenschaftliches Fachwissen mit angewandter Informatik und kannst dieses während der Praxispahse im Unternehmen demonstrieren.\n\n**Du lernst**\n\n- Durchführung von Tests bei bestehenden Anwendungen\n- Anpassung von Programmen\n- Fehlerbehebung und Fehleranalyse\n- Dokumentation von Lösungen\n- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit&#160;&#160;**\n\n- Allgemeine Hochschulreife oder Fachhochschulreife mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengänge\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Daten- und Prozessanalyse (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
+    "gaji": "",
+    "persyaratan": "- Anforderungsanalyse und Beratung in den Fachabteilungen\n- Entwicklung von Webanwendungen (Server, Web und Apps)\nAbitur / Allgemeine Hochschulreife",
+    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Systemintegration",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
+    "apa_yang_ditawarkan": "",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387666-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387666-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "",
+    "dokumen_yang_harus_dipenuhi": "Für Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206387666-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 80,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2027-08-01",
+    "scraped_at": "2026-06-11T08:16:29.832745+00:00"
+  },
+  {
+    "referenznummer": "10000-1206388366-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "Bernard Krone Holding SE & Co. KG",
+    "titik_data_di_peta": "52.3710714,7.4590321",
+    "posisi_kota": "Spelle",
+    "alamat_detail": "48480 Spelle",
+    "detail_deskripsi": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finden Deinen Platz bei der Bernard Krone Holding SE & Co. KG an unserem Standort in Spelle und Werlte ab dem 01.08.2027 als\n\nDualstudierender zum **Bachelor of Engineering (m/w/d) Technische Informatik**\n\nAls Bachelor of Engineering (m/w/d) im Bereich technische Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du nicht nur eine Auge für technische Zusammenhänge hast sondern auch an der Informatik interessiert bist. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen Ingenieurswissenschaften mit angewandter Informatik und wirst so gut auf die Anforderungen im Unternehmen vorbereitet.\n\n**Dauer des Studiums**\n\n- 3 Jahre\n\n**Du lernst**\n\n- Planung und Weiterentwicklung komplexer IT-Systeme bis Embedded Systems\n- Erstellung von Dokumentationsunterlagen\n- Qualifizierung von Problemen und Serviceanfragen\n- Mitarbeit in interdisziplinären Teams\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit**\n\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengäng\n\n**Integrierte Berufsausbildung**\n\nAls Bachelor of Engineering (m/w/d) im Bereich technische Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du nicht nur eine Auge für technische Zusammenhänge hast sondern auch an der Informatik interessiert bist. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen Ingenieurswissenschaften mit angewandter Informatik und wirst so gut auf die Anforderungen im Unternehmen vorbereitet.\n\n**Dauer des Studiums**\n\n- 3 Jahre\n\n**Du lernst**\n\n- Planung und Weiterentwicklung komplexer IT-Systeme bis Embedded Systems\n- Erstellung von Dokumentationsunterlagen\n- Qualifizierung von Problemen und Serviceanfragen\n- Mitarbeit in interdisziplinären Teams\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle, Werlte oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n- Elektronikentwicklung am Standort Spelle (Ausbildungsbetrieb Maschinenfabrik Bernard Krone GmbH & Co. KG)\n\n**Du bringst mit**\n\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nHochschule Osnabrück, Campus Lingen, Institut für duale Studiengänge\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Daten- und Prozessanalyse (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
+    "gaji": "",
+    "persyaratan": "Als Bachelor of Engineering (m/w/d) im Bereich technische Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du nicht nur eine Auge für technische Zusammenhänge hast sondern auch an der Informatik interessiert bist. Du verbindest während deiner theoretischen Phasen am Institut für duale Studiengänge am Standort Lingen Ingenieurswissenschaften mit angewandter Informatik und wirst so gut auf die Anforderungen im Unternehmen vorbereitet.\n**Dauer des Studiums**\nAbitur / Allgemeine Hochschulreife",
+    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Als führender Hersteller in der Land- und Nutzfahrzeugtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben möchten.\nAls familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
+    "apa_yang_ditawarkan": "",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388366-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388366-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "",
+    "dokumen_yang_harus_dipenuhi": "- Erstellung von Dokumentationsunterlagen\n- Qualifizierung von Problemen und Serviceanfragen\n- Mitarbeit in interdisziplinären Teams",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388366-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 80,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2027-08-01",
+    "scraped_at": "2026-06-11T08:16:24.070446+00:00"
+  },
+  {
+    "referenznummer": "10000-1206388713-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "KRONE Business Center DigITAL GmbH & Co. KG",
+    "titik_data_di_peta": "52.358958,7.474212",
+    "posisi_kota": "Spelle",
+    "alamat_detail": "Heinrich-Krone-Str. 10, 48480 Spelle",
+    "detail_deskripsi": "Als führender Hersteller in der Landtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben und gemeinsam mit uns die stärksten Erntemaschinen der Welt herstellen möchten. Als familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.\n\nVerstärke unser Team und finde Deinen Platz bei der KRONE Business Center DigITAL GmbH & Co.KG an unserem Standort in Spelle ab dem 01.08.2027 als\n\n**Dualstudierender zum Bachelor of Science (m/w/d) Informatik**\n\nAls Bachelor of Science (m/w/d) im Bereich Informatik bei KRONE erwartet Dich nicht nur eine spannende und aufschlussreiche Zeit bei uns im Unternehmen, sondern Du setzt zugleich den Startschuss Deiner beruflichen Karriere. Dieser Studiengang ist richtig für Dich, wenn Du Interesse daran hast, weitere Innovationen voranzutreiben, bestehende Systeme zu optimieren und Fehler zu beheben. Was du dafür brauchst lernst du im dualen Studium an der FH Münster.\n\n**Dauer des Studiums**\n\n- 4 Jahre\n\n**Du lernst**\n\n- Planung und Weiterentwicklung komplexer IT-Systeme bis Embedded Systems\n- Erstellung von Dokumentationsunterlagen\n- Durchführung von Tests bei bestehenden Anwendungen\n- Fehlerbehebung und Fehleranalyse\n- Entwicklung von Webanwendungen (Server, Web und Apps)\n\n**Mögliche Einsatzgebiete während der Praxisphasen&#160;&#160;&#160;&#160;**\n\n- IT-Abteilung an den Standorten Spelle oder Haselünne (Ausbildungsbetrieb Krone Business Center DigITal GmbH & Co. KG)\n\n **Du bringst mit**\n\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\n\n**Hochschulstandort**\n\nFH Münster, Campus Steinfurt\n\n**Integrierte Berufsausbildung**\n\nFachinformatiker für Daten- und Prozessanalyse (m/w/d)\n\nFür Deine Bewerbung nutze bitte unser Online- Bewerbungsformular unter www.krone.de/karriere.",
+    "gaji": "",
+    "persyaratan": "**Du bringst mit**\n- Allgemeine Hochschulreife oder Fachabitur mit einschlägiger, abgeschlossener Berufsausbildung\n- Technische Grundkenntnisse bzw. IT-Affinität\n- Kommunikations- und Teamfähigkeit\n- Gute Noten in den naturwissenschaftlichen Fächern, sowie in Deutsch und Englisch\n- Selbstständiges und verantwortungsbewusstes Arbeiten\nAbitur / Allgemeine Hochschulreife",
+    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Als führender Hersteller in der Landtechnik sind wir auf der Suche nach Mitarbeitern (m/w/d), die die Geschichte der KRONE Gruppe erfolgreich weiter schreiben und gemeinsam mit uns die stärksten Erntemaschinen der Welt herstellen möchten. Als familiengeführtes Unternehmen bieten wir den nötigen Raum für Kreativität, Eigeninitiative und Entfaltung. Weltweit mehr als 5.000 Mitarbeiter (m/w/d) gehören zum aktuellen KRONE Team. Hochmotiviert und dynamisch tragen wir alle mit unseren Taten und Talenten zur heutigen und zukünftigen KRONE Erfolgsstory bei.",
+    "apa_yang_ditawarkan": "",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388713-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388713-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "",
+    "dokumen_yang_harus_dipenuhi": "- Erstellung von Dokumentationsunterlagen\n- Durchführung von Tests bei bestehenden Anwendungen\n- Fehlerbehebung und Fehleranalyse\n- Entwicklung von Webanwendungen (Server, Web und Apps)",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1206388713-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 80,
+    "tahun_mulai": 2027,
+    "bulan_mulai": 8,
+    "tanggal_mulai": "2027-08-01",
+    "scraped_at": "2026-06-11T08:16:23.761837+00:00"
+  },
+  {
+    "referenznummer": "10000-1205460876-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "Deutsche Bank AG",
+    "titik_data_di_peta": "50.1113194,8.6818977",
+    "posisi_kota": "Frankfurt am Main",
+    "alamat_detail": "60311 Frankfurt am Main",
+    "detail_deskripsi": "**Herzlich willkommen!**\n\nWir freuen uns darauf, dich auf deinem Weg ins Berufsleben zu begleiten und gemeinsam deine Fähigkeiten zu entwickeln. Unsere global ausgerichtete Bank mit all ihren Möglichkeiten steht dir offen.\n\nDu willst Wirtschaft und IT verbinden? In unserem ausbildungsintegrierten Studium Wirtschaftsinformatik gestaltest du die digitale Zukunft der Deutschen Bank. Dabei sind Theorie und Praxis eng miteinander verzahnt. Du hast nach 2 Jahren einen IHK-Abschluss als Fachinformatiker:in und nach 3,5 Jahren außerdem einen Bachelor of Science in der Tasche. Beste Voraussetzungen, um beruflich in jeder Hinsicht durchzustarten.\n\n**Aufgaben während der Ausbildung:**\n\n— Aktiv an digitalen Lösungen mitarbeiten und unsere Produkte und Services im Bereich Technology, Data & Innovation verbessern\n\n— Im Tagesgeschäft und in Projekten an der Schnittstelle von Technologie und Praxis mitwirken\n\n— An innovativen IT-Themen wie Cloud, Künstliche Intelligenz, Cyber-Securitiy, Softwareentwicklung und Datenanalyse mitwirken\n\n— Schrittweise eigene Aufgaben & Projekte übernehmen, die unsere Syteme smarter machen und Prozesse effizienter gestalten\n\n**Fähigkeiten:**\n\n— Gutes (Fach-) Abitur\n\n— Interesse an IT und Wirtschaft\n\n— Kommunikations- und Konfliktfähigkeit\n\n— Ausdauer und Kreativität\n\n— Analytische und sprachliche Fähigkeiten\n\n— Hohe Lern- und Leistungsbereitschaft\n\n**Deine ausbildungsintegriertes Studium bei uns ist …**\n\n**Facettenreich**\n\nErgreife die Chance, in Technology, Data & Innvoation Prozesse und Lösungen in echten Projekten zu entwickeln, die unsere Bank noch leistungsfähiger machen.\n\n**Innovativ & zukunftssicher**\n\nErlebe Digitalisierung, Künstliche Intelligenz, Innovation & Nachhaltigkeit hautnah.\n\n**Vernetzt & karrierestark**\n\nWerde Teil eines starken (inter-) nationalen Netzwerks mit Top-Perspektiven.\n\n**Individuell, flexibel & vielfältig**\n\nSetze eigene Schwerpunkte und gestalte deine Einsätze nach deinen Stärken und Interessen.\n\n**Gehalt und mehr**\n\n- 1. Ausbildungsjahr: 1.470 EUR\n- 2. Ausbildungsjahr: 1.550 EUR\n- Nach erfolgreichem IHK-Abschluss bis zum Abschluss der Bachelorthesis: Teilzeit Arbeitsvertrag nach Bankentarif\n- individueller Bonus\n- Kostenloses Gehaltskonto\n- Vermögenswirksame Leistungen\n- Belegschaftsaktien und Betriebsrente\n- Lernmittel-, Miet- und Fahrtkostenzuschüsse möglich\n- 30 Tage Urlaub (den 24.12. und 31.12. gibt es gleich noch obendrauf)\n\n**Hier kannst du dich bewerben:**\n\ncareers.db.com/ausbildung-studium",
+    "gaji": "",
+    "persyaratan": "Du willst Wirtschaft und IT verbinden? In unserem ausbildungsintegrierten Studium Wirtschaftsinformatik gestaltest du die digitale Zukunft der Deutschen Bank. Dabei sind Theorie und Praxis eng miteinander verzahnt. Du hast nach 2 Jahren einen IHK-Abschluss als Fachinformatiker:in und nach 3,5 Jahren außerdem einen Bachelor of Science in der Tasche. Beste Voraussetzungen, um beruflich in jeder Hinsicht durchzustarten.\n**Aufgaben während der Ausbildung:**",
+    "jenis_ausbildung": "Duales Studium | Fachinformatiker/in - Daten- und Prozessanalyse",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Herzlich willkommen!**",
+    "apa_yang_ditawarkan": "**Gehalt und mehr**\n- 1. Ausbildungsjahr: 1.470 EUR\n- 2. Ausbildungsjahr: 1.550 EUR\n- Nach erfolgreichem IHK-Abschluss bis zum Abschluss der Bachelorthesis: Teilzeit Arbeitsvertrag nach Bankentarif\n- individueller Bonus\n- Kostenloses Gehaltskonto\n- Vermögenswirksame Leistungen\n- Belegschaftsaktien und Betriebsrente\n- Lernmittel-, Miet- und Fahrtkostenzuschüsse möglich\n- 30 Tage Urlaub (den 24.12. und 31.12. gibt es gleich noch obendrauf)",
+    "link_website_perusahaan": "http://www.arbeitsagentur.de",
+    "link_website_perusahaan_resmi": "",
+    "website_type": "ba_portal",
+    "alamat_email_bewerbung": "",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205460876-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205460876-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "",
+    "dokumen_yang_harus_dipenuhi": "",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1205460876-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 73,
+    "tahun_mulai": null,
+    "bulan_mulai": null,
+    "tanggal_mulai": "",
+    "scraped_at": "2026-06-11T08:16:24.691519+00:00"
+  },
+  {
+    "referenznummer": "15740-1535-1728440-0-S",
+    "category_id": "fachinformatiker_dpa",
+    "nama_perusahaan": "Kassenärztl. Bundesvereinigung",
+    "titik_data_di_peta": "52.5149147,13.3343333",
+    "posisi_kota": "Berlin",
+    "alamat_detail": "Herbert-Lewin-Platz 2, 10623 Berlin",
+    "detail_deskripsi": "Wir suchen Sie für unser Dezernat Digitalisierung und IT, Abteilung Daten und Automatisierung, für das Duale Studium \"Bachelor of Science Informatik / Data Science\" im Zentrum Berlins für den Studienstart Oktober 2026. Als Teil unseres Teams lernen Sie in verschiedenen Abteilungen der IT in der KBV (z.B. Daten und Automatisierung, Entwicklung, IT in der Arztpraxis, Betrieb und Service, IT Sicherheit) neueste Technologien und echten Teamgeist kennen.\n\t\t\t\t\t\n\nDuales Studium - Bachelor of Science Informatik / Data Science\n\n\t\t\nDas Dezernat Digitalisierung und IT beschäftigt sich mit einer Vielzahl von spannenden Fragestellungen und Zukunftsthemen. In der Abteilung Daten und Automatisierung arbeiten Sie als Data Engineer, Data Scientist und Data Analyst an anspruchsvollen Projekten und Aufgaben. Wir unterstützen und beraten die Dezernate und Fachabteilungen der KBV zu folgenden Themen:\n\t\t\t\n\n- Beratung zu den Themen Datenanalyse, Datenmanagement und Datennutzung\n- Durchführung von komplexen Datenanalysen und Unterstützung der Fachbereiche\n- Datenmanagement in Form der Integration von Daten\n- Automatisierung von Datenverarbeitungsprozessen und Monitoring mittels Datenlieferungsverwaltung\n- Datenaustausch zwischen den Stakeholdern im Gesundheitswesen\n- Betreuung Data Warehouse (DWH) und Business Intelligence (BI)\n- Einsatz von KI\n\t\t\n\t\n- Allgemeine Hochschulreife (Abitur), Fachhochschulreife oder fachgebundene Hochschulreife\n- Gute bis sehr gute Leistungen in den Leistungsfächern Mathematik und Informatik\n- Ausgeprägte Fähigkeit zu analytischem, logischem und abstraktem Denken\n- Lernbereitschaft, Selbstorganisation, strukturierte Arbeitsweise, Zielstrebigkeit sowie gute Kommunikationsfähigkeit in Wort und Schrift\n- Abwechslung: Sie genießen die Vorteile eines öffentlichen Arbeitgebers und agieren zugleich in einem innovativen Umfeld\n- Frühaufsteher oder Langschläfer? Ihre Arbeitszeit können Sie flexibel durch mobiles Arbeiten und unser Gleitzeitmodell gestalten\n- Vergütung: Wir wertschätzen Ihre Arbeit mit einer attraktiven Bezahlung\n- Berufliche Entwicklung: Bei uns können Sie wachsen: Wir fördern Sie durch verantwortungsvolle und praxisnahe Aufgaben\n- Weitere Benefits: Kantine, Sportangebote sowie Zuschuss zum Firmenticket sind nur einige Beispiele\n\nDie KBV gewährleistet die berufliche Gleichstellung von Frauen und Männern. Schwerbehinderte Menschen werden bei gleicher Eignung besonders berücksichtigt. Die Stelle ist für die Besetzung mit Teilzeitkräften grundsätzlich geeignet. Gerne können Sie auch die externe Bewerbungsfrist über den angegebenen Link nutzen.",
+    "gaji": "",
+    "persyaratan": "",
+    "jenis_ausbildung": "Ausbildung | Fachinformatiker/in - Daten- und Prozessanalyse",
+    "beruf_typ": "dual",
+    "deskripsi_perusahaan": "Wir suchen Sie für unser Dezernat Digitalisierung und IT, Abteilung Daten und Automatisierung, für das Duale Studium \"Bachelor of Science Informatik / Data Science\" im Zentrum Berlins für den Studienstart Oktober 2026. Als Teil unseres Teams lernen Sie in verschiedenen Abteilungen der IT in der KBV (z.B. Daten und Automatisierung, Entwicklung, IT in der Arztpraxis, Betrieb und Service, IT Sicherheit) neueste Technologien und echten Teamgeist kennen.",
+    "apa_yang_ditawarkan": "- Vergütung: Wir wertschätzen Ihre Arbeit mit einer attraktiven Bezahlung\n- Berufliche Entwicklung: Bei uns können Sie wachsen: Wir fördern Sie durch verantwortungsvolle und praxisnahe Aufgaben\n- Weitere Benefits: Kantine, Sportangebote sowie Zuschuss zum Firmenticket sind nur einige Beispiele",
+    "link_website_perusahaan": "https://www.kbv.de",
+    "link_website_perusahaan_resmi": "https://www.kbv.de",
+    "website_type": "company",
+    "alamat_email_bewerbung": "",
+    "link_bewerbung": "https://www.arbeitsagentur.de/jobsuche/jobdetail/15740-1535-1728440-0-S",
+    "link_bewerbung_externe": "",
+    "link_bewerbung_efektif": "https://www.arbeitsagentur.de/jobsuche/jobdetail/15740-1535-1728440-0-S",
+    "bewerbung_sumber": "ba_portal",
+    "kontak_penanggung_jawab": "",
+    "dokumen_yang_harus_dipenuhi": "",
+    "ba_job_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/15740-1535-1728440-0-S",
+    "sumber_data": "",
+    "ausbildung_de_url": "",
+    "is_duplicate_of_arbeitsagentur": false,
+    "duplicate_of_refnr": "",
+    "kelengkapan_score": 67,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 10,
+    "tanggal_mulai": "",
+    "scraped_at": "2026-06-11T08:16:23.459855+00:00"
   },
   {
     "referenznummer": "15740-1549-1745182-0-S",
@@ -3626,7 +3965,7 @@
     "gaji": "",
     "persyaratan": "",
     "jenis_ausbildung": "Ausbildung | Fachinformatiker/in - Daten- und Prozessanalyse",
-    "beruf_typ": "dpa",
+    "beruf_typ": "dual",
     "deskripsi_perusahaan": "Wir suchen Sie für unser Dezernat Digitalisierung und IT, Abteilung Daten und Automatisierung, für das Duale Studium \"Bachelor of Science Informatik / Data Science\" im Zentrum Berlins für den Studienstart Oktober 2026. Als Teil unseres Teams lernen Sie in verschiedenen Abteilungen der IT in der KBV (z.B. Daten und Automatisierung, Entwicklung, IT in der Arztpraxis, Betrieb und Service, IT Sicherheit) neueste Technologien und echten Teamgeist kennen.",
     "apa_yang_ditawarkan": "- Vergütung: Wir wertschätzen Ihre Arbeit mit einer attraktiven Bezahlung\n- Berufliche Entwicklung: Bei uns können Sie wachsen: Wir fördern Sie durch verantwortungsvolle und praxisnahe Aufgaben\n- Weitere Benefits: Kantine, Sportangebote sowie Zuschuss zum Firmenticket sind nur einige Beispiele",
     "link_website_perusahaan": "https://www.kbv.de",
@@ -3645,6 +3984,9 @@
     "is_duplicate_of_arbeitsagentur": false,
     "duplicate_of_refnr": "",
     "kelengkapan_score": 47,
+    "tahun_mulai": 2026,
+    "bulan_mulai": 10,
+    "tanggal_mulai": "",
     "scraped_at": "2026-06-11T08:16:23.156162+00:00"
   }
 ]

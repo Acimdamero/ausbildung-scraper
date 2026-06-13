@@ -1,0 +1,82 @@
+{
+  "scraped_at": "2026-06-13T10:41:09.495283+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "requests + JSON-LD ItemList (search) + JobPosting (detail)",
+    "pagination": "?page=N query param; 20 listings/page; ~664 total FI listings",
+    "expected_results": 664,
+    "expected_pages": 34,
+    "detail_url_pattern": "https://www.azubi.de/ausbildungsplatz/{id}-p-{slug}",
+    "notes": "Server-rendered HTML with schema.org JSON-LD. Combined Fachinformatiker page covers AE/SI/DPA/DV; beruf_typ via specialization.py."
+  },
+  "categories": [
+    {
+      "category_id": "azubi_de_fi",
+      "discovered_urls": 664,
+      "scraped": 659,
+      "failed": 0,
+      "skipped_wrong_beruf": 5,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 659,
+    "output_total": 645,
+    "removed_total": 14,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 14,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "azubi_de_fi": 659
+    },
+    "output_by_category": {
+      "azubi_de_fi": 645
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 645,
+    "internal_dupes": 0,
+    "cross_dupes": 174,
+    "unique_new": 471,
+    "by_category": {
+      "azubi_de_fi": {
+        "scraped": 645,
+        "cross_duplicates": 174,
+        "unique_new": 471
+      }
+    }
+  },
+  "master_before": 2902,
+  "total_scraped_raw": 659,
+  "total_after_within_dedup": 645,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 5,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 91.5,
+    "alamat_detail": 91.5,
+    "detail_deskripsi": 100.0,
+    "gaji": 36.3,
+    "persyaratan": 98.8,
+    "jenis_ausbildung": 91.6,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 62.9,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 33.6,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 34.7,
+    "dokumen_yang_harus_dipenuhi": 31.2
+  },
+  "beruf_typ_breakdown": {
+    "si": 322,
+    "ae": 214,
+    "fi_other": 15,
+    "dpa": 48,
+    "dual": 19,
+    "dv": 7,
+    "non_fi": 20
+  }
+}

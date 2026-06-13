@@ -1,0 +1,12 @@
+﻿id_referensi,kategori,nama_perusahaan,kota,alamat,jenis_ausbildung,spesialisasi,tahun_mulai,bulan_mulai,gaji,skor_kelengkapan,tipe_website,email_bewerbung,link_bewerbung,cara_apply,kontak_hr,link_arbeitsagentur,ringkasan,butuh_manual,status_lamaran,prioritas,deskripsi,persyaratan,tanggal_scrape
+ASD-991360000000006506,ausbildungsstellen_si,Seventythree Networks GmbH,Puchheim,Boschstr. 8 82178 Puchheim,AUSBILDUNG ZUM/R FACHINFORMATIKER/IN BEREICH ANWENDUNGSENTWICKLUNG,ae,,,,60,empty,Bewerbung@73s.de,https://www.sprungbrett-bayern.de/schueler/tipps-und-tricks-rund-um-die-bewerbung/checklistebetriebspraktikumschueler/,email,"Ansprechpartner
+Frau Susanne Harnisch
+Seventythree Networks GmbH",,Seventythree Networks GmbH | AUSBILDUNG ZUM/R FACHINFORMATIKER/IN BEREICH ANWENDUNGSENTWICKLUNG | Puchheim,tidak,belum,tinggi,"AUSBILDUNG ZUM/R FACHINFORMATIKER/IN BEREICH ANWENDUNGSENTWICKLUNG
+
+{'@type': 'EducationalOccupationalCredential', 'credentialCategory': 'Gymnasium/FOS/BOS, Realschule'}","{'@type': 'EducationalOccupationalCredential', 'credentialCategory': 'Gymnasium/FOS/BOS, Realschule'}",2026-06-13T12:23:32.896759+00:00
+MAD-2451448553,meine_ausbildung_ae,IfTA (Sys­tems) GmbH,Puchheim,,Ausbildung zum Fachinformatiker für Anwendungsentwicklung (m/w/d),ae,,,,40,company,,https://career.ifta.com/jobposting/797322abd85d91f595ef62853c6735afe7fdd6221?utm_source=meine-ausbildung-in-deutschland,portal,,,IfTA (Sys­tems) GmbH | Ausbildung zum Fachinformatiker für Anwendungsentwicklung (m/w/d) | Puchheim,ya,belum,rendah,Ausbildung zum Fachinformatiker für Anwendungsentwicklung (m/w/d),,2026-06-11T11:36:08.909144+00:00
+ASD-991360000000006505,ausbildungsstellen_si,Seventythree Networks GmbH,Puchheim,Boschstr. 8 82178 Puchheim,AUSBILDUNG ZUM/R FACHINFORMATIKER/IN FACHRICHTUNG SYSTEMINTEGRATION,si,,,,60,empty,Bewerbung@73s.de,https://www.sprungbrett-bayern.de/schueler/tipps-und-tricks-rund-um-die-bewerbung/checklistebetriebspraktikumschueler/,email,"Ansprechpartner
+Frau Susanne Harnisch
+Seventythree Networks GmbH",,Seventythree Networks GmbH | AUSBILDUNG ZUM/R FACHINFORMATIKER/IN FACHRICHTUNG SYSTEMINTEGRATION | Puchheim,tidak,belum,tinggi,"AUSBILDUNG ZUM/R FACHINFORMATIKER/IN FACHRICHTUNG SYSTEMINTEGRATION
+
+{'@type': 'EducationalOccupationalCredential', 'credentialCategory': 'Gymnasium/FOS/BOS, Realschule'}","{'@type': 'EducationalOccupationalCredential', 'credentialCategory': 'Gymnasium/FOS/BOS, Realschule'}",2026-06-13T12:23:29.795673+00:00

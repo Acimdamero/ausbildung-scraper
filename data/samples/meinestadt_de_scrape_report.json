@@ -1,0 +1,107 @@
+{
+  "scraped_at": "2026-06-13T16:18:53.632021+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "playwright (context.request pagination + page detail scrape, JSON-LD JobPosting)",
+    "pagination": "?page=N query param (~20 jobs/page); Seite X von Y until exhausted",
+    "radius_note": "Deutschland-wide via /deutschland/lehrstellen/jkl/{path_ids}",
+    "detail_url_pattern": "/deutschland/lehrstellen/standard?id={jobId}",
+    "path_id_mapping": {
+      "97268-16197-16203-13659": "Fachinformatiker Anwendungsentwicklung (AE)",
+      "97268-16197-16203-7817": "Fachinformatiker Systemintegration (SI)",
+      "97268-16360-17489-18734": "All Fachinformatiker (DPA/DV card filter)"
+    },
+    "notes": "User URL IDs are filter hierarchy, not one ID per specialization. DPA/DV lack dedicated jkl paths; scraped from all-FI URL with card hints."
+  },
+  "categories": [
+    {
+      "category_id": "meinestadt_ae",
+      "discovered_urls": 176,
+      "scraped": 2,
+      "failed": 0,
+      "skipped_wrong_beruf": 174,
+      "failed_urls": []
+    },
+    {
+      "category_id": "meinestadt_dpa",
+      "discovered_urls": 540,
+      "scraped": 0,
+      "failed": 0,
+      "skipped_wrong_beruf": 540,
+      "failed_urls": []
+    },
+    {
+      "category_id": "meinestadt_dv",
+      "discovered_urls": 580,
+      "scraped": 0,
+      "failed": 0,
+      "skipped_wrong_beruf": 580,
+      "failed_urls": []
+    },
+    {
+      "category_id": "meinestadt_si",
+      "discovered_urls": 295,
+      "scraped": 3,
+      "failed": 0,
+      "skipped_wrong_beruf": 292,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 5,
+    "output_total": 5,
+    "removed_total": 0,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 0,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "meinestadt_ae": 2,
+      "meinestadt_si": 3
+    },
+    "output_by_category": {
+      "meinestadt_ae": 2,
+      "meinestadt_si": 3
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 5,
+    "internal_dupes": 0,
+    "cross_dupes": 3,
+    "unique_new": 2,
+    "by_category": {
+      "meinestadt_ae": {
+        "scraped": 2,
+        "cross_duplicates": 2,
+        "unique_new": 0
+      },
+      "meinestadt_si": {
+        "scraped": 3,
+        "cross_duplicates": 1,
+        "unique_new": 2
+      }
+    }
+  },
+  "total_scraped_raw": 5,
+  "total_after_within_dedup": 5,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 1586,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 60.0,
+    "persyaratan": 0.0,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 20.0,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 20.0,
+    "link_bewerbung": 40.0,
+    "kontak_penanggung_jawab": 100.0,
+    "dokumen_yang_harus_dipenuhi": 0.0
+  }
+}

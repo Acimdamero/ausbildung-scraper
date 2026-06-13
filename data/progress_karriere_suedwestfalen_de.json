@@ -1,0 +1,45 @@
+{
+  "last_run_at": "2026-06-13T14:45:49.179724+00:00",
+  "source": "karriere_suedwestfalen_de",
+  "categories": [
+    {
+      "category_id": "karriere_sw_ae",
+      "discovered_urls": 84,
+      "scraped": 34,
+      "failed": 0,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": []
+    }
+  ],
+  "total_scraped": 34,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 0,
+  "cross_duplicates_with_master": 16,
+  "new_unique_vs_master": 68,
+  "within_source_removed": 0,
+  "by_category": {
+    "karriere_sw_ae": {
+      "scraped": 84,
+      "cross_duplicates": 16,
+      "unique_new": 68
+    }
+  },
+  "merged_master_total": 3978,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 0.0,
+    "persyaratan": 27.4,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 27.4,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 76.2,
+    "link_bewerbung": 73.8,
+    "kontak_penanggung_jawab": 38.1,
+    "dokumen_yang_harus_dipenuhi": 0.0
+  }
+}

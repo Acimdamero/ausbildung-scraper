@@ -1,0 +1,88 @@
+{
+  "last_run_at": "2026-06-13T15:03:00.428463+00:00",
+  "source": "ausbildungsstellen_de",
+  "categories": [
+    {
+      "category_id": "ausbildungsstellen_ae",
+      "discovered_urls": 2833,
+      "scraped": 2746,
+      "failed": 1,
+      "skipped_wrong_beruf": 86,
+      "failed_urls": [
+        "https://www.ausbildungsstellen.de/job.php?c=990850001112403820"
+      ]
+    },
+    {
+      "category_id": "ausbildungsstellen_dpa",
+      "discovered_urls": 130,
+      "scraped": 122,
+      "failed": 0,
+      "skipped_wrong_beruf": 8,
+      "failed_urls": []
+    },
+    {
+      "category_id": "ausbildungsstellen_dv",
+      "discovered_urls": 60,
+      "scraped": 56,
+      "failed": 0,
+      "skipped_wrong_beruf": 4,
+      "failed_urls": []
+    },
+    {
+      "category_id": "ausbildungsstellen_si",
+      "discovered_urls": 2833,
+      "scraped": 2765,
+      "failed": 1,
+      "skipped_wrong_beruf": 67,
+      "failed_urls": [
+        "https://www.ausbildungsstellen.de/job.php?c=990850001112403820"
+      ]
+    }
+  ],
+  "total_scraped": 5689,
+  "total_failed": 2,
+  "total_skipped_wrong_beruf": 165,
+  "cross_duplicates_with_master": 179,
+  "new_unique_vs_master": 2472,
+  "within_source_removed": 3038,
+  "by_category": {
+    "ausbildungsstellen_si": {
+      "scraped": 2459,
+      "cross_duplicates": 178,
+      "unique_new": 2281
+    },
+    "ausbildungsstellen_ae": {
+      "scraped": 138,
+      "cross_duplicates": 1,
+      "unique_new": 137
+    },
+    "ausbildungsstellen_dpa": {
+      "scraped": 37,
+      "cross_duplicates": 0,
+      "unique_new": 37
+    },
+    "ausbildungsstellen_dv": {
+      "scraped": 17,
+      "cross_duplicates": 0,
+      "unique_new": 17
+    }
+  },
+  "merged_master_total": 6652,
+  "field_completeness_pct": {
+    "nama_perusahaan": 68.1,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 16.0,
+    "alamat_detail": 16.0,
+    "detail_deskripsi": 71.4,
+    "gaji": 15.2,
+    "persyaratan": 37.3,
+    "jenis_ausbildung": 71.4,
+    "deskripsi_perusahaan": 13.0,
+    "apa_yang_ditawarkan": 35.6,
+    "link_website_perusahaan": 16.7,
+    "alamat_email_bewerbung": 54.8,
+    "link_bewerbung": 70.3,
+    "kontak_penanggung_jawab": 62.1,
+    "dokumen_yang_harus_dipenuhi": 24.0
+  }
+}

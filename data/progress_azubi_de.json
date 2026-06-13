@@ -1,0 +1,54 @@
+{
+  "last_run_at": "2026-06-13T10:41:36.541416+00:00",
+  "source": "azubi_de",
+  "categories": [
+    {
+      "category_id": "azubi_de_fi",
+      "discovered_urls": 664,
+      "scraped": 659,
+      "failed": 0,
+      "skipped_wrong_beruf": 5,
+      "failed_urls": []
+    }
+  ],
+  "total_scraped": 659,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 5,
+  "cross_duplicates_with_master": 174,
+  "new_unique_vs_master": 471,
+  "within_source_removed": 14,
+  "by_category": {
+    "azubi_de_fi": {
+      "scraped": 645,
+      "cross_duplicates": 174,
+      "unique_new": 471
+    }
+  },
+  "merged_master_total": 3373,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 91.5,
+    "alamat_detail": 91.5,
+    "detail_deskripsi": 100.0,
+    "gaji": 36.3,
+    "persyaratan": 98.8,
+    "jenis_ausbildung": 91.6,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 62.9,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 33.6,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 34.7,
+    "dokumen_yang_harus_dipenuhi": 31.2
+  },
+  "beruf_typ_breakdown": {
+    "si": 322,
+    "ae": 214,
+    "fi_other": 15,
+    "dpa": 48,
+    "dual": 19,
+    "dv": 7,
+    "non_fi": 20
+  }
+}

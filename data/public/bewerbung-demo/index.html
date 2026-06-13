@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bewerbung Intelligence — Public Demo</title>
+  <style>
+    :root { --bg:#0f1419; --card:#1a2332; --text:#e7ecf3; --muted:#8b9cb3; --accent:#3d8bfd; --border:#2a3544; --ok:#7ddea2; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+    header { padding:1.25rem 1.5rem; border-bottom:1px solid var(--border); background:var(--card); }
+    h1 { margin:0 0 .35rem; font-size:1.35rem; }
+    .meta { color:var(--muted); font-size:.9rem; }
+    .banner { background:rgba(61,139,253,.12); border:1px solid #2a4a6b; color:#8ec8ff; padding:.65rem 1rem; border-radius:8px; margin-top:.75rem; font-size:.9rem; }
+    main { padding:1rem 1.5rem 2rem; max-width:920px; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1rem 1.25rem; margin-bottom:1rem; }
+    h2 { font-size:1.05rem; margin:0 0 .75rem; }
+    pre { white-space:pre-wrap; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:1rem; font-size:.88rem; overflow-x:auto; }
+    .tabs { display:flex; gap:.4rem; margin-bottom:.75rem; flex-wrap:wrap; }
+    .tab { border:1px solid var(--border); border-radius:999px; padding:.35rem .75rem; cursor:pointer; font-size:.85rem; background:var(--bg); color:var(--muted); }
+    .tab.active { border-color:var(--accent); color:var(--accent); }
+    .badge { display:inline-block; font-size:.72rem; padding:.12rem .45rem; border-radius:999px; border:1px solid var(--border); color:var(--ok); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bewerbung Intelligence — Public Demo</h1>
+    <p class="meta">Sample data only · Max Mustermann · example.com</p>
+    <div class="banner">
+      This demo shows UI structure and document templates. Real applicant data stays local — see <a href="https://github.com/Acimdamero/ausbildung-scraper/blob/main/docs/PRIVACY.md" style="color:#8ec8ff">docs/PRIVACY.md</a>.
+    </div>
+  </header>
+  <main>
+    <div class="card">
+      <h2>TechSolutions GmbH · Berlin <span class="badge">draft_ready</span></h2>
+      <p class="meta">Fachinformatiker/in Anwendungsentwicklung · Beginn 2026 · karriere@techsolutions-example.de</p>
+      <div class="tabs">
+        <button class="tab active" data-tab="anschreiben_de">Anschreiben DE</button>
+        <button class="tab" data-tab="motivationsschreiben_de">Motivation DE</button>
+        <button class="tab" data-tab="email_draft_de">Email draft</button>
+      </div>
+      <pre id="doc-content">Max Mustermann
+Berlin
+max.mustermann@example.com
+
+TechSolutions GmbH
+Berlin
+
+Sehr geehrte Damen und Herren,
+
+hiermit bewerbe ich mich um einen Ausbildungsplatz als Fachinformatiker/in Anwendungsentwicklung mit Beginn 2026.
+
+Ich möchte eine Ausbildung zum Fachinformatiker Anwendungsentwicklung beginnen, weil mich Softwareentwicklung schon länger fasziniert. Ich bringe Abitur mit sowie Deutschkenntnisse auf Niveau C1 (Muttersprache). Ich habe kleine Programmierprojekte in Python und JavaScript umgesetzt.
+
+Besonders reizt mich an TechSolutions GmbH, dass Sie moderne Webanwendungen für den Mittelstand entwickeln und Auszubildenden früh eigenverantwortliche Projekte anvertrauen.
+
+Mit freundlichen Grüßen
+Max Mustermann
+Berlin</pre>
+    </div>
+    <div class="card">
+      <h2>Pipeline features (local install)</h2>
+      <ul>
+        <li>Company research from public websites</li>
+        <li>DE + ID document generation (Anschreiben, Motivationsschreiben, email drafts)</li>
+        <li>One-per-company prioritization from 15+ job portals</li>
+        <li>Preview UI with mailto: helpers (manual send only)</li>
+      </ul>
+    </div>
+  </main>
+  <script>
+    const DOCS = {
+      anschreiben_de: document.getElementById('doc-content').textContent,
+      motivationsschreiben_de: `Motivationsschreiben — Fachinformatiker/in Anwendungsentwicklung\nTechSolutions GmbH, Berlin\n\n1. Persönlicher Werdegang\nMein Name ist Max Mustermann. Ich wohne in Berlin und habe mein Abitur abgeschlossen.\n\n2. Warum Fachinformatiker Anwendungsentwicklung?\nIch möchte strukturiert lernen, wie Anwendungen konzipiert, programmiert und getestet werden.\n\n3. Meine Stärken\n- Lernbereitschaft und logisches Denken\n- Erste Erfahrung mit Python und JavaScript\n\n4. Warum TechSolutions GmbH?\nIhr Fokus auf Webentwicklung passt zu meinen Interessen.\n\nMit freundlichen Grüßen\nMax Mustermann`,
+      email_draft_de: `An: karriere@techsolutions-example.de\nBetreff: Bewerbung Ausbildung Fachinformatiker/in Anwendungsentwicklung — Max Mustermann\n\nSehr geehrte Damen und Herren,\n\nanbei sende ich Ihnen meine Bewerbungsunterlagen für die Ausbildung als Fachinformatiker/in Anwendungsentwicklung (Beginn 2026).\n\nMit freundlichen Grüßen\nMax Mustermann\nmax.mustermann@example.com`
+    };
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('doc-content').textContent = DOCS[tab.dataset.tab] || '';
+      });
+    });
+  </script>
+</body>
+</html>

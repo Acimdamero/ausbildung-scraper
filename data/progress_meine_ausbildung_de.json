@@ -1,0 +1,40 @@
+{
+  "last_run_at": "2026-06-11T12:06:14.905209+00:00",
+  "source": "meine_ausbildung_de",
+  "category_id": "meine_ausbildung_ae",
+  "query": "anwendungsentwicklung",
+  "expected_total": 1478,
+  "expected_pages": 74,
+  "pages_scraped": 74,
+  "discovered_urls": 1439,
+  "total_scraped": 1439,
+  "total_failed": 0,
+  "cross_duplicates_with_master": 647,
+  "new_unique_vs_master": 770,
+  "within_source_removed": 22,
+  "by_category": {
+    "meine_ausbildung_ae": {
+      "scraped": 1417,
+      "cross_duplicates": 647,
+      "unique_new": 770
+    }
+  },
+  "merged_master_total": 2168,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 32.7,
+    "posisi_kota": 100.0,
+    "alamat_detail": 32.7,
+    "detail_deskripsi": 100.0,
+    "gaji": 5.3,
+    "persyaratan": 32.0,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 30.7,
+    "apa_yang_ditawarkan": 23.5,
+    "link_website_perusahaan": 100.0,
+    "alamat_email_bewerbung": 12.3,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 17.4,
+    "dokumen_yang_harus_dipenuhi": 19.6
+  }
+}

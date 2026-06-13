@@ -1,0 +1,86 @@
+{
+  "scraped_at": "2026-06-12T22:02:10.524456+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "playwright_pagination + playwright_detail_pages (JSON-LD JobPosting)",
+    "pagination": "?page=N query param (~25 jobs/page); click fallback",
+    "rsearch_note": "rsearch=2 is search-origin/radius param, NOT page number",
+    "detail_url_pattern": "/stellenangebote--{title}--{id}-inline.html"
+  },
+  "categories": [
+    {
+      "category_id": "stepstone_de_ae",
+      "discovered_urls": 848,
+      "scraped": 488,
+      "failed": 0,
+      "skipped_wrong_beruf": 360,
+      "failed_urls": []
+    },
+    {
+      "category_id": "stepstone_de_dpa",
+      "discovered_urls": 550,
+      "scraped": 98,
+      "failed": 5,
+      "skipped_wrong_beruf": 447,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 586,
+    "output_total": 579,
+    "removed_total": 7,
+    "removed_by_refnr_cross_category": 3,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 4,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "stepstone_de_ae": 488,
+      "stepstone_de_dpa": 98
+    },
+    "output_by_category": {
+      "stepstone_de_ae": 483,
+      "stepstone_de_dpa": 96
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 579,
+    "internal_dupes": 0,
+    "cross_dupes": 69,
+    "unique_new": 510,
+    "by_category": {
+      "stepstone_de_ae": {
+        "scraped": 483,
+        "cross_duplicates": 50,
+        "unique_new": 433
+      },
+      "stepstone_de_dpa": {
+        "scraped": 96,
+        "cross_duplicates": 19,
+        "unique_new": 77
+      }
+    }
+  },
+  "total_scraped_raw": 586,
+  "total_after_within_dedup": 579,
+  "total_failed": 5,
+  "total_skipped_wrong_beruf": 807,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 18.3,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 13.3,
+    "persyaratan": 60.8,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 78.9,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 5.0,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 59.8,
+    "dokumen_yang_harus_dipenuhi": 29.7
+  },
+  "merged_master_total": 2826
+}

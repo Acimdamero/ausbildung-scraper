@@ -1,0 +1,86 @@
+{
+  "scraped_at": "2026-06-12T09:56:43.626798+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "playwright_pagination + playwright_detail_pages (JSON-LD JobPosting)",
+    "pagination": "URL path /ausbildung/{beruf}/{page}/ with query filters; ~15 jobs/page",
+    "start_param_note": "start=20262 filters Ausbildungsbeginn 2026 (site shows 532 total, ~98 match with subject+radius filters)",
+    "detail_url_pattern": "https://www.azubiyo.de/stellenanzeigen/{slug}_{company}_{id}/",
+    "notes": "Angular SPA; no listing search API intercepted. Detail pages expose JobPosting schema.org JSON-LD."
+  },
+  "categories": [
+    {
+      "category_id": "azubiyo_de_ae",
+      "discovered_urls": 98,
+      "scraped": 83,
+      "failed": 0,
+      "skipped_wrong_beruf": 15,
+      "failed_urls": []
+    },
+    {
+      "category_id": "azubiyo_de_dpa",
+      "discovered_urls": 22,
+      "scraped": 22,
+      "failed": 0,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 105,
+    "output_total": 103,
+    "removed_total": 2,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 2,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "azubiyo_de_ae": 83,
+      "azubiyo_de_dpa": 22
+    },
+    "output_by_category": {
+      "azubiyo_de_ae": 82,
+      "azubiyo_de_dpa": 21
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 103,
+    "internal_dupes": 0,
+    "cross_dupes": 12,
+    "unique_new": 91,
+    "by_category": {
+      "azubiyo_de_ae": {
+        "scraped": 82,
+        "cross_duplicates": 11,
+        "unique_new": 71
+      },
+      "azubiyo_de_dpa": {
+        "scraped": 21,
+        "cross_duplicates": 1,
+        "unique_new": 20
+      }
+    }
+  },
+  "total_scraped_raw": 105,
+  "total_after_within_dedup": 103,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 15,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 85.4,
+    "alamat_detail": 85.4,
+    "detail_deskripsi": 100.0,
+    "gaji": 59.2,
+    "persyaratan": 52.4,
+    "jenis_ausbildung": 85.4,
+    "deskripsi_perusahaan": 100.0,
+    "apa_yang_ditawarkan": 52.4,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 16.5,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 36.9,
+    "dokumen_yang_harus_dipenuhi": 29.1
+  }
+}

@@ -1,0 +1,98 @@
+﻿id_referensi,kategori,nama_perusahaan,kota,alamat,jenis_ausbildung,spesialisasi,tahun_mulai,bulan_mulai,gaji,skor_kelengkapan,tipe_website,email_bewerbung,link_bewerbung,cara_apply,kontak_hr,link_arbeitsagentur,ringkasan,butuh_manual,status_lamaran,prioritas,deskripsi,persyaratan,tanggal_scrape
+INDEED-09d781e19947ea21,indeed_de_ae,teuto.net Netzdienste GmbH,33602 Bielefeld,33602 33602 Bielefeld NW,Ausbildung | zum Fachinformatiker Systemintegration und Anwendungsentwicklung (m/w/d),ae,,,Berufsausbildung,73,empty,jobs@teuto.net,https://www.hiringlab.org/de/,email,,,teuto.net Netzdienste GmbH | Ausbildung | zum Fachinformatiker Systemintegration und Anwendungsentwicklung (m/w/d) | 33602 Bielefeld,tidak,belum,tinggi,"Ausbildung zum Fachinformatiker Systemintegration und Anwendungsentwicklung (m/w/d)
+
+Gutes Teamwork ist unsere Basis um flexibel auf unterschiedliche Anforderungen reagieren und Kundenwünsche erfüllen zu können.
+Bei uns erhalten Mitarbeitende vielfältige Kompetenzen. So erhältst Du nicht nur Verantwortung, sondern auch die Möglichkeit unternehmensinterne Prozesse mit zu gestalten.
+Als Sahnehäubchen bieten wir flexible und familienfreundliche Arbeitszeiten, Home Office, eine Sport Navi Mitgliedschaft und regelmäßige Firmenevents.
+Deine Lieblingsbefehle sind „:wq!“ und „fastfetch“, Routen haben für dich nichts mit Autos zu tun, du liest zur Unterhaltung Manpages und beginnst Gespräche generell mit „I use Arch btw“?
+Oder sprichst du fließend Python, optimierst deine SQL-Statements, während andere noch die Doku suchen, du findest Refactoring entspannend und schreibst lieber Unit-Tests als E-Mails?
+Dann bist du bei uns genau richtig!
+Aber auch wenn du noch kein SysVeteran oder Bug-Bändiger bist, kannst du bei uns im Rahmen einer Ausbildung zu einem werden!
+Bei uns hast du die Möglichkeit, eine Ausbildung in einem der folgenden Bereiche zu starten:
+Fachinformatiker/in für Systemintegration
+– Du arbeitest aktiv an der Administration unserer IT-Infrastruktur und Rechenzentren mit.
+– Du unterstützt im direkten Kundensupport und lernst, wie man Systeme effizient überwacht und optimiert.
+– Du tauchst tief in Themen wie Netzwerkprotokolle, Datenbanken, Container, Web- und Mailserver ein, bis hin zu komplexem Routing,
+– Deine Arbeitsumgebung ist Linux, deine Tools sind die Shell, SSH, VIM und Git
+Fachinformatiker/in für Anwendungsentwicklung
+– Du bist von Anfang an in unsere Softwareprojekte eingebunden – von der Planung bis zur fertigen Anwendung.
+– Du entwickelst moderne Web- und Backend-Anwendungen und automatisierst Abläufe wie z.B. Softwareupdates, um mehr Zeit für spaßigere Dinge zu haben.
+– Du arbeitest mit gängigen Programmiersprachen wie Python, JavaScript, Kotlin, Rust – je nach Projekt.
+– Auch hier ist Linux dein Alltag – du entwickelst an echten Projekten, versionierst mittels Git und rollst via CI/CD-Pipeline auf Kubernetes aus.
+Was du mitbringen solltest
+– Idealerweise hast du (Fach-)Abitur oder einen sehr guten Realschulabschluss.
+– Du hast erste Erfahrungen mit Computern, Linux oder Programmierung gesammelt – z.B. eigene Projekte oder erste Skripte.
+– Du bist neugierig, lernbereit, kommunikativ und zuverlässig.
+– Du hast Lust, in einem tollen und jungen Team moderne IT und aktuelle Cloudtechnologien kennenzulernen und mitzugestalten.
+Warum du dich bewerben solltest
+– Weil du bei uns nicht nur zuschaust, sondern aktiv mitentwickelst.
+– Weil wir moderne Technologien leben – mit echten Projekten, echten Servern, echten Herausforderungen.
+– Und weil das Team einfach passt.
+Bewirb dich jetzt – egal ob du eher Admin oder Developer bist.
+Wir freuen uns darauf, dich bei einem persönlichen Gespräch kennenzulernen!
+Linux aus Leidenschaft
+teuto.net steht für professionelles Kubernetes, Cloud und Server Hosting. Wir entwicklen Webanwendungen und beraten im Linux und OpenSource Umfeld.
+Als inhabergeführtes Unternehmen behaupten wir uns seit mehr als 20 Jahren erfolgreich auf dem Managed Hosting Markt. Wir betreuen unsere Kund*innen von der Anforderungsaufnahme über die Umsetzung bis hin zu Betrieb und Wartung der von uns eingesetzten Lösungen.
+Aus dieser Position heraus können wir durch neue Blickwinkel und Ideen Mehrwert für unsere Kundinnen und Kunden schaffen. Wir sind innovativ und agil. Die von uns entwickelten und eingesetzten Lösungen bewegen sich stets an der Spitze des Entwicklungsstandes.
+Unsere Philosophie
+Seit über 20 Jahren setzen wir bei teuto.net Vertrauen in unsere Mitarbeiter*innen und deren Fähigkeiten.
+Wir sind überzeugt, dass die beste Lösung nur durch gemeinsam erarbeitete Ideen erreicht wird. Teamwork steht bei uns an erster Stelle. Wir ermutigen unsere Mitarbeiter*innen stets nach neuen und eigenen Lösungsansätzen zu suchen und pflegen deshalb einen offenen Umgang miteinander.
+Flache Hierarchien, agile Vorgehensweisen und regelmäßige Meetings (wie Sprint Plannings, Dailys) helfen uns dabei Projekte transparent zu halten. Sie geben jedem Beteiligten die Möglichkeit seine Meinung und Erfahrungen einfließen zu lassen.
+
+Unsere Benefits
+für unsere Mitarbeiter*innen
+Anbindung
+Unser Büro liegt im Zentrum von Bielefeld, umgeben von unzähligen Einkaufsmöglichkeiten und nur wenige Minuten vom Hauptbahnhof entfernt.
+Barrierefreiheit
+Unser Büroräume sind barrierefrei. Unsere Arbeitsplätze können dem individuellen Bedarf angepasst werden.
+Getränke, Obst & Club Mate
+Wir stellen kostenfrei Kaffee, Tee, Kaltgetränke und Obst in unseren Büroräumen zur Verfügung.
+Sport
+Der Ausgleich zum Büroalltag ist uns ein Anliegen und wir übernehmen die Kosten einer Mitgliedschaft bei Sport Navi. Ob Fitness, Schwimmen, Klettern oder Massage für jeden ist etwas dabei.
+Home Office
+Wir bieten unseren Mitarbeiter*innen eine attraktive Home Office Regelung und flexibele Arbeitszeiten.
+Weiterbildung
+Unsere Mitarbeiter*innen machen uns zu dem, was wir sind. Daher bieten wir zahlreiche Chancen für berufliche Weiterentwicklung.
+Dazu gehören u.a. Teilnahme an relevanten Konferenzen (z.B. KubeCon) und Workshops.
+Events
+Wir veranstalten regelmäßig Teamevents und die teuto.net Weihnachtsfeier ist immer ein Highlight.
+Was ich besonders an teuto.net schätze ist die angenehme Athmosphäre und das super Kollegium. Fachlich reizt mich die Nähe zur neuesten Open Source Technologie, die sich hier über alle Bereiche erstreckt. Das Büro in Bielefeld hat eine klasse Lage und ich hatte in meinem ganzen Leben noch nie so schnelles Internet!
+Florian Braun
+Marketing, teuto.net Netzdienste GmbH
+Hinweis zum Datenschutz","Gutes Teamwork ist unsere Basis um flexibel auf unterschiedliche Anforderungen reagieren und Kundenwünsche erfüllen zu können.
+Bei uns erhalten Mitarbeitende vielfältige Kompetenzen. So erhältst Du nicht nur Verantwortung, sondern auch die Möglichkeit unternehmensinterne Prozesse mit zu gestalten.
+Als Sahnehäubchen bieten wir flexible und familienfreundliche Arbeitszeiten, Home Office, eine Sport Navi Mitgliedschaft und regelmäßige Firmenevents.
+Deine Lieblingsbefehle sind „:wq!“ und „fastfetch“, Routen haben für dich nichts mit Autos zu tun, du liest zur Unterhaltung Manpages und beginnst Gespräche generell mit „I use Arch btw“?
+Oder sprichst du fließend Python, optimierst deine SQL-Statements, während andere noch die Doku suchen, du findest Refactoring entspannend und schreibst lieber Unit-Tests als E-Mails?
+Dann bist du bei uns genau richtig!
+Aber auch wenn du noch kein SysVeteran oder Bug-Bändiger bist, kannst du bei uns im Rahmen einer Ausbildung zu einem werden!
+Bei uns hast du die Möglichkeit, eine Ausbildung in einem der folgenden Bereiche zu starten:
+Fachinformatiker/in für Systemintegration
+– Du arbeitest aktiv an der Administration unserer IT-Infrastruktur und Rechenzentren mit.
+– Du unterstützt im direkten Kundensupport und lernst, wie man Systeme effizient überwacht und optimiert.
+– Du tauchst tief in Themen wie Netzwerkprotokolle, Datenbanken, Container, Web- und Mailserver ein, bis hin zu komplexem Routing,
+– Deine Arbeitsumgebung ist Linux, deine Tools sind die Shell, SSH, VIM und Git
+Fachinformatiker/in für Anwendungsentwicklung
+– Du bist von Anfang an in unsere Softwareprojekte eingebunden – von der Planung bis zur fertigen Anwendung.
+– Du entwickelst moderne Web- und Backend-Anwendungen und automatisierst Abläufe wie z.B. Softwareupdates, um mehr Zeit für spaßigere Dinge zu haben.
+– Du arbeitest mit gängigen Programmiersprachen wie Python, JavaScript, Kotlin, Rust – je nach Projekt.
+– Auch hier ist Linux dein Alltag – du entwickelst an echten Projekten, versionierst mittels Git und rollst via CI/CD-Pipeline auf Kubernetes aus.
+Was du mitbringen solltest
+– Idealerweise hast du (Fach-)Abitur oder einen sehr guten Realschulabschluss.
+– Du hast erste Erfahrungen mit Computern, Linux oder Programmierung gesammelt – z.B. eigene Projekte oder erste Skripte.
+– Du bist neugierig, lernbereit, kommunikativ und zuverlässig.
+– Du hast Lust, in einem tollen und jungen Team moderne IT und aktuelle Cloudtechnologien kennenzulernen und mitzugestalten.
+Warum du dich bewerben solltest
+– Weil du bei uns nicht nur zuschaust, sondern aktiv mitentwickelst.
+– Weil wir moderne Technologien leben – mit echten Projekten, echten Servern, echten Herausforderungen.
+– Und weil das Team einfach passt.
+Bewirb dich jetzt – egal ob du eher Admin oder Developer bist.
+Wir freuen uns darauf, dich bei einem persönlichen Gespräch kennenzulernen!
+Linux aus Leidenschaft
+teuto.net steht für professionelles Kubernetes, Cloud und Server Hosting. Wir entwicklen Webanwendungen und beraten im Linux und OpenSource Umfeld.
+Als inhabergeführtes Unternehmen behaupten wir uns seit mehr als 20 Jahren erfolgreich auf dem Managed Hosting Markt. Wir betreuen unsere Kund*innen von der Anforderungsaufnahme über die Umsetzung bis hin zu Betrieb und Wartung der von uns eingesetzten Lösungen.
+Aus dieser Position heraus können wir durch neue Blickwinkel und Ideen Mehrwert für unsere Kundinnen und Kunden schaffen. Wir sind innovativ und agil. Die von uns entwickelten und eingesetzten Lösungen bewegen sich stets an der Spitze des Entwicklungsstandes.
+Unsere Philosophie
+Seit über 20 Jahren setzen wir bei teuto.net Vertrauen in unsere Mitarbeiter*innen und deren Fähigkeiten.
+Wir sind überzeugt, dass die beste Lösung nur durch gemeinsam erarbeitete Ideen erreicht wird. Teamwork steht bei uns an erster Stelle. Wir ermutigen unsere Mitarbeiter*innen stets nach neuen und eigenen Lösungsansätzen zu suchen und pflegen deshalb einen offenen Umgang miteinander.
+Flache Hierarchien, agile Vorgehensweisen und regelmäßige Meetings (wie Sprint Plannings, Dailys) helfen uns dabei Projekte transparent zu halten. Sie geben jedem Beteiligten die Möglichkeit seine Meinung und Erfahrungen einfließen zu lassen.",2026-06-13T11:22:14.246540+00:00

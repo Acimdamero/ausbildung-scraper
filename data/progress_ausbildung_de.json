@@ -1,0 +1,56 @@
+{
+  "last_run_at": "2026-06-11T11:24:10.405716+00:00",
+  "source": "ausbildung_de",
+  "categories": [
+    {
+      "category_id": "ausbildung_de_ae",
+      "discovered_urls": 144,
+      "scraped": 144,
+      "failed": 0,
+      "failed_urls": []
+    },
+    {
+      "category_id": "ausbildung_de_dpa",
+      "discovered_urls": 27,
+      "scraped": 27,
+      "failed": 0,
+      "failed_urls": []
+    }
+  ],
+  "total_scraped": 171,
+  "total_failed": 0,
+  "cross_duplicates_with_arbeitsagentur": 41,
+  "new_unique_vs_arbeitsagentur": 129,
+  "by_category": {
+    "ausbildung_de_ae": {
+      "scraped": 143,
+      "cross_duplicates": 34,
+      "unique_new": 109,
+      "failed": 0
+    },
+    "ausbildung_de_dpa": {
+      "scraped": 27,
+      "cross_duplicates": 7,
+      "unique_new": 20,
+      "failed": 0
+    }
+  },
+  "merged_master_total": 1236,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 49.4,
+    "persyaratan": 100.0,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 100.0,
+    "apa_yang_ditawarkan": 38.2,
+    "link_website_perusahaan": 100.0,
+    "alamat_email_bewerbung": 61.2,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 23.5,
+    "dokumen_yang_harus_dipenuhi": 25.9
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "retried_at": "2026-06-13T08:53:51.782577+00:00",
+  "category_id": "stepstone_de_dpa",
+  "total_retried": 5,
+  "recovered": 0,
+  "still_failed": 5,
+  "merged_to_exports": 0,
+  "results": [
+    {
+      "url": "https://www.stepstone.de/stellenangebote--Ausbildung-zum-Fachinformatiker-fuer-2027-m-w-d-Fachrichtung-Systemintegration-Wietmarschen-Lohne-Rosenxt-Group--14017595-inline.html",
+      "can_extract": false,
+      "root_cause": "listing_expired (Stellenanzeige nicht mehr verfügbar, no JSON-LD)",
+      "fields_recovered": {}
+    },
+    {
+      "url": "https://www.stepstone.de/stellenangebote--Engineering-Trainee-Elektronik-Mechatronik-Software-m-w-d-Celle-OneSubsea-GmbH--14016906-inline.html",
+      "can_extract": false,
+      "root_cause": "listing_expired (Stellenanzeige nicht mehr verfügbar, no JSON-LD)",
+      "fields_recovered": {}
+    },
+    {
+      "url": "https://www.stepstone.de/stellenangebote--IT-Administrator-m-w-d-OT-IT-Infrastruktur-Hausen-dosmatix-GmbH--14014679-inline.html",
+      "can_extract": false,
+      "root_cause": "listing_expired (Stellenanzeige nicht mehr verfügbar, no JSON-LD)",
+      "fields_recovered": {}
+    },
+    {
+      "url": "https://www.stepstone.de/stellenangebote--Praktikum-Softwareentwicklung-w-m-d-Karlsruhe-CAS-Software-AG--11927888-inline.html",
+      "can_extract": false,
+      "root_cause": "listing_expired (Stellenanzeige nicht mehr verfügbar, no JSON-LD)",
+      "fields_recovered": {}
+    },
+    {
+      "url": "https://www.stepstone.de/stellenangebote--Praktikum-in-der-Softwareentwicklung-m-w-d-Berlin-Bonn-Frankfurt-Hamburg-Muenchen-Nuernberg-Wien-Senacor-Technologies-AG--13409271-inline.html",
+      "can_extract": false,
+      "root_cause": "listing_expired (Stellenanzeige nicht mehr verfügbar, no JSON-LD)",
+      "fields_recovered": {}
+    }
+  ]
+}

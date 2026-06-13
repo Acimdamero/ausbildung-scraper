@@ -1,0 +1,98 @@
+{
+  "scraped_at": "2026-06-13T16:15:17.158438+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "playwright viewjob-first (/viewjob?jk=) + SERP split-view fallback; #jobDescriptionText + JSON-LD",
+    "pagination": "Location-sharded search (l=City/Bundesland); start=10+ blocked by Cloudflare",
+    "anti_bot_note": "SERP reload blocked after first job; viewjob direct is primary. Use --headful if headless blocked.",
+    "detail_url_pattern": "/viewjob?jk={16-char-hex}",
+    "notes": "No public search JSON API; mosaic job cards in HTML. viewjob-first strategy with 3-8s random delay between details."
+  },
+  "categories": [
+    {
+      "category_id": "indeed_de_ae",
+      "discovered_urls": 402,
+      "scraped": 0,
+      "failed": 5,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": [
+        "https://de.indeed.com/viewjob?jk=a1b2c3d4e5f67890",
+        "https://de.indeed.com/viewjob?jk=890abcdef0123456",
+        "https://de.indeed.com/viewjob?jk=f1e2d3c4b5a67890",
+        "https://de.indeed.com/viewjob?jk=cdef0123456789ab",
+        "https://de.indeed.com/viewjob?jk=0f1e2d3c4b5a6978"
+      ]
+    },
+    {
+      "category_id": "indeed_de_dpa",
+      "discovered_urls": 240,
+      "scraped": 105,
+      "failed": 5,
+      "skipped_wrong_beruf": 130,
+      "failed_urls": [
+        "https://de.indeed.com/viewjob?jk=0f1e2d3c4b5a6978",
+        "https://de.indeed.com/viewjob?jk=cdef0123456789ab",
+        "https://de.indeed.com/viewjob?jk=890abcdef0123456",
+        "https://de.indeed.com/viewjob?jk=f1e2d3c4b5a67890",
+        "https://de.indeed.com/viewjob?jk=a1b2c3d4e5f67890"
+      ]
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 491,
+    "output_total": 488,
+    "removed_total": 3,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 3,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "indeed_de_ae": 386,
+      "indeed_de_dpa": 105
+    },
+    "output_by_category": {
+      "indeed_de_ae": 383,
+      "indeed_de_dpa": 105
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 488,
+    "internal_dupes": 0,
+    "cross_dupes": 488,
+    "unique_new": 0,
+    "by_category": {
+      "indeed_de_ae": {
+        "scraped": 383,
+        "cross_duplicates": 383,
+        "unique_new": 0
+      },
+      "indeed_de_dpa": {
+        "scraped": 105,
+        "cross_duplicates": 105,
+        "unique_new": 0
+      }
+    }
+  },
+  "total_scraped_raw": 491,
+  "total_after_within_dedup": 488,
+  "total_failed": 10,
+  "total_skipped_wrong_beruf": 130,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 96.5,
+    "persyaratan": 64.5,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 74.0,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 34.0,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 35.9,
+    "dokumen_yang_harus_dipenuhi": 35.2
+  }
+}

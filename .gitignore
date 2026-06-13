@@ -1,10 +1,19 @@
 # Secrets & credentials
 .env
+.env.local
 credentials/
-*.json
-!config/*.yaml
+*.pem
+*.key
+
+# Private applicant data (NEVER commit)
+src/bewerbung/user_profile.local.py
+data/bewerbung/
+data/processed/bewerbung_enriched.json
+data/cache/company_research/
+
+# Google service account JSON (allow config yaml and sample json)
+credentials/*.json
 !data/samples/*.json
-!data/progress.json
 
 # Python
 __pycache__/
@@ -14,20 +23,29 @@ __pycache__/
 venv/
 dist/
 build/
+.pytest_cache/
+.mypy_cache/
 
-# Data outputs (keep samples + deduplicated processed)
+# Data outputs — raw exports and dated snapshots stay local
 data/raw/
-data/processed/*
-!data/processed/*.json
-!data/processed/*.csv
 data/exports/
-!data/samples/
+logs/
+*.log
+scrape_run.log
+
+# Processed data: keep main deduped files for demo; ignore dated backups
+data/processed/*_20*.json
+data/processed/*_20*.csv
 
 # IDE & OS
 .idea/
 .vscode/
 .DS_Store
+*.swp
+*~
 
-# Progress / logs
-logs/
-*.log
+# Keep for public demo (explicit allowlist via negation above)
+# data/viewer/index.html
+# data/processed/all_listings_deduped.*
+# data/processed/one_per_company.*
+# data/public/

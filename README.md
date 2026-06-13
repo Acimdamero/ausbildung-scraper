@@ -1,330 +1,207 @@
-# Ausbildung Scraper
+# AusbildungHunter Intelligence
 
-**ID:** Pengumpul data lowongan Ausbildung (pelatihan kejuruan) dari Arbeitsagentur Jerman.  
-**DE:** Sammler für Ausbildungsstellen der Bundesagentur für Arbeit.  
-**EN:** Scraper for German apprenticeship listings via the official Jobsuche API.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Listings](https://img.shields.io/badge/listings-6850%20deduped-green.svg)](#scraping-sources)
+[![Companies](https://img.shields.io/badge/companies-3895%20unique-orange.svg)](#one-per-company)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/demo-GitHub%20Pages-3d8bfd.svg)](https://acimdamero.github.io/ausbildung-scraper/)
 
-## Tech Stack
+> **Tagline:** Multi-portal FI apprenticeship discovery, deduplication, and intelligent Bewerbung generation.
+
+**AusbildungHunter Intelligence** (AHI) combines three ideas into one pipeline:
+
+- **Ausbildung Intelligence** — aggregate, dedupe, and search listings across 15+ German job portals
+- **FI-Ausbildung Hunter** — focused on *Fachinformatiker/in Anwendungsentwicklung* (and related FI profiles)
+- **Bewerbung Engine** — company research + personalized application documents (DE + ID), local-only
+
+| Language | README |
+|----------|--------|
+| Deutsch | [README.de.md](README.de.md) |
+| Bahasa Indonesia | [README.id.md](README.id.md) |
+
+## Highlights
+
+| Feature | Description |
+|---------|-------------|
+| Multi-portal scraping | Arbeitsagentur API + 14 browser-based portals |
+| Smart deduplication | Cross-source dedup by reference ID and content hash |
+| Searchable viewer | Filter by city, company, portal, category — embedded HTML, no backend |
+| One-per-company | Best listing per company for efficient Bewerbung outreach |
+| Bewerbung Intelligence | Company research, Anschreiben, Motivationsschreiben, email drafts (DE + ID) |
+| Privacy-first | Applicant profile and generated letters stay local — never in git |
+
+## Live demo
+
+**Job listing viewer (public):** https://acimdamero.github.io/ausbildung-scraper/
+
+**Bewerbung UI demo (sample data):** open `data/public/bewerbung-demo/index.html` after clone
+
+## Architecture
+
+```mermaid
+flowchart LR
+    subgraph scrape [Scrape]
+        P1[15+ portals]
+        P2[Normalize]
+    end
+    subgraph process [Process]
+        D[Deduplicate]
+        O[One per company]
+    end
+    subgraph publish [Publish]
+        V[HTML viewer]
+        GP[GitHub Pages]
+    end
+    subgraph local [Local only]
+        BP[user_profile.local.py]
+        BG[Bewerbung docs]
+    end
+    P1 --> P2 --> D --> O
+    D --> V --> GP
+    O --> BG
+    BP --> BG
+```
+
+Full details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+
+## Repository structure
+
+```
+ausbildung-scraper/
+├── README.md, README.de.md, README.id.md
+├── config/                 # Search categories & field mapping
+├── docs/                   # Architecture, privacy, portal guides
+├── scripts/                # Scrapers, dedup, viewer, Bewerbung
+├── src/
+│   ├── api_client/         # Arbeitsagentur REST
+│   ├── scraper/            # Portal fetchers
+│   ├── parser/             # Normalization
+│   ├── storage/            # Export, dedup, progress
+│   └── bewerbung/          # Profile, research, doc generation
+├── data/
+│   ├── processed/          # Deduped JSON/CSV
+│   ├── viewer/             # Public job viewer → GitHub Pages
+│   └── public/             # Sample Bewerbung demo (no PII)
+└── .github/workflows/      # Pages deploy
+```
+
+## Scraping sources
+
+| Portal | Script | Status | Notes |
+|--------|--------|--------|-------|
+| Arbeitsagentur | `run_scraper.py` | ✅ Active | Official REST API, no browser |
+| ausbildung.de | `run_ausbildung_de.py` | ✅ Active | Playwright, JSON-LD |
+| Ausbildung.NRW | `run_ausbildung_nrw.py` | ✅ Active | Regional portal |
+| meine-ausbildung.de | `run_meine_ausbildung_de.py` | ✅ Active | Playwright |
+| azubi.de | `run_azubi_de.py` | ✅ Active | FI-focused search |
+| azubiyo.de | `run_azubiyo_de.py` | ✅ Active | Playwright |
+| StepStone | `run_stepstone_de.py` | ✅ Active | Anti-bot handling |
+| ausbildungsstellen.de | `run_ausbildungsstellen_de.py` | ✅ Active | Multiple FI categories |
+| aubi-plus.de | `run_aubi_plus_de.py` | ✅ Active | Playwright |
+| wir-sind-bund.de | `run_wir_sind_bund_de.py` | ✅ Active | Public sector |
+| karriere-suedwestfalen.de | `run_karriere_suedwestfalen_de.py` | ✅ Active | Regional |
+| ausbildungsmarkt.de | `run_ausbildungsmarkt_de.py` | ✅ Active | Playwright |
+| backinjob.de | `run_backinjob_de.py` | ✅ Active | Playwright |
+| Indeed DE | `run_indeed_de.py` | ⚠️ Partial | Shard batches, anti-bot limits |
+| meinestadt.de | `run_meinestadt_de.py` | ⚠️ Low yield | Dedicated AE URLs, slow |
+
+Per-portal docs: `docs/*_SCRAPING.md`
+
+## Quick start
+
+### Prerequisites
 
 - Python 3.10+
-- [Arbeitsagentur Jobsuche API](https://jobsuche.api.bund.dev/) (REST, no browser)
-- Google Sheets via `gspread` (optional)
-- Local JSON/CSV backup
+- Chromium for Playwright (`playwright install chromium`)
 
-## Quick Start Siap Pakai (Bahasa Indonesia)
-
-### Checklist — apa yang dibutuhkan?
-
-| Item | Wajib? | Keterangan |
-|------|--------|------------|
-| Python 3.10+ | ✅ Ya | Sudah terinstall di Mac |
-| API Key Arbeitsagentur | ❌ Tidak perlu daftar | Pakai key publik bawaan |
-| Akun Google / Sheets | ❌ Opsional | Hanya jika mau export ke Google Sheets |
-| Browser | ✅ Ya | Untuk buka HTML viewer |
-
-### API — tanpa login
-
-| | |
-|---|---|
-| **Dokumentasi** | https://jobsuche.api.bund.dev/ |
-| **Base URL** | `https://rest.arbeitsagentur.de/jobboerse/jobsuche-service` |
-| **API Key** | `jobboerse-jobsuche` (header `X-API-Key`) |
-| **Registrasi** | Tidak diperlukan — key publik |
-
-### Setup sekali (copy-paste)
+### Setup
 
 ```bash
-cd ~/Projects/ausbildung-scraper
+git clone https://github.com/Acimdamero/ausbildung-scraper.git
+cd ausbildung-scraper
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-playwright install chromium   # hanya untuk scraper ausbildung.de
+playwright install chromium
 cp .env.example .env
 ```
 
-### Scraper ausbildung.de (Playwright)
-
-Situs dinamis — butuh Chromium:
+### Run Arbeitsagentur scraper (API)
 
 ```bash
-python scripts/run_ausbildung_de.py
-```
-
-Hasil digabung ke `data/processed/all_listings_deduped.json` dengan deduplikasi lintas sumber (Arbeitsagentur + ausbildung.de). Panduan: [docs/AUSBILDUNG_DE_SCRAPING.md](docs/AUSBILDUNG_DE_SCRAPING.md).
-
-### Jalankan scraper Arbeitsagentur (API)
-
-```bash
-# Cepat — 1 halaman per kategori (~75 listing total)
+# Quick test — 1 page per category
 python scripts/run_scraper.py --max-pages 1
 
-# Rekomendasi — 3 halaman per kategori (~225 listing)
+# Recommended — 3 pages per category
 python scripts/run_scraper.py --max-pages 3 --workers 3
-
-# Full scrape semua halaman (~947 x 3 kategori ≈ 2840 listing)
-python scripts/run_scraper.py --max-pages 0 --workers 3
 ```
 
-### Reprocess parser (tanpa scrape ulang)
-
-Setelah perbaikan parser, perbarui export yang ada:
-
-```bash
-python scripts/reprocess_data.py
-python scripts/dedup_data.py
-```
-
-### Deduplikasi data
-
-Scrape mentah sering berisi duplikat (lowongan sama muncul di beberapa kategori pencarian). Jalankan deduplikasi setelah scrape:
+### Deduplicate & view
 
 ```bash
 python scripts/dedup_data.py
-```
-
-Script ini:
-- Membaca `data/exports/*.json` (terbaru per kategori)
-- Menghapus duplikat berdasarkan `referenznummer` (prioritas utama) dan hash sekunder
-- Menyimpan hasil bersih ke `data/processed/` (JSON + CSV)
-- Memperbarui `data/viewer/index.html` dengan data deduplikasi
-- Memperbarui statistik di `data/progress.json` dan `data/PROGRESS.md`
-
-Prioritas kategori saat duplikat lintas-kategori: `ae_2026` > `dpa` > `ae`.
-
-### Export untuk Bewerbung (Excel/Sheets)
-
-Setelah deduplikasi, file siap pakai di `data/processed/`:
-
-| File | Kegunaan |
-|------|----------|
-| `master_bewerbung.csv` | File utama — tracking lamaran |
-| `high_priority.csv` | Punya email + data lengkap |
-| `needs_manual_review.csv` | Perlu cek manual |
-| `by_city/*.csv` | Per kota |
-
-```bash
-python scripts/generate_bewerbung_exports.py   # regenerate tanpa dedup
-```
-
-Panduan lengkap: [docs/DATA_WORKFLOW.md](docs/DATA_WORKFLOW.md)
-
-### Lihat data langsung
-
-Setelah scrape (dan deduplikasi), buka di browser:
-
-```bash
-open data/viewer/index.html
-```
-
-Atau regenerate viewer manual:
-
-```bash
 python scripts/generate_viewer.py
 open data/viewer/index.html
 ```
 
-**Cara lain:**
-
-| Format | Lokasi | Cara buka |
-|--------|--------|-----------|
-| HTML Viewer | `data/viewer/index.html` | Double-click / `open` di browser |
-| JSON/CSV deduplikasi | `data/processed/all_listings_deduped.*` | Disarankan untuk analisis |
-| CSV mentah | `data/exports/*.csv` | Excel, Numbers, Google Sheets upload |
-| JSON mentah | `data/exports/*.json` | VS Code, editor teks |
-| Progress | `data/PROGRESS.md` | Ringkasan + statistik dedup |
-| Google Sheets | Tab `FI_AE`, dll. | Perlu setup service account |
-
-### Rate limit — aman vs agresif
-
-| Mode | Workers | Delay | Estimasi full scrape (~2840 detail) |
-|------|---------|-------|-------------------------------------|
-| **Aman (default)** | 1 | 0.3s | ~15–20 menit |
-| **Seimbang** | 3 | 0.3s | ~6–8 menit |
-| **Cepat** | 5 | 0.15s | ~3–5 menit |
-| **Agresif ⚠️** | 8+ | 0.05s | Risiko HTTP 429 / IP throttle |
-
-Atur di `.env` atau flag CLI:
+### One-per-company export
 
 ```bash
-# .env
-REQUEST_DELAY_SECONDS=0.3
-SCRAPE_WORKERS=3
-
-# atau via CLI
-python scripts/run_scraper.py --max-pages 0 --workers 3
+python scripts/export_one_per_company.py
+# → data/processed/one_per_company.json
 ```
 
-Retry otomatis untuk connection reset dan HTTP 429/5xx (`MAX_RETRIES=3`).
-
-### Google Sheets (opsional — butuh kredensial)
-
-Tidak wajib. Tanpa Google, data tetap tersimpan lokal (JSON/CSV/HTML).
-
----
-
-## Quick Start (English)
+## Bewerbung Intelligence (local only)
 
 ```bash
-cd ~/Projects/ausbildung-scraper
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
+cp src/bewerbung/user_profile.example.py src/bewerbung/user_profile.local.py
+# Edit user_profile.local.py with YOUR data — never commit
 
-# Test run — first page, one category
-python scripts/run_scraper.py --category fachinformatiker_ae --max-pages 1 --samples
+python scripts/generate_bewerbung_exports.py
+python scripts/run_bewerbung_pilot.py --limit 10
+python scripts/generate_bewerbung_ui.py
+open data/bewerbung/index.html
 ```
 
-Output sample: `data/samples/sample_fachinformatiker_ae.json`
+No automatic email sending — preview and mailto helpers only. See [docs/BEWERBUNG_SYSTEM.md](docs/BEWERBUNG_SYSTEM.md).
 
-## Search Categories
-
-Configured in `config/categories.yaml`:
-
-| ID | Query (`was`) |
-|----|---------------|
-| `fachinformatiker_ae` | Fachinformatiker/in Anwendungsentwicklung |
-| `fachinformatiker_ae_2026` | Fachinformatiker/in Anwendungsentwicklung Jahr 2026 |
-| `fachinformatiker_dpa` | Fachinformatiker/in Daten- und Prozessanalyse |
-
-`angebotsart=4` = Ausbildung (apprenticeship).
-
-## Usage
+## Git workflow
 
 ```bash
-# One category, one page
-python scripts/run_scraper.py --category fachinformatiker_ae --max-pages 1
-
-# All categories, one page each
-python scripts/run_scraper.py --max-pages 1
-
-# Full scrape (all pages — can take hours)
-python scripts/run_scraper.py --max-pages 0
+git checkout -b feature/my-change
+# ... make changes ...
+git add <files>   # never add user_profile.local.py or data/bewerbung/
+git commit -m "Describe your change"
+git push -u origin feature/my-change
 ```
 
-### Options
+## Privacy: public vs private
 
-| Flag | Description |
-|------|-------------|
-| `--category ID` | Single category from config |
-| `--max-pages N` | Pages per category (`0` = all) |
-| `--page-size N` | Results per page (default 25) |
-| `--workers N` | Parallel detail fetch workers (default 1) |
-| `--samples` | Save to `data/samples/` |
-| `--no-viewer` | Skip HTML viewer generation |
+| Public (GitHub + Pages) | Private (local only) |
+|-------------------------|----------------------|
+| Job listings viewer | `user_profile.local.py` |
+| Sample Bewerbung demo | `data/bewerbung/index.html` |
+| Scraper code & docs | `bewerbung_enriched.json` |
+| Deduped listing stats | Real Anschreiben / emails |
+| | `.env`, credentials |
 
-## Google Sheets Setup
+Details: [docs/PRIVACY.md](docs/PRIVACY.md) · Access guide: [docs/ACCESS.md](docs/ACCESS.md)
 
-1. [Google Cloud Console](https://console.cloud.google.com/) → create project
-2. Enable **Google Sheets API** + **Google Drive API**
-3. Create **Service Account** → download JSON
-4. Save as `credentials/google-service-account.json`
-5. Create a Google Sheet → share with service account email (Editor)
-6. Copy spreadsheet ID from URL → set in `.env`:
+## GitHub Pages
 
-```env
-GOOGLE_SHEETS_ENABLED=true
-GOOGLE_SHEETS_SPREADSHEET_ID=your-spreadsheet-id
-GOOGLE_SERVICE_ACCOUNT_JSON=credentials/google-service-account.json
-```
+Deploys automatically from `data/viewer/` on push to `main`.
 
-Each category exports to its own tab (`FI_AE`, `FI_AE_2026`, `FI_DPA`).
-
-## Project Structure
-
-```
-ausbildung-scraper/
-├── config/           # categories + field mapping
-├── docs/             # PRD, architecture, pipeline
-├── scripts/          # run_scraper.py, dedup_data.py, generate_viewer.py
-├── src/
-│   ├── api_client/   # Jobsuche REST client
-│   ├── scraper/      # arbeitsagentur.py (API), ausbildung_de.py (Playwright)
-│   ├── parser/       # API / ausbildung.de → normalized listing
-│   ├── storage/      # JSON, CSV, Sheets, progress
-│   └── models/       # AusbildungListing dataclass
-└── data/
-    ├── samples/      # test output
-    ├── exports/      # raw scrape output (JSON + CSV)
-    ├── processed/    # deduplicated output (JSON + CSV)
-    ├── viewer/       # index.html — buka di browser
-    └── progress.json # scrape stats
-```
-
-## Data Fields
-
-| Field (ID) | Availability |
-|------------|--------------|
-| Nama perusahaan | ✅ |
-| Titik peta (lat,lon) | ✅ |
-| Kota | ✅ |
-| Alamat detail | ⚠️ (street not always present) |
-| Deskripsi | ✅ |
-| Gaji | ⚠️ (~6% listings) |
-| Persyaratan | ⚠️ (structured: education only) |
-| Jenis Ausbildung | ✅ |
-| Deskripsi perusahaan | ❌ |
-| Yang ditawarkan | ⚠️ (in description) |
-| Website perusahaan | ⚠️ (often partner URL) |
-| Email bewerbung | ❌ |
-| Link bewerbung | ✅ (externe atau fallback BA) |
-| Website type / kelengkapan | ✅ (derived) |
-| Kontak HR | ❌ |
-| Dokumen | ❌ |
-
-See `config/fields_mapping.yaml`, `docs/DATA_COMPLETENESS.md`, and `docs/API_INVESTIGATION.md`.
-
-### ausbildung.de vs Arbeitsagentur (field availability)
-
-| Field | Arbeitsagentur API | ausbildung.de (JSON-LD + DOM) |
-|-------|-------------------|-------------------------------|
-| Nama perusahaan | ✅ | ✅ |
-| Koordinat peta | ✅ | ❌ (tidak di JSON-LD) |
-| Kota / alamat | ✅ | ✅ (street + PLZ) |
-| Deskripsi | ✅ | ✅ |
-| Gaji | ⚠️ ~6% | ⚠️ ~51% (tabel tahun di DOM) |
-| Persyaratan | ⚠️ education code | ✅ section terstruktur |
-| Jenis Ausbildung | ✅ | ✅ |
-| Deskripsi perusahaan | ❌ | ✅ Corporation schema |
-| Yang ditawarkan | ⚠️ heuristic | ⚠️ ~39% section |
-| Website perusahaan | ⚠️ partner URL | ✅ `hiringOrganization.sameAs` |
-| Email bewerbung | ❌ | ⚠️ ~65% (mailto) |
-| Link bewerbung | ✅ externe/BA | ✅ `/direktbewerbung/` |
-| Kontak HR | ❌ | ⚠️ ~25% |
-| Dokumen | ❌ | ⚠️ ~26% |
-| `referenznummer` BA | ✅ | ❌ (pakai `AD-{uuid}`) |
-| `sumber_data` | `arbeitsagentur` | `ausbildung_de` |
-
-## Progress Tracking
-
-After each run:
-- `data/progress.json` — Arbeitsagentur scrape stats
-- `data/progress_ausbildung_de.json` — ausbildung.de scrape stats
-- `data/PROGRESS.md` — markdown table for GitHub
-
-**Monitor real-time (Bahasa Indonesia):** lihat [docs/BACKGROUND_RUN.md](docs/BACKGROUND_RUN.md#monitor-progress-real-time-saat-scrape-berjalan). Ringkas:
-
-```bash
-./scripts/watch_progress.sh          # dashboard terminal
-tail -f logs/meine_ausbildung_ae.log # log live
-cat data/LIVE_STATUS.md              # snapshot terakhir
-```
+Setup: [docs/github-pages-setup.md](docs/github-pages-setup.md)
 
 ## Documentation
 
-- [PRD](docs/PRD.md)
-- [System Requirements](docs/SYSTEM_REQUIREMENTS.md)
 - [Architecture](docs/ARCHITECTURE.md)
-- [Data Pipeline](docs/DATA_PIPELINE.md)
-- [API Investigation](docs/API_INVESTIGATION.md)
-- [Development Process](docs/DEVELOPMENT_PROCESS.md)
-
-## Roadmap
-
-1. **MVP** — API scraper + local/Sheets export ✅
-2. NLP extraction from descriptions (email, documents)
-3. Automated personalized Bewerbung system
+- [Data pipeline](docs/DATA_PIPELINE.md)
+- [Bewerbung system](docs/BEWERBUNG_SYSTEM.md)
+- [Privacy](docs/PRIVACY.md)
+- [Access / review guide](docs/ACCESS.md)
+- [Contributing](CONTRIBUTING.md)
 
 ## License
 
-MIT — use responsibly; respect API rate limits.
+MIT — use responsibly; respect portal terms and API rate limits.

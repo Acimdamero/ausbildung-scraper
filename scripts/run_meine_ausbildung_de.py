@@ -85,6 +85,12 @@ def save_processed_merge(
 
 
 def regenerate_viewer(data_dir: Path) -> None:
+    bewerbung = ROOT / "scripts" / "generate_bewerbung_exports.py"
+    subprocess.run(
+        [sys.executable, str(bewerbung), "--data-dir", str(data_dir)],
+        cwd=ROOT,
+        check=False,
+    )
     script = ROOT / "scripts" / "generate_viewer.py"
     subprocess.run(
         [
@@ -95,12 +101,6 @@ def regenerate_viewer(data_dir: Path) -> None:
             "--output",
             str(data_dir / "viewer" / "index.html"),
         ],
-        cwd=ROOT,
-        check=False,
-    )
-    bewerbung = ROOT / "scripts" / "generate_bewerbung_exports.py"
-    subprocess.run(
-        [sys.executable, str(bewerbung), "--data-dir", str(data_dir)],
         cwd=ROOT,
         check=False,
     )

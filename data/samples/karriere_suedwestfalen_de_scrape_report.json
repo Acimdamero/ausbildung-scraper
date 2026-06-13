@@ -1,0 +1,71 @@
+{
+  "scraped_at": "2026-06-13T14:44:51.870357+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "HTTP pagination (/jobboerse/{page}) + Playwright detail (JSON-LD JobPosting)",
+    "pagination": "/jobboerse/{page}?s=query — stop on empty page or 2 stagnant pages",
+    "json_ld": "JobPosting schema on /ausbildung/* detail pages",
+    "expected_listings": "~84 unique for fachinformatiker+anwendungsentwicklung",
+    "notes": "Regional IHK Südwestfalen portal. referenznummer KSW-{id}; beruf_typ via specialization.py enrichment."
+  },
+  "categories": [
+    {
+      "category_id": "karriere_sw_ae",
+      "discovered_urls": 84,
+      "scraped": 34,
+      "failed": 0,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 84,
+    "output_total": 84,
+    "removed_total": 0,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 0,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "karriere_sw_ae": 84
+    },
+    "output_by_category": {
+      "karriere_sw_ae": 84
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 84,
+    "internal_dupes": 0,
+    "cross_dupes": 16,
+    "unique_new": 68,
+    "by_category": {
+      "karriere_sw_ae": {
+        "scraped": 84,
+        "cross_duplicates": 16,
+        "unique_new": 68
+      }
+    }
+  },
+  "total_scraped_raw": 84,
+  "total_after_within_dedup": 84,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 0,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 0.0,
+    "persyaratan": 27.4,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 27.4,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 76.2,
+    "link_bewerbung": 73.8,
+    "kontak_penanggung_jawab": 38.1,
+    "dokumen_yang_harus_dipenuhi": 0.0
+  }
+}

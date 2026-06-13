@@ -1,21 +1,21 @@
 # Live Scrape Status
 
-**Updated:** 2026-06-12 12:51:28
+**Updated:** 2026-06-13 18:22:56
 
 Snapshot otomatis dari `scripts/watch_progress.py`.
 
 ```
 ==============================================================
   AUSBILDUNG SCRAPER — LIVE PROGRESS
-  2026-06-12 12:51:28  (refresh 7s, Ctrl+C keluar)
+  2026-06-13 18:22:56  (refresh 7s, Ctrl+C keluar)
 ==============================================================
 
-MASTER TOTAL: 2316 listing (master_bewerbung.json)
+MASTER TOTAL: 6850 listing (master_bewerbung.json)
 
 BACKGROUND STATUS:
   - **State:** COMPLETED
-  - **Updated (UTC):** 2026-06-12T10:01:34Z
-  Scrape suche.ausbildung.nrw selesai: 215 listing, 48 unik baru (master total 2316).
+  - **Updated (UTC):** 2026-06-13T16:19:30Z
+  Scrape meinestadt.de selesai: 5 listing, 2 unik baru (master total 6850).
 
 SOURCES:
   Arbeitsagentur: 1764 scraped, 0 failed

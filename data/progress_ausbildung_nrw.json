@@ -1,0 +1,57 @@
+{
+  "last_run_at": "2026-06-12T10:01:34.045833+00:00",
+  "source": "suche_ausbildung_nrw",
+  "categories": [
+    {
+      "category_id": "ausbildung_nrw_ae",
+      "apprenticeship_id": 322,
+      "discovered_urls": 181,
+      "scraped": 181,
+      "failed": 0,
+      "failed_urls": []
+    },
+    {
+      "category_id": "ausbildung_nrw_dpa",
+      "apprenticeship_id": 430,
+      "discovered_urls": 34,
+      "scraped": 34,
+      "failed": 0,
+      "failed_urls": []
+    }
+  ],
+  "total_scraped": 215,
+  "total_failed": 0,
+  "cross_duplicates_with_master": 165,
+  "new_unique_vs_master": 48,
+  "within_source_removed": 2,
+  "by_category": {
+    "ausbildung_nrw_ae": {
+      "scraped": 179,
+      "cross_duplicates": 143,
+      "unique_new": 36
+    },
+    "ausbildung_nrw_dpa": {
+      "scraped": 34,
+      "cross_duplicates": 22,
+      "unique_new": 12
+    }
+  },
+  "merged_master_total": 2316,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 100.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 0.0,
+    "persyaratan": 2.3,
+    "jenis_ausbildung": 100.0,
+    "deskripsi_perusahaan": 85.9,
+    "apa_yang_ditawarkan": 47.9,
+    "link_website_perusahaan": 84.5,
+    "alamat_email_bewerbung": 85.9,
+    "link_bewerbung": 85.9,
+    "kontak_penanggung_jawab": 100.0,
+    "dokumen_yang_harus_dipenuhi": 35.7
+  }
+}

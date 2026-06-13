@@ -265,3 +265,71 @@ categories:
     expected_pages: 144
     filter_beruf: si
     sheet_tab: "BIJ_SI"
+
+  # ausbildungsmarkt.de (Playwright detail + HTTP pagination — scripts/run_ausbildungsmarkt_de.py)
+  - id: ausbildungsmarkt_fi
+    name: "ausbildungsmarkt.de — Fachinformatiker/in (all specializations)"
+    name_id: "Fachinformatiker/in (ausbildungsmarkt.de)"
+    source: ausbildungsmarkt_de
+    search_url: "https://www.ausbildungsmarkt.de/suche.html?q=Fachinformatiker%2Fin&l=&r=100"
+    expected_results: 2835
+    expected_pages: 142
+    sheet_tab: "ABM_FI"
+
+  # karriere-suedwestfalen.de (Playwright — scripts/run_karriere_suedwestfalen_de.py)
+  - id: karriere_sw_ae
+    name: "karriere-suedwestfalen.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (karriere-suedwestfalen.de)"
+    source: karriere_suedwestfalen_de
+    search_url: "https://www.karriere-suedwestfalen.de/jobboerse?s=fachinformatiker+anwendungsentwicklung"
+    expected_results: 84
+    expected_pages: 10
+    sheet_tab: "KSW_AE"
+
+  # azubi.de (HTTP + JSON-LD — scripts/run_azubi_de.py)
+  - id: azubi_de_fi
+    name: "azubi.de — Fachinformatiker/in (all specializations)"
+    name_id: "Fachinformatiker/in (azubi.de)"
+    source: azubi_de
+    search_url: "https://www.azubi.de/beruf/ausbildung-fachinformatiker/ausbildungsplaetze"
+    expected_results: 664
+    expected_pages: 34
+    sheet_tab: "AZDE_FI"
+
+  # ausbildungsmarkt.de (Playwright — scripts/run_ausbildungsmarkt_de.py)
+  - id: ausbildungsmarkt_fi
+    name: "ausbildungsmarkt.de — Fachinformatiker/in (all specializations)"
+    name_id: "Fachinformatiker/in (ausbildungsmarkt.de)"
+    source: ausbildungsmarkt_de
+    search_url: "https://www.ausbildungsmarkt.de/suche.html?q=Fachinformatiker%2Fin&l=&r=100"
+    expected_results: 2835
+    expected_pages: 142
+    sheet_tab: "ABM_FI"
+
+  # karriere-suedwestfalen.de (Playwright — scripts/run_karriere_suedwestfalen_de.py)
+  - id: karriere_sw_ae
+    name: "karriere-suedwestfalen.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (karriere-suedwestfalen.de)"
+    source: karriere_suedwestfalen_de
+    search_url: "https://www.karriere-suedwestfalen.de/jobboerse?s=fachinformatiker+anwendungsentwicklung"
+    expected_results: 84
+    sheet_tab: "KSW_AE"
+
+  # aubi-plus.de (Playwright — scripts/run_aubi_plus_de.py)
+  - id: aubi_plus_fi
+    name: "aubi-plus.de — Fachinformatiker/in (all specializations)"
+    name_id: "Fachinformatiker/in (aubi-plus.de)"
+    source: aubi_plus_de
+    search_url: "https://www.aubi-plus.de/suchmaschine/suche/?mSuggest=fachinformatiker+&fGeo=25&fLand%5B%5D=deutschland&s%5B%5D=relevanz"
+    expected_results: 190
+    expected_pages: 19
+    sheet_tab: "AUBI_FI"
+
+  # wir-sind-bund.de (Playwright — scripts/run_wir_sind_bund_de.py)
+  - id: wir_sind_bund_fi
+    name: "wir-sind-bund.de — Fachinformatiker/in (Bundesverwaltung)"
+    name_id: "Fachinformatiker/in (wir-sind-bund.de)"
+    source: wir_sind_bund_de
+    search_url: "https://www.wir-sind-bund.de/SiteGlobals/Forms/Suche/Umkreissuche_Einstieg_Header_Formular.html?nn=758728&resourceId=755098&input_=754228&pageLocale=de&templateQueryString=fachinformatiker&city_zipcode=&submit=Stellen+finden&ambit_distance=100"
+    expected_results: 20
+    sheet_tab: "WSB_FI"

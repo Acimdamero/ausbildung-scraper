@@ -1,0 +1,75 @@
+﻿id_referensi,kategori,nama_perusahaan,kota,alamat,jenis_ausbildung,spesialisasi,tahun_mulai,bulan_mulai,gaji,skor_kelengkapan,tipe_website,email_bewerbung,link_bewerbung,cara_apply,kontak_hr,link_arbeitsagentur,ringkasan,butuh_manual,status_lamaran,prioritas,deskripsi,persyaratan,tanggal_scrape
+INDEED-0e654fd3e456dc33,indeed_de_ae,energy & meteo systems,Oskar-Homt-Straße 1,"26131 Oskar-Homt-Straße 1, 26131 Oldenburg NI",Ausbildung | Java-Entwickler:in / Software Developer,ae,,,"Festanstellung, Berufsausbildung",73,empty,jobs@emsysvpp.de,https://www.hiringlab.org/de/,email,,,energy & meteo systems | Ausbildung | Java-Entwickler:in / Software Developer | Oskar-Homt-Straße 1,tidak,belum,tinggi,"Java-Entwickler:in / Software Developer
+
+Du unterstützt uns bei der Entwicklung von Software anhand von internen und kundenbasierten Anforderungen.
+Im Rahmen der Pflege und Wartung bereits bestehender Software übernimmst du neben der Fehlerbehebung auch Codeoptimierungen und Anpassungen.
+Gemeinsam mit deinem Team stellst du den reibungslosen Betrieb kundenspezifischer Softwarekomponenten sicher.
+Dein Profil:
+Du hast ein abgeschlossenes Studium, z. B. in Informatik, Wirtschaftsinformatik oder Software Engineering, bist ausgebildete:r Fachinformatiker:in für Anwendungsentwicklung oder kommst als IT-Quereinsteiger:in zu uns.
+Ob du nach deiner Ausbildung deine Karriere starten möchtest oder schon mehrjährig dabei bist, ist für uns zweitrangig: Was zählt, ist deine Erfahrung in der agilen Softwareentwicklung in Java – mit allem, was dazu gehört: Java11 / Java17, Hibernate, Gradle, Spring-Framework.
+Bei RabbitMQ und Kafka denkst du nicht an ausgefallene Tiernamen, sondern an Kommunikationsprotokolle à la Message Queuing.
+Zudem kennst du dich mit Datenbanken und -verwaltungssystemen wie z. B. MySQL, MariaDB, Cassandra oder PostgreSQL sowie mit Webtechnologien (z. B. Aurelia, Vue.js, TypeScript) aus.
+Du hast Spaß an Teamwork, kannst aber auch allein vor dich hin programmieren – dein strukturierter und pragmatischer Arbeitsstil bringt dich stets ans Ziel.
+Von Vorteil sind Kenntnisse über Energiemärkte, das Stromnetz und die Steuerung von Industrieanlagen – alles, was du nicht weißt, lernst du bei uns.
+Was dich bei uns erwartet
+Du erhältst die Chance, an sinnstiftenden Projekten im Bereich Erneuerbare Energien mitzuarbeiten und dein Potenzial sowie deine Ideen einzubringen.
+Dein Arbeitstag ist abwechslungsreich, deine Tätigkeit anspruchsvoll und dein Team motiviert.
+Unbefristeter Arbeitsvertrag – wir rechnen längerfristig mit dir.
+Flexible Arbeitszeit und die Erfassung jeder Überstunde: Du musst nicht um 7 Uhr auf der Matte stehen. Wichtig ist uns, dass du vollen Einsatz zeigst, wenn du da bist.
+Flache Hierarchien und kurze Entscheidungswege – unsere Chefs haben offene Ohren und Türen.
+Für den kleinen Break zwischendurch gibt es Getränke, Bio-Obst und Snacks for free. Für den großen Hunger erwartet dich unsere hauseigene Kantine mit vegetarischen, veganen und fleischhaltigen Gerichten aus regionalen Produkten.
+Auch außerhalb unserer Büroräume ist die Stimmung gut, z. B. auf dem jährlichen Betriebsausflug, bei Teambuildingmaßnahmen, Weihnachtsfeiern, unserem monatlichen Spieleabend etc. Hier reden wir nicht nur über Arbeit.
+
+Weitere Benefits: betriebliche Altersvorsorge, Berufsunfähigkeitsversicherung, Fahrradleasing oder Sportzuschuss sowie die guud-Karte mit vielen nachhaltigen Vorteilen.
+Bewerbungsschluss: Wir nehmen fortlaufend Bewerbungen entgegen.
+Du fühlst dich angesprochen und willst mit uns die Energiewende gestalten?","Du unterstützt uns bei der Entwicklung von Software anhand von internen und kundenbasierten Anforderungen.
+Im Rahmen der Pflege und Wartung bereits bestehender Software übernimmst du neben der Fehlerbehebung auch Codeoptimierungen und Anpassungen.
+Gemeinsam mit deinem Team stellst du den reibungslosen Betrieb kundenspezifischer Softwarekomponenten sicher.
+Dein Profil:
+Du hast ein abgeschlossenes Studium, z. B. in Informatik, Wirtschaftsinformatik oder Software Engineering, bist ausgebildete:r Fachinformatiker:in für Anwendungsentwicklung oder kommst als IT-Quereinsteiger:in zu uns.
+Ob du nach deiner Ausbildung deine Karriere starten möchtest oder schon mehrjährig dabei bist, ist für uns zweitrangig: Was zählt, ist deine Erfahrung in der agilen Softwareentwicklung in Java – mit allem, was dazu gehört: Java11 / Java17, Hibernate, Gradle, Spring-Framework.
+Bei RabbitMQ und Kafka denkst du nicht an ausgefallene Tiernamen, sondern an Kommunikationsprotokolle à la Message Queuing.
+Zudem kennst du dich mit Datenbanken und -verwaltungssystemen wie z. B. MySQL, MariaDB, Cassandra oder PostgreSQL sowie mit Webtechnologien (z. B. Aurelia, Vue.js, TypeScript) aus.
+Du hast Spaß an Teamwork, kannst aber auch allein vor dich hin programmieren – dein strukturierter und pragmatischer Arbeitsstil bringt dich stets ans Ziel.
+Von Vorteil sind Kenntnisse über Energiemärkte, das Stromnetz und die Steuerung von Industrieanlagen – alles, was du nicht weißt, lernst du bei uns.
+Was dich bei uns erwartet
+Du erhältst die Chance, an sinnstiftenden Projekten im Bereich Erneuerbare Energien mitzuarbeiten und dein Potenzial sowie deine Ideen einzubringen.
+Dein Arbeitstag ist abwechslungsreich, deine Tätigkeit anspruchsvoll und dein Team motiviert.
+Unbefristeter Arbeitsvertrag – wir rechnen längerfristig mit dir.
+Flexible Arbeitszeit und die Erfassung jeder Überstunde: Du musst nicht um 7 Uhr auf der Matte stehen. Wichtig ist uns, dass du vollen Einsatz zeigst, wenn du da bist.
+Flache Hierarchien und kurze Entscheidungswege – unsere Chefs haben offene Ohren und Türen.
+Für den kleinen Break zwischendurch gibt es Getränke, Bio-Obst und Snacks for free. Für den großen Hunger erwartet dich unsere hauseigene Kantine mit vegetarischen, veganen und fleischhaltigen Gerichten aus regionalen Produkten.
+Auch außerhalb unserer Büroräume ist die Stimmung gut, z. B. auf dem jährlichen Betriebsausflug, bei Teambuildingmaßnahmen, Weihnachtsfeiern, unserem monatlichen Spieleabend etc. Hier reden wir nicht nur über Arbeit.",2026-06-13T11:45:00.396340+00:00
+INDEED-b7cd8d8cb36afe63,indeed_de_ae,energy & meteo systems,Oskar-Homt-Straße 1,"26131 Oskar-Homt-Straße 1, 26131 Oldenburg NI",Ausbildung | DevOps Engineer / Java-Entwickler:in,ae,,,"Festanstellung, Berufsausbildung",73,empty,jobs@energymeteo.de,https://www.hiringlab.org/de/,email,,,energy & meteo systems | Ausbildung | DevOps Engineer / Java-Entwickler:in | Oskar-Homt-Straße 1,tidak,belum,tinggi,"DevOps Engineer / Java-Entwickler:in
+
+Dein Profil:
+Du hast ein abgeschlossenes Studium, z. B. in Informatik, Wirtschaftsinformatik oder Software Engineering, bist ausgebildete:r Fachinformatiker:in für Anwendungsentwicklung oder kommst als IT-Quereinsteiger:in zu uns.
+Ob du nach deiner Ausbildung deine Karriere starten möchtest oder schon mehrjährig dabei bist, ist für uns zweitrangig: Was zählt ist deine Expertise in Systemarchitekturen, aber auch in der Java-Entwicklung.
+Bei RabbitMQ und Kafka denkst du nicht an ausgefallene Tiernamen, sondern an Kommunikationsprotokolle à la Message Queuing.
+Du kennst dich mit Datenbanken und -verwaltungssystemen wie z. B. MySQL, MariaDB, Cassandra oder PostgreSQL gut aus.
+Docker und Kubernetes sind keine Fremdwörter für dich und hardwarenahe Entwicklung empfindest du eher als Herausforderung statt als Problem.
+Was dich bei uns erwartet
+Du erhältst die Chance, an sinnstiftenden Projekten im Bereich Erneuerbare Energien mitzuarbeiten und dein Potenzial sowie deine Ideen einzubringen.
+Dein Arbeitstag ist abwechslungsreich, deine Tätigkeit anspruchsvoll und dein Team motiviert.
+Ein unbefristeter Arbeitsvertrag – wir rechnen längerfristig mit dir.
+Flexible Arbeitszeit und die Erfassung jeder Überstunde: Du musst nicht um 7 Uhr auf der Matte stehen – wichtig ist uns, dass du vollen Einsatz zeigst, wenn du da bist.
+Flache Hierarchien und kurze Entscheidungswege – unsere Führungskräfte haben offene Ohren und Türen.
+Für den kleinen Break zwischendurch gibt es Getränke, Bio-Obst und Snacks for free – für den großen Hunger erwartet dich unsere hauseigene Kantine mit vegetarischen, veganen und fleischhaltigen Gerichten aus regionalen Produkten.
+Auch außerhalb unserer Büroräume ist die Stimmung gut, z. B. auf dem jährlichen Betriebsausflug, bei Teambuildingmaßnahmen, Weihnachtsfeiern, unserem monatlichen Spieleabend etc. – hier reden wir nicht nur über Arbeit.
+
+Weitere Benefits: betriebliche Altersvorsorge, Berufsunfähigkeitsversicherung, Fahrradleasing oder Sportzuschuss sowie die guud-Karte mit vielen nachhaltigen Benefits.
+Bewerbungsschluss: Wir nehmen fortlaufend Bewerbungen entgegen.
+Du fühlst dich angesprochen und willst mit uns die Energiewende gestalten?","Dein Profil:
+Du hast ein abgeschlossenes Studium, z. B. in Informatik, Wirtschaftsinformatik oder Software Engineering, bist ausgebildete:r Fachinformatiker:in für Anwendungsentwicklung oder kommst als IT-Quereinsteiger:in zu uns.
+Ob du nach deiner Ausbildung deine Karriere starten möchtest oder schon mehrjährig dabei bist, ist für uns zweitrangig: Was zählt ist deine Expertise in Systemarchitekturen, aber auch in der Java-Entwicklung.
+Bei RabbitMQ und Kafka denkst du nicht an ausgefallene Tiernamen, sondern an Kommunikationsprotokolle à la Message Queuing.
+Du kennst dich mit Datenbanken und -verwaltungssystemen wie z. B. MySQL, MariaDB, Cassandra oder PostgreSQL gut aus.
+Docker und Kubernetes sind keine Fremdwörter für dich und hardwarenahe Entwicklung empfindest du eher als Herausforderung statt als Problem.
+Was dich bei uns erwartet
+Du erhältst die Chance, an sinnstiftenden Projekten im Bereich Erneuerbare Energien mitzuarbeiten und dein Potenzial sowie deine Ideen einzubringen.
+Dein Arbeitstag ist abwechslungsreich, deine Tätigkeit anspruchsvoll und dein Team motiviert.
+Ein unbefristeter Arbeitsvertrag – wir rechnen längerfristig mit dir.
+Flexible Arbeitszeit und die Erfassung jeder Überstunde: Du musst nicht um 7 Uhr auf der Matte stehen – wichtig ist uns, dass du vollen Einsatz zeigst, wenn du da bist.
+Flache Hierarchien und kurze Entscheidungswege – unsere Führungskräfte haben offene Ohren und Türen.
+Für den kleinen Break zwischendurch gibt es Getränke, Bio-Obst und Snacks for free – für den großen Hunger erwartet dich unsere hauseigene Kantine mit vegetarischen, veganen und fleischhaltigen Gerichten aus regionalen Produkten.
+Auch außerhalb unserer Büroräume ist die Stimmung gut, z. B. auf dem jährlichen Betriebsausflug, bei Teambuildingmaßnahmen, Weihnachtsfeiern, unserem monatlichen Spieleabend etc. – hier reden wir nicht nur über Arbeit.",2026-06-13T11:45:09.367510+00:00

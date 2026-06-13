@@ -1,0 +1,54 @@
+{
+  "last_run_at": "2026-06-13T14:57:52.650558+00:00",
+  "source": "aubi_plus_de",
+  "categories": [
+    {
+      "category_id": "aubi_plus_fi",
+      "discovered_urls": 245,
+      "scraped": 245,
+      "failed": 0,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": []
+    }
+  ],
+  "total_scraped": 245,
+  "total_failed": 0,
+  "total_skipped_wrong_beruf": 0,
+  "cross_duplicates_with_master": 50,
+  "new_unique_vs_master": 185,
+  "within_source_removed": 10,
+  "by_category": {
+    "aubi_plus_fi": {
+      "scraped": 235,
+      "cross_duplicates": 50,
+      "unique_new": 185
+    }
+  },
+  "merged_master_total": 4180,
+  "field_completeness_pct": {
+    "nama_perusahaan": 82.6,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 44.7,
+    "persyaratan": 43.4,
+    "jenis_ausbildung": 94.9,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 77.4,
+    "link_website_perusahaan": 2.6,
+    "alamat_email_bewerbung": 42.6,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 97.9,
+    "dokumen_yang_harus_dipenuhi": 0.0
+  },
+  "beruf_typ_breakdown": {
+    "ae": 88,
+    "dpa": 21,
+    "dual": 4,
+    "si": 106,
+    "fi_other": 5,
+    "non_fi": 9,
+    "dv": 2
+  }
+}

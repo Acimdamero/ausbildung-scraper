@@ -37,6 +37,11 @@ CATEGORY_PRIORITY: dict[str, int] = {
     "backinjob_dpa": 3,
     "backinjob_dv": 3,
     "backinjob_si": 3,
+    "karriere_sw_ae": 3,
+    "azubi_de_fi": 3,
+    "ausbildungsmarkt_fi": 3,
+    "aubi_plus_fi": 3,
+    "wir_sind_bund_fi": 3,
     "fachinformatiker_dpa": 2,
     "fachinformatiker_ae": 1,
 }

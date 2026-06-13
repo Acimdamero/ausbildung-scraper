@@ -1,0 +1,79 @@
+{
+  "scraped_at": "2026-06-13T14:57:22.964854+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "Playwright pagination (seite=N, anzahl=10) + detail HTML/JSON-LD",
+    "pagination": "Canonical ?seite=N from pagination widget; ~10 /ausbildung/ links/page",
+    "search_note": "807 Plätze total includes dual studium; only /ausbildung/ URLs scraped",
+    "expected_ausbildung_urls": "~190-400",
+    "detail_url_pattern": "/ausbildung/{company-slug}-{id}/",
+    "notes": "Cookie banner dismissed via .cookie-manager-accept. Detail pages often lack JSON-LD; parser falls back to HTML title/body."
+  },
+  "categories": [
+    {
+      "category_id": "aubi_plus_fi",
+      "discovered_urls": 245,
+      "scraped": 245,
+      "failed": 0,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 245,
+    "output_total": 235,
+    "removed_total": 10,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 10,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "aubi_plus_fi": 245
+    },
+    "output_by_category": {
+      "aubi_plus_fi": 235
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 235,
+    "internal_dupes": 0,
+    "cross_dupes": 50,
+    "unique_new": 185,
+    "by_category": {
+      "aubi_plus_fi": {
+        "scraped": 235,
+        "cross_duplicates": 50,
+        "unique_new": 185
+      }
+    }
+  },
+  "total_scraped_raw": 245,
+  "total_after_within_dedup": 235,
+  "field_completeness_pct": {
+    "nama_perusahaan": 82.6,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 100.0,
+    "alamat_detail": 100.0,
+    "detail_deskripsi": 100.0,
+    "gaji": 44.7,
+    "persyaratan": 43.4,
+    "jenis_ausbildung": 94.9,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 77.4,
+    "link_website_perusahaan": 2.6,
+    "alamat_email_bewerbung": 42.6,
+    "link_bewerbung": 100.0,
+    "kontak_penanggung_jawab": 97.9,
+    "dokumen_yang_harus_dipenuhi": 0.0
+  },
+  "beruf_typ_breakdown": {
+    "ae": 88,
+    "dpa": 21,
+    "dual": 4,
+    "si": 106,
+    "fi_other": 5,
+    "non_fi": 9,
+    "dv": 2
+  }
+}

@@ -24,11 +24,16 @@ SCRAPE_PATTERNS = (
     "run_meine_ausbildung_de.py",
     "run_ausbildung_nrw.py",
     "run_azubiyo_de.py",
+    "run_azubi_de.py",
     "run_stepstone_de.py",
     "run_indeed_de.py",
     "run_ausbildungsstellen_de.py",
+    "run_ausbildungsmarkt_de.py",
     "run_meinestadt_de.py",
     "run_backinjob_de.py",
+    "run_karriere_suedwestfalen_de.py",
+    "run_aubi_plus_de.py",
+    "run_wir_sind_bund_de.py",
 )
 
 SOURCE_LOGS: dict[str, Path] = {
@@ -38,11 +43,16 @@ SOURCE_LOGS: dict[str, Path] = {
     "meine_dpa": LOGS / "meine_ausbildung_dpa.log",
     "ausbildung_nrw": LOGS / "ausbildung_nrw_scrape.log",
     "azubiyo_de": LOGS / "azubiyo_de_scrape.log",
+    "azubi_de": LOGS / "azubi_de_scrape.log",
     "stepstone_de": LOGS / "stepstone_de_scrape.log",
     "indeed_de": LOGS / "indeed_de_scrape.log",
     "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.log",
+    "ausbildungsmarkt_de": LOGS / "ausbildungsmarkt_de_scrape.log",
     "meinestadt_de": LOGS / "meinestadt_de_scrape.log",
     "backinjob_de": LOGS / "backinjob_de_scrape.log",
+    "karriere_suedwestfalen_de": LOGS / "karriere_suedwestfalen_de_scrape.log",
+    "aubi_plus_de": LOGS / "aubi_plus_de_scrape.log",
+    "wir_sind_bund_de": LOGS / "wir_sind_bund_de_scrape.log",
 }
 
 SOURCE_PID_FILES: dict[str, Path] = {
@@ -52,8 +62,13 @@ SOURCE_PID_FILES: dict[str, Path] = {
     "stepstone_de": LOGS / "stepstone_de_scrape.pid",
     "indeed_de": LOGS / "indeed_de_scrape.pid",
     "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.pid",
+    "ausbildungsmarkt_de": LOGS / "ausbildungsmarkt_de_scrape.pid",
     "meinestadt_de": LOGS / "meinestadt_de_scrape.pid",
     "backinjob_de": LOGS / "backinjob_de_scrape.pid",
+    "azubi_de": LOGS / "azubi_de_scrape.pid",
+    "karriere_suedwestfalen_de": LOGS / "karriere_suedwestfalen_de_scrape.pid",
+    "aubi_plus_de": LOGS / "aubi_plus_de_scrape.pid",
+    "wir_sind_bund_de": LOGS / "wir_sind_bund_de_scrape.pid",
 }
 
 DEDUP_SOURCE_LABELS = {
@@ -62,11 +77,16 @@ DEDUP_SOURCE_LABELS = {
     "meine_ausbildung": "meine-ausbildung",
     "ausbildung_nrw": "ausbildung.nrw",
     "azubiyo_de": "azubiyo.de",
+    "azubi_de": "azubi.de",
     "stepstone_de": "stepstone.de",
     "indeed_de": "indeed.de",
     "ausbildungsstellen_de": "ausbildungsstellen.de",
+    "ausbildungsmarkt_de": "ausbildungsmarkt.de",
     "meinestadt_de": "meinestadt.de",
     "backinjob_de": "backinjob.de",
+    "karriere_suedwestfalen_de": "karriere-suedwestfalen.de",
+    "aubi_plus_de": "aubi-plus.de",
+    "wir_sind_bund_de": "wir-sind-bund.de",
 }
 
 
@@ -171,6 +191,7 @@ def dedup_source_key(category_id: str) -> str:
         "meine_ausbildung",
         "ausbildung_nrw",
         "azubiyo_de",
+        "azubi_de",
         "stepstone_de",
         "indeed_de",
     ):
@@ -178,10 +199,18 @@ def dedup_source_key(category_id: str) -> str:
             return prefix
     if category_id.startswith("ausbildungsstellen_"):
         return "ausbildungsstellen_de"
+    if category_id.startswith("ausbildungsmarkt_"):
+        return "ausbildungsmarkt_de"
     if category_id.startswith("meinestadt_"):
         return "meinestadt_de"
     if category_id.startswith("backinjob_"):
         return "backinjob_de"
+    if category_id.startswith("karriere_sw_"):
+        return "karriere_suedwestfalen_de"
+    if category_id.startswith("aubi_plus_"):
+        return "aubi_plus_de"
+    if category_id.startswith("wir_sind_bund_"):
+        return "wir_sind_bund_de"
     return category_id.split("_")[0]
 
 
@@ -238,6 +267,8 @@ def detect_running(proc_blob: str) -> dict[str, bool]:
         or "meine_ausbildung_dpa" in proc_blob,
         "ausbildung_nrw": "run_ausbildung_nrw.py" in proc_blob,
         "azubiyo_de": "run_azubiyo_de.py" in proc_blob,
+        "azubi_de": is_pid_running(SOURCE_PID_FILES["azubi_de"])
+        or "run_azubi_de.py" in proc_blob,
         "stepstone_de": is_pid_running(SOURCE_PID_FILES["stepstone_de"])
         or "run_stepstone_de.py" in proc_blob,
         "indeed_de": is_pid_running(SOURCE_PID_FILES["indeed_de"])
@@ -248,6 +279,16 @@ def detect_running(proc_blob: str) -> dict[str, bool]:
         or "run_meinestadt_de.py" in proc_blob,
         "backinjob_de": is_pid_running(SOURCE_PID_FILES["backinjob_de"])
         or "run_backinjob_de.py" in proc_blob,
+        "ausbildungsmarkt_de": is_pid_running(SOURCE_PID_FILES["ausbildungsmarkt_de"])
+        or "run_ausbildungsmarkt_de.py" in proc_blob,
+        "karriere_suedwestfalen_de": is_pid_running(
+            SOURCE_PID_FILES["karriere_suedwestfalen_de"]
+        )
+        or "run_karriere_suedwestfalen_de.py" in proc_blob,
+        "aubi_plus_de": is_pid_running(SOURCE_PID_FILES["aubi_plus_de"])
+        or "run_aubi_plus_de.py" in proc_blob,
+        "wir_sind_bund_de": is_pid_running(SOURCE_PID_FILES["wir_sind_bund_de"])
+        or "run_wir_sind_bund_de.py" in proc_blob,
     }
 
 
@@ -378,11 +419,16 @@ def format_deduped_summary(stats: dict) -> list[str]:
             "meine_ausbildung",
             "ausbildung_nrw",
             "azubiyo_de",
+            "azubi_de",
             "stepstone_de",
             "indeed_de",
             "ausbildungsstellen_de",
+            "ausbildungsmarkt_de",
             "meinestadt_de",
             "backinjob_de",
+            "karriere_suedwestfalen_de",
+            "aubi_plus_de",
+            "wir_sind_bund_de",
         ):
             count = stats["by_source"].get(key)
             if count:
@@ -491,6 +537,22 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             )
         )
 
+    azde = load_json(DATA / "progress_azubi_de.json")
+    if isinstance(azde, dict):
+        lines.extend(
+            format_multi_category(
+                azde,
+                "azubi.de",
+                SOURCE_LOGS["azubi_de"],
+                running["azubi_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
     step = load_json(DATA / "progress_stepstone_de.json")
     if isinstance(step, dict):
         lines.extend(
@@ -522,6 +584,14 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
                 ],
             )
         )
+    fix_status = DATA / "INDEED_FIX_STATUS.md"
+    if fix_status.is_file():
+        fix_lines = fix_status.read_text(encoding="utf-8").splitlines()
+        snippet = [row for row in fix_lines if row.strip()][:14]
+        if snippet:
+            lines.append("  indeed.de FIX status:")
+            for row in snippet:
+                lines.append(f"    {row}")
 
     ast = load_json(DATA / "progress_ausbildungsstellen_de.json")
     if isinstance(ast, dict):
@@ -531,6 +601,22 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
                 "ausbildungsstellen.de",
                 SOURCE_LOGS["ausbildungsstellen_de"],
                 running["ausbildungsstellen_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
+    abm = load_json(DATA / "progress_ausbildungsmarkt_de.json")
+    if isinstance(abm, dict):
+        lines.extend(
+            format_multi_category(
+                abm,
+                "ausbildungsmarkt.de",
+                SOURCE_LOGS["ausbildungsmarkt_de"],
+                running["ausbildungsmarkt_de"],
                 extra_fields=[
                     "new_unique_vs_master",
                     "cross_duplicates_with_master",
@@ -571,6 +657,55 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             )
         )
 
+    ksw = load_json(DATA / "progress_karriere_suedwestfalen_de.json")
+    if isinstance(ksw, dict):
+        lines.extend(
+            format_multi_category(
+                ksw,
+                "karriere-suedwestfalen.de",
+                SOURCE_LOGS["karriere_suedwestfalen_de"],
+                running["karriere_suedwestfalen_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
+    aubi = load_json(DATA / "progress_aubi_plus_de.json")
+    if isinstance(aubi, dict):
+        lines.extend(
+            format_multi_category(
+                aubi,
+                "aubi-plus.de",
+                SOURCE_LOGS["aubi_plus_de"],
+                running["aubi_plus_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                    "beruf_typ_breakdown",
+                ],
+            )
+        )
+
+    wsb = load_json(DATA / "progress_wir_sind_bund_de.json")
+    if isinstance(wsb, dict):
+        lines.extend(
+            format_multi_category(
+                wsb,
+                "wir-sind-bund.de",
+                SOURCE_LOGS["wir_sind_bund_de"],
+                running["wir_sind_bund_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
     lines.append("")
     lines.append("PROSES AKTIF:")
     try:
@@ -589,8 +724,14 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
                 "stepstone",
                 "indeed",
                 "ausbildungsstellen",
+                "ausbildungsmarkt",
                 "meinestadt",
                 "backinjob",
+                "karriere",
+                "suedwestfalen",
+                "aubi",
+                "wir-sind-bund",
+                "wir_sind",
                 "nrw",
                 "socket",
                 "scraper",

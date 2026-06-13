@@ -36,10 +36,14 @@ logger = logging.getLogger("run_indeed_de")
 
 def setup_file_logging(log_path: Path) -> None:
     log_path.parent.mkdir(parents=True, exist_ok=True)
+    resolved = str(log_path.resolve())
+    root = logging.getLogger()
+    for handler in root.handlers:
+        if isinstance(handler, logging.FileHandler) and handler.baseFilename == resolved:
+            return
     handler = logging.FileHandler(log_path, encoding="utf-8")
     handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
-    logging.getLogger().addHandler(handler)
-    logging.getLogger("src.scraper.indeed_de").addHandler(handler)
+    root.addHandler(handler)
 
 
 def field_completeness(listings: list[dict]) -> dict[str, float]:
@@ -95,6 +99,12 @@ def save_processed_merge(
 
 
 def regenerate_viewer(data_dir: Path) -> None:
+    bewerbung = ROOT / "scripts" / "generate_bewerbung_exports.py"
+    subprocess.run(
+        [sys.executable, str(bewerbung), "--data-dir", str(data_dir)],
+        cwd=ROOT,
+        check=False,
+    )
     script = ROOT / "scripts" / "generate_viewer.py"
     subprocess.run(
         [
@@ -105,12 +115,6 @@ def regenerate_viewer(data_dir: Path) -> None:
             "--output",
             str(data_dir / "viewer" / "index.html"),
         ],
-        cwd=ROOT,
-        check=False,
-    )
-    bewerbung = ROOT / "scripts" / "generate_bewerbung_exports.py"
-    subprocess.run(
-        [sys.executable, str(bewerbung), "--data-dir", str(data_dir)],
         cwd=ROOT,
         check=False,
     )

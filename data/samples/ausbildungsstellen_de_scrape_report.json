@@ -1,0 +1,120 @@
+{
+  "scraped_at": "2026-06-13T15:02:11.588744+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "playwright_pagination (?p=N) + playwright_detail (JSON-LD JobPosting)",
+    "pagination": "?p=N query param (~20 jobs/page, AE ~142 pages); Weiter » until exhausted",
+    "radius_note": "r=100 is search radius in km (Bundesweit when l= empty)",
+    "detail_url_pattern": "/ausbildung-{slug}-{id}.html OR /job.php?c={chiffre} (redirect)",
+    "notes": "Server-rendered HTML; job.php may 302 to backinjob/ausbildung.de. Native pages include schema.org JobPosting and span.beginn hints."
+  },
+  "categories": [
+    {
+      "category_id": "ausbildungsstellen_ae",
+      "discovered_urls": 2833,
+      "scraped": 2746,
+      "failed": 1,
+      "skipped_wrong_beruf": 86,
+      "failed_urls": [
+        "https://www.ausbildungsstellen.de/job.php?c=990850001112403820"
+      ]
+    },
+    {
+      "category_id": "ausbildungsstellen_dpa",
+      "discovered_urls": 130,
+      "scraped": 122,
+      "failed": 0,
+      "skipped_wrong_beruf": 8,
+      "failed_urls": []
+    },
+    {
+      "category_id": "ausbildungsstellen_dv",
+      "discovered_urls": 60,
+      "scraped": 56,
+      "failed": 0,
+      "skipped_wrong_beruf": 4,
+      "failed_urls": []
+    },
+    {
+      "category_id": "ausbildungsstellen_si",
+      "discovered_urls": 2833,
+      "scraped": 2765,
+      "failed": 1,
+      "skipped_wrong_beruf": 67,
+      "failed_urls": [
+        "https://www.ausbildungsstellen.de/job.php?c=990850001112403820"
+      ]
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 5689,
+    "output_total": 2651,
+    "removed_total": 3038,
+    "removed_by_refnr_cross_category": 2899,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 139,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "ausbildungsstellen_ae": 2746,
+      "ausbildungsstellen_dpa": 122,
+      "ausbildungsstellen_dv": 56,
+      "ausbildungsstellen_si": 2765
+    },
+    "output_by_category": {
+      "ausbildungsstellen_si": 2459,
+      "ausbildungsstellen_ae": 138,
+      "ausbildungsstellen_dpa": 37,
+      "ausbildungsstellen_dv": 17
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 2651,
+    "internal_dupes": 0,
+    "cross_dupes": 179,
+    "unique_new": 2472,
+    "by_category": {
+      "ausbildungsstellen_si": {
+        "scraped": 2459,
+        "cross_duplicates": 178,
+        "unique_new": 2281
+      },
+      "ausbildungsstellen_ae": {
+        "scraped": 138,
+        "cross_duplicates": 1,
+        "unique_new": 137
+      },
+      "ausbildungsstellen_dpa": {
+        "scraped": 37,
+        "cross_duplicates": 0,
+        "unique_new": 37
+      },
+      "ausbildungsstellen_dv": {
+        "scraped": 17,
+        "cross_duplicates": 0,
+        "unique_new": 17
+      }
+    }
+  },
+  "total_scraped_raw": 5689,
+  "total_after_within_dedup": 2651,
+  "total_failed": 2,
+  "total_skipped_wrong_beruf": 165,
+  "field_completeness_pct": {
+    "nama_perusahaan": 68.1,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 16.0,
+    "alamat_detail": 16.0,
+    "detail_deskripsi": 71.4,
+    "gaji": 15.2,
+    "persyaratan": 37.3,
+    "jenis_ausbildung": 71.4,
+    "deskripsi_perusahaan": 13.0,
+    "apa_yang_ditawarkan": 35.6,
+    "link_website_perusahaan": 16.7,
+    "alamat_email_bewerbung": 54.8,
+    "link_bewerbung": 70.3,
+    "kontak_penanggung_jawab": 62.1,
+    "dokumen_yang_harus_dipenuhi": 24.0
+  }
+}

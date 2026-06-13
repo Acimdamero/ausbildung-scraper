@@ -1,0 +1,75 @@
+{
+  "scraped_at": "2026-06-13T14:45:32.694678+00:00",
+  "investigation": {
+    "api_available": false,
+    "method": "Playwright search (pageNo=N) + Playwright detail (HTML text parse)",
+    "pagination": "Initial ~20 results; click 'Weitere Ergebnisse anzeigen' until exhausted (~25 for fachinformatiker)",
+    "cookie_note": "Bund.de cookie banner — click 'Auswahl bestätigen' (necessary cookies only)",
+    "detail_url_pattern": "ExternalContent/.../Stellenangebote/.../{uuid}.html",
+    "notes": "Bundesverwaltung portal; relative hrefs need base URL prefix."
+  },
+  "categories": [
+    {
+      "category_id": "wir_sind_bund_fi",
+      "discovered_urls": 25,
+      "scraped": 25,
+      "failed": 0,
+      "skipped_wrong_beruf": 0,
+      "failed_urls": []
+    }
+  ],
+  "within_source_dedup": {
+    "input_total": 25,
+    "output_total": 24,
+    "removed_total": 1,
+    "removed_by_refnr_cross_category": 0,
+    "removed_by_refnr_within_category": 0,
+    "removed_by_secondary_key": 0,
+    "removed_by_near_duplicate": 1,
+    "removed_by_cross_source": 0,
+    "input_by_category": {
+      "wir_sind_bund_fi": 25
+    },
+    "output_by_category": {
+      "wir_sind_bund_fi": 24
+    }
+  },
+  "cross_dedup": {
+    "scraped_total": 24,
+    "internal_dupes": 0,
+    "cross_dupes": 7,
+    "unique_new": 17,
+    "by_category": {
+      "wir_sind_bund_fi": {
+        "scraped": 24,
+        "cross_duplicates": 7,
+        "unique_new": 17
+      }
+    }
+  },
+  "total_scraped_raw": 25,
+  "total_after_within_dedup": 24,
+  "field_completeness_pct": {
+    "nama_perusahaan": 100.0,
+    "titik_data_di_peta": 0.0,
+    "posisi_kota": 33.3,
+    "alamat_detail": 33.3,
+    "detail_deskripsi": 100.0,
+    "gaji": 58.3,
+    "persyaratan": 20.8,
+    "jenis_ausbildung": 79.2,
+    "deskripsi_perusahaan": 0.0,
+    "apa_yang_ditawarkan": 66.7,
+    "link_website_perusahaan": 0.0,
+    "alamat_email_bewerbung": 58.3,
+    "link_bewerbung": 50.0,
+    "kontak_penanggung_jawab": 95.8,
+    "dokumen_yang_harus_dipenuhi": 0.0
+  },
+  "beruf_typ_breakdown": {
+    "si": 16,
+    "non_fi": 2,
+    "ae": 5,
+    "dpa": 1
+  }
+}

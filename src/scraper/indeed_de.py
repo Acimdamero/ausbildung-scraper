@@ -57,8 +57,11 @@ FIX_APPLIED = (
     "viewjob-first: direct /viewjob?jk= before SERP reload",
     "SERP click fallback when viewjob empty or blocked",
     "challenge/captcha page detection with clear [FIX] logging",
+    "Cloudflare auto-wait up to 45s on challenge pages",
+    "fresh browser context per job (anti-fingerprint)",
     "random 3-8s delay between detail requests",
     "resume from cached discovered_jks (skip re-discovery)",
+    "--headful flag for non-headless testing",
 )
 
 DEFAULT_SEARCHES: dict[str, dict[str, Any]] = {
@@ -263,84 +266,94 @@ class IndeedDeScraper:
                 total_pending,
             )
 
-        shard_groups: dict[str, list[str]] = {}
-        for jk in pending:
-            shard_groups.setdefault(jk_pages[jk], []).append(jk)
-
+        context = self._new_context(browser)
+        page = context.new_page()
         detail_attempts = 0
-        processed = 0
-        for shard_url, shard_jks in shard_groups.items():
-            context = self._new_context(browser)
-            page = context.new_page()
-            shard_loaded = False
-            try:
-                for jk in shard_jks:
-                    processed += 1
-                    index = processed
-                    self._last_jk = jk
-                    detail_url = self._detail_url(jk)
-                    try:
-                        listing, strategy = self._scrape_detail_on_shard(
-                            page,
-                            jk=jk,
-                            shard_url=shard_url,
-                            detail_url=detail_url,
-                            category_id=category_id,
-                            shard_loaded=shard_loaded,
-                        )
-                        shard_loaded = True
-                        self._last_strategy = strategy
-                        if listing is None:
-                            report.skipped_wrong_beruf += 1
-                            scraped_jks.add(jk)
-                            detail_attempts += 1
-                            continue
-                        report.listings.append(listing)
-                        report.scraped += 1
+        try:
+            for index, jk in enumerate(pending, start=1):
+                self._last_jk = jk
+                shard_url = jk_pages[jk]
+                detail_url = self._detail_url(jk)
+                # Fresh context per job reduces Indeed session fingerprinting blocks.
+                if index > 1:
+                    page.close()
+                    context.close()
+                    context = self._new_context(browser)
+                    page = context.new_page()
+                try:
+                    listing, strategy = self._scrape_detail(
+                        page,
+                        jk=jk,
+                        search_url=shard_url,
+                        detail_url=detail_url,
+                        category_id=category_id,
+                    )
+                    self._last_strategy = strategy
+                    if listing is None:
+                        report.skipped_wrong_beruf += 1
                         scraped_jks.add(jk)
-                        listings_cache.append(listing.to_dict())
                         detail_attempts += 1
-                    except Exception as exc:
-                        report.failed += 1
-                        report.failed_urls.append(detail_url)
-                        detail_attempts += 1
-                        self._fix_stats["both_failed"] += 1
-                        self._last_strategy = "failed"
-                        logger.warning("Detail failed jk=%s: %s", jk, exc)
+                        self._log_fix(f"jk={jk} skipped wrong beruf via {strategy}")
+                        continue
+                    report.listings.append(listing)
+                    report.scraped += 1
+                    scraped_jks.add(jk)
+                    listings_cache.append(listing.to_dict())
+                    detail_attempts += 1
+                    self._log_fix(f"jk={jk} OK via {strategy}")
+                except Exception as exc:
+                    report.failed += 1
+                    report.failed_urls.append(detail_url)
+                    detail_attempts += 1
+                    self._fix_stats["both_failed"] += 1
+                    self._last_strategy = "failed"
+                    logger.warning("Detail failed jk=%s: %s", jk, exc)
+                    self._log_fix(f"jk={jk} FAILED: {exc}")
 
-                    if index % 5 == 0 or index == total_pending:
-                        pct = 100 * index / total_pending if total_pending else 100
-                        success_rate = (
-                            100 * report.scraped / detail_attempts if detail_attempts else 0
-                        )
-                        logger.info(
-                            "%s: %d/%d details scraped (%.1f%%, %d failed, %d skipped, "
-                            "success_rate=%.1f%%)",
-                            category_id,
-                            index,
-                            total_pending,
-                            pct,
-                            report.failed,
-                            report.skipped_wrong_beruf,
-                            success_rate,
-                        )
-                        self._save_progress(
-                            category_id,
-                            search_url=search_url,
-                            discovered_jks=jk_pages,
-                            scraped_jks=sorted(scraped_jks),
-                            listings=listings_cache,
-                            scraped=report.scraped,
-                            failed=report.failed,
-                            skipped=report.skipped_wrong_beruf,
-                            finished=index == total_pending,
-                        )
-                    self._detail_delay()
-            finally:
-                page.close()
-                context.close()
-            if self.page_delay:
-                time.sleep(min(self.page_delay, 5.0))
+                if index % 5 == 0 or index == total_pending:
+                    pct = 100 * index / total_pending if total_pending else 100
+                    success_rate = (
+                        100 * report.scraped / detail_attempts if detail_attempts else 0
+                    )
+                    logger.info(
+                        "%s: %d/%d details scraped (%.1f%%, %d failed, %d skipped, "
+                        "success_rate=%.1f%%)",
+                        category_id,
+                        index,
+                        total_pending,
+                        pct,
+                        report.failed,
+                        report.skipped_wrong_beruf,
+                        success_rate,
+                    )
+                    self._log_fix(
+                        f"progress {index}/{total_pending}: scraped={report.scraped} "
+                        f"failed={report.failed} success_rate={success_rate:.1f}% "
+                        f"viewjob={self._fix_stats['viewjob_ok']} serp={self._fix_stats['serp_ok']}"
+                    )
+                    self._update_fix_status(
+                        category_id=category_id,
+                        processed=index,
+                        total=total_pending,
+                        scraped=report.scraped,
+                        failed=report.failed,
+                        skipped=report.skipped_wrong_beruf,
+                    )
+                    self._save_progress(
+                        category_id,
+                        search_url=search_url,
+                        discovered_jks=jk_pages,
+                        scraped_jks=sorted(scraped_jks),
+                        listings=listings_cache,
+                        scraped=report.scraped,
+                        failed=report.failed,
+                        skipped=report.skipped_wrong_beruf,
+                        finished=index == total_pending,
+                    )
+                self._detail_delay()
+        finally:
+            page.close()
+            context.close()
 
         report.listings = self._merge_cached_listings(listings_cache, report.listings)
         self._save_progress(
@@ -448,12 +461,27 @@ class IndeedDeScraper:
         category_id: str,
         shard_loaded: bool,
     ) -> tuple[AusbildungListing | None, str]:
+        """viewjob-first; SERP shard click only when viewjob fails."""
+        if self._try_viewjob(page, detail_url, jk):
+            panel = self._extract_panel(page)
+            if self._panel_has_content(panel):
+                self._fix_stats["viewjob_ok"] += 1
+                self._log_fix(f"jk={jk} OK via viewjob")
+                return (
+                    self._finalize_detail(
+                        page, jk=jk, detail_url=detail_url, category_id=category_id, panel=panel
+                    ),
+                    "viewjob",
+                )
+            self._log_fix(f"jk={jk} viewjob thin panel, trying SERP shard")
+
         if not shard_loaded:
             if not self._try_serp_detail(page, shard_url, jk):
-                raise RuntimeError(f"could not load SERP shard for jk={jk}")
+                raise RuntimeError(f"viewjob and SERP shard load failed for jk={jk}")
             panel = self._extract_panel(page)
             if self._panel_has_content(panel):
                 self._fix_stats["serp_ok"] += 1
+                self._log_fix(f"jk={jk} OK via serp (shard load)")
                 return (
                     self._finalize_detail(
                         page, jk=jk, detail_url=detail_url, category_id=category_id, panel=panel
@@ -474,12 +502,13 @@ class IndeedDeScraper:
         )
         if not clicked:
             if not self._try_serp_detail(page, shard_url, jk):
-                raise RuntimeError(f"job card not found for jk={jk}")
+                raise RuntimeError(f"job card not found and SERP reload failed for jk={jk}")
         else:
             try:
                 self._wait_for_description(page, rounds=15)
             except RuntimeError as exc:
-                raise RuntimeError(f"description panel did not load for jk={jk}") from exc
+                if not self._try_viewjob(page, detail_url, jk):
+                    raise RuntimeError(f"description panel did not load for jk={jk}") from exc
 
         panel = self._extract_panel(page)
         if not self._panel_has_content(panel):
@@ -487,6 +516,7 @@ class IndeedDeScraper:
                 panel = self._extract_panel(page)
                 if self._panel_has_content(panel):
                     self._fix_stats["viewjob_ok"] += 1
+                    self._log_fix(f"jk={jk} OK via viewjob (after empty SERP click)")
                     return (
                         self._finalize_detail(
                             page, jk=jk, detail_url=detail_url, category_id=category_id, panel=panel
@@ -496,6 +526,7 @@ class IndeedDeScraper:
             raise RuntimeError(f"empty panel for jk={jk}")
 
         self._fix_stats["serp_ok"] += 1
+        self._log_fix(f"jk={jk} OK via serp (shard click)")
         return (
             self._finalize_detail(
                 page, jk=jk, detail_url=detail_url, category_id=category_id, panel=panel
@@ -789,6 +820,13 @@ class IndeedDeScraper:
         self.fix_status_path.parent.mkdir(parents=True, exist_ok=True)
         self.fix_status_path.write_text("\n".join(lines), encoding="utf-8")
 
+    def _wait_through_challenge(self, page: Page, *, max_wait: int = 45) -> bool:
+        for _ in range(max_wait):
+            if not self._is_challenge_page(page):
+                return True
+            time.sleep(1)
+        return False
+
     def _goto_with_retry(self, page: Page, url: str, *, max_attempts: int = GOTO_RETRIES) -> bool:
         is_detail = "/viewjob" in url
         for attempt in range(1, max_attempts + 1):
@@ -796,19 +834,31 @@ class IndeedDeScraper:
                 page.goto(url, wait_until="domcontentloaded", timeout=90_000)
                 self._dismiss_cookies(page)
                 if self._is_challenge_page(page):
-                    self._fix_stats["challenge_hits"] += 1
                     self._log_fix(
-                        f"challenge on goto attempt {attempt} url={url[:80]} title={page.title()!r}"
+                        f"challenge on goto attempt {attempt} url={url[:80]} title={page.title()!r} — waiting"
                     )
-                    time.sleep(2.0 * attempt)
-                    continue
+                    if self._wait_through_challenge(page):
+                        pass
+                    else:
+                        self._fix_stats["challenge_hits"] += 1
+                        time.sleep(2.0 * attempt)
+                        continue
                 if is_detail:
-                    try:
-                        self._wait_for_description(page, rounds=25)
-                        return True
-                    except RuntimeError:
-                        if self._extract_panel(page).get("description"):
+                    if self._is_challenge_page(page):
+                        self._fix_stats["challenge_hits"] += 1
+                        self._log_fix(
+                            f"challenge on viewjob attempt {attempt} title={page.title()!r}"
+                        )
+                        time.sleep(2.0 * attempt)
+                        continue
+                    for wait_round in range(20):
+                        if self._panel_has_content(self._extract_panel(page)):
                             return True
+                        if self._is_challenge_page(page):
+                            break
+                        time.sleep(1)
+                    if not self._is_challenge_page(page):
+                        return True
                 elif self._wait_for_results(page, timeout=45):
                     return True
             except Exception as exc:
