@@ -13,6 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from src.ui.listing_action_links import count_link_stats, listing_action_links_js
+
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="de">
@@ -71,6 +73,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     .bridge-link { border-color: #4a3a6b !important; color: #b8a0ff !important; background: rgba(184,160,255,0.08) !important; }
     .ext-link { color: var(--accent); text-decoration: none; }
     .ext-link:hover { text-decoration: underline; }
+    .listing-action-links { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .listing-action-links a {
+      color: var(--accent); text-decoration: none; font-size: 0.85rem;
+      border: 1px solid var(--border); padding: 0.45rem 0.75rem; border-radius: 6px;
+      min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    }
+    .listing-action-links a:hover { background: rgba(61, 139, 253, 0.12); }
     .profil-cell { display: flex; flex-wrap: wrap; gap: 0.3rem; max-width: 220px; }
     .actions { display: flex; flex-wrap: wrap; gap: 0.35rem; }
     .actions button { padding: 0.35rem 0.55rem; font-size: 0.82rem; }
@@ -196,17 +205,14 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       return `<a class="ext-link bridge-link" href="${esc(href)}" target="_blank" rel="noopener noreferrer">📋 Lihat di Database</a>`;
     }
 
+    function escapeHtml(s) { return esc(s); }
+
+    __LISTING_ACTION_LINKS_JS__
+
     function listingPortalLinks(r) {
       const L = listing(r);
-      const bewerbungUrl = L.link_bewerbung_efektif || L.link_bewerbung || L.ba_job_url;
-      const websiteUrl = L.link_website_perusahaan_resmi || L.link_website_perusahaan || r.company_url_researched;
-      const parts = [];
-      if (L.ba_job_url) parts.push(externalLink(L.ba_job_url, 'Arbeitsagentur'));
-      if (bewerbungUrl && bewerbungUrl !== L.ba_job_url) {
-        parts.push(externalLink(bewerbungUrl, L.bewerbung_sumber === 'externe' ? 'Bewerbung (extern)' : 'Bewerbung'));
-      }
-      if (websiteUrl) parts.push(externalLink(websiteUrl, 'Website'));
-      return parts.join(' · ') || '—';
+      const html = listingExternalLinks(L);
+      return html ? `<span class="listing-action-links">${html}</span>` : '—';
     }
 
     function listing(r) { return r.listing || {}; }
@@ -289,7 +295,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
       return `
         <p class="meta" style="margin:0 0 1rem">Profil Perusahaan · Hasil Riset Intelligence · ${esc(researched)}</p>
-        <div style="margin-bottom:0.85rem">${listingPortalLinks(r)} · ${viewerBridgeLink(r.referenznummer)}</div>
+        <div style="margin-bottom:0.85rem">${listingPortalLinks(r)} ${viewerBridgeLink(r.referenznummer)}</div>
         <div class="research-grid two-col">
           <div>
             <h3><span class="lang-tag">DE</span> Firmenprofil</h3>
@@ -375,7 +381,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       currentTab = initialTab || 'firmenprofil';
       document.getElementById('modal-title').textContent = company(current);
       document.getElementById('modal-sub').innerHTML =
-        `${esc(city(current))} · ${esc(email(current) || 'keine E-Mail')} · ${esc(current.referenznummer)} · ${listingPortalLinks(current)} · ${viewerBridgeLink(current.referenznummer)}`;
+        `${esc(city(current))} · ${esc(email(current) || 'keine E-Mail')} · ${esc(current.referenznummer)} · ${listingPortalLinks(current)} ${viewerBridgeLink(current.referenznummer)}`;
       const tabs = document.getElementById('doc-tabs');
       tabs.innerHTML = DOC_TABS.map(([k, label]) =>
         `<button type="button" class="tab ${k === currentTab ? 'active' : ''}" data-tab="${k}">${label}</button>`
@@ -531,6 +537,7 @@ def generate_ui(data_dir: Path, out_path: Path | None = None) -> Path:
 
     page = (
         HTML_TEMPLATE.replace("__EMBEDDED_JSON__", embedded)
+        .replace("__LISTING_ACTION_LINKS_JS__", listing_action_links_js(link_class="ext-link"))
         .replace("__GENERATED_AT__", html.escape(generated_at))
         .replace("__RECORD_COUNT__", str(len(records)))
         .replace("__SCOPE_LINE__", html.escape(scope_line))
@@ -546,7 +553,17 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
     path = generate_ui(args.data_dir, args.out)
+    records = load_enriched(args.data_dir)
+    listing_rows = [r.get("listing") or {} for r in records]
+    stats = count_link_stats(listing_rows) if listing_rows else count_link_stats([])
     print(path)
+    if listing_rows:
+        print(
+            f"Link stats (enriched listings): website={stats['with_website']}, "
+            f"bewerbungsportal={stats['with_bewerbung_portal']}, "
+            f"both={stats['with_both']}, arbeitsagentur={stats['with_arbeitsagentur']} "
+            f"(of {stats['total']})"
+        )
     return 0
 
 

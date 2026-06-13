@@ -20,6 +20,7 @@ from src.parser.specialization import (
     SECONDARY_CODES,
     TARGET_FI_CODES,
 )
+from src.ui.listing_action_links import count_link_stats, listing_action_links_js
 
 # Friendly portal names for sumber_data / all_sources keys (viewer only).
 PORTAL_LABELS: dict[str, str] = {
@@ -1058,21 +1059,7 @@ def build_html(
       return `<a href="${{href}}" class="bridge-link" target="_blank" rel="noopener noreferrer">🔍 Bewerbung Intelligence</a>`;
     }}
 
-    function listingExternalLinks(item) {{
-      const bewerbungUrl = item.link_bewerbung_efektif || item.link_bewerbung || item.ba_job_url;
-      const bewerbungLabel = item.bewerbung_sumber === "externe" ? "Bewerbung (eksternal)" : "Bewerbung (BA)";
-      const websiteUrl = item.link_website_perusahaan_resmi || item.link_website_perusahaan;
-      const websiteLabel = item.link_website_perusahaan_resmi
-        ? "Website resmi"
-        : (item.website_sumber === "email_domain" ? "Website (email)" : "Website");
-      return [
-        item.ba_job_url ? externalLink(item.ba_job_url, "Arbeitsagentur") : "",
-        bewerbungUrl && bewerbungUrl !== item.ba_job_url
-          ? externalLink(bewerbungUrl, bewerbungLabel)
-          : "",
-        websiteUrl ? externalLink(websiteUrl, websiteLabel) : "",
-      ].filter(Boolean).join("");
-    }}
+    {listing_action_links_js()}
 
     const CATEGORY_SOURCE_HINTS = [
       ["fachinformatiker_", "arbeitsagentur"],
@@ -1982,7 +1969,14 @@ def main() -> int:
         build_html(listings, sources, public_mode=args.public, enriched_index=enriched_index),
         encoding="utf-8",
     )
+    stats = count_link_stats(listings)
     print(f"Viewer written: {args.output} ({len(listings)} listings)")
+    print(
+        f"Link stats: website={stats['with_website']}, "
+        f"bewerbungsportal={stats['with_bewerbung_portal']}, "
+        f"both={stats['with_both']}, arbeitsagentur={stats['with_arbeitsagentur']} "
+        f"(of {stats['total']})"
+    )
     return 0
 
 
