@@ -297,6 +297,29 @@ def main() -> int:
         logger.error("No listings matched selection criteria")
         return 1
 
+    if not args.refs and not args.skip_research:
+        before = len(selected)
+        selected = [
+            listing
+            for listing in selected
+            if store.get(listing.get("referenznummer", ""), {}).get("bewerbung_status")
+            not in ("draft_ready", "researched")
+        ]
+        skipped = before - len(selected)
+        if skipped:
+            logger.info("Skipping %d already-complete listings (resume)", skipped)
+
+    if not selected:
+        logger.info("All matching listings already complete in store")
+        write_status(
+            state="completed",
+            done=0,
+            total=0,
+            workers=args.workers,
+            target=f"{args.source}:{args.beruf_typ}",
+        )
+        return 0
+
     total = len(selected)
     target_label = f"{args.source}:{args.beruf_typ}"
     if not args.no_email_required:
