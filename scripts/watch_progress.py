@@ -26,6 +26,7 @@ SCRAPE_PATTERNS = (
     "run_azubiyo_de.py",
     "run_stepstone_de.py",
     "run_indeed_de.py",
+    "run_ausbildungsstellen_de.py",
 )
 
 SOURCE_LOGS: dict[str, Path] = {
@@ -37,6 +38,7 @@ SOURCE_LOGS: dict[str, Path] = {
     "azubiyo_de": LOGS / "azubiyo_de_scrape.log",
     "stepstone_de": LOGS / "stepstone_de_scrape.log",
     "indeed_de": LOGS / "indeed_de_scrape.log",
+    "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.log",
 }
 
 SOURCE_PID_FILES: dict[str, Path] = {
@@ -45,6 +47,7 @@ SOURCE_PID_FILES: dict[str, Path] = {
     "meine_dpa": LOGS / "meine_ausbildung_dpa.pid",
     "stepstone_de": LOGS / "stepstone_de_scrape.pid",
     "indeed_de": LOGS / "indeed_de_scrape.pid",
+    "ausbildungsstellen_de": LOGS / "ausbildungsstellen_de_scrape.pid",
 }
 
 DEDUP_SOURCE_LABELS = {
@@ -55,6 +58,7 @@ DEDUP_SOURCE_LABELS = {
     "azubiyo_de": "azubiyo.de",
     "stepstone_de": "stepstone.de",
     "indeed_de": "indeed.de",
+    "ausbildungsstellen_de": "ausbildungsstellen.de",
 }
 
 
@@ -164,6 +168,8 @@ def dedup_source_key(category_id: str) -> str:
     ):
         if category_id.startswith(prefix):
             return prefix
+    if category_id.startswith("ausbildungsstellen_"):
+        return "ausbildungsstellen_de"
     return category_id.split("_")[0]
 
 
@@ -224,6 +230,8 @@ def detect_running(proc_blob: str) -> dict[str, bool]:
         or "run_stepstone_de.py" in proc_blob,
         "indeed_de": is_pid_running(SOURCE_PID_FILES["indeed_de"])
         or "run_indeed_de.py" in proc_blob,
+        "ausbildungsstellen_de": is_pid_running(SOURCE_PID_FILES["ausbildungsstellen_de"])
+        or "run_ausbildungsstellen_de.py" in proc_blob,
     }
 
 
@@ -356,6 +364,7 @@ def format_deduped_summary(stats: dict) -> list[str]:
             "azubiyo_de",
             "stepstone_de",
             "indeed_de",
+            "ausbildungsstellen_de",
         ):
             count = stats["by_source"].get(key)
             if count:
@@ -496,6 +505,22 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
             )
         )
 
+    ast = load_json(DATA / "progress_ausbildungsstellen_de.json")
+    if isinstance(ast, dict):
+        lines.extend(
+            format_multi_category(
+                ast,
+                "ausbildungsstellen.de",
+                SOURCE_LOGS["ausbildungsstellen_de"],
+                running["ausbildungsstellen_de"],
+                extra_fields=[
+                    "new_unique_vs_master",
+                    "cross_duplicates_with_master",
+                    "total_skipped_wrong_beruf",
+                ],
+            )
+        )
+
     lines.append("")
     lines.append("PROSES AKTIF:")
     try:
@@ -507,7 +532,17 @@ def build_display(running: dict[str, bool], interval: int) -> tuple[str, str]:
     for row in screen_lines:
         if any(
             token in row.lower()
-            for token in ("meine", "ausbildung", "azubiyo", "stepstone", "indeed", "nrw", "socket", "scraper")
+            for token in (
+                "meine",
+                "ausbildung",
+                "azubiyo",
+                "stepstone",
+                "indeed",
+                "ausbildungsstellen",
+                "nrw",
+                "socket",
+                "scraper",
+            )
         ):
             lines.append(f"  {row.strip()}")
             shown_screen = True

@@ -159,3 +159,32 @@ categories:
     source: stepstone_de
     search_url: "https://www.stepstone.de/jobs/ausbildung-fachinformatiker-digitale-vernetzung?searchOrigin=jobad&rsearch=2"
     sheet_tab: "STEP_DV"
+
+  # ausbildungsstellen.de (Playwright — scripts/run_ausbildungsstellen_de.py)
+  - id: ausbildungsstellen_ae
+    name: "ausbildungsstellen.de — Fachinformatiker/in Anwendungsentwicklung"
+    name_id: "Fachinformatiker/in Anwendungsentwicklung (ausbildungsstellen.de)"
+    source: ausbildungsstellen_de
+    search_url: "https://www.ausbildungsstellen.de/suche.html?q=Fachinformatiker%2Fin+Anwendungsentwicklung&l=&r=100"
+    sheet_tab: "AST_AE"
+
+  - id: ausbildungsstellen_dpa
+    name: "ausbildungsstellen.de — Fachinformatiker/in Daten- und Prozessanalyse"
+    name_id: "Fachinformatiker/in Daten- und Prozessanalyse (ausbildungsstellen.de)"
+    source: ausbildungsstellen_de
+    search_url: "https://www.ausbildungsstellen.de/suche.html?q=Fachinformatiker%2Fin+-+Daten-+und+Prozessanalyse&l=&r=100"
+    sheet_tab: "AST_DPA"
+
+  - id: ausbildungsstellen_dv
+    name: "ausbildungsstellen.de — Fachinformatiker/in Digitale Vernetzung"
+    name_id: "Fachinformatiker/in Digitale Vernetzung (ausbildungsstellen.de)"
+    source: ausbildungsstellen_de
+    search_url: "https://www.ausbildungsstellen.de/suche.html?q=Fachinformatiker%2Fin+-+Digitale+Vernetzung&l=&r=100"
+    sheet_tab: "AST_DV"
+
+  - id: ausbildungsstellen_si
+    name: "ausbildungsstellen.de — Fachinformatiker/in Systemintegration"
+    name_id: "Fachinformatiker/in Systemintegration (ausbildungsstellen.de)"
+    source: ausbildungsstellen_de
+    search_url: "https://www.ausbildungsstellen.de/suche.html?q=Fachinformatiker%2Fin+Systemintegration&l=&r=100"
+    sheet_tab: "AST_SI"
