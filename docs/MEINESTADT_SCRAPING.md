@@ -17,8 +17,8 @@ scripts/run_meinestadt_de.py       # Scrape, dedup, merge master, exports
 | Aspek | Temuan |
 |-------|--------|
 | Search API | Tidak ada endpoint JSON listing publik |
-| Metode | Playwright `context.request.get` untuk search HTML; `page.goto` untuk detail |
-| Pagination | Query `?page=N` (~20 listing/halaman); teks `Seite X von Y` |
+| Metode | Playwright **Firefox** + klik paginasi + detail `page.goto` (JSON-LD JobPosting) |
+| Pagination | Klik `a.m-pagination__next` / `?page=N` (~20/halaman); `Seite X von Y` |
 | Hash fragment | `#order=search(stelle%2Ctrue)` untuk sort — tidak memengaruhi pagination |
 | Cookie | OneTrust: `#onetrust-accept-btn-handler`, `Alle akzeptieren` |
 | Akses | `curl` sering 403; HTTP/2 bisa error — scraper pakai `--disable-http2` + fallback Chrome |
@@ -74,7 +74,7 @@ Hierarki contoh AE: `97268` Lehrstellen → `16197` Alle Ausbildungen A–Z → 
 
 ```bash
 source .venv/bin/activate
-playwright install chromium   # sekali saja
+playwright install firefox   # direkomendasikan (Chromium sering diblokir Akamai)
 
 # Foreground
 python scripts/run_meinestadt_de.py
