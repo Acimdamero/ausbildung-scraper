@@ -14,7 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.parser.listing_sort import BERUF_TYP_PRIORITY, sort_listings
-from src.parser.specialization import BERUF_TYP_CODES, BERUF_TYP_LABELS, BERUF_TYP_TAB_LABELS
+from src.parser.specialization import (
+    BERUF_TYP_LABELS,
+    BERUF_TYP_TAB_LABELS,
+    SECONDARY_CODES,
+    TARGET_FI_CODES,
+)
 
 
 def find_json_files(data_dir: Path, source: str = "exports") -> list[Path]:
@@ -81,13 +86,22 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     beruf_typ_labels_json = json.dumps(BERUF_TYP_LABELS, ensure_ascii=False)
     beruf_typ_tab_labels_json = json.dumps(BERUF_TYP_TAB_LABELS, ensure_ascii=False)
     beruf_typ_order_json = json.dumps(BERUF_TYP_PRIORITY, ensure_ascii=False)
-    spec_tab_buttons = (
-        '<button type="button" class="spec-tab active" data-spec="" role="tab" aria-selected="true">Semua</button>'
+    main_tab_buttons = (
+        '<button type="button" class="spec-tab active" data-spec="target" role="tab" '
+        'aria-selected="true">Semua FI</button>'
         + "".join(
             f'<button type="button" class="spec-tab" data-spec="{code}" role="tab" aria-selected="false">'
             f"{html.escape(BERUF_TYP_TAB_LABELS[code])}</button>"
-            for code in BERUF_TYP_CODES
+            for code in TARGET_FI_CODES
         )
+    )
+    secondary_tab_buttons = "".join(
+        f'<button type="button" class="spec-tab spec-tab-secondary" data-spec="{code}" role="tab" '
+        f'aria-selected="false">{html.escape(BERUF_TYP_TAB_LABELS[code])}</button>'
+        for code in SECONDARY_CODES
+    ) + (
+        '<button type="button" class="spec-tab spec-tab-secondary" data-spec="" role="tab" '
+        'aria-selected="false">Semua Data</button>'
     )
     source_lines = "".join(
         f"<li><code>{html.escape(src)}</code></li>" for src in sorted(sources.values())
@@ -218,6 +232,10 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .badge.spec-dpa {{ color: #d4a5ff; border-color: #5a2a6b; }}
     .badge.spec-si {{ color: #7ddea2; border-color: #2d6b47; }}
     .badge.spec-dv {{ color: #f0c674; border-color: #6b5a2a; }}
+    .badge.spec-fi_other {{ color: var(--muted); }}
+    .badge.spec-non_fi {{ color: #e88a7d; border-color: #6b2d2d; }}
+    .badge.spec-dual {{ color: #c9a0ff; border-color: #4a2a6b; }}
+    .badge.spec-skip {{ color: #888; border-color: #444; opacity: 0.85; }}
     .badge.spec-other {{ color: var(--muted); }}
     .badge.start-date {{ color: #a8d4a0; border-color: #3a5a3a; }}
     .spec-tabs {{
@@ -381,7 +399,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="">Semua kategori</option>
       </select>
       <select id="sort">
-        <option value="spec-priority" selected>AE → DPA → SI → DV → Lainnya</option>
+        <option value="spec-priority" selected>AE → DPA → SI → DV → …</option>
         <option value="score-desc">Kelengkapan tertinggi</option>
         <option value="score-asc">Kelengkapan terendah</option>
         <option value="city">Kota A–Z</option>
@@ -419,8 +437,13 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="12">Des</option>
       </select>
     </div>
-    <div class="spec-tabs" id="specTabs" role="tablist" aria-label="Filter spesialisasi">
-      {spec_tab_buttons}
+    <div class="spec-tabs-label">Target Fachinformatiker</div>
+    <div class="spec-tabs" id="specTabsMain" role="tablist" aria-label="Filter target FI">
+      {main_tab_buttons}
+    </div>
+    <div class="spec-tabs-label">Terpisah (non-target)</div>
+    <div class="spec-tabs spec-tabs-secondary" id="specTabsSecondary" role="tablist" aria-label="Filter terpisah">
+      {secondary_tab_buttons}
     </div>
   </header>
   <main>
@@ -595,7 +618,15 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       return parts.join(" · ");
     }}
 
-    let activeSpecFilter = "";
+    const TARGET_FI_CODES = {json.dumps(list(TARGET_FI_CODES), ensure_ascii=False)};
+
+    let activeSpecFilter = "target";
+
+    function matchesSpecFilter(item) {{
+      if (!activeSpecFilter) return true;
+      if (activeSpecFilter === "target") return TARGET_FI_CODES.includes(item.beruf_typ);
+      return item.beruf_typ === activeSpecFilter;
+    }}
 
     function hasEmail(item) {{
       return Boolean((item.alamat_email_bewerbung || "").trim());
@@ -619,7 +650,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       const bulanFilter = document.getElementById("bulanFilter").value;
       let filtered = LISTINGS.filter(item => {{
         if (cat && item.category_id !== cat) return false;
-        if (activeSpecFilter && item.beruf_typ !== activeSpecFilter) return false;
+        if (!matchesSpecFilter(item)) return false;
         if (emailFilter === "yes" && !hasEmail(item)) return false;
         if (emailFilter === "no" && hasEmail(item)) return false;
         const manual = butuhManual(item) ? "ya" : "tidak";
@@ -737,7 +768,12 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       render();
     }}
 
-    document.getElementById("specTabs").addEventListener("click", (e) => {{
+    document.getElementById("specTabsMain").addEventListener("click", (e) => {{
+      const tab = e.target.closest(".spec-tab");
+      if (!tab) return;
+      setActiveSpecTab(tab);
+    }});
+    document.getElementById("specTabsSecondary").addEventListener("click", (e) => {{
       const tab = e.target.closest(".spec-tab");
       if (!tab) return;
       setActiveSpecTab(tab);

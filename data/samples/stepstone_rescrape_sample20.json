@@ -1,0 +1,110 @@
+[
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Engineering-Trainee-Elektronik-Mechatronik-Software-m-w-d-Celle-OneSubsea-GmbH--14016906-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "",
+    "old_skip": true,
+    "new_keep": false,
+    "beruf_typ": null,
+    "parsed": false
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Praktikum-Softwareentwicklung-w-m-d-Karlsruhe-CAS-Software-AG--11927888-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "",
+    "old_skip": true,
+    "new_keep": false,
+    "beruf_typ": null,
+    "parsed": false
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Ausbildung-zum-Fachinformatiker-fuer-2027-m-w-d-Fachrichtung-Systemintegration-Wietmarschen-Lohne-Rosenxt-Group--14017595-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "non_fi",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--IT-Ausbildung-zum-Fachinformatiker-Anwendungsentwicklung-Systemintegration-2027-m-w-d-in-Kooperation-mit-der-Gewerblich-Technischen-Schule-Offenburg-Offenburg-Markant-Gruppe--13575495-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "IT-Ausbildung zum Fachinformatiker Anwendungsentwicklung & Systemintegration 2027 (m/w/d) - in Koope",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "ae",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Duales-Studium-der-Informatik-m-w-d-Verbundstudium-mit-Ausbildung-zum-Fachinformatiker-Fachrichtung-Anwendungsentwicklung-zum-01-09-2026-Muenchen-Rohde-Schwarz-GmbH-Co-KG-Headquarter-Muenchen--14074612-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Duales Studium der Informatik (m/w/d) Verbundstudium mit Ausbildung zum Fachinformatiker Fachrichtun",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "dual",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Ausbildungsverantwortlicher-fuer-die-Ausbildung-zum-Fachinformatiker-fuer-Anwendungsentwicklung-Systemintegration-m-w-d-Berlin-Charlottenburg-bbw-Bildungswerk-der-Wirtschaft-in-Berlin-und-Brandenburg-e-V--13918439-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Ausbildungsverantwortlicher für die Ausbildung zum Fachinformatiker für Anwendungsentwicklung / Syst",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "ae",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Duales-Studium-B-Sc-Software-und-Systemtechnik-Ausbildung-zum-Fachinformatiker-Anwendungsentwicklung-w-m-d-Duesseldorf-A-u-K-Mueller-GmbH-Co-KG-Elektromagnetventile-Steuergeraete-Spezialarmaturen--14080829-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Duales Studium (B. Sc.) Software- und Systemtechnik Ausbildung zum Fachinformatiker Anwendungsentwic",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "dual",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Ausbildung-zum-Fachinformatiker-m-w-d-fuer-Systemintegration-bzw-Anwendungsentwicklung-Borkheide-Burkhardt-Haustechnik-GmbH--14070582-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Ausbildung zum Fachinformatiker (m/w/d) für Systemintegration bzw. Anwendungsentwicklung",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "ae",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Ausbildung-zum-Fachinformatiker-Systemintegration-Anwendungsentwicklung-Paderborn-Net-at-Work-GmbH--13918071-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Ausbildung zum Fachinformatiker* Systemintegration/Anwendungsentwicklung",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "ae",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Ausbildung-zum-Fachinformatiker-Systemintegration-Anwendungsentwicklung-Paderborn-Deutschland-Net-at-Work-GmbH--13917474-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Ausbildung zum Fachinformatiker* Systemintegration/Anwendungsentwicklung",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "ae",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Duales-Studium-der-Wirtschaftsinformatik-Anwendungsentwicklung-2027-all-genders-Oldenburg-CEWE-Stiftung-Co-KGaA--14106806-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Duales Studium der Wirtschaftsinformatik Anwendungsentwicklung 2027 (all genders)",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "dual",
+    "parsed": true
+  },
+  {
+    "url": "https://www.stepstone.de/stellenangebote--Duales-Studium-Bachelor-of-Science-Wirtschaftsinformatik-m-w-d-Beginn-01-08-2027-Papenburg-Wachstumsregion-Ems-Achse-e-V--14147915-inline.html",
+    "category_id": "stepstone_de_ae",
+    "title": "Duales Studium Bachelor of Science Wirtschaftsinformatik (m/w/d) - Beginn 01.08.2027",
+    "old_skip": false,
+    "new_keep": true,
+    "beruf_typ": "dual",
+    "parsed": true
+  }
+]

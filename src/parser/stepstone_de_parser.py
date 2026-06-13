@@ -46,29 +46,13 @@ SECTION_MARKERS = {
 }
 
 
-def _is_ae_text(text: str) -> bool:
-    lower = text.lower()
-    if re.search(r"daten.{0,30}prozess|prozess.{0,30}daten", lower):
-        return False
-    return "anwendungsentwicklung" in lower
-
-
-def _is_dpa_text(text: str) -> bool:
-    lower = text.lower()
-    return bool(
-        re.search(r"daten.{0,30}prozess|prozess.{0,30}daten", lower)
-        or "daten- und prozessanalyse" in lower
-        or "daten und prozessanalyse" in lower
-    )
-
-
 def matches_expected_beruf(category_id: str, title: str, description: str) -> bool:
-    blob = f"{title} {description}".lower()
-    if category_id.endswith("_dpa"):
-        return _is_dpa_text(blob)
-    if category_id.endswith("_ae"):
-        return _is_ae_text(blob)
-    return True
+    """Skip only non-Berufsausbildung listings; keep SI/DV/dual/non_fi for beruf_typ tagging."""
+    from src.parser.specialization import is_scrape_skip
+
+    _ = category_id  # scrape category no longer filters by AE/DPA keyword match
+    blob = f"{title} {description}"
+    return not is_scrape_skip(title, blob)
 
 
 def _strip_html(value: str) -> str:

@@ -1,16 +1,13 @@
-"""Display/data sort priority: AE → DPA → SI → DV → other, Ausbildung first, then kelengkapan_score."""
+"""Display/data sort priority: target FI first, then separated categories."""
 
 from __future__ import annotations
 
 from typing import Any
 
-BERUF_TYP_PRIORITY: dict[str, int] = {
-    "ae": 1,
-    "dpa": 2,
-    "si": 3,
-    "dv": 4,
-    "other": 5,
-}
+from src.parser.specialization import BERUF_TYP_CODES
+
+BERUF_TYP_PRIORITY: dict[str, int] = {code: idx + 1 for idx, code in enumerate(BERUF_TYP_CODES)}
+BERUF_TYP_PRIORITY["other"] = len(BERUF_TYP_CODES) + 1
 
 AUSBILDUNG_ANGEBOTSART = 4
 
@@ -32,7 +29,7 @@ def is_ausbildung_listing(listing: dict[str, Any]) -> bool:
 
 
 def listing_sort_key(listing: dict[str, Any]) -> tuple[Any, ...]:
-    """Sort key: Ausbildung first, then AE/DPA/SI/DV/other, kelengkapan_score desc, city, company."""
+    """Sort key: Ausbildung first, then AE/DPA/SI/DV/…, kelengkapan_score desc, city, company."""
     return (
         0 if is_ausbildung_listing(listing) else 1,
         beruf_typ_priority(listing.get("beruf_typ") or listing.get("ausbildung_specialization")),
