@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 
-from playwright.sync_api import BrowserContext, Page, sync_playwright
+from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
 
 from src.models.listing import AusbildungListing
 from src.parser.indeed_de_parser import IndeedDeParser
@@ -171,25 +171,29 @@ class IndeedDeScraper:
                 headless=self.headless,
                 args=["--disable-blink-features=AutomationControlled"],
             )
-            context = browser.new_context(
-                locale="de-DE",
-                user_agent=self.user_agent,
-                viewport={"width": 1400, "height": 900},
-            )
-            context.add_init_script(
-                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
-            )
-            for category_id, config in targets.items():
-                logger.info("Scraping indeed.de category %s", category_id)
-                report = self._scrape_category(context, category_id, config)
-                reports.append(report)
-            context.close()
-            browser.close()
+            try:
+                for category_id, config in targets.items():
+                    logger.info("Scraping indeed.de category %s", category_id)
+                    report = self._scrape_category(browser, category_id, config)
+                    reports.append(report)
+            finally:
+                browser.close()
         return reports
+
+    def _new_context(self, browser: Browser) -> BrowserContext:
+        context = browser.new_context(
+            locale="de-DE",
+            user_agent=self.user_agent,
+            viewport={"width": 1400, "height": 900},
+        )
+        context.add_init_script(
+            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
+        )
+        return context
 
     def _scrape_category(
         self,
-        context: BrowserContext,
+        browser: Browser,
         category_id: str,
         config: dict[str, Any],
     ) -> ScrapeReport:
@@ -200,7 +204,7 @@ class IndeedDeScraper:
         scraped_jks: set[str] = set(progress.get("scraped_jks") or [])
         listings_cache: list[dict[str, Any]] = list(progress.get("listings") or [])
 
-        jk_pages = self._discover_jks(context, search_url)
+        jk_pages = self._discover_jks(browser, search_url)
         report.discovered_urls = len(jk_pages)
         logger.info("Discovered %d job keys for %s", len(jk_pages), category_id)
 
@@ -214,6 +218,7 @@ class IndeedDeScraper:
                 total_pending,
             )
 
+        context = self._new_context(browser)
         page = context.new_page()
         try:
             for index, jk in enumerate(pending, start=1):
@@ -266,6 +271,7 @@ class IndeedDeScraper:
                     time.sleep(self.request_delay)
         finally:
             page.close()
+            context.close()
 
         report.listings = self._merge_cached_listings(listings_cache, report.listings)
         self._save_progress(
@@ -281,21 +287,22 @@ class IndeedDeScraper:
         )
         return report
 
-    def _discover_jks(self, context: BrowserContext, search_url: str) -> dict[str, str]:
+    def _discover_jks(self, browser: Browser, search_url: str) -> dict[str, str]:
         """Return mapping jk -> shard search URL (location-sharded; pagination blocked by CF)."""
         jk_urls: dict[str, str] = {}
         expected_total: int | None = None
 
         for shard_index, location in enumerate(LOCATION_SHARDS):
             shard_url = self._shard_search_url(search_url, location)
+            context = self._new_context(browser)
             page = context.new_page()
             try:
-                if not self._goto_with_retry(page, shard_url):
+                if not self._goto_with_retry(page, shard_url, max_attempts=3):
                     logger.warning("Shard skip (%s): could not load", location or "nationwide")
                     continue
 
                 self._dismiss_cookies(page)
-                if not self._wait_for_results(page, timeout=50):
+                if not self._wait_for_results(page, timeout=35):
                     logger.warning("Shard skip (%s): blocked or empty", location or "nationwide")
                     continue
 
@@ -324,6 +331,7 @@ class IndeedDeScraper:
                     break
             finally:
                 page.close()
+                context.close()
 
             delay = self.page_delay or SHARD_DELAY
             if delay and shard_index + 1 < len(LOCATION_SHARDS):
@@ -443,9 +451,9 @@ class IndeedDeScraper:
             mailto_links=mailto_links,
         )
 
-    def _goto_with_retry(self, page: Page, url: str) -> bool:
+    def _goto_with_retry(self, page: Page, url: str, *, max_attempts: int = GOTO_RETRIES) -> bool:
         is_detail = "/viewjob" in url
-        for attempt in range(1, GOTO_RETRIES + 1):
+        for attempt in range(1, max_attempts + 1):
             try:
                 page.goto(url, wait_until="domcontentloaded", timeout=90_000)
                 self._dismiss_cookies(page)

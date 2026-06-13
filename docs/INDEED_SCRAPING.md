@@ -17,7 +17,8 @@ scripts/run_indeed_de.py       # Scrape, dedup, merge master, exports
 | Aspek | Temuan |
 |-------|--------|
 | Search API | Tidak ada endpoint JSON listing publik; hanya HTML + mosaic job cards |
-| Pagination | Query `?start=N` (10 listing/halaman: start=0, 10, 20, …) |
+| Pagination | Query `?start=N` (10/halaman) — **diblokir Cloudflare** di headless |
+| Discovery workaround | **Location sharding**: ~50 kota/Bundesland via `l=`, halaman 1 saja |
 | Result count | Dari title halaman: „Jetzt 700 offene Stellen finden“ |
 | Detail | Canonical URL `/viewjob?jk={16-hex}` — sering diblokir Cloudflare |
 | Scrape detail | Klik kartu `[data-jk]` di SERP → panel kanan `#jobDescriptionText` |
