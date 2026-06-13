@@ -2,6 +2,10 @@
 
 Anyone can clone, run, and review **AusbildungHunter Intelligence** without access to the author's private Bewerbung data.
 
+| Language | Document |
+|----------|----------|
+| Deutsch | [ACCESS.de.md](ACCESS.de.md) |
+
 ## Quick links
 
 | Resource | URL / path |

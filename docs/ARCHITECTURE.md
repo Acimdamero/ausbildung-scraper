@@ -2,6 +2,10 @@
 
 > **Tagline:** Multi-portal FI apprenticeship discovery, deduplication, and intelligent Bewerbung generation.
 
+| Language | Document |
+|----------|----------|
+| Deutsch | [ARCHITECTURE.de.md](ARCHITECTURE.de.md) |
+
 ## System overview
 
 ```mermaid
