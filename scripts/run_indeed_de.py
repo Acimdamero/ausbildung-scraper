@@ -268,7 +268,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Scrape indeed.de listings")
     parser.add_argument("--headless", action="store_true", default=True)
     parser.add_argument("--delay", type=float, default=1.2, help="Delay between detail pages")
-    parser.add_argument("--page-delay", type=float, default=2.5, help="Delay between search pages")
+    parser.add_argument("--page-delay", type=float, default=12.0, help="Delay between location shards")
     parser.add_argument("--category", choices=list(DEFAULT_SEARCHES), help="Single category")
     parser.add_argument("--no-merge", action="store_true", help="Skip merge into master")
     parser.add_argument("--no-viewer", action="store_true")
@@ -331,8 +331,8 @@ def main() -> int:
     investigation = {
         "api_available": False,
         "method": "playwright_pagination + SERP split-view panel (#jobDescriptionText); viewjob fallback",
-        "pagination": "?start=N query param (10 jobs/page; start=0,10,20,...); ~700 AE results",
-        "anti_bot_note": "Cloudflare/security on direct /viewjob; SERP panel click preferred",
+        "pagination": "Location-sharded search (l=City/Bundesland); start=10+ blocked by Cloudflare",
+        "anti_bot_note": "Pagination triggers Security Check; use ~50 location shards, page 1 only",
         "detail_url_pattern": "/viewjob?jk={16-char-hex}",
         "notes": (
             "No public search JSON API; mosaic job cards in HTML. "

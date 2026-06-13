@@ -54,10 +54,65 @@ DEFAULT_SEARCHES: dict[str, dict[str, Any]] = {
 
 JK_RE = re.compile(r'(?:data-jk="([a-f0-9]{16})"|"jobkey":"([a-f0-9]{16})")', re.I)
 RESULT_COUNT_RE = re.compile(r"(\d[\d.,]*)\s+offene\s+Stellen", re.I)
-JOBS_PER_PAGE = 10
-MAX_PAGES = 85
 GOTO_RETRIES = 5
 DETAIL_WAIT_ROUNDS = 20
+SHARD_DELAY = 12.0
+
+# Cloudflare blocks start=10+ pagination in headless mode; shard by location instead.
+LOCATION_SHARDS: tuple[str, ...] = (
+    "",
+    "Berlin",
+    "München",
+    "Hamburg",
+    "Köln",
+    "Frankfurt am Main",
+    "Stuttgart",
+    "Düsseldorf",
+    "Leipzig",
+    "Dortmund",
+    "Essen",
+    "Bremen",
+    "Dresden",
+    "Hannover",
+    "Nürnberg",
+    "Duisburg",
+    "Bochum",
+    "Wuppertal",
+    "Bielefeld",
+    "Bonn",
+    "Münster",
+    "Karlsruhe",
+    "Mannheim",
+    "Augsburg",
+    "Wiesbaden",
+    "Gelsenkirchen",
+    "Chemnitz",
+    "Kiel",
+    "Aachen",
+    "Freiburg",
+    "Mainz",
+    "Rostock",
+    "Kassel",
+    "Saarbrücken",
+    "Potsdam",
+    "Heidelberg",
+    "Darmstadt",
+    "Regensburg",
+    "Würzburg",
+    "Ulm",
+    "Heilbronn",
+    "Paderborn",
+    "Siegen",
+    "Oldenburg",
+    "Osnabrück",
+    "Bayern",
+    "Baden-Württemberg",
+    "Nordrhein-Westfalen",
+    "Niedersachsen",
+    "Hessen",
+    "Sachsen",
+    "Rheinland-Pfalz",
+)
 
 
 @dataclass
@@ -162,14 +217,13 @@ class IndeedDeScraper:
         page = context.new_page()
         try:
             for index, jk in enumerate(pending, start=1):
-                start_offset = jk_pages[jk]
+                shard_url = jk_pages[jk]
                 detail_url = self._detail_url(jk)
                 try:
                     listing = self._scrape_detail(
                         page,
                         jk=jk,
-                        start_offset=start_offset,
-                        search_url=search_url,
+                        search_url=shard_url,
                         detail_url=detail_url,
                         category_id=category_id,
                     )
@@ -227,104 +281,80 @@ class IndeedDeScraper:
         )
         return report
 
-    def _discover_jks(self, context: BrowserContext, search_url: str) -> dict[str, int]:
-        """Return mapping jk -> search start offset where the listing was found."""
-        jk_pages: dict[str, int] = {}
-        page = context.new_page()
+    def _discover_jks(self, context: BrowserContext, search_url: str) -> dict[str, str]:
+        """Return mapping jk -> shard search URL (location-sharded; pagination blocked by CF)."""
+        jk_urls: dict[str, str] = {}
         expected_total: int | None = None
-        stagnant_pages = 0
 
-        try:
-            if not self._goto_search_page(page, search_url, start=0):
-                logger.error("Could not load search page: %s", search_url)
-                return {}
-
-            expected_total = self._read_result_count(page)
-            if expected_total:
-                logger.info("Search reports %d total results", expected_total)
-
-            for page_index in range(MAX_PAGES):
-                start = page_index * JOBS_PER_PAGE
-                if page_index > 0:
-                    if not self._advance_search_page(page, search_url, start=start):
-                        logger.info("Pagination stop at start=%d (navigation failed)", start)
-                        break
+        for shard_index, location in enumerate(LOCATION_SHARDS):
+            shard_url = self._shard_search_url(search_url, location)
+            page = context.new_page()
+            try:
+                if not self._goto_with_retry(page, shard_url):
+                    logger.warning("Shard skip (%s): could not load", location or "nationwide")
+                    continue
 
                 self._dismiss_cookies(page)
-                self._wait_for_results(page)
-                jks = self._extract_jks(page.content())
-                if not jks:
-                    logger.info("Pagination stop at start=%d (0 job keys)", start)
-                    break
+                if not self._wait_for_results(page, timeout=50):
+                    logger.warning("Shard skip (%s): blocked or empty", location or "nationwide")
+                    continue
 
-                before = len(jk_pages)
+                if expected_total is None:
+                    expected_total = self._read_result_count(page)
+                    if expected_total:
+                        logger.info("Search reports ~%d total results (nationwide)", expected_total)
+
+                jks = self._extract_jks(page.content())
+                before = len(jk_urls)
                 for jk in jks:
-                    jk_pages.setdefault(jk, start)
-                new_count = len(jk_pages) - before
+                    jk_urls.setdefault(jk, shard_url)
+                new_count = len(jk_urls) - before
                 logger.info(
-                    "Search start=%d: %d keys (%d new, total %d%s)",
-                    start,
+                    "Shard %d/%d (%s): %d keys (%d new, total %d%s)",
+                    shard_index + 1,
+                    len(LOCATION_SHARDS),
+                    location or "nationwide",
                     len(jks),
                     new_count,
-                    len(jk_pages),
+                    len(jk_urls),
                     f" / ~{expected_total}" if expected_total else "",
                 )
 
-                if new_count == 0:
-                    stagnant_pages += 1
-                    if stagnant_pages >= 2:
-                        break
-                else:
-                    stagnant_pages = 0
-
-                if expected_total and len(jk_pages) >= expected_total:
+                if expected_total and len(jk_urls) >= expected_total:
                     break
+            finally:
+                page.close()
 
-                if self.page_delay:
-                    time.sleep(self.page_delay)
-        finally:
-            page.close()
+            delay = self.page_delay or SHARD_DELAY
+            if delay and shard_index + 1 < len(LOCATION_SHARDS):
+                time.sleep(delay)
 
-        return jk_pages
+        return jk_urls
 
-    def _advance_search_page(self, page: Page, search_url: str, *, start: int) -> bool:
-        page_num = (start // JOBS_PER_PAGE) + 1
-        try:
-            link = page.locator(f'a[href*="start={start}"]').first
-            if link.is_visible(timeout=4000):
-                link.click()
-                page.wait_for_load_state("domcontentloaded")
-                page.wait_for_timeout(2500)
-                if f"start={start}" in page.url or self._extract_jks(page.content()):
-                    return True
-        except Exception as exc:
-            logger.warning("Pagination click failed for start=%d: %s", start, exc)
-
-        if page_num <= 10:
-            try:
-                nav_link = page.locator("nav a").filter(has_text=str(page_num)).first
-                if nav_link.is_visible(timeout=3000):
-                    nav_link.click()
-                    page.wait_for_load_state("domcontentloaded")
-                    page.wait_for_timeout(2500)
-                    if self._extract_jks(page.content()):
-                        return True
-            except Exception as exc:
-                logger.warning("Pagination nav click failed for page %d: %s", page_num, exc)
-
-        return self._goto_search_page(page, search_url, start=start)
+    @staticmethod
+    def _shard_search_url(search_url: str, location: str) -> str:
+        parsed = urlparse(search_url)
+        query = parse_qs(parsed.query, keep_blank_values=True)
+        query["l"] = [location]
+        if "start" in query:
+            del query["start"]
+        if "from" not in query:
+            query["from"] = ["searchOnDesktopSerp"]
+        flat = {k: v[0] if len(v) == 1 else v for k, v in query.items()}
+        return urlunparse(
+            (parsed.scheme, parsed.netloc, parsed.path, parsed.params, urlencode(flat), "")
+        )
 
     def _scrape_detail(
         self,
         page: Page,
         *,
         jk: str,
-        start_offset: int,
         search_url: str,
         detail_url: str,
         category_id: str,
     ) -> AusbildungListing | None:
-        if not self._goto_search_page(page, search_url, start=start_offset):
+        if not self._goto_with_retry(page, search_url):
             raise RuntimeError(f"could not load search page for jk={jk}")
 
         self._dismiss_cookies(page)
@@ -413,27 +443,6 @@ class IndeedDeScraper:
             mailto_links=mailto_links,
         )
 
-    def _goto_search_page(self, page: Page, search_url: str, *, start: int) -> bool:
-        page_url = self._search_page_url(search_url, start)
-        return self._goto_with_retry(page, page_url)
-
-    @staticmethod
-    def _search_page_url(search_url: str, start: int) -> str:
-        parsed = urlparse(search_url)
-        query = parse_qs(parsed.query, keep_blank_values=True)
-        if start > 0:
-            query["start"] = [str(start)]
-        elif "start" in query:
-            del query["start"]
-        flat = {k: v[0] if len(v) == 1 else v for k, v in query.items()}
-        return urlunparse(
-            (parsed.scheme, parsed.netloc, parsed.path, parsed.params, urlencode(flat), "")
-        )
-
-    @staticmethod
-    def _detail_url(jk: str) -> str:
-        return f"https://de.indeed.com/viewjob?jk={jk}"
-
     def _goto_with_retry(self, page: Page, url: str) -> bool:
         is_detail = "/viewjob" in url
         for attempt in range(1, GOTO_RETRIES + 1):
@@ -452,6 +461,10 @@ class IndeedDeScraper:
                 logger.warning("goto attempt %d failed for %s: %s", attempt, url, exc)
             time.sleep(1.5 * attempt)
         return False
+
+    @staticmethod
+    def _detail_url(jk: str) -> str:
+        return f"https://de.indeed.com/viewjob?jk={jk}"
 
     def _wait_for_results(self, page: Page, *, timeout: int = 40) -> bool:
         for _ in range(max(1, timeout // 2)):
@@ -572,7 +585,7 @@ class IndeedDeScraper:
         category_id: str,
         *,
         search_url: str,
-        discovered_jks: dict[str, int],
+        discovered_jks: dict[str, str],
         scraped_jks: list[str],
         listings: list[dict[str, Any]],
         scraped: int,
