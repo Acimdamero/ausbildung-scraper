@@ -72,12 +72,19 @@ DEFAULT_SEARCHES: dict[str, dict[str, Any]] = {
 }
 
 DETAIL_HREF_RE = re.compile(
-    r'href="([^"]+/lehrstellen/standard\?id=\d+[^"]*)"',
+    r'href="([^"]+/lehrstellen/(?:standard|premium)\?id=\d+[^"]*)"',
     re.IGNORECASE,
 )
-DETAIL_ID_RE = re.compile(r"standard\?id=(\d+)", re.IGNORECASE)
+REDIRECT_HREF_RE = re.compile(
+    r'href="([^"]+/redirect/jobs-redirect[^"]*[&?]id=\d+[^"]*)"',
+    re.IGNORECASE,
+)
+DETAIL_ID_RE = re.compile(
+    r"(?:standard|premium)\?id=(\d+)|(?:[&?])id=(\d+)",
+    re.IGNORECASE,
+)
 MAX_PAGES = 60
-GOTO_RETRIES = 5
+GOTO_RETRIES = 8
 PER_PAGE = 20
 
 
@@ -139,9 +146,11 @@ class MeinestadtDeScraper:
         launch_args = ["--disable-http2", "--disable-quic"]
         with sync_playwright() as playwright:
             browser = None
-            for launch_mode in ("chromium", "chrome"):
+            for launch_mode in ("firefox", "chrome", "chromium"):
                 try:
-                    if launch_mode == "chrome":
+                    if launch_mode == "firefox":
+                        browser = playwright.firefox.launch(headless=self.headless)
+                    elif launch_mode == "chrome":
                         browser = playwright.chromium.launch(
                             channel="chrome",
                             headless=self.headless,
@@ -152,16 +161,33 @@ class MeinestadtDeScraper:
                             headless=self.headless,
                             args=launch_args,
                         )
+                    logger.info("Playwright browser: %s", launch_mode)
                     break
                 except Exception as exc:
                     logger.warning("Launch %s failed: %s", launch_mode, exc)
             if browser is None:
                 raise RuntimeError("Could not launch Playwright browser for meinestadt.de")
 
-            context = browser.new_context(locale="de-DE", user_agent=self.user_agent)
+            context = browser.new_context(
+                locale="de-DE",
+                user_agent=self.user_agent,
+                viewport={"width": 1280, "height": 900},
+                extra_http_headers={
+                    "Accept-Language": "de-DE,de;q=0.9,en;q=0.8",
+                },
+            )
+            context.add_init_script(
+                'Object.defineProperty(navigator, "webdriver", {get: () => undefined});'
+            )
             warmup = context.new_page()
-            self._dismiss_cookies(warmup)
-            warmup.close()
+            try:
+                warmup.goto(BASE_URL, wait_until="domcontentloaded", timeout=90_000)
+                self._dismiss_cookies(warmup)
+                warmup.wait_for_timeout(800)
+            except Exception as exc:
+                logger.warning("Warmup failed: %s", exc)
+            finally:
+                warmup.close()
 
             for category_id, config in targets.items():
                 logger.info("Scraping meinestadt.de category %s", category_id)
@@ -268,61 +294,156 @@ class MeinestadtDeScraper:
         config: dict[str, Any],
     ) -> list[DetailTarget]:
         by_id: dict[str, DetailTarget] = {}
-        request = context.request
         filter_beruf = str(config.get("filter_beruf") or "")
         stagnant_pages = 0
 
-        for page_num in range(1, MAX_PAGES + 1):
-            page_url = self._page_url(search_url, page_num)
-            try:
-                response = request.get(
-                    page_url,
-                    headers={"User-Agent": self.user_agent},
-                    timeout=90_000,
+        search_page = context.new_page()
+        try:
+            first_url = self._page_url(search_url, 1)
+            if not self._goto_with_retry(search_page, first_url, wait_until="domcontentloaded"):
+                logger.error("Could not load first search page: %s", first_url)
+                return []
+            self._dismiss_cookies(search_page)
+            search_page.wait_for_timeout(1200)
+
+            for page_num in range(1, MAX_PAGES + 1):
+                if page_num > 1 and not self._advance_search_page(search_page, page_num):
+                    logger.warning("Pagination click failed at page %d", page_num)
+                    break
+                html = search_page.content()
+                if not html or "access denied" in html.lower():
+                    break
+
+                page_targets = self._extract_targets_from_html(html, filter_beruf=filter_beruf)
+                if not page_targets:
+                    logger.info("Pagination stop at page %d (0 links)", page_num)
+                    break
+
+                before = len(by_id)
+                for target in page_targets:
+                    job_id = self._job_id_from_url(target.url)
+                    if job_id and job_id not in by_id:
+                        by_id[job_id] = target
+                new_count = len(by_id) - before
+                logger.info(
+                    "Search page %d: %d links (%d new, total %d)",
+                    page_num,
+                    len(page_targets),
+                    new_count,
+                    len(by_id),
                 )
-                if not response.ok:
-                    logger.error(
-                        "Search page %d HTTP %s: %s",
-                        page_num,
-                        response.status,
-                        page_url,
-                    )
+                if new_count == 0:
+                    stagnant_pages += 1
+                    if stagnant_pages >= 2:
+                        break
+                else:
+                    stagnant_pages = 0
+
+                if not self._has_next_page_html(html, page_num):
+                    logger.info("Pagination exhausted at page %d", page_num)
                     break
-                html = response.text()
-            except Exception as exc:
-                logger.error("Search page %d fetch failed: %s", page_num, exc)
-                break
 
-            page_targets = self._extract_targets_from_html(html, filter_beruf=filter_beruf)
-            if not page_targets:
-                logger.info("Pagination stop at page %d (0 links)", page_num)
-                break
-
-            before = len(by_id)
-            for target in page_targets:
-                job_id = self._job_id_from_url(target.url)
-                if job_id and job_id not in by_id:
-                    by_id[job_id] = target
-            new_count = len(by_id) - before
-            logger.info(
-                "Search page %d: %d links (%d new, total %d)",
-                page_num,
-                len(page_targets),
-                new_count,
-                len(by_id),
-            )
-            if new_count == 0:
-                stagnant_pages += 1
-                if stagnant_pages >= 2:
-                    break
-            else:
-                stagnant_pages = 0
-
-            if not self._has_next_page_html(html, page_num):
-                logger.info("Pagination exhausted at page %d", page_num)
-                break
+                if self.request_delay:
+                    time.sleep(self.request_delay)
+        finally:
+            search_page.close()
 
         return sorted(by_id.values(), key=lambda item: item.url)
+
+    def _advance_search_page(self, search_page: Page, next_page: int) -> bool:
+        try:
+            clicked = search_page.evaluate(
+                """(nextPage) => {
+                    const selectors = [
+                        'a.m-pagination__next',
+                        'a[data-page="next"]',
+                        `a[href*="page=${nextPage}"]`,
+                    ];
+                    for (const sel of selectors) {
+                        const el = document.querySelector(sel);
+                        if (el) {
+                            el.scrollIntoView({ block: 'center' });
+                            el.click();
+                            return true;
+                        }
+                    }
+                    return false;
+                }""",
+                next_page,
+            )
+            if not clicked:
+                return False
+            search_page.wait_for_load_state("domcontentloaded", timeout=90_000)
+            search_page.wait_for_timeout(1500)
+            return True
+        except Exception as exc:
+            logger.warning("Pagination click to page %d failed: %s", next_page, exc)
+            return False
+
+    def _fetch_search_html(
+        self,
+        context: BrowserContext,
+        search_page: Page,
+        page_url: str,
+        page_num: int,
+    ) -> str:
+        """Fetch search HTML via Playwright page (403 on bare API request)."""
+        if page_num == 1:
+            if self._goto_with_retry(search_page, page_url, wait_until="domcontentloaded"):
+                self._dismiss_cookies(search_page)
+                search_page.wait_for_timeout(1200)
+                html = search_page.content()
+                if html and "access denied" not in html.lower():
+                    return html
+
+        if search_page.url and "meinestadt.de" in search_page.url:
+            try:
+                html = search_page.evaluate(
+                    """async (url) => {
+                        const response = await fetch(url, {
+                            credentials: 'include',
+                            headers: { 'Accept': 'text/html' }
+                        });
+                        if (!response.ok) return '';
+                        return await response.text();
+                    }""",
+                    page_url.split("#")[0],
+                )
+                if html and "access denied" not in html.lower():
+                    return html
+            except Exception as exc:
+                logger.warning("In-page fetch failed for page %d: %s", page_num, exc)
+
+        if self._goto_with_retry(search_page, page_url, wait_until="commit"):
+            self._dismiss_cookies(search_page)
+            search_page.wait_for_timeout(1200)
+            html = search_page.content()
+            if html and "access denied" not in html.lower():
+                return html
+
+        request = context.request
+        try:
+            response = request.get(
+                page_url.split("#")[0],
+                headers={
+                    "User-Agent": self.user_agent,
+                    "Accept": "text/html,application/xhtml+xml",
+                    "Accept-Language": "de-DE,de;q=0.9",
+                    "Referer": BASE_URL,
+                },
+                timeout=90_000,
+            )
+            if response.ok:
+                return response.text()
+            logger.error(
+                "Search page %d HTTP %s: %s",
+                page_num,
+                response.status,
+                page_url,
+            )
+        except Exception as exc:
+            logger.error("Search page %d fetch failed: %s", page_num, exc)
+        return ""
 
     @staticmethod
     def _page_url(search_url: str, page_num: int) -> str:
@@ -353,24 +474,31 @@ class MeinestadtDeScraper:
     ) -> list[DetailTarget]:
         targets: list[DetailTarget] = []
         seen: set[str] = set()
-        for match in DETAIL_HREF_RE.finditer(html):
-            href = match.group(1)
+
+        def add_href(href: str) -> None:
             clean = self._normalize_detail_url(href)
             job_id = self._job_id_from_url(clean)
             if not job_id or job_id in seen:
-                continue
+                return
             card_hint = self._card_hint_near_href(html, href)
             if filter_beruf == "dpa" and not self._hint_matches_dpa(card_hint):
-                continue
+                return
             if filter_beruf == "dv" and not self._hint_matches_dv(card_hint):
-                continue
+                return
             seen.add(job_id)
             targets.append(DetailTarget(url=clean, card_hint=card_hint))
+
+        for match in DETAIL_HREF_RE.finditer(html):
+            add_href(match.group(1))
+        for match in REDIRECT_HREF_RE.finditer(html):
+            add_href(match.group(1))
+
         if targets:
             return targets
 
-        for job_id in DETAIL_ID_RE.findall(html):
-            if job_id in seen:
+        for match in DETAIL_ID_RE.finditer(html):
+            job_id = match.group(1) or match.group(2)
+            if not job_id or job_id in seen:
                 continue
             seen.add(job_id)
             targets.append(
@@ -410,10 +538,16 @@ class MeinestadtDeScraper:
         next_page = current_page + 1
         return f"?page={next_page}" in html or f'page={next_page}' in html
 
-    def _goto_with_retry(self, page: Page, url: str) -> bool:
+    def _goto_with_retry(
+        self,
+        page: Page,
+        url: str,
+        *,
+        wait_until: str = "domcontentloaded",
+    ) -> bool:
         for attempt in range(1, GOTO_RETRIES + 1):
             try:
-                page.goto(url, wait_until="domcontentloaded", timeout=90_000)
+                page.goto(url, wait_until=wait_until, timeout=90_000)
                 page.wait_for_timeout(1200)
                 if "access denied" in page.title().lower():
                     raise RuntimeError("access denied")
@@ -502,6 +636,11 @@ class MeinestadtDeScraper:
         parsed = urlparse(clean)
         query = parse_qs(parsed.query)
         job_ids = query.get("id") or []
+        if "/redirect/jobs-redirect" in parsed.path and job_ids:
+            return clean.split("#")[0]
+        if job_ids and "/lehrstellen/" in parsed.path:
+            listing_type = "premium" if "/premium" in parsed.path else "standard"
+            return f"{BASE_URL}/deutschland/lehrstellen/{listing_type}?id={job_ids[0]}"
         if job_ids:
             return f"{BASE_URL}/deutschland/lehrstellen/standard?id={job_ids[0]}"
         return clean.split("#")[0]
@@ -509,7 +648,9 @@ class MeinestadtDeScraper:
     @staticmethod
     def _job_id_from_url(url: str) -> str:
         match = DETAIL_ID_RE.search(url)
-        return match.group(1) if match else ""
+        if match:
+            return match.group(1) or match.group(2) or ""
+        return ""
 
     def _dismiss_cookies(self, page: Page) -> None:
         for selector in COOKIE_SELECTORS:
