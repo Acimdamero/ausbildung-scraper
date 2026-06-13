@@ -31,6 +31,20 @@ categories:
     sheet_tab: "FI_DPA_2"
     duplicate_of: fachinformatiker_dpa
 
+  - id: fachinformatiker_si
+    name: "Fachinformatiker/in Systemintegration"
+    name_id: "Fachinformatiker/in Systemintegration"
+    was: "Fachinformatiker/in Systemintegration"
+    angebotsart: 4
+    sheet_tab: "FI_SI"
+
+  - id: fachinformatiker_dv
+    name: "Fachinformatiker/in Digitale Vernetzung"
+    name_id: "Fachinformatiker/in Digitale Vernetzung"
+    was: "Fachinformatiker/in Digitale Vernetzung"
+    angebotsart: 4
+    sheet_tab: "FI_DV"
+
   # ausbildung.de (Playwright scraper — scripts/run_ausbildung_de.py)
   - id: ausbildung_de_ae
     name: "ausbildung.de — Fachinformatiker/in Anwendungsentwicklung"
@@ -116,3 +130,17 @@ categories:
     source: stepstone_de
     search_url: "https://www.stepstone.de/jobs/ausbildung-fachinformatiker-daten-und-prozessanalyse?searchOrigin=jobad&rsearch=2"
     sheet_tab: "STEP_DPA"
+
+  - id: stepstone_de_si
+    name: "stepstone.de — Fachinformatiker/in Systemintegration"
+    name_id: "Fachinformatiker/in Systemintegration (stepstone.de)"
+    source: stepstone_de
+    search_url: "https://www.stepstone.de/jobs/ausbildung-fachinformatiker-systemintegration?searchOrigin=jobad&rsearch=2"
+    sheet_tab: "STEP_SI"
+
+  - id: stepstone_de_dv
+    name: "stepstone.de — Fachinformatiker/in Digitale Vernetzung"
+    name_id: "Fachinformatiker/in Digitale Vernetzung (stepstone.de)"
+    source: stepstone_de
+    search_url: "https://www.stepstone.de/jobs/ausbildung-fachinformatiker-digitale-vernetzung?searchOrigin=jobad&rsearch=2"
+    sheet_tab: "STEP_DV"
