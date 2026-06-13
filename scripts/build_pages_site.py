@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -83,8 +84,9 @@ LANDING_HTML = """<!DOCTYPE html>
 
 
 def build() -> None:
-    if not VIEWER_SRC.is_file():
-        print(f"ERROR: missing viewer source: {VIEWER_SRC}", file=sys.stderr)
+    viewer_script = ROOT / "scripts" / "generate_viewer.py"
+    if not viewer_script.is_file():
+        print(f"ERROR: missing viewer generator: {viewer_script}", file=sys.stderr)
         sys.exit(1)
     if not DEMO_SRC.is_file():
         print(f"ERROR: missing demo source: {DEMO_SRC}", file=sys.stderr)
@@ -92,7 +94,25 @@ def build() -> None:
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
     VIEWER_DST.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(VIEWER_SRC, VIEWER_DST)
+    subprocess.run(
+        [
+            sys.executable,
+            str(viewer_script),
+            "--public",
+            "--source",
+            "processed",
+            "--output",
+            str(VIEWER_DST),
+        ],
+        cwd=ROOT,
+        check=True,
+    )
+    if not VIEWER_DST.is_file():
+        print(f"ERROR: missing public viewer after build: {VIEWER_DST}", file=sys.stderr)
+        sys.exit(1)
+
+    PUBLIC.mkdir(parents=True, exist_ok=True)
+    VIEWER_DST.parent.mkdir(parents=True, exist_ok=True)
     viewer_html = VIEWER_DST.read_text(encoding="utf-8")
     public_banner = (
         '<div class="public-banner">'

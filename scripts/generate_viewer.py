@@ -100,13 +100,25 @@ def load_listings(data_dir: Path, source: str = "exports") -> tuple[list[dict], 
     return listings, sources
 
 
-def build_html(listings: list[dict], sources: dict[str, str]) -> str:
+def build_html(
+    listings: list[dict],
+    sources: dict[str, str],
+    *,
+    public_mode: bool = False,
+    enriched_index: dict | None = None,
+) -> str:
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     data_json = json.dumps(listings, ensure_ascii=False)
     beruf_typ_labels_json = json.dumps(BERUF_TYP_LABELS, ensure_ascii=False)
     beruf_typ_tab_labels_json = json.dumps(BERUF_TYP_TAB_LABELS, ensure_ascii=False)
     beruf_typ_order_json = json.dumps(BERUF_TYP_PRIORITY, ensure_ascii=False)
     portal_labels_json = json.dumps(PORTAL_LABELS, ensure_ascii=False)
+    enriched_refs = {} if public_mode else (enriched_index or {}).get("refs", {})
+    enriched_refs_json = json.dumps(enriched_refs, ensure_ascii=False)
+    enriched_count = len(enriched_refs)
+    master_count = (enriched_index or {}).get("master_listings") or len(listings)
+    one_per_company_count = (enriched_index or {}).get("one_per_company") or 0
+    is_public_json = "true" if public_mode else "false"
     main_tab_buttons = (
         '<button type="button" class="spec-tab active" data-spec="target" role="tab" '
         'aria-selected="true">Semua FI</button>'
@@ -127,6 +139,19 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     source_lines = "".join(
         f"<li><code>{html.escape(src)}</code></li>" for src in sorted(sources.values())
     )
+    if public_mode:
+        scope_footer = (
+            f"<p><strong>{len(listings)}</strong> listings · PUBLIC — no Bewerbung Intelligence links "
+            "(private research stays local).</p>"
+        )
+    else:
+        scope_footer = (
+            f"<p><strong>{len(listings)}</strong> listings in viewer · "
+            f"<strong>{enriched_count}</strong> with Bewerbung Intelligence research (local). "
+            f"Database: {master_count} master · {one_per_company_count} unique companies "
+            f"(<code>one_per_company</code> target for scaling research).</p>"
+            "<p>First pilot: AE + email only (~940). Expanded run: all beruf_typ, one listing per company.</p>"
+        )
 
     return f"""<!DOCTYPE html>
 <html lang="id">
@@ -436,6 +461,16 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       min-width: 0;
     }}
     .card a:hover {{ background: rgba(61, 139, 253, 0.12); }}
+    .card a.bridge-link {{
+      border-color: #4a3a6b;
+      color: #b8a0ff;
+      background: rgba(184, 160, 255, 0.08);
+    }}
+    .card a.bridge-link:hover {{ background: rgba(184, 160, 255, 0.18); }}
+    .card.highlight-ref {{
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(61, 139, 253, 0.35);
+    }}
     .salary {{
       color: #7ddea2;
       font-size: 0.9rem;
@@ -973,6 +1008,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     <div class="grid" id="grid"></div>
   </main>
   <footer>
+    {scope_footer}
     <strong>Sumber data:</strong>
     <ul>{source_lines or "<li>Belum ada file JSON</li>"}</ul>
   </footer>
@@ -994,6 +1030,49 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     const BERUF_TYP_TAB_LABELS = {beruf_typ_tab_labels_json};
     const BERUF_TYP_ORDER = {beruf_typ_order_json};
     const PORTAL_LABELS = {portal_labels_json};
+    const ENRICHED_REFS = {enriched_refs_json};
+    const IS_PUBLIC = {is_public_json};
+    const BEWERBUNG_BASE = "../bewerbung/index.html";
+
+    function normalizeUrl(url) {{
+      const raw = String(url || "").trim();
+      if (!raw) return "";
+      if (/^https?:\\/\\//i.test(raw)) return raw;
+      if (raw.startsWith("//")) return "https:" + raw;
+      return "https://" + raw.replace(/^\\/\\//, "");
+    }}
+
+    function externalLink(url, label) {{
+      const href = normalizeUrl(url);
+      if (!href) return "";
+      return `<a href="${{href.replace(/"/g, "&quot;")}}" target="_blank" rel="noopener noreferrer">${{escapeHtml(label)}}</a>`;
+    }}
+
+    function hasEnrichedResearch(ref) {{
+      return Boolean(ref) && Object.prototype.hasOwnProperty.call(ENRICHED_REFS, ref);
+    }}
+
+    function bewerbungBridgeLink(ref) {{
+      if (IS_PUBLIC || !hasEnrichedResearch(ref)) return "";
+      const href = `${{BEWERBUNG_BASE}}#ref=${{encodeURIComponent(ref)}}`;
+      return `<a href="${{href}}" class="bridge-link" target="_blank" rel="noopener noreferrer">🔍 Bewerbung Intelligence</a>`;
+    }}
+
+    function listingExternalLinks(item) {{
+      const bewerbungUrl = item.link_bewerbung_efektif || item.link_bewerbung || item.ba_job_url;
+      const bewerbungLabel = item.bewerbung_sumber === "externe" ? "Bewerbung (eksternal)" : "Bewerbung (BA)";
+      const websiteUrl = item.link_website_perusahaan_resmi || item.link_website_perusahaan;
+      const websiteLabel = item.link_website_perusahaan_resmi
+        ? "Website resmi"
+        : (item.website_sumber === "email_domain" ? "Website (email)" : "Website");
+      return [
+        item.ba_job_url ? externalLink(item.ba_job_url, "Arbeitsagentur") : "",
+        bewerbungUrl && bewerbungUrl !== item.ba_job_url
+          ? externalLink(bewerbungUrl, bewerbungLabel)
+          : "",
+        websiteUrl ? externalLink(websiteUrl, websiteLabel) : "",
+      ].filter(Boolean).join("");
+    }}
 
     const CATEGORY_SOURCE_HINTS = [
       ["fachinformatiker_", "arbeitsagentur"],
@@ -1136,20 +1215,13 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
 
     function openModal(item) {{
       const overlay = document.getElementById("modal-overlay");
-      const bewerbungUrl = item.link_bewerbung_efektif || item.link_bewerbung || item.ba_job_url;
-      const bewerbungLabel = item.bewerbung_sumber === "externe" ? "Bewerbung (eksternal)" : "Bewerbung (BA)";
-      const websiteUrl = item.link_website_perusahaan_resmi || item.link_website_perusahaan;
-      const websiteLabel = item.link_website_perusahaan_resmi ? "Website resmi" : "Website";
       const score = item.kelengkapan_score ?? 0;
+      const ref = item.referenznummer || "";
 
       document.getElementById("modal-company").textContent = item.nama_perusahaan || "—";
       document.getElementById("modal-title").textContent = item.jenis_ausbildung || item.category_id || "—";
 
-      const links = [
-        item.ba_job_url ? `<a href="${{item.ba_job_url}}" target="_blank" rel="noopener">Arbeitsagentur</a>` : "",
-        bewerbungUrl ? `<a href="${{bewerbungUrl}}" target="_blank" rel="noopener">${{bewerbungLabel}}</a>` : "",
-        websiteUrl ? `<a href="${{websiteUrl}}" target="_blank" rel="noopener">${{websiteLabel}}</a>` : "",
-      ].filter(Boolean).join("");
+      const links = listingExternalLinks(item) + bewerbungBridgeLink(ref);
 
       document.getElementById("modal-body").innerHTML = `
         <div class="badges" style="margin-bottom:1rem">
@@ -1172,6 +1244,8 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         ${{detailSection("Apa yang Ditawarkan", item.apa_yang_ditawarkan)}}
         ${{detailSection("Deskripsi Lengkap", item.detail_deskripsi, {{ scrollable: true }})}}
         ${{detailSection("Email Bewerbung", item.alamat_email_bewerbung)}}
+        ${{detailSection("Telefon", item.telefon_bewerbung)}}
+        ${{detailSection("Ansprechpartner", item.nama_ansprechpartner ? `${{item.anrede_ansprechpartner ? item.anrede_ansprechpartner + " " : ""}}${{item.nama_ansprechpartner}}` : "")}}
         ${{detailSection("Kontak HR", item.kontak_penanggung_jawab)}}
         ${{detailSection("Dokumen yang Diperlukan", item.dokumen_yang_harus_dipenuhi, {{ scrollable: true }})}}
         ${{detailSection("Referenznummer", item.referenznummer, {{ muted: true }})}}
@@ -1744,8 +1818,6 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
 
       const grid = document.getElementById("grid");
       grid.innerHTML = filtered.map(item => {{
-        const bewerbungUrl = item.link_bewerbung_efektif || item.link_bewerbung || item.ba_job_url;
-        const bewerbungLabel = item.bewerbung_sumber === "externe" ? "Bewerbung (eksternal)" : "Bewerbung (BA)";
         const score = item.kelengkapan_score ?? 0;
         const cara = item.cara_apply || "";
         const manual = butuhManual(item);
@@ -1761,6 +1833,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
             ${{cara ? `<span class="badge">Apply: ${{escapeHtml(cara)}}</span>` : ""}}
             ${{item.website_type ? `<span class="badge">Web: ${{escapeHtml(item.website_type)}}</span>` : ""}}
             ${{hasEmail(item) ? `<span class="badge score-high">Email</span>` : ""}}
+            ${{(item.telefon_bewerbung || "").trim() ? `<span class="badge">Tel</span>` : ""}}
             ${{manual ? `<span class="badge score-low">Manual</span>` : ""}}
             ${{specBadgeLabel(item.beruf_typ) ? `<span class="badge ${{specBadgeClass(item.beruf_typ)}}">${{specBadgeLabel(item.beruf_typ)}}</span>` : ""}}
             ${{startDateBadge(item)}}
@@ -1770,9 +1843,8 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
           <div class="desc">${{highlightHtml(excerpt(item.detail_deskripsi), q)}}</div>
           <div class="card-hint">Klik untuk detail lengkap →</div>
           <div class="links">
-            ${{item.ba_job_url ? `<a href="${{item.ba_job_url}}" target="_blank" rel="noopener">Arbeitsagentur</a>` : ""}}
-            ${{bewerbungUrl ? `<a href="${{bewerbungUrl}}" target="_blank" rel="noopener">${{bewerbungLabel}}</a>` : ""}}
-            ${{(item.link_website_perusahaan_resmi || item.link_website_perusahaan) ? `<a href="${{item.link_website_perusahaan_resmi || item.link_website_perusahaan}}" target="_blank" rel="noopener">${{item.link_website_perusahaan_resmi ? "Website resmi" : "Website"}}</a>` : ""}}
+            ${{listingExternalLinks(item)}}
+            ${{bewerbungBridgeLink(ref)}}
           </div>
         </article>
       `}}).join("");
@@ -1836,9 +1908,35 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       if (!tab) return;
       setActiveSpecTab(tab);
     }});
+    function parseHashRef() {{
+      const raw = location.hash.replace(/^#/, "");
+      if (!raw) return "";
+      const params = new URLSearchParams(raw);
+      return params.get("ref") || "";
+    }}
+
+    function applyHashRef() {{
+      const ref = parseHashRef();
+      if (!ref) return;
+      searchInput.value = ref;
+      render();
+      requestAnimationFrame(() => {{
+        const cards = document.querySelectorAll(".card[data-ref]");
+        for (const card of cards) {{
+          if (card.dataset.ref === ref) {{
+            card.classList.add("highlight-ref");
+            card.scrollIntoView({{ behavior: "smooth", block: "center" }});
+            break;
+          }}
+        }}
+      }});
+    }}
+
+    window.addEventListener("hashchange", applyHashRef);
     render();
     updateFilterCount();
     setFilterPanelExpanded(false);
+    applyHashRef();
   </script>
 </body>
 </html>
@@ -1865,12 +1963,25 @@ def main() -> int:
         default=ROOT / "data" / "viewer" / "index.html",
         help="Output HTML path",
     )
+    parser.add_argument(
+        "--public",
+        action="store_true",
+        help="Public GitHub Pages build: omit Bewerbung Intelligence bridge links",
+    )
     args = parser.parse_args()
 
     listings, sources = load_listings(args.data_dir, source=args.source)
     listings = sort_listings(listings)
+    enriched_index = None
+    if not args.public:
+        from scripts.build_enriched_index import build_index
+
+        enriched_index = build_index(args.data_dir)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(build_html(listings, sources), encoding="utf-8")
+    args.output.write_text(
+        build_html(listings, sources, public_mode=args.public, enriched_index=enriched_index),
+        encoding="utf-8",
+    )
     print(f"Viewer written: {args.output} ({len(listings)} listings)")
     return 0
 
