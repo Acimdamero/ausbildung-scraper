@@ -34,6 +34,14 @@ logging.basicConfig(
 logger = logging.getLogger("run_indeed_de")
 
 
+def setup_file_logging(log_path: Path) -> None:
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    handler = logging.FileHandler(log_path, encoding="utf-8")
+    handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
+    logging.getLogger().addHandler(handler)
+    logging.getLogger("src.scraper.indeed_de").addHandler(handler)
+
+
 def field_completeness(listings: list[dict]) -> dict[str, float]:
     if not listings:
         return {field: 0.0 for field in SCORE_FIELDS}
@@ -266,8 +274,17 @@ def update_background_status(data_dir: Path, state: str, detail: str) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Scrape indeed.de listings")
-    parser.add_argument("--headless", action="store_true", default=True)
-    parser.add_argument("--delay", type=float, default=1.2, help="Delay between detail pages")
+    parser.add_argument(
+        "--headful",
+        action="store_true",
+        help="Run browser visible (non-headless); use if viewjob is blocked headless",
+    )
+    parser.add_argument(
+        "--delay",
+        type=float,
+        default=5.0,
+        help="Base delay between detail pages (actual: 3-8s random)",
+    )
     parser.add_argument("--page-delay", type=float, default=12.0, help="Delay between location shards")
     parser.add_argument("--category", choices=list(DEFAULT_SEARCHES), help="Single category")
     parser.add_argument("--no-merge", action="store_true", help="Skip merge into master")
@@ -279,21 +296,28 @@ def main() -> int:
         searches = {args.category: DEFAULT_SEARCHES[args.category]}
 
     data_dir = ROOT / "data"
+    logs_dir = ROOT / "logs"
+    log_path = logs_dir / "indeed_de_scrape.log"
+    setup_file_logging(log_path)
+
     progress_path = data_dir / "progress_indeed_de.json"
+    fix_status_path = data_dir / "INDEED_FIX_STATUS.md"
     storage = LocalStorage(data_dir)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     update_background_status(
         data_dir,
         "RUNNING",
-        "Scrape indeed.de sedang berjalan. Log: `logs/indeed_de_scrape.log`",
+        "Scrape indeed.de sedang berjalan (viewjob-first fix). "
+        "Log: `logs/indeed_de_scrape.log` | Status: `data/INDEED_FIX_STATUS.md`",
     )
 
     scraper = IndeedDeScraper(
-        headless=args.headless,
+        headless=not args.headful,
         request_delay=args.delay,
         page_delay=args.page_delay,
         progress_path=progress_path,
+        fix_status_path=fix_status_path,
     )
     reports = scraper.scrape_all(searches=searches)
 
@@ -330,13 +354,19 @@ def main() -> int:
 
     investigation = {
         "api_available": False,
-        "method": "playwright_pagination + SERP split-view panel (#jobDescriptionText); viewjob fallback",
+        "method": (
+            "playwright viewjob-first (/viewjob?jk=) + SERP split-view fallback; "
+            "#jobDescriptionText + JSON-LD"
+        ),
         "pagination": "Location-sharded search (l=City/Bundesland); start=10+ blocked by Cloudflare",
-        "anti_bot_note": "Pagination triggers Security Check; use ~50 location shards, page 1 only",
+        "anti_bot_note": (
+            "SERP reload blocked after first job; viewjob direct is primary. "
+            "Use --headful if headless blocked."
+        ),
         "detail_url_pattern": "/viewjob?jk={16-char-hex}",
         "notes": (
             "No public search JSON API; mosaic job cards in HTML. "
-            "Anti-bot blocks many direct viewjob loads; panel scrape preferred."
+            "viewjob-first strategy with 3-8s random delay between details."
         ),
     }
 
