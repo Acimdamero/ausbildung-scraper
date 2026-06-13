@@ -235,7 +235,6 @@ class MeinestadtDeScraper:
                 )
                 if listing is None:
                     report.skipped_wrong_beruf += 1
-                    scraped_urls.add(target.url)
                     continue
                 report.listings.append(listing)
                 report.scraped += 1
