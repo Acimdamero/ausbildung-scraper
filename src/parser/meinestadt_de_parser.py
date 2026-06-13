@@ -61,14 +61,18 @@ def matches_expected_beruf(
     beruf = derive_beruf_typ(
         {"jenis_ausbildung": title, "detail_deskripsi": description, "category_id": category_id}
     )
+    if beruf in ("skip", "dual", "non_fi"):
+        return False
+
+    # Dedicated jkl search URLs already filter by Berufsfeld — only reject clear mismatches.
     if category_id.endswith("_ae"):
-        return beruf in ("ae", "fi_other") and "anwendungsentwicklung" in blob
+        return beruf not in ("dpa", "si", "dv")
+    if category_id.endswith("_si"):
+        return beruf not in ("dpa", "ae", "dv")
     if category_id.endswith("_dpa"):
         return beruf in ("dpa", "fi_other") and (
             "daten" in blob and ("prozess" in blob or "prozes" in blob)
         )
-    if category_id.endswith("_si"):
-        return beruf in ("si", "fi_other") and "systemintegration" in blob
     if category_id.endswith("_dv"):
         return beruf in ("dv", "fi_other") and (
             "digitale vernetzung" in blob or "digitale vernetz" in blob
