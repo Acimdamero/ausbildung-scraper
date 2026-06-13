@@ -20,6 +20,7 @@ from src.parser.bewerbung_fields import (
 )
 from src.parser.enrichment import enrich_listing
 from src.parser.listing_sort import sort_listings
+from src.parser.specialization import BERUF_TYP_CODES
 
 logging.basicConfig(
     level=logging.INFO,
@@ -190,7 +191,7 @@ def main() -> int:
 
     by_spec_dir = processed_dir / "by_specialization"
     by_spec_dir.mkdir(parents=True, exist_ok=True)
-    for spec in ("ae", "dpa", "other"):
+    for spec in BERUF_TYP_CODES:
         subset = [item for item in listings if item.get("beruf_typ") == spec]
         spec_path = by_spec_dir / f"{spec}_listings.csv"
         write_csv(spec_path, subset)

@@ -13,7 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.parser.listing_sort import sort_listings
+from src.parser.listing_sort import BERUF_TYP_PRIORITY, sort_listings
+from src.parser.specialization import BERUF_TYP_CODES, BERUF_TYP_LABELS, BERUF_TYP_TAB_LABELS
 
 
 def find_json_files(data_dir: Path, source: str = "exports") -> list[Path]:
@@ -77,6 +78,17 @@ def load_listings(data_dir: Path, source: str = "exports") -> tuple[list[dict], 
 def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     data_json = json.dumps(listings, ensure_ascii=False)
+    beruf_typ_labels_json = json.dumps(BERUF_TYP_LABELS, ensure_ascii=False)
+    beruf_typ_tab_labels_json = json.dumps(BERUF_TYP_TAB_LABELS, ensure_ascii=False)
+    beruf_typ_order_json = json.dumps(BERUF_TYP_PRIORITY, ensure_ascii=False)
+    spec_tab_buttons = (
+        '<button type="button" class="spec-tab active" data-spec="" role="tab" aria-selected="true">Semua</button>'
+        + "".join(
+            f'<button type="button" class="spec-tab" data-spec="{code}" role="tab" aria-selected="false">'
+            f"{html.escape(BERUF_TYP_TAB_LABELS[code])}</button>"
+            for code in BERUF_TYP_CODES
+        )
+    )
     source_lines = "".join(
         f"<li><code>{html.escape(src)}</code></li>" for src in sorted(sources.values())
     )
@@ -204,6 +216,8 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     .badge.score-low {{ color: #e88a7d; border-color: #6b2d2d; }}
     .badge.spec-ae {{ color: #8ec8ff; border-color: #2a4a6b; }}
     .badge.spec-dpa {{ color: #d4a5ff; border-color: #5a2a6b; }}
+    .badge.spec-si {{ color: #7ddea2; border-color: #2d6b47; }}
+    .badge.spec-dv {{ color: #f0c674; border-color: #6b5a2a; }}
     .badge.spec-other {{ color: var(--muted); }}
     .badge.start-date {{ color: #a8d4a0; border-color: #3a5a3a; }}
     .spec-tabs {{
@@ -222,11 +236,30 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       cursor: pointer;
     }}
     .spec-tab:hover {{ border-color: var(--accent); }}
+    .spec-tab-secondary {{
+      opacity: 0.92;
+      border-style: dashed;
+    }}
     .spec-tab.active {{
       background: rgba(61, 139, 253, 0.18);
       border-color: var(--accent);
       color: var(--accent);
       font-weight: 600;
+    }}
+    .spec-tab-secondary.active {{
+      background: rgba(240, 198, 116, 0.12);
+      border-color: #6b5a2a;
+      color: #f0c674;
+    }}
+    .spec-tabs-secondary {{
+      margin-top: 0.45rem;
+    }}
+    .spec-tabs-label {{
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.65rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
     }}
     footer {{
       padding: 1rem 1.5rem 2rem;
@@ -348,7 +381,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
         <option value="">Semua kategori</option>
       </select>
       <select id="sort">
-        <option value="spec-priority" selected>AE → DPA (default)</option>
+        <option value="spec-priority" selected>AE → DPA → SI → DV → Lainnya</option>
         <option value="score-desc">Kelengkapan tertinggi</option>
         <option value="score-asc">Kelengkapan terendah</option>
         <option value="city">Kota A–Z</option>
@@ -387,9 +420,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       </select>
     </div>
     <div class="spec-tabs" id="specTabs" role="tablist" aria-label="Filter spesialisasi">
-      <button type="button" class="spec-tab" data-spec="" role="tab" aria-selected="false">Semua</button>
-      <button type="button" class="spec-tab active" data-spec="ae" role="tab" aria-selected="true">AE</button>
-      <button type="button" class="spec-tab" data-spec="dpa" role="tab" aria-selected="false">DPA</button>
+      {spec_tab_buttons}
     </div>
   </header>
   <main>
@@ -414,6 +445,9 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
   </div>
   <script>
     const LISTINGS = {data_json};
+    const BERUF_TYP_LABELS = {beruf_typ_labels_json};
+    const BERUF_TYP_TAB_LABELS = {beruf_typ_tab_labels_json};
+    const BERUF_TYP_ORDER = {beruf_typ_order_json};
 
     const categories = [...new Set(LISTINGS.map(l => l.category_id))].sort();
     const categorySelect = document.getElementById("category");
@@ -514,30 +548,23 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     }}
 
     function berufTypOrder(typ) {{
-      if (typ === "ae") return 1;
-      if (typ === "dpa") return 2;
-      return 3;
+      return BERUF_TYP_ORDER[typ] ?? BERUF_TYP_ORDER.other;
     }}
 
     function specBadgeLabel(typ) {{
-      if (typ === "ae") return "AE";
-      if (typ === "dpa") return "DPA";
-      if (typ === "other") return "Other";
-      return "";
+      return BERUF_TYP_TAB_LABELS[typ] || "";
     }}
 
     function specBadgeClass(typ) {{
-      if (typ === "ae") return "spec-ae";
-      if (typ === "dpa") return "spec-dpa";
-      if (typ === "other") return "spec-other";
-      return "";
+      if (!typ) return "";
+      return `spec-${{typ}}`;
     }}
 
     function specDetailLabel(typ) {{
-      if (typ === "dpa") return "DPA — Daten- und Prozessanalyse";
-      if (typ === "ae") return "AE — Anwendungsentwicklung";
-      if (typ === "other") return "Other";
-      return typ || "";
+      if (!typ) return "";
+      const label = BERUF_TYP_LABELS[typ] || typ;
+      const short = BERUF_TYP_TAB_LABELS[typ] || typ.toUpperCase();
+      return `${{short}} — ${{label}}`;
     }}
 
     const BULAN_LABELS = {{
@@ -568,7 +595,7 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
       return parts.join(" · ");
     }}
 
-    let activeSpecFilter = "ae";
+    let activeSpecFilter = "";
 
     function hasEmail(item) {{
       return Boolean((item.alamat_email_bewerbung || "").trim());
@@ -700,16 +727,20 @@ def build_html(listings: list[dict], sources: dict[str, str]) -> str:
     document.getElementById("manualFilter").addEventListener("change", render);
     document.getElementById("tahunFilter").addEventListener("change", render);
     document.getElementById("bulanFilter").addEventListener("change", render);
-    document.getElementById("specTabs").addEventListener("click", (e) => {{
-      const tab = e.target.closest(".spec-tab");
-      if (!tab) return;
-      activeSpecFilter = tab.dataset.spec || "";
+    function setActiveSpecTab(tab) {{
+      activeSpecFilter = tab.dataset.spec ?? "";
       document.querySelectorAll(".spec-tab").forEach(btn => {{
         const active = btn === tab;
         btn.classList.toggle("active", active);
         btn.setAttribute("aria-selected", active ? "true" : "false");
       }});
       render();
+    }}
+
+    document.getElementById("specTabs").addEventListener("click", (e) => {{
+      const tab = e.target.closest(".spec-tab");
+      if (!tab) return;
+      setActiveSpecTab(tab);
     }});
     render();
   </script>

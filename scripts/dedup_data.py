@@ -22,7 +22,12 @@ from src.storage.dedup import DedupStats, deduplicate_all_sources, split_by_cate
 SPECIALIZATION_FILES = {
     "ae": "ae_listings.csv",
     "dpa": "dpa_listings.csv",
-    "other": "other_listings.csv",
+    "si": "si_listings.csv",
+    "dv": "dv_listings.csv",
+    "fi_other": "fi_other_listings.csv",
+    "non_fi": "non_fi_listings.csv",
+    "dual": "dual_listings.csv",
+    "skip": "skip_listings.csv",
 }
 from src.storage.local import LocalStorage
 from src.storage.progress import ProgressTracker
@@ -131,11 +136,11 @@ def save_by_specialization(
     out_dir = storage.base_dir / "processed" / "by_specialization"
     out_dir.mkdir(parents=True, exist_ok=True)
     paths: list[str] = []
-    by_spec: dict[str, list[dict]] = {"ae": [], "dpa": [], "other": []}
+    by_spec: dict[str, list[dict]] = {spec: [] for spec in SPECIALIZATION_FILES}
     for item in deduped:
-        spec = item.get("beruf_typ") or item.get("ausbildung_specialization") or "other"
+        spec = item.get("beruf_typ") or item.get("ausbildung_specialization") or "fi_other"
         if spec not in by_spec:
-            spec = "other"
+            spec = "fi_other"
         by_spec[spec].append(item)
 
     fieldnames = AusbildungListing.field_names()
