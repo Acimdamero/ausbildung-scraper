@@ -113,9 +113,33 @@ fi
 echo "Starting Bewerbung research: target=${TARGET} workers=${WORKERS}"
 echo "Command: ${CMD[*]}"
 
-nohup caffeinate -i "${CMD[@]}" >> "$LOG" 2>&1 &
-pid=$!
-echo "$pid" > "$PID_FILE"
+# New session so the pilot survives when this launcher shell exits.
+CMD_JSON="$("$PYTHON" -c 'import json,sys; print(json.dumps(sys.argv[1:]))' "${CMD[@]}")"
+export ROOT LOG PID_FILE CMD_JSON
+pid="$("$PYTHON" -c '
+import json
+import os
+import subprocess
+from pathlib import Path
+
+root = Path(os.environ["ROOT"])
+log_path = root / os.environ["LOG"]
+pid_path = root / os.environ["PID_FILE"]
+cmd = json.loads(os.environ["CMD_JSON"])
+
+with open(log_path, "a", encoding="utf-8") as log_fp:
+    proc = subprocess.Popen(
+        cmd,
+        cwd=root,
+        stdout=log_fp,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,
+        close_fds=True,
+    )
+
+pid_path.write_text(str(proc.pid), encoding="utf-8")
+print(proc.pid)
+')"
 
 echo "Started PID ${pid}"
 echo "Log: $LOG"

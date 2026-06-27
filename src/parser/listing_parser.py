@@ -6,7 +6,7 @@ import re
 from typing import Any
 
 from src.models.listing import AusbildungListing
-from src.parser.enrichment import enrich_listing
+from src.parser.enrichment import classify_website_type, enrich_listing
 
 EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
 PHONE_RE = re.compile(
@@ -121,6 +121,9 @@ class ListingParser:
         externe = self._externe_from_stored(item, ba_url)
         gaji = item.get("gaji", "") or ""
         description = item.get("detail_deskripsi", "") or ""
+        stored_website = item.get("link_website_perusahaan", "") or ""
+        if stored_website and classify_website_type(stored_website) in ("ba_portal", "partner_portal"):
+            stored_website = ""
 
         listing = self._build_listing(
             referenznummer=refnr,
@@ -128,7 +131,7 @@ class ListingParser:
             detail=None,
             description=description,
             externe_url=externe,
-            website_url=item.get("link_website_perusahaan", "") or "",
+            website_url=stored_website,
             scraped_at=item.get("scraped_at"),
             stored=item,
             initial_gaji=gaji,
@@ -487,6 +490,10 @@ class ListingParser:
     @staticmethod
     def _format_website(detail: dict[str, Any]) -> str:
         url = detail.get("allianzpartnerUrl", "") or ""
-        if url and not url.startswith("http"):
-            return f"https://{url}"
+        if not url:
+            return ""
+        if not url.startswith("http"):
+            url = f"https://{url}"
+        if classify_website_type(url) in ("ba_portal", "partner_portal"):
+            return ""
         return url

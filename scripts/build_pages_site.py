@@ -52,7 +52,7 @@ LANDING_HTML = """<!DOCTYPE html>
   <main>
     <div class="card">
       <h2>Job database viewer</h2>
-      <p>Search 6,850+ deduplicated apprenticeship listings from 15 German portals. Public job data only — no applicant PII.</p>
+      <p>Search 8,500+ deduplicated apprenticeship listings from 15 German portals. Public job data only — no applicant PII.</p>
       <a class="btn" href="viewer/">Open viewer</a>
     </div>
     <div class="card">

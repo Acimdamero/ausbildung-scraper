@@ -1,0 +1,144 @@
+{
+  "generated_at": "2026-06-13T17:33:42.732311+00:00",
+  "input": "data/processed/all_listings_deduped.json",
+  "outcomes": {
+    "api_ok": 1088,
+    "api_failed": 19,
+    "updated": 1107,
+    "enriched_other": 5743
+  },
+  "before": {
+    "_total_ba": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "sumber_data": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "alamat_email_bewerbung": {
+      "filled": 402,
+      "total": 1107,
+      "pct": 36.3
+    },
+    "telefon_bewerbung": {
+      "filled": 262,
+      "total": 1107,
+      "pct": 23.7
+    },
+    "nama_ansprechpartner": {
+      "filled": 88,
+      "total": 1107,
+      "pct": 7.9
+    },
+    "kontak_penanggung_jawab": {
+      "filled": 652,
+      "total": 1107,
+      "pct": 58.9
+    },
+    "link_website_perusahaan": {
+      "filled": 466,
+      "total": 1107,
+      "pct": 42.1
+    },
+    "link_website_perusahaan_resmi": {
+      "filled": 466,
+      "total": 1107,
+      "pct": 42.1
+    },
+    "link_bewerbung_externe": {
+      "filled": 101,
+      "total": 1107,
+      "pct": 9.1
+    },
+    "link_bewerbung_efektif": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "website_sumber": {
+      "filled": 466,
+      "total": 1107,
+      "pct": 42.1
+    },
+    "kelengkapan_score": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "phone_any": {
+      "filled": 497,
+      "total": 1107,
+      "pct": 44.9
+    }
+  },
+  "after": {
+    "_total_ba": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "sumber_data": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "alamat_email_bewerbung": {
+      "filled": 402,
+      "total": 1107,
+      "pct": 36.3
+    },
+    "telefon_bewerbung": {
+      "filled": 262,
+      "total": 1107,
+      "pct": 23.7
+    },
+    "nama_ansprechpartner": {
+      "filled": 88,
+      "total": 1107,
+      "pct": 7.9
+    },
+    "kontak_penanggung_jawab": {
+      "filled": 652,
+      "total": 1107,
+      "pct": 58.9
+    },
+    "link_website_perusahaan": {
+      "filled": 466,
+      "total": 1107,
+      "pct": 42.1
+    },
+    "link_website_perusahaan_resmi": {
+      "filled": 466,
+      "total": 1107,
+      "pct": 42.1
+    },
+    "link_bewerbung_externe": {
+      "filled": 101,
+      "total": 1107,
+      "pct": 9.1
+    },
+    "link_bewerbung_efektif": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "website_sumber": {
+      "filled": 466,
+      "total": 1107,
+      "pct": 42.1
+    },
+    "kelengkapan_score": {
+      "filled": 1107,
+      "total": 1107,
+      "pct": 100.0
+    },
+    "phone_any": {
+      "filled": 497,
+      "total": 1107,
+      "pct": 44.9
+    }
+  }
+}

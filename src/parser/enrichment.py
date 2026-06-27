@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 from urllib.parse import urlparse
 
+from src.parser.contact_enrichment import apply_structured_contacts, apply_website_inference
 from src.parser.date_extraction import extract_start_date, is_date_only_contact
 from src.parser.specialization import derive_beruf_typ
 
@@ -134,6 +135,15 @@ def enrich_listing(listing: dict[str, Any]) -> dict[str, Any]:
     listing["bewerbung_sumber"] = bewerbung_sumber(externe_url, efektif)
     listing["website_type"] = website_type
     listing["link_website_perusahaan_resmi"] = official_company_website(website, website_type)
+
+    apply_structured_contacts(listing)
+    apply_website_inference(listing)
+    listing["website_type"] = classify_website_type(listing.get("link_website_perusahaan", "") or "")
+    listing["link_website_perusahaan_resmi"] = official_company_website(
+        listing.get("link_website_perusahaan", "") or "",
+        listing["website_type"],
+    )
+
     listing["kelengkapan_score"] = compute_kelengkapan_score(listing)
     spec = derive_beruf_typ(listing)
     listing["beruf_typ"] = spec
